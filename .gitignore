@@ -1,0 +1,35 @@
+bin/
+obj/
+.vs/
+.idea/
+*.user
+*.suo
+*.rsuser
+workers/echo-cave/.dev.vars
+workers/echo-cave/node_modules/
+__pycache__/
+*.py[cod]
+*.blend1
+TestResults/
+logs/
+artifacts/
+.artifacts/
+.build-temp/
+.tools/
+
+# Local workspace caches, generated files, and development exports
+.agents/
+.catpaw/
+.nuget/
+.tmp/
+tmp/
+output/
+publish/
+gui-build.txt
+
+# IDE and OS metadata
+.vscode/
+.history/
+*.DotSettings.user
+Thumbs.db
+Desktop.ini

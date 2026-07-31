@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "Blender": {
+      "source": "sfkislev/flue",
+      "sourceType": "github",
+      "skillPath": "skills/blender/SKILL.md",
+      "computedHash": "dfca38e76b0eff02cb9dc5400ce0641896fc4cbd8f64b6f73d6c7ee64377275f"
+    },
+    "blender-web-pipeline": {
+      "source": "freshtechbro/claudedesignskills",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/blender-web-pipeline/SKILL.md",
+      "computedHash": "d93cf2756b91e5d2e756f052b844280134bce4095a1b02be4104acf7d6a3cdfd"
+    },
+    "refero-design": {
+      "source": "referodesign/refero_skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "3949c57ffde008b4047ad1030f5da735c70beebd33fce32cba516f6968ba687d"
+    }
+  }
+}
