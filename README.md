@@ -5,7 +5,7 @@
   <p>启动游戏、管理 Mod、保护存档、追踪进度，并在一个安静可靠的工作台中探索炼金与锻造。</p>
 
   [![BohemiX CI](https://github.com/Luming-Sky/BohemiX/actions/workflows/ci.yml/badge.svg)](https://github.com/Luming-Sky/BohemiX/actions/workflows/ci.yml)
-  ![Version](https://img.shields.io/badge/version-0.9.0%20Beta-2f6fed)
+  ![Version](https://img.shields.io/badge/version-0.9.0%20-2f6fed)
   ![Platform](https://img.shields.io/badge/platform-Windows%20x64-087cd5)
   [![License](https://img.shields.io/badge/license-MIT-2f855a)](LICENSE)
 </div>
