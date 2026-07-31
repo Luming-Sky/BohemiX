@@ -8,6 +8,15 @@ public sealed class PublishWinX64ScriptTests
     private const string TestSha256 = "0000000000000000000000000000000000000000000000000000000000000000";
 
     [Fact]
+    public void PublishScript_DoesNotDependOnGetFileHashCmdlet()
+    {
+        var script = File.ReadAllText(FindRepositoryFile(Path.Combine("tools", "publish-win-x64.ps1")));
+
+        Assert.DoesNotContain("Get-FileHash", script, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("System.Security.Cryptography.SHA256", script, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public async Task PublishScript_FailsWhenRootLicenseIsMissing()
     {
         var root = CreateTemporaryRoot();

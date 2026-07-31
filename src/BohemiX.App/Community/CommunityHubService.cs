@@ -278,14 +278,13 @@ public sealed class CommunityHubService : ICommunityHubService, IDisposable
                 stream,
                 JsonOptions,
                 cancellationToken);
-            var configuredFeedbackEndpoint = ParseHttpsUri(document?.FeedbackEndpoint);
-            var feedbackEndpointVariable = document?.FeedbackEndpointEnvironmentVariable?.Trim();
-            var environmentFeedbackEndpoint = string.IsNullOrWhiteSpace(feedbackEndpointVariable)
-                ? null
-                : ParseHttpsUri(environmentVariableReader(feedbackEndpointVariable));
+            var feedbackEndpoint = ResolveFeedbackEndpoint(
+                document?.FeedbackEndpoint,
+                document?.FeedbackEndpointEnvironmentVariable,
+                environmentVariableReader);
             loadedConfiguration = new CommunityHubConfiguration(
                 ParseHttpsUri(document?.ContentEndpoint),
-                environmentFeedbackEndpoint ?? configuredFeedbackEndpoint,
+                feedbackEndpoint,
                 NormalizeContent(
                     new CommunityHubContentDocument
                     {
@@ -303,6 +302,18 @@ public sealed class CommunityHubService : ICommunityHubService, IDisposable
         }
 
         return loadedConfiguration;
+    }
+
+    internal static Uri? ResolveFeedbackEndpoint(
+        string? configuredEndpoint,
+        string? environmentVariableName,
+        Func<string, string?> environmentVariableReader)
+    {
+        var fallbackEndpoint = ParseHttpsUri(configuredEndpoint);
+        var variableName = environmentVariableName?.Trim();
+        return string.IsNullOrWhiteSpace(variableName)
+            ? fallbackEndpoint
+            : ParseHttpsUri(environmentVariableReader(variableName)) ?? fallbackEndpoint;
     }
 
     private static CommunityHubConfiguration EmptyConfiguration()

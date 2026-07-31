@@ -29,7 +29,7 @@ function Remove-OutputDirectory([string]$Path) {
 function Get-Sha256Hash([string]$Path) {
     $stream = [IO.File]::OpenRead($Path)
     try {
-        $algorithm = [Security.Cryptography.SHA256]::Create()
+        $algorithm = [System.Security.Cryptography.SHA256]::Create()
         try {
             return [BitConverter]::ToString($algorithm.ComputeHash($stream)).Replace("-", "")
         }

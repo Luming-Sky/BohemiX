@@ -338,81 +338,33 @@ public sealed class CommunityHubTests
     }
 
     [Fact]
-    public async Task SubmitEchoAsync_ResolvesWorkerEndpointFromEnvironment()
+    public void ResolveFeedbackEndpoint_PrefersValidEnvironmentEndpoint()
     {
-        const string verification = """
-            {
-              "isConfigured": true,
-              "isEligible": true,
-              "sponsorName": "Supporter",
-              "planName": "熏奶酪"
-            }
-            """;
-        var handler = new RecordingHandler(request => request.RequestUri?.AbsolutePath switch
-        {
-            "/verify" => JsonResponse(verification),
-            "/echo-cave" => new HttpResponseMessage(HttpStatusCode.NoContent),
-            _ => throw new InvalidOperationException($"Unexpected request: {request.RequestUri}")
-        });
-        using var service = new CommunityHubService(
-            Logger.None,
-            new HttpClient(handler),
-            suppliedConfiguration: null,
-            environmentVariableReader: name => name switch
+        var endpoint = CommunityHubService.ResolveFeedbackEndpoint(
+            "https://bohemix-echo-cave.bohemix-lume-sky.workers.dev",
+            "BOHEMIX_ECHO_CAVE_ENDPOINT",
+            name => name switch
             {
                 "BOHEMIX_ECHO_CAVE_ENDPOINT" => "https://example.com/echo-cave",
                 _ => null
-            },
-            TimeProvider.System);
+            });
 
-        await service.SubmitEchoAsync(new EchoCaveSubmission(
-            "Suggestion",
-            "Please add this feature.",
-            "",
-            "1.2.3",
-            "zh-CN",
-            "supporter-id"));
-
-        Assert.Equal("/echo-cave", handler.RequestUris[^1].AbsolutePath);
+        Assert.Equal(new Uri("https://example.com/echo-cave"), endpoint);
     }
 
     [Fact]
-    public async Task SubmitEchoAsync_InvalidEnvironmentEndpointFallsBackToConfiguredEndpoint()
+    public void ResolveFeedbackEndpoint_InvalidEnvironmentEndpointFallsBackToConfiguredEndpoint()
     {
-        const string verification = """
-            {
-              "isConfigured": true,
-              "isEligible": true,
-              "sponsorName": "Supporter",
-              "planName": "Echo Support"
-            }
-            """;
-        var handler = new RecordingHandler(request => request.RequestUri?.AbsolutePath switch
-        {
-            "/verify" => JsonResponse(verification),
-            "/" => new HttpResponseMessage(HttpStatusCode.NoContent),
-            _ => throw new InvalidOperationException($"Unexpected request: {request.RequestUri}")
-        });
-        using var service = new CommunityHubService(
-            Logger.None,
-            new HttpClient(handler),
-            suppliedConfiguration: null,
-            environmentVariableReader: name => name switch
+        var endpoint = CommunityHubService.ResolveFeedbackEndpoint(
+            "https://bohemix-echo-cave.bohemix-lume-sky.workers.dev",
+            "BOHEMIX_ECHO_CAVE_ENDPOINT",
+            name => name switch
             {
                 "BOHEMIX_ECHO_CAVE_ENDPOINT" => "http://not-secure.example.com/echo-cave",
                 _ => null
-            },
-            TimeProvider.System);
+            });
 
-        await service.SubmitEchoAsync(new EchoCaveSubmission(
-            "Suggestion",
-            "Please add this feature.",
-            "",
-            "1.2.3",
-            "zh-CN",
-            "supporter-id"));
-
-        Assert.Equal("bohemix-echo-cave.bohemix-lume-sky.workers.dev", handler.RequestUris[^1].Host);
+        Assert.Equal(new Uri("https://bohemix-echo-cave.bohemix-lume-sky.workers.dev"), endpoint);
     }
 
     [Fact]
