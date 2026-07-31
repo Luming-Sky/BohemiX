@@ -12,6 +12,10 @@
 
 [中文](#中文) | [English](#english)
 
+## AI 辅助开发
+
+BohemiX 的部分开发工作借助了基于 AI 的工具。所有由 AI 生成或建议的代码及文档均由项目作者进行审查、测试和维护。最终软件、许可协议及版本发布的相关责任均由项目作者承担。
+
 # 产品定位
 
 BohemiX 面向喜欢在《天国：拯救 II》里配置模组、体验游戏玩法的玩家。它提供从游戏下载验证、模组管理与下载、存档管理到游戏玩法模拟综合体验。极大地降低玩家配置模组、游玩游戏的门槛。
@@ -114,6 +118,10 @@ BohemiX 是社区开发的第三方工具，与 Warhorse Studios、Deep Silver�
 
 \---
 # English
+
+## AI-Assisted Development
+
+Parts of BohemiX were developed with the assistance of AI-based tools. All generated or suggested code and documentation are reviewed, tested, and maintained by the project author. Responsibility for the final software, licensing, and releases remains with the project author.
 
 # Product Positioning
 
