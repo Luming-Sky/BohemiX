@@ -5,6 +5,15 @@ namespace BohemiX.Core.Tests;
 public sealed class TrimWinX64OutputScriptTests
 {
     [Fact]
+    public void Script_DoesNotDependOnGetFileHashCmdlet()
+    {
+        var script = File.ReadAllText(FindRepositoryFile(Path.Combine("tools", "trim-win-x64-output.ps1")));
+
+        Assert.DoesNotContain("Get-FileHash", script, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Security.Cryptography.SHA256", script, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public async Task Script_RemovesOnlyUnsupportedGeneratedPayloads()
     {
         var root = CreateTemporaryRoot();

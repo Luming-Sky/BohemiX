@@ -26,6 +26,22 @@ function Remove-OutputDirectory([string]$Path) {
     Remove-Item -LiteralPath $fullPath -Recurse -Force
 }
 
+function Get-Sha256Hash([string]$Path) {
+    $stream = [IO.File]::OpenRead($Path)
+    try {
+        $algorithm = [Security.Cryptography.SHA256]::Create()
+        try {
+            return [BitConverter]::ToString($algorithm.ComputeHash($stream)).Replace("-", "")
+        }
+        finally {
+            $algorithm.Dispose()
+        }
+    }
+    finally {
+        $stream.Dispose()
+    }
+}
+
 function Remove-FlattenedRuntimeCopies([string]$PayloadRoot) {
     $runtimeDirectory = Join-Path $PayloadRoot "runtimes\win-x64"
     if (-not (Test-Path -LiteralPath $runtimeDirectory -PathType Container)) {
@@ -41,8 +57,7 @@ function Remove-FlattenedRuntimeCopies([string]$PayloadRoot) {
         if ($runtimeFile.Length -ne (Get-Item -LiteralPath $flattenedFile).Length) {
             return
         }
-        if ((Get-FileHash -LiteralPath $runtimeFile.FullName -Algorithm SHA256).Hash -ne
-            (Get-FileHash -LiteralPath $flattenedFile -Algorithm SHA256).Hash) {
+        if ((Get-Sha256Hash $runtimeFile.FullName) -ne (Get-Sha256Hash $flattenedFile)) {
             return
         }
     }
