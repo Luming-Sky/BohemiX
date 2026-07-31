@@ -10,6 +10,7 @@
   [![License](https://img.shields.io/badge/license-MIT-2f855a)](LICENSE)
 </div>
 
+[中文](#中文) | [English](#english)
 
 # 产品定位
 
@@ -109,3 +110,107 @@ docs/         产品、架构、安全与发布文档
 BohemiX 项目源码采用 [MIT License](LICENSE)。随发布包分发的 usvfs 及其他第三方组件受各自许可证约束，详情见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md) 和发布包中的 `native` 目录。
 
 BohemiX 是社区开发的第三方工具，与 Warhorse Studios、Deep Silver、Nexus Mods、Valve 或 Epic Games 无隶属或背书关系。《天国：拯救》及相关名称、图像和商标归其各自权利人所有。
+
+
+\---
+# English
+
+# Product Positioning
+
+BohemiX is designed for players who enjoy configuring mods and exploring new ways to play Kingdom Come: Deliverance II. It provides an integrated experience covering game installation verification, mod management and downloads, save management, and gameplay simulations. Its goal is to make configuring mods and getting into the game significantly easier.
+
+# Core Features
+
+| Module | Capabilities |
+| --- | --- |
+| Game launcher | Scans Steam and local directories, detects `KingdomCome.exe`, saves verified installation paths, and provides diagnostics for abnormal exits. |
+| Mod management | Scans local mods, automatically analyses health and file conflicts, repairs mod load order with one click, and supports external mod pack imports and manual grouping. |
+| Mod acquisition and installation | Downloads mods and mod pack resources from local archives, Nexus Mods, Nexus Collections, and Steam Workshop. Includes translated mod descriptions, download queues, collection catalogues, prerequisite selection, and rollback-protected installation. |
+| Save system | Manages player save configurations and slots, monitors `.whs` changes, creates individual protection points or complete snapshots, and supports import, export, retention policies, and pre-restore validation. |
+| Player profiles | Manages multiple local player profiles. |
+| Lab | Includes alchemy and forging simulation modules that recreate KCD2 crafting workflows with high-fidelity simulations of the original gameplay. |
+| Settings and diagnostics | Supports Simplified Chinese and English, appearance and runtime options, log navigation, global error reports, update checks, and dependency status. |
+
+# Installation and Use
+
+### Using a Release Package
+
+1. Download the Windows x64 ZIP and SHA-256 checksum file from [GitHub Releases](https://github.com/Luming-Sky/BohemiX/releases).
+2. Verify the archive and extract it completely to a writable directory. Do not run the application from inside the ZIP file.
+3. Run `BohemiX.App.exe`.
+4. On first launch, let BohemiX scan for the game automatically or select `KingdomCome.exe` manually.
+
+The release package is a self-contained .NET 8 build and normally does not require a separate .NET Runtime installation. Nexus browser authentication requires Microsoft Edge WebView2 Runtime, which is already included with most current Windows 10 and Windows 11 installations.
+
+### System Requirements
+
+- Windows 10 or Windows 11, x64
+- A legitimate local installation of Kingdom Come: Deliverance II
+- Enough disk space for mods, save snapshots, and download caches
+- Microsoft Edge WebView2 Runtime for Nexus browser authentication
+
+## Privacy and Security
+
+- BohemiX works offline by default. Network access is limited to explicit online features such as downloads, account authorization, and update checks.
+- Nexus authentication takes place in a separate WebView2 session. Passwords are submitted only to Nexus Mods pages. Cookies are attached only to verified `nexusmods.com` hosts, and personal API keys are encrypted with Windows Data Protection.
+- Logs do not record sensitive values such as Nexus cookies, API keys.
+- Remote mod collection catalogues must pass ECDSA P-256/SHA-256 signature verification. If verification fails, BohemiX falls back to the most recent trusted cache or the built-in catalogue.
+- Native usvfs files use pinned versions and SHA-256 validation. The release script fails when a dependency is missing, has the wrong architecture, or does not match the expected hash.
+
+# Further Documentation
+
+- [Nexus account binding](docs/NexusAccountBinding.md)
+- [Nexus cookie security audit](docs/NexusCookieAuthSecurityAudit.md)
+- [Save snapshot architecture](docs/SnapshotStorageArchitecture.md)
+- [Release checklist](docs/ReleaseChecklist.md)
+
+# Building from Source
+
+Git, PowerShell, and the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) are required.
+
+```powershell
+git clone https://github.com/Luming-Sky/BohemiX.git
+cd BohemiX
+dotnet restore BohemiX.sln
+dotnet test BohemiX.sln -c Release --nologo
+dotnet run --project src/BohemiX.App/BohemiX.App.csproj -c Release
+```
+
+To generate a tested and dependency-validated portable Windows x64 package:
+
+```powershell
+.\tools\publish-win-x64.ps1 -Version "0.9.0"
+```
+
+The script runs the complete Release test suite, publishes a self-contained application, removes unrelated runtime files, validates native dependencies, copies licenses, and generates a ZIP archive and `SHA256SUMS.txt`.
+
+## Architecture
+
+```text
+BohemiX.App                         Avalonia desktop shell, views, and application composition
+  |-- BohemiX.Modules.Alchemy      Alchemy module
+  |-- BohemiX.Modules.Forge        Forging module
+  |-- BohemiX.Modules.SaveManager  Save management module
+  |-- BohemiX.Infrastructure       SQLite, file system, process, network, and usvfs implementations
+  `-- BohemiX.Core                 Domain models, service contracts, and business rules
+```
+
+The project uses .NET 8, Avalonia 11, CommunityToolkit.Mvvm, SQLite/Dapper, Serilog, SkiaSharp, Silk.NET/OpenGL, WebView2, LibVLCSharp, and usvfs. See the [architecture documentation](docs/Architecture.md) for dependency rules and runtime lifecycle details.
+
+## Main Directories
+
+```text
+src/          Application, core, infrastructure, and feature modules
+tests/        Core, App, Alchemy, and Forge automated tests
+tools/        Publishing, asset generation, and catalogue validation tools
+workers/      Echo Cave Cloudflare Worker
+third-party/  Pinned native dependencies and complete license files
+docs/         Product, architecture, security, and release documentation
+```
+
+## License and Disclaimer
+
+BohemiX source code is distributed under the [MIT License](LICENSE). usvfs and other third-party components included in release packages remain subject to their respective licenses. See [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md) and the release package's `native` directory for details.
+
+BohemiX is an independent community project. It is not affiliated with or endorsed by Warhorse Studios, Deep Silver, Nexus Mods, Valve, or Epic Games. Kingdom Come: Deliverance and all related names, images, and trademarks belong to their respective owners.
+
