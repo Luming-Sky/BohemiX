@@ -1,0 +1,2110 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:semi="https://irihi.tech/semi"
+             x:Class="BohemiX.App.App"
+             xmlns:local="using:BohemiX.App"
+             xmlns:controls="using:BohemiX.App.Controls"
+             RequestedThemeVariant="Dark">
+
+    <Application.Resources>
+        <Color x:Key="NebulaBackgroundColor">#0B0D12</Color>
+        <Color x:Key="NebulaSurfaceColor">#08FFFFFF</Color>
+        <Color x:Key="NebulaSurfaceStrongColor">#12FFFFFF</Color>
+        <Color x:Key="NebulaBorderColor">#14FFFFFF</Color>
+        <Color x:Key="NebulaTextColor">#F4F8FF</Color>
+        <Color x:Key="NebulaMutedTextColor">#8E9AAE</Color>
+        <Color x:Key="NebulaAccentColor">#00E5FF</Color>
+        <Color x:Key="NebulaAccentSoftColor">#3300E5FF</Color>
+        <Color x:Key="GlyphPrimaryColor">#2563EB</Color>
+        <Color x:Key="GlyphPrimaryHoverColor">#1D4ED8</Color>
+        <Color x:Key="GlyphSkyColor">#60A5FA</Color>
+        <Color x:Key="GlyphInkColor">#111827</Color>
+        <Color x:Key="GlyphMutedColor">#667085</Color>
+        <Color x:Key="GlyphCardColor">#EEF8FAFC</Color>
+        <Color x:Key="GlyphCardBorderColor">#33FFFFFF</Color>
+
+        <SolidColorBrush x:Key="NebulaBackgroundBrush" Color="{StaticResource NebulaBackgroundColor}" />
+        <SolidColorBrush x:Key="NebulaSurfaceBrush" Color="{StaticResource NebulaSurfaceColor}" />
+        <SolidColorBrush x:Key="NebulaSurfaceStrongBrush" Color="{StaticResource NebulaSurfaceStrongColor}" />
+        <SolidColorBrush x:Key="NebulaBorderBrush" Color="{StaticResource NebulaBorderColor}" />
+        <SolidColorBrush x:Key="NebulaTextBrush" Color="{StaticResource NebulaTextColor}" />
+        <SolidColorBrush x:Key="NebulaMutedTextBrush" Color="{StaticResource NebulaMutedTextColor}" />
+        <SolidColorBrush x:Key="NebulaAccentBrush" Color="{StaticResource NebulaAccentColor}" />
+        <SolidColorBrush x:Key="NebulaAccentSoftBrush" Color="{StaticResource NebulaAccentSoftColor}" />
+        <SolidColorBrush x:Key="GlyphPrimaryBrush" Color="{StaticResource GlyphPrimaryColor}" />
+        <SolidColorBrush x:Key="GlyphSkyBrush" Color="{StaticResource GlyphSkyColor}" />
+        <SolidColorBrush x:Key="GlyphInkBrush" Color="{StaticResource GlyphInkColor}" />
+        <SolidColorBrush x:Key="GlyphMutedBrush" Color="{StaticResource GlyphMutedColor}" />
+        <SolidColorBrush x:Key="GlyphCardBrush" Color="{StaticResource GlyphCardColor}" />
+        <SolidColorBrush x:Key="GlyphCardBorderBrush" Color="{StaticResource GlyphCardBorderColor}" />
+
+        <ExperimentalAcrylicMaterial x:Key="TopNavAcrylic"
+                                     BackgroundSource="Digger"
+                                     TintColor="#111721"
+                                     TintOpacity="0.82"
+                                     MaterialOpacity="0.62"
+                                     FallbackColor="#D9111721" />
+        <ExperimentalAcrylicMaterial x:Key="SidebarAcrylic"
+                                     BackgroundSource="Digger"
+                                     TintColor="#0B0D12"
+                                     TintOpacity="0.64"
+                                     MaterialOpacity="0.45"
+                                     FallbackColor="#E00B0D12" />
+        <ExperimentalAcrylicMaterial x:Key="SaveCardAcrylic"
+                                     BackgroundSource="Digger"
+                                     TintColor="#0B1118"
+                                     TintOpacity="0.28"
+                                     MaterialOpacity="0.34"
+                                     FallbackColor="#780B1118" />
+    </Application.Resources>
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+  
+    <Application.Styles>
+        <StyleInclude Source="avares://BohemiX.App/Assets/Icons/BohemiXIcons.axaml" />
+        <semi:SemiTheme Locale="zh-CN" />
+
+        <Style Selector="controls|StripedCardBorder">
+            <Setter Property="StripeAnchorMode" Value="Viewport" />
+        </Style>
+
+        <Style Selector="Button.NebulaIconButton">
+            <Setter Property="Width" Value="38" />
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Background" Value="#0AFFFFFF" />
+            <Setter Property="BorderBrush" Value="{StaticResource NebulaBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="{StaticResource NebulaTextBrush}" />
+        </Style>
+
+        <Style Selector="Button.NebulaIconButton:pointerover">
+            <Setter Property="Background" Value="#1A00E5FF" />
+            <Setter Property="BorderBrush" Value="{StaticResource NebulaAccentBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource NebulaAccentBrush}" />
+        </Style>
+
+        <Style Selector="Button.PrimaryCommand">
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Padding" Value="16,0" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Background" Value="{StaticResource NebulaAccentBrush}" />
+            <Setter Property="Foreground" Value="#061014" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style Selector="Button.GhostCommand">
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Padding" Value="14,0" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Background" Value="#0AFFFFFF" />
+            <Setter Property="BorderBrush" Value="{StaticResource NebulaBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="{StaticResource NebulaTextBrush}" />
+        </Style>
+
+        <Style Selector="Border.NebulaHairline">
+            <Setter Property="BorderBrush" Value="{StaticResource NebulaBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Background" Value="{StaticResource NebulaSurfaceBrush}" />
+        </Style>
+
+        <Style Selector="Border.BentoCard">
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="Background" Value="{StaticResource NebulaSurfaceBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource NebulaBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BoxShadow" Value="0 18 40 0 #33000000" />
+        </Style>
+
+        <Style Selector="Border.BentoCard:pointerover">
+            <Setter Property="Background" Value="#10FFFFFF" />
+            <Setter Property="BorderBrush" Value="{StaticResource NebulaAccentBrush}" />
+            <Setter Property="BoxShadow" Value="0 22 56 0 #5500E5FF" />
+        </Style>
+
+        <Style Selector="ListBox.SidebarList">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+
+        <Style Selector="ListBox.SidebarList > ListBoxItem">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+
+        <Style Selector="ListBox.SidebarList > ListBoxItem:selected">
+            <Setter Property="Background" Value="#1800E5FF" />
+        </Style>
+
+        <Style Selector="Border.GlyphGlassCard">
+            <Setter Property="Background" Value="{StaticResource GlyphCardBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource GlyphCardBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="18" />
+            <Setter Property="BoxShadow" Value="0 10 28 0 #24050A14" />
+        </Style>
+
+        <Style Selector="controls|SmoothCornerBorder.LauncherDashboardPanel">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="#DEFFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+
+        <Style Selector="controls|SmoothCornerBorder.LauncherStatusStrip">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="#DEFFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+
+        <Style Selector="Button.LauncherStatusItem">
+            <Setter Property="MinHeight" Value="42" />
+            <Setter Property="Padding" Value="12,5" />
+            <Setter Property="Background" Value="#68FFFFFF" />
+            <Setter Property="BorderBrush" Value="#96FFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="14" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+
+        <Style Selector="Button.LauncherStatusItem:pointerover">
+            <Setter Property="Background" Value="#C8FFFFFF" />
+            <Setter Property="BorderBrush" Value="#FFFFFFFF" />
+        </Style>
+
+        <Style Selector="Button.LauncherDashboardCommand">
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Padding" Value="13,0" />
+            <Setter Property="Background" Value="#E92F7FC1" />
+            <Setter Property="BorderBrush" Value="#FF77B4E3" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="15" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="11.5" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style Selector="Button.LauncherDashboardCommand:pointerover">
+            <Setter Property="Background" Value="#FF246EAA" />
+        </Style>
+
+        <Style Selector="Border.LauncherModRow">
+            <Setter Property="MinHeight" Value="38" />
+            <Setter Property="Padding" Value="5,3" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Background" Value="#18FFFFFF" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.12" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Border.LauncherModRow:pointerover">
+            <Setter Property="Background" Value="#62FFFFFF" />
+        </Style>
+
+        <Style Selector="CheckBox.LauncherModCheck">
+            <Setter Property="Foreground" Value="#18212F" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+
+        <Style Selector="Button.LauncherNewsLead">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Background" Value="#62FFFFFF" />
+            <Setter Property="BorderBrush" Value="#94FFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        </Style>
+
+        <Style Selector="Button.LauncherNewsLead:pointerover">
+            <Setter Property="Background" Value="#86FFFFFF" />
+            <Setter Property="BorderBrush" Value="#C8FFFFFF" />
+        </Style>
+
+        <Style Selector="Button.LauncherDailyMod">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Background" Value="#58FFFFFF" />
+            <Setter Property="BorderBrush" Value="#A8FFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="ClipToBounds" Value="True" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        </Style>
+
+        <Style Selector="Button.LauncherDailyMod:pointerover">
+            <Setter Property="Background" Value="#84FFFFFF" />
+            <Setter Property="BorderBrush" Value="#E8FFFFFF" />
+        </Style>
+
+        <Style Selector="Button.LauncherNewsRow">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Background" Value="#32FFFFFF" />
+            <Setter Property="BorderBrush" Value="#58FFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        </Style>
+
+        <Style Selector="Button.LauncherNewsRow:pointerover">
+            <Setter Property="Background" Value="#66FFFFFF" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.GlyphGlassCard">
+            <Setter Property="Background" Value="{StaticResource GlyphCardBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource GlyphCardBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="18" />
+            <Setter Property="BoxShadow" Value="0 10 28 0 #24050A14" />
+            <Setter Property="StripeOpacity" Value="0.32" />
+            <Setter Property="StripeSpeed" Value="14" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.GlyphMiniCard">
+            <Setter Property="Background" Value="#F4F6F8" />
+            <Setter Property="BorderBrush" Value="#0D0F172A" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="14" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="StripeOpacity" Value="0.16" />
+            <Setter Property="StripeSpeed" Value="14" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.GlyphPreviewCard">
+            <Setter Property="Background" Value="#F4F6F8" />
+            <Setter Property="BorderBrush" Value="#0D0F172A" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="StripeOpacity" Value="0.14" />
+            <Setter Property="StripeSpeed" Value="14" />
+        </Style>
+
+        <Style Selector="Border.SaveWorkspacePanel">
+            <Setter Property="Background" Value="#101114" />
+            <Setter Property="BorderBrush" Value="#2B2D33" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="14" />
+        </Style>
+
+        <Style Selector="Border.SaveHeaderStrip">
+            <Setter Property="Background" Value="#181A1F" />
+            <Setter Property="BorderBrush" Value="#30333A" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Padding" Value="12" />
+        </Style>
+
+        <Style Selector="Border.SaveSurface">
+            <Setter Property="Background" Value="#17191F" />
+            <Setter Property="BorderBrush" Value="#2E323A" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Padding" Value="12" />
+        </Style>
+
+        <Style Selector="Border.SaveDetailHero">
+            <Setter Property="Background" Value="#17191F" />
+            <Setter Property="BorderBrush" Value="#2E323A" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Padding" Value="12" />
+        </Style>
+
+        <Style Selector="Border.SaveDetailFact">
+            <Setter Property="Background" Value="#15171D" />
+            <Setter Property="BorderBrush" Value="#2A2E36" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="MinHeight" Value="62" />
+        </Style>
+
+        <Style Selector="Border.SaveDetailPill">
+            <Setter Property="Background" Value="#22262E" />
+            <Setter Property="BorderBrush" Value="#3A404B" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="9,6" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+
+        <Style Selector="Border.SaveMetricTile">
+            <Setter Property="Background" Value="#151820" />
+            <Setter Property="BorderBrush" Value="#2A2F38" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+
+        <Style Selector="Border.SaveListHeader">
+            <Setter Property="Background" Value="#20242B" />
+            <Setter Property="BorderBrush" Value="#333943" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10,7" />
+        </Style>
+
+        <Style Selector="Border.SaveListRow">
+            <Setter Property="Background" Value="#1D2027" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Border.SaveListRow:pointerover">
+            <Setter Property="Background" Value="#242831" />
+            <Setter Property="BorderBrush" Value="#4B5563" />
+        </Style>
+
+        <Style Selector="Border.SaveListRow.selected">
+            <Setter Property="Background" Value="#333840" />
+            <Setter Property="BorderBrush" Value="#F59E0B" />
+        </Style>
+
+        <Style Selector="Border.SaveSlotIcon">
+            <Setter Property="Width" Value="44" />
+            <Setter Property="Height" Value="44" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#242932" />
+            <Setter Property="BorderBrush" Value="#3A404B" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+
+        <Style Selector="Border.SaveMountedPill">
+            <Setter Property="Height" Value="26" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#2B2112" />
+            <Setter Property="BorderBrush" Value="#8A5A12" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="8,0" />
+        </Style>
+
+        <Style Selector="Border.SaveNotice">
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#14171D" />
+            <Setter Property="BorderBrush" Value="#2C3038" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SaveWorkspacePanel">
+            <Setter Property="Background" Value="#101114" />
+            <Setter Property="BorderBrush" Value="#2B2D33" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="14" />
+            <Setter Property="StripeAnchorMode" Value="Viewport" />
+            <Setter Property="StripeOpacity" Value="0.1" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-background-page.png" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SaveHeaderStrip">
+            <Setter Property="Background" Value="#181A1F" />
+            <Setter Property="BorderBrush" Value="#30333A" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="StripeOpacity" Value="0.12" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SaveSurface">
+            <Setter Property="Background" Value="#17191F" />
+            <Setter Property="BorderBrush" Value="#2E323A" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="StripeOpacity" Value="0.12" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SaveDetailSurface">
+            <Setter Property="Background" Value="#171A20" />
+            <Setter Property="BorderBrush" Value="#8A5A12" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Padding" Value="14" />
+            <Setter Property="StripeOpacity" Value="0.14" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SaveMetricTile">
+            <Setter Property="Background" Value="#151820" />
+            <Setter Property="BorderBrush" Value="#2A2F38" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="StripeOpacity" Value="0.14" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SaveListHeader">
+            <Setter Property="Background" Value="#20242B" />
+            <Setter Property="BorderBrush" Value="#333943" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10,7" />
+            <Setter Property="StripeOpacity" Value="0.1" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SaveListRow">
+            <Setter Property="Background" Value="#1D2027" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="StripeOpacity" Value="0.16" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SaveListRow:pointerover">
+            <Setter Property="Background" Value="#242831" />
+            <Setter Property="BorderBrush" Value="#4B5563" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SaveListRow.selected">
+            <Setter Property="Background" Value="#333840" />
+            <Setter Property="BorderBrush" Value="#F59E0B" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SaveNotice">
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#14171D" />
+            <Setter Property="BorderBrush" Value="#2C3038" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="StripeOpacity" Value="0.12" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+        </Style>
+
+        <Style Selector="TextBox.SavePathBox">
+            <Setter Property="Height" Value="34" />
+            <Setter Property="FontSize" Value="11.5" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#0F1116" />
+            <Setter Property="Foreground" Value="#E5E7EB" />
+            <Setter Property="BorderBrush" Value="#30343D" />
+            <Setter Property="SelectionBrush" Value="#665B8CFF" />
+        </Style>
+
+        <Style Selector="Button.SavePrimaryButton">
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Padding" Value="12,0" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#F59E0B" />
+            <Setter Property="BorderBrush" Value="#F59E0B" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#111318" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style Selector="Button.SavePrimaryButton:pointerover">
+            <Setter Property="Background" Value="#FBBF24" />
+            <Setter Property="BorderBrush" Value="#FBBF24" />
+        </Style>
+
+        <Style Selector="Button.SaveFlatButton">
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Padding" Value="12,0" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#22262E" />
+            <Setter Property="BorderBrush" Value="#3A404B" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#E5E7EB" />
+            <Setter Property="FontWeight" Value="Medium" />
+        </Style>
+
+        <Style Selector="Button.SaveFlatButton:pointerover">
+            <Setter Property="Background" Value="#2A2F38" />
+            <Setter Property="BorderBrush" Value="#58606D" />
+        </Style>
+
+        <Style Selector="ListBox.SaveListBox">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+
+        <Style Selector="ListBox.SaveListBox > ListBoxItem">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0,0,0,7" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+
+        <Style Selector="ListBox.SaveListBox > ListBoxItem:selected">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+        <Style Selector="ListBox.SaveCardAxis">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="ClipToBounds" Value="False" />
+        </Style>
+
+        <Style Selector="ListBox.SaveCardAxis > ListBoxItem">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Opacity" Value="{ReflectionBinding Opacity}" />
+            <Setter Property="Panel.ZIndex" Value="{ReflectionBinding ZIndex}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.22" Easing="CubicEaseOut" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="ListBox.SaveCardAxis > ListBoxItem:selected">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SaveCardAxisCard">
+            <Setter Property="Background" Value="#17191F" />
+            <Setter Property="BorderBrush" Value="#2E323A" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="BoxShadow" Value="0 24 72 0 #66000000, inset 0 1 2 0 #33FFFFFF, inset 0 -1 2 0 #26000000" />
+            <Setter Property="StripeOpacity" Value="0.12" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SaveCardAxisCard:pointerover">
+            <Setter Property="Background" Value="#252932" />
+            <Setter Property="BorderBrush" Value="#4B5563" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SaveCardAxisCard.selected">
+            <Setter Property="Background" Value="#30343B" />
+            <Setter Property="BorderBrush" Value="#2563EB" />
+        </Style>
+
+        <Style Selector="Border.ModOpsWorkspacePanel">
+            <Setter Property="Background" Value="#101114" />
+            <Setter Property="BorderBrush" Value="#2B2D33" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="14" />
+        </Style>
+
+        <Style Selector="Border.ModOpsHeaderStrip">
+            <Setter Property="Background" Value="#181A1F" />
+            <Setter Property="BorderBrush" Value="#30333A" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="12" />
+        </Style>
+
+        <Style Selector="Border.ModOpsSurface">
+            <Setter Property="Background" Value="#17191F" />
+            <Setter Property="BorderBrush" Value="#2E323A" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Padding" Value="12" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsSurface">
+            <Setter Property="Background" Value="#17191F" />
+            <Setter Property="BorderBrush" Value="#2E323A" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="StripeOpacity" Value="0.12" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+        </Style>
+
+        <Style Selector="Border.ModOpsMetricTile">
+            <Setter Property="Background" Value="#15171D" />
+            <Setter Property="BorderBrush" Value="#2A2E36" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+
+        <Style Selector="Border.ModOpsListHeader">
+            <Setter Property="Background" Value="#20232A" />
+            <Setter Property="BorderBrush" Value="#343943" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10,7" />
+        </Style>
+
+        <Style Selector="Border.ModOpsListRow">
+            <Setter Property="Background" Value="#1D2027" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsListRow">
+            <Setter Property="Background" Value="#1D2027" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="StripeOpacity" Value="0.16" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsListRow:pointerover">
+            <Setter Property="Background" Value="#252932" />
+            <Setter Property="BorderBrush" Value="#4B5563" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsListRow.selected">
+            <Setter Property="Background" Value="#30343B" />
+            <Setter Property="BorderBrush" Value="#2563EB" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsListRow.dragover">
+            <Setter Property="Background" Value="#252F40" />
+            <Setter Property="BorderBrush" Value="#60A5FA" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsListRow CheckBox">
+            <Setter Property="Foreground" Value="#D1D5DB" />
+        </Style>
+
+        <Style Selector="Border.ModOpsListRow:pointerover">
+            <Setter Property="Background" Value="#252932" />
+            <Setter Property="BorderBrush" Value="#4B5563" />
+        </Style>
+
+        <Style Selector="Border.ModOpsListRow.selected">
+            <Setter Property="Background" Value="#30343B" />
+            <Setter Property="BorderBrush" Value="#2563EB" />
+        </Style>
+
+        <Style Selector="Border.ModOpsIconTile">
+            <Setter Property="Width" Value="54" />
+            <Setter Property="Height" Value="46" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#272C34" />
+            <Setter Property="BorderBrush" Value="#3A404B" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+
+        <Style Selector="Border.ModOpsPill">
+            <Setter Property="Height" Value="26" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#22262E" />
+            <Setter Property="BorderBrush" Value="#3A404B" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="8,0" />
+        </Style>
+
+        <Style Selector="Border.ModOpsNotice">
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#14171D" />
+            <Setter Property="BorderBrush" Value="#2C3038" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+
+        <Style Selector="Border.ModOpsNotice.dragover">
+            <Setter Property="Background" Value="#15243D" />
+            <Setter Property="BorderBrush" Value="#2563EB" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsWorkspacePanel">
+            <Setter Property="Background" Value="#101114" />
+            <Setter Property="BorderBrush" Value="#2B2D33" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="14" />
+            <Setter Property="StripeAnchorMode" Value="Viewport" />
+            <Setter Property="StripeOpacity" Value="0.1" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsHeaderStrip">
+            <Setter Property="Background" Value="#181A1F" />
+            <Setter Property="BorderBrush" Value="#30333A" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="StripeOpacity" Value="0.12" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsCommandBar">
+            <Setter Property="Background" Value="#15171C" />
+            <Setter Property="BorderBrush" Value="#30343C" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="12,10" />
+            <Setter Property="StripeOpacity" Value="0.06" />
+        </Style>
+
+        <Style Selector="Border.ModOpsStatusStrip">
+            <Setter Property="MinHeight" Value="44" />
+            <Setter Property="Background" Value="#111318" />
+            <Setter Property="BorderBrush" Value="#292D35" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Padding" Value="14,8" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsListSurface">
+            <Setter Property="Padding" Value="12,10" />
+            <Setter Property="StripeOpacity" Value="0.06" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsInspectorSurface">
+            <Setter Property="Background" Value="#14161B" />
+            <Setter Property="BorderBrush" Value="#343943" />
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="StripeOpacity" Value="0.05" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsSearchBar">
+            <Setter Property="Background" Value="#101319" />
+            <Setter Property="BorderBrush" Value="#2A303A" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="12,11" />
+            <Setter Property="StripeOpacity" Value="0.05" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsResultsSurface">
+            <Setter Property="Background" Value="#15171C" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="Padding" Value="12,10" />
+            <Setter Property="StripeOpacity" Value="0.06" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsQueueInspectorSurface">
+            <Setter Property="Background" Value="#12151A" />
+            <Setter Property="BorderBrush" Value="#343943" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="StripeOpacity" Value="0.05" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.RecommendationInspectorSurface">
+            <Setter Property="Background" Value="#D414161B" />
+            <Setter Property="BorderBrush" Value="#343943" />
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="StripeOpacity" Value="0.14" />
+            <Setter Property="BoxShadow" Value="0 8 20 0 #33000000" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsWorkspacePanel.RecommendationWorkspace">
+            <Setter Property="Background" Value="#C9101114" />
+            <Setter Property="BorderBrush" Value="#2B2D33" />
+            <Setter Property="StripeOpacity" Value="0.16" />
+        </Style>
+
+        <Style Selector="Border.ModCoverCard">
+            <Setter Property="Background" Value="#0B0E13" />
+            <Setter Property="BorderBrush" Value="#303845" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="ClipToBounds" Value="True" />
+            <Setter Property="BoxShadow" Value="0 8 20 0 #40000000" />
+        </Style>
+
+        <Style Selector="Border.ModCoverCard:pointerover">
+            <Setter Property="BorderBrush" Value="#4B5563" />
+        </Style>
+
+        <Style Selector="Border.ModCoverCard.selected">
+            <Setter Property="BorderBrush" Value="#303845" />
+        </Style>
+
+        <Style Selector="Border.ModCoverGlassPanel">
+            <Setter Property="Background" Value="#CC0E1218" />
+            <Setter Property="Padding" Value="12,12,12,8" />
+        </Style>
+
+        <Style Selector="Border.ModCoverFade">
+            <Setter Property="IsHitTestVisible" Value="False" />
+        </Style>
+
+        <Style Selector="Border.ModPackPlatformTag">
+            <Setter Property="Height" Value="24" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="8,0" />
+        </Style>
+
+        <Style Selector="Border.ModPackPlatformTag.steam">
+            <Setter Property="Background" Value="#182F3D" />
+            <Setter Property="BorderBrush" Value="#2F7796" />
+        </Style>
+
+        <Style Selector="Border.ModPackPlatformTag.nexus">
+            <Setter Property="Background" Value="#3A271C" />
+            <Setter Property="BorderBrush" Value="#A95B2C" />
+        </Style>
+
+        <Style Selector="controls|SmoothCornerBorder.ModCoverOutline">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="#78FFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Margin" Value="1" />
+            <Setter Property="InsetStroke" Value="True" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+        </Style>
+
+        <Style Selector="controls|SmoothCornerBorder.ModCoverOutline.selected">
+            <Setter Property="BorderBrush" Value="#2563EB" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsListRow.DownloadResultCard">
+            <Setter Property="Background" Value="#191C22" />
+            <Setter Property="BorderBrush" Value="#303845" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="9" />
+            <Setter Property="StripeOpacity" Value="0.1" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsListRow.RecommendationResultCard">
+            <Setter Property="Background" Value="#E6191C22" />
+            <Setter Property="BorderBrush" Value="#303845" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="StripeOpacity" Value="0.09" />
+            <Setter Property="BoxShadow" Value="0 8 20 0 #40000000" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsListRow.RecommendationResultCard:pointerover">
+            <Setter Property="Background" Value="#19212C" />
+            <Setter Property="BorderBrush" Value="#64748B" />
+            <Setter Property="BoxShadow" Value="0 10 24 0 #52000000" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsListRow.RecommendationResultCard.selected">
+            <Setter Property="Background" Value="#17243A" />
+            <Setter Property="BorderBrush" Value="#60A5FA" />
+            <Setter Property="BoxShadow" Value="0 0 0 1 #4060A5FA, 0 10 24 0 #52000000" />
+        </Style>
+
+        <Style Selector="Grid.RecommendationFilterBar">
+            <Setter Property="Background" Value="#101318" />
+            <Setter Property="Margin" Value="0,-2,0,0" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.RecommendationFilterStrip">
+            <Setter Property="Background" Value="#D615171C" />
+            <Setter Property="BorderBrush" Value="#30343C" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="12,10" />
+            <Setter Property="StripeOpacity" Value="0.14" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.RecommendationHeader">
+            <Setter Property="Background" Value="#D6181A1F" />
+            <Setter Property="BorderBrush" Value="#30333A" />
+            <Setter Property="StripeOpacity" Value="0.15" />
+            <Setter Property="BoxShadow" Value="0 8 20 0 #33000000" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.RecommendationResultsSurface">
+            <Setter Property="Background" Value="#D615171C" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="StripeOpacity" Value="0.14" />
+        </Style>
+
+        <Style Selector="Button.ModOpsCategoryChip.RecommendationStrategyChip.active">
+            <Setter Property="Background" Value="#2563EB" />
+            <Setter Property="BorderBrush" Value="#60A5FA" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+        </Style>
+
+        <Style Selector="Button.RecommendationQualifierButton">
+            <Setter Property="Background" Value="#15243D" />
+            <Setter Property="BorderBrush" Value="#365C8D" />
+            <Setter Property="Foreground" Value="#BFDBFE" />
+        </Style>
+
+        <Style Selector="Border.RecommendationRankPlate">
+            <Setter Property="CornerRadius" Value="0,0,6,0" />
+            <Setter Property="Background" Value="#E60C1420" />
+            <Setter Property="BorderBrush" Value="#8060A5FA" />
+            <Setter Property="BorderThickness" Value="0,0,1,1" />
+            <Setter Property="BoxShadow" Value="0 4 12 0 #59000000" />
+        </Style>
+
+        <Style Selector="Border.RecommendationHeatBadge">
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#29170E" />
+            <Setter Property="BorderBrush" Value="#F97316" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+
+        <Style Selector="Border.RecommendationCardMedia">
+            <Setter Property="BorderBrush" Value="#3B4655" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+
+        <Style Selector="TextBlock.RecommendationCardTitle">
+            <Setter Property="LetterSpacing" Value="0.05" />
+        </Style>
+
+        <Style Selector="Grid.RecommendationCardFooter">
+            <Setter Property="Margin" Value="0,2,0,0" />
+        </Style>
+
+        <Style Selector="Border.RecommendationActiveQualifier">
+            <Setter Property="Background" Value="#15243D" />
+            <Setter Property="BorderBrush" Value="#365C8D" />
+        </Style>
+
+        <Style Selector="Border.RecommendationReasonSnippet">
+            <Setter Property="Background" Value="#D015171C" />
+            <Setter Property="BorderBrush" Value="#2A2E36" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Padding" Value="8,6" />
+        </Style>
+
+        <Style Selector="Border.RecommendationBasisPanel">
+            <Setter Property="Background" Value="#D0111318" />
+            <Setter Property="BorderBrush" Value="#2C3038" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsNotice.DownloadDetailPanel">
+            <Setter Property="Background" Value="#151A22" />
+            <Setter Property="BorderBrush" Value="#365073" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="StripeOpacity" Value="0.06" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsNotice.QueueInspectorPanel">
+            <Setter Property="Background" Value="#E014171D" />
+            <Setter Property="BorderBrush" Value="#2E3540" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="StripeOpacity" Value="0.1" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsNotice.RecommendationDecisionPanel">
+            <Setter Property="Background" Value="#E014171D" />
+            <Setter Property="BorderBrush" Value="#343943" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="StripeOpacity" Value="0.11" />
+            <Setter Property="BoxShadow" Value="0 8 20 0 #40000000" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsNotice.InspectorSection">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="#2C3038" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="Padding" Value="0,0,0,10" />
+            <Setter Property="StripeOpacity" Value="0" />
+        </Style>
+
+        <Style Selector="Button.ModOpsToolbarButton">
+            <Setter Property="Height" Value="28" />
+            <Setter Property="Padding" Value="10,0" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="#343943" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#B8C0CC" />
+            <Setter Property="FontSize" Value="10.5" />
+            <Setter Property="FontWeight" Value="Medium" />
+        </Style>
+
+        <Style Selector="Button.ModOpsToolbarButton:pointerover">
+            <Setter Property="Background" Value="#242830" />
+            <Setter Property="BorderBrush" Value="#58606D" />
+            <Setter Property="Foreground" Value="#F8FAFC" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsMetricTile">
+            <Setter Property="Background" Value="#15171D" />
+            <Setter Property="BorderBrush" Value="#2A2E36" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="StripeOpacity" Value="0.14" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsListHeader">
+            <Setter Property="Background" Value="#20232A" />
+            <Setter Property="BorderBrush" Value="#343943" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10,7" />
+            <Setter Property="StripeOpacity" Value="0.1" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.ModOpsNotice">
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#14171D" />
+            <Setter Property="BorderBrush" Value="#2C3038" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="StripeOpacity" Value="0.12" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+        </Style>
+
+        <Style Selector="FlyoutPresenter.RecommendationQualifierFlyout">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="CornerRadius" Value="7" />
+        </Style>
+
+        <Style Selector="Border.ModOpsConflictDetail">
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#171B22" />
+            <Setter Property="BorderBrush" Value="#334155" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+
+        <Style Selector="Border.ModOpsConflictSummary">
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#151A23" />
+            <Setter Property="BorderBrush" Value="#365073" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+
+        <Style Selector="Border.ModOpsConflictStatusDot">
+            <Setter Property="Width" Value="10" />
+            <Setter Property="Height" Value="10" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Background" Value="#FBBF24" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Margin" Value="0,4,0,0" />
+        </Style>
+
+        <Style Selector="Border.ModOpsConflictRolePill">
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#15243D" />
+            <Setter Property="BorderBrush" Value="#2563EB" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="8,5" />
+        </Style>
+
+        <Style Selector="Border.ModOpsConflictFlow">
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#10141B" />
+            <Setter Property="BorderBrush" Value="#283241" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+
+        <Style Selector="Border.ModOpsConflictPath">
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Background" Value="#0F1217" />
+            <Setter Property="BorderBrush" Value="#2B313B" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="8,6" />
+        </Style>
+
+        <Style Selector="Border.ModOpsConflictEmpty">
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#101318" />
+            <Setter Property="BorderBrush" Value="#262B34" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+
+        <Style Selector="TextBox.ModOpsTextBox">
+            <Setter Property="Height" Value="38" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#0F1116" />
+            <Setter Property="BorderBrush" Value="#30343D" />
+            <Setter Property="Foreground" Value="#E5E7EB" />
+            <Setter Property="SelectionBrush" Value="#665B8CFF" />
+            <Setter Property="CaretBrush" Value="#60A5FA" />
+        </Style>
+
+        <Style Selector="TextBox.ModOpsTextBox:focus">
+            <Setter Property="Background" Value="#11141A" />
+            <Setter Property="BorderBrush" Value="#2563EB" />
+        </Style>
+
+        <Style Selector="ComboBox.ModOpsComboBox">
+            <Setter Property="Height" Value="38" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#0F1116" />
+            <Setter Property="BorderBrush" Value="#30343D" />
+            <Setter Property="Foreground" Value="#E5E7EB" />
+        </Style>
+
+        <Style Selector="ComboBox.ModOpsComboBox:focus">
+            <Setter Property="Background" Value="#11141A" />
+            <Setter Property="BorderBrush" Value="#2563EB" />
+        </Style>
+
+        <Style Selector="Button.ModOpsQueueSegment">
+            <Setter Property="Height" Value="52" />
+            <Setter Property="Padding" Value="12,0" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#1D2027" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#E5E7EB" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.ModOpsQueueSegment:pointerover">
+            <Setter Property="Background" Value="#252932" />
+            <Setter Property="BorderBrush" Value="#4B5563" />
+        </Style>
+
+        <Style Selector="Button.ModOpsQueueSegment.active">
+            <Setter Property="Background" Value="#15243D" />
+            <Setter Property="BorderBrush" Value="#2563EB" />
+            <Setter Property="Foreground" Value="#93C5FD" />
+        </Style>
+
+        <Style Selector="Border.ModOpsQueueTaskRow">
+            <Setter Property="Background" Value="#1D2027" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Border.ModOpsQueueTaskRow:pointerover">
+            <Setter Property="Background" Value="#252932" />
+            <Setter Property="BorderBrush" Value="#4B5563" />
+        </Style>
+
+        <Style Selector="Button.DownloadCenterLauncher">
+            <Setter Property="Width" Value="54" />
+            <Setter Property="Height" Value="54" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="CornerRadius" Value="27" />
+            <Setter Property="Background" Value="#E62563EB" />
+            <Setter Property="BorderBrush" Value="#8060A5FA" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.12" />
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.DownloadCenterLauncher:pointerover">
+            <Setter Property="Background" Value="#FF2563EB" />
+            <Setter Property="RenderTransform" Value="scale(1.04)" />
+        </Style>
+
+        <Style Selector="ListBox.DownloadCenterQueueList">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+
+        <Style Selector="Border.DownloadCenterQueueGroupHeader">
+            <Setter Property="Margin" Value="0,0,0,8" />
+            <Setter Property="Padding" Value="4,2,4,8" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.12" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.12" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Border.DownloadCenterQueueGroupHeader.modpack">
+            <Setter Property="BorderBrush" Value="#315B91" />
+        </Style>
+
+        <Style Selector="Border.DownloadCenterQueueGroupHeader.dragover">
+            <Setter Property="Background" Value="#332563EB" />
+            <Setter Property="BorderBrush" Value="#60A5FA" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+
+        <Style Selector="ListBox.DownloadCenterQueueList ListBoxItem">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0,0,0,8" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+
+        <Style Selector="ListBox.DownloadCenterQueueList ListBoxItem:pointerover">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+        <Style Selector="ListBox.DownloadCenterQueueList ListBoxItem:selected">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+        <Style Selector="Border.DownloadCenterQueueRow">
+            <Setter Property="Background" Value="#171A20" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.12" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.12" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Border.DownloadCenterQueueRow:pointerover">
+            <Setter Property="Background" Value="#20242C" />
+            <Setter Property="BorderBrush" Value="#475569" />
+        </Style>
+
+        <Style Selector="ListBox.DownloadCenterQueueList ListBoxItem:selected Border.DownloadCenterQueueRow">
+            <Setter Property="Background" Value="#14223A" />
+            <Setter Property="BorderBrush" Value="#2563EB" />
+        </Style>
+
+        <Style Selector="Button.DownloadCenterIconButton">
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Background" Value="#20242C" />
+            <Setter Property="BorderBrush" Value="#38404B" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#CBD5E1" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style Selector="Button.DownloadCenterIconButton:pointerover">
+            <Setter Property="Background" Value="#29303A" />
+            <Setter Property="BorderBrush" Value="#64748B" />
+            <Setter Property="Foreground" Value="#F8FAFC" />
+        </Style>
+
+        <Style Selector="Button.DownloadCenterCancelButton">
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#94A3B8" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style Selector="Button.DownloadCenterCancelButton:pointerover">
+            <Setter Property="Background" Value="#321A1F" />
+            <Setter Property="BorderBrush" Value="#7F1D1D" />
+            <Setter Property="Foreground" Value="#FCA5A5" />
+        </Style>
+
+        <Style Selector="Button.DownloadCenterHoverAction">
+            <Setter Property="Opacity" Value="0" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.1" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Border.DownloadCenterQueueRow:pointerover Button.DownloadCenterHoverAction">
+            <Setter Property="Opacity" Value="1" />
+            <Setter Property="IsHitTestVisible" Value="True" />
+        </Style>
+
+        <Style Selector="Border.ModOpsQueueEmpty">
+            <Setter Property="MinHeight" Value="150" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="BorderBrush" Value="#2C3038" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Background" Value="#14171D" />
+            <Setter Property="Padding" Value="18" />
+        </Style>
+
+        <Style Selector="Button.ModOpsPrimaryButton">
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Padding" Value="12,0" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#2563EB" />
+            <Setter Property="BorderBrush" Value="#2563EB" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style Selector="Button.ModOpsPrimaryButton:pointerover">
+            <Setter Property="Background" Value="#1D4ED8" />
+            <Setter Property="BorderBrush" Value="#1D4ED8" />
+        </Style>
+
+        <Style Selector="Button.ModOpsPrimaryButton.downloaded">
+            <Setter Property="Background" Value="#2B3038" />
+            <Setter Property="BorderBrush" Value="#4B5563" />
+            <Setter Property="Foreground" Value="#D1D5DB" />
+        </Style>
+
+        <Style Selector="Button.ModOpsPrimaryButton.downloaded:pointerover">
+            <Setter Property="Background" Value="#343A44" />
+            <Setter Property="BorderBrush" Value="#6B7280" />
+            <Setter Property="Foreground" Value="#E5E7EB" />
+        </Style>
+
+        <Style Selector="Button.ModOpsPrimaryButton:disabled">
+            <Setter Property="Background" Value="#272A31" />
+            <Setter Property="BorderBrush" Value="#353A43" />
+            <Setter Property="Foreground" Value="#6B7280" />
+        </Style>
+
+        <Style Selector="Button.ModOpsFlatButton">
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Padding" Value="12,0" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#22262E" />
+            <Setter Property="BorderBrush" Value="#3A404B" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#E5E7EB" />
+            <Setter Property="FontWeight" Value="Medium" />
+        </Style>
+
+        <Style Selector="Button.ModOpsFlatButton:pointerover">
+            <Setter Property="Background" Value="#2A2F38" />
+            <Setter Property="BorderBrush" Value="#58606D" />
+        </Style>
+
+        <Style Selector="Button.ModOpsFlatButton.active">
+            <Setter Property="Background" Value="#15243D" />
+            <Setter Property="BorderBrush" Value="#2563EB" />
+            <Setter Property="Foreground" Value="#93C5FD" />
+        </Style>
+
+        <Style Selector="Button.ModOpsFlatButton:disabled">
+            <Setter Property="Background" Value="#1A1D23" />
+            <Setter Property="BorderBrush" Value="#282D35" />
+            <Setter Property="Foreground" Value="#646B77" />
+        </Style>
+
+        <Style Selector="ListBox.ModFilePickerList">
+            <Setter Property="Background" Value="#12151B" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="7" />
+        </Style>
+
+        <Style Selector="ListBox.ModFilePickerList > ListBoxItem">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="#1B1F27" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+        </Style>
+
+        <Style Selector="ListBox.ModFilePickerList > ListBoxItem:pointerover">
+            <Setter Property="Background" Value="#252B35" />
+            <Setter Property="BorderBrush" Value="#536174" />
+        </Style>
+
+        <Style Selector="ListBox.ModFilePickerList > ListBoxItem:selected">
+            <Setter Property="Background" Value="#172842" />
+            <Setter Property="BorderBrush" Value="#3B82F6" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.NexusModFilePickerSurface">
+            <Setter Property="Background" Value="#F2171A20" />
+            <Setter Property="BorderBrush" Value="#4DFFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="9" />
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="StripeAnchorMode" Value="Local" />
+            <Setter Property="StripeOpacity" Value="0.11" />
+            <Setter Property="StripeSpeed" Value="9" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+        </Style>
+
+        <Style Selector="Button.NexusModFilePickerCloseButton">
+            <Setter Property="Background" Value="#2B171C" />
+            <Setter Property="BorderBrush" Value="#74313B" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#F87171" />
+        </Style>
+
+        <Style Selector="Button.NexusModFilePickerCloseButton:pointerover">
+            <Setter Property="Background" Value="#442029" />
+            <Setter Property="BorderBrush" Value="#EF4444" />
+            <Setter Property="Foreground" Value="#FCA5A5" />
+        </Style>
+
+        <Style Selector="Button.NexusDownloadPreset">
+            <Setter Property="MinHeight" Value="88" />
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="Background" Value="#1B1F27" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Foreground" Value="#F8FAFC" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        </Style>
+
+        <Style Selector="Button.NexusDownloadPreset:pointerover">
+            <Setter Property="Background" Value="#252B35" />
+            <Setter Property="BorderBrush" Value="#536174" />
+        </Style>
+
+        <Style Selector="Button.NexusDownloadPreset.selected">
+            <Setter Property="Background" Value="#172842" />
+            <Setter Property="BorderBrush" Value="#3B82F6" />
+        </Style>
+
+        <Style Selector="Button.ModOpsSearchClearButton">
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#1B1F27" />
+            <Setter Property="BorderBrush" Value="#30343D" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#9CA3AF" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style Selector="Button.ModOpsSearchClearButton:pointerover">
+            <Setter Property="Background" Value="#252A33" />
+            <Setter Property="BorderBrush" Value="#4B5563" />
+            <Setter Property="Foreground" Value="#E5E7EB" />
+        </Style>
+
+        <Style Selector="Button.ModOpsSearchClearButton:disabled">
+            <Setter Property="Background" Value="#15181E" />
+            <Setter Property="BorderBrush" Value="#252A33" />
+            <Setter Property="Foreground" Value="#4B5563" />
+        </Style>
+
+        <Style Selector="Button.ModOpsCategoryChip">
+            <Setter Property="Height" Value="28" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="Padding" Value="12,0" />
+            <Setter Property="CornerRadius" Value="14" />
+            <Setter Property="Background" Value="#121418" />
+            <Setter Property="BorderBrush" Value="#3A3D46" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#E5E7EB" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+                    <BrushTransition Property="Foreground" Duration="0:0:0.15" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.ModOpsCategoryChip:pointerover">
+            <Setter Property="Background" Value="#1C2027" />
+            <Setter Property="BorderBrush" Value="#6B7280" />
+        </Style>
+
+        <Style Selector="Button.ModOpsCategoryChip.active">
+            <Setter Property="Background" Value="#F8FAFC" />
+            <Setter Property="BorderBrush" Value="#F8FAFC" />
+            <Setter Property="Foreground" Value="#111318" />
+        </Style>
+
+        <Style Selector="Button.ModOpsCategoryChip.RecommendationStrategyChip.active">
+            <Setter Property="Background" Value="#2563EB" />
+            <Setter Property="BorderBrush" Value="#60A5FA" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+        </Style>
+
+        <Style Selector="Button.ModOpsDangerButton">
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Padding" Value="12,0" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#2B171A" />
+            <Setter Property="BorderBrush" Value="#7F1D1D" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#FCA5A5" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style Selector="Button.ModOpsDangerButton:pointerover">
+            <Setter Property="Background" Value="#3A1C20" />
+            <Setter Property="BorderBrush" Value="#B91C1C" />
+        </Style>
+
+        <Style Selector="Button.ModOpsDangerButton:disabled">
+            <Setter Property="Background" Value="#201C20" />
+            <Setter Property="BorderBrush" Value="#35282C" />
+            <Setter Property="Foreground" Value="#7F6A6F" />
+        </Style>
+
+        <Style Selector="ProgressBar.ModOpsProgress">
+            <Setter Property="Height" Value="6" />
+            <Setter Property="Foreground" Value="#2563EB" />
+            <Setter Property="Background" Value="#242832" />
+            <Setter Property="CornerRadius" Value="3" />
+        </Style>
+
+        <Style Selector="Border.RecommendationHeatScale">
+            <Setter Property="Background" Value="#17191E" />
+            <Setter Property="BorderBrush" Value="#3E342C" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="9,7" />
+        </Style>
+
+        <Style Selector="PathIcon.RecommendationHeatGlyph">
+            <Setter Property="Width" Value="17" />
+            <Setter Property="Height" Value="17" />
+            <Setter Property="Foreground" Value="#554940" />
+            <Setter Property="Opacity" Value="0.72" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.14" />
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.14" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="PathIcon.RecommendationHeatGlyph.active">
+            <Setter Property="Foreground" Value="#FB923C" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+        <Style Selector="Border.RecommendationSignalTooltip">
+            <Setter Property="Width" Value="280" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#1B2331" />
+            <Setter Property="BorderBrush" Value="#475569" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="BoxShadow" Value="0 14 30 0 #66050A14" />
+        </Style>
+
+        <Style Selector="Border.ModOpsListRow CheckBox">
+            <Setter Property="Foreground" Value="#D1D5DB" />
+        </Style>
+
+        <Style Selector="ListBox.ModOpsListBox">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+
+        <Style Selector="ListBox.ModOpsListBox > ListBoxItem">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0,0,0,7" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        </Style>
+
+        <Style Selector="ListBox.ModOpsListBox > ListBoxItem:selected">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+        <Style Selector="ListBox.ModListBox">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+
+        <Style Selector="ListBox.ModListBox > ListBoxItem">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0,0,0,6" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+
+        <Style Selector="ListBox.ModListBox > ListBoxItem:selected">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+        <Style Selector="Button.ModPrimaryButton">
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Padding" Value="12,0" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#F59E0B" />
+            <Setter Property="BorderBrush" Value="#F59E0B" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#101114" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style Selector="Button.ModPrimaryButton:pointerover">
+            <Setter Property="Background" Value="#FBBF24" />
+            <Setter Property="BorderBrush" Value="#FBBF24" />
+        </Style>
+
+        <Style Selector="Button.ModFlatButton">
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Padding" Value="12,0" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#22262E" />
+            <Setter Property="BorderBrush" Value="#3A404B" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#E5E7EB" />
+            <Setter Property="FontWeight" Value="Medium" />
+        </Style>
+
+        <Style Selector="Button.ModFlatButton:pointerover">
+            <Setter Property="Background" Value="#2A2F38" />
+            <Setter Property="BorderBrush" Value="#58606D" />
+        </Style>
+
+        <Style Selector="Button.ModFlatButton.active">
+            <Setter Property="Background" Value="#302616" />
+            <Setter Property="BorderBrush" Value="#F59E0B" />
+            <Setter Property="Foreground" Value="#FBBF24" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style Selector="Button.ModDangerButton">
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Padding" Value="12,0" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#2B171A" />
+            <Setter Property="BorderBrush" Value="#7F1D1D" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#FCA5A5" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style Selector="Button.ModDangerButton:pointerover">
+            <Setter Property="Background" Value="#3A1C20" />
+            <Setter Property="BorderBrush" Value="#B91C1C" />
+            <Setter Property="Foreground" Value="#FCA5A5" />
+        </Style>
+
+        <Style Selector="Button.GlyphPrimaryButton">
+            <Setter Property="Height" Value="42" />
+            <Setter Property="Padding" Value="22,0" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Background" Value="{StaticResource GlyphPrimaryBrush}" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style Selector="Button.GlyphPrimaryButton:pointerover">
+            <Setter Property="Background" Value="#1D4ED8" />
+        </Style>
+
+        <Style Selector="Button.GlyphGlassButton">
+            <Setter Property="Height" Value="42" />
+            <Setter Property="Padding" Value="18,0" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Background" Value="#18FFFFFF" />
+            <Setter Property="BorderBrush" Value="#2BFFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="Medium" />
+        </Style>
+
+        <Style Selector="Button.GlyphGlassButton:pointerover">
+            <Setter Property="Background" Value="#26FFFFFF" />
+            <Setter Property="BorderBrush" Value="#3DFFFFFF" />
+        </Style>
+
+        <Style Selector="Button.GlyphWindowControlButton">
+            <Setter Property="Width" Value="32" />
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="CornerRadius" Value="16" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Foreground" Value="#D9FFFFFF" />
+        </Style>
+
+        <Style Selector="Button.GlyphWindowControlButton:pointerover">
+            <Setter Property="Background" Value="#22FFFFFF" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style Selector="Button.CloseWindowControl">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="#EF4444" />
+        </Style>
+
+        <Style Selector="Button.CloseWindowControl:pointerover">
+            <Setter Property="Background" Value="#26EF4444" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="#FCA5A5" />
+        </Style>
+
+        <Style Selector="Button.GlyphDangerButton">
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Padding" Value="16,0" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Background" Value="#DC2626" />
+            <Setter Property="BorderBrush" Value="#F87171" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style Selector="Button.GlyphDangerButton:pointerover">
+            <Setter Property="Background" Value="#B91C1C" />
+            <Setter Property="BorderBrush" Value="#FCA5A5" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style Selector="Button.GlyphDangerButton:disabled">
+            <Setter Property="Background" Value="#DC2626" />
+            <Setter Property="BorderBrush" Value="#F87171" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Opacity" Value="0.82" />
+        </Style>
+
+        <Style Selector="Button.GlyphNavCircle">
+            <Setter Property="Width" Value="36" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Background" Value="#10FFFFFF" />
+            <Setter Property="BorderBrush" Value="#1FFFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#A6FFFFFF" />
+        </Style>
+
+        <Style Selector="Button.GlyphNavCircle:pointerover">
+            <Setter Property="Background" Value="#26FFFFFF" />
+            <Setter Property="BorderBrush" Value="#40FFFFFF" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style Selector="Button.GlyphNavCircle.active">
+            <Setter Property="Background" Value="#332563EB" />
+            <Setter Property="BorderBrush" Value="#665B8CFF" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style Selector="Button.GlyphSidebarItem">
+            <Setter Property="Height" Value="40" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="12,0" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#8CFFFFFF" />
+        </Style>
+
+        <Style Selector="Button.GlyphSidebarItem:pointerover">
+            <Setter Property="Background" Value="#14FFFFFF" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style Selector="Button.GlyphSidebarItem.active">
+            <Setter Property="Background" Value="#1CFFFFFF" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style Selector="Button.GlyphSidebarToggleButton">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Background" Value="#14FFFFFF" />
+            <Setter Property="BorderBrush" Value="#24FFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#B8FFFFFF" />
+        </Style>
+
+        <Style Selector="Button.GlyphSidebarToggleButton:pointerover">
+            <Setter Property="Background" Value="#24FFFFFF" />
+            <Setter Property="BorderBrush" Value="#3AFFFFFF" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style Selector="Border.SettingsPanel">
+            <Setter Property="Background" Value="#EEF8FAFC" />
+            <Setter Property="BorderBrush" Value="#33FFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="22" />
+            <Setter Property="BoxShadow" Value="0 10 28 0 #24050A14" />
+        </Style>
+
+        <!-- 设置面板样式 - 深色主题，进一步降低背景亮度 -->
+        <Style Selector="controls|StripedCardBorder.SettingsPanel">
+            <Setter Property="Background" Value="#101114" />
+            <Setter Property="BorderBrush" Value="#2B2D33" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="16" />
+            <Setter Property="StripeAnchorMode" Value="Viewport" />
+            <Setter Property="StripeOpacity" Value="0.1" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+        </Style>
+
+        <Style Selector="Border.SettingRow">
+            <Setter Property="Background" Value="#1D2027" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Padding" Value="12" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SettingRow">
+            <Setter Property="Background" Value="#1D2027" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="StripeOpacity" Value="0.16" />
+            <Setter Property="StripeSpeed" Value="14" />
+            <Setter Property="StripeAssetUri" Value="avares://BohemiX.App/Assets/striped-draft-card-surface.png" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SettingRow:pointerover">
+            <Setter Property="Background" Value="#252932" />
+            <Setter Property="BorderBrush" Value="#4B5563" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SettingRow CheckBox">
+            <Setter Property="Foreground" Value="#FFFFFFFF" />
+        </Style>
+
+        <Style Selector="CheckBox.SettingsToggle">
+            <Setter Property="Foreground" Value="#E5E7EB" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid ColumnDefinitions="Auto,Auto"
+                          ColumnSpacing="10"
+                          VerticalAlignment="Center">
+                        <Border x:Name="SwitchTrack"
+                                Width="52"
+                                Height="28"
+                                CornerRadius="14"
+                                Background="#202631"
+                                BorderBrush="#4B5563"
+                                BorderThickness="1">
+                            <Border.Transitions>
+                                <Transitions>
+                                    <BrushTransition Property="Background" Duration="0:0:0.18" />
+                                    <BrushTransition Property="BorderBrush" Duration="0:0:0.18" />
+                                </Transitions>
+                            </Border.Transitions>
+                            <Grid>
+                                <Border x:Name="SwitchThumb"
+                                        Width="20"
+                                        Height="20"
+                                        Margin="4,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        CornerRadius="10"
+                                        Background="#94A3B8"
+                                        BoxShadow="0 2 8 0 #66000000">
+                                    <Border.Transitions>
+                                        <Transitions>
+                                            <ThicknessTransition Property="Margin" Duration="0:0:0.18" />
+                                            <BrushTransition Property="Background" Duration="0:0:0.18" />
+                                        </Transitions>
+                                    </Border.Transitions>
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <ContentPresenter Grid.Column="1"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          VerticalAlignment="Center" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="CheckBox.SettingsToggle:pointerover /template/ Border#SwitchTrack">
+            <Setter Property="Background" Value="#293241" />
+            <Setter Property="BorderBrush" Value="#64748B" />
+        </Style>
+
+        <Style Selector="CheckBox.SettingsToggle:checked /template/ Border#SwitchTrack">
+            <Setter Property="Background" Value="#2563EB" />
+            <Setter Property="BorderBrush" Value="#60A5FA" />
+        </Style>
+
+        <Style Selector="CheckBox.SettingsToggle:checked:pointerover /template/ Border#SwitchTrack">
+            <Setter Property="Background" Value="#1D4ED8" />
+            <Setter Property="BorderBrush" Value="#93C5FD" />
+        </Style>
+
+        <Style Selector="CheckBox.SettingsToggle:checked /template/ Border#SwitchThumb">
+            <Setter Property="Margin" Value="28,0,0,0" />
+            <Setter Property="Background" Value="#FFFFFFFF" />
+        </Style>
+
+        <Style Selector="CheckBox.SettingsToggle:focus-visible /template/ Border#SwitchTrack">
+            <Setter Property="BorderBrush" Value="#BFDBFE" />
+            <Setter Property="BoxShadow" Value="0 0 0 3 #334F7DFF" />
+        </Style>
+
+        <Style Selector="CheckBox.SettingsToggle:disabled /template/ Border#SwitchTrack">
+            <Setter Property="Opacity" Value="0.45" />
+        </Style>
+
+        <Style Selector="controls|StripedCardBorder.SettingRow TextBox">
+            <Setter Property="Foreground" Value="#FFFFFFFF" />
+            <Setter Property="Background" Value="#0F1116" />
+            <Setter Property="BorderBrush" Value="#30343D" />
+            <Setter Property="CornerRadius" Value="6" />
+        </Style>
+
+        <Style Selector="Border.SettingRow CheckBox">
+            <Setter Property="Foreground" Value="#FFFFFFFF" />
+        </Style>
+
+        <Style Selector="Border.SettingRow TextBox">
+            <Setter Property="Foreground" Value="#FFFFFFFF" />
+            <Setter Property="Background" Value="#0F1116" />
+            <Setter Property="BorderBrush" Value="#30343D" />
+            <Setter Property="CornerRadius" Value="6" />
+        </Style>
+
+        <Style Selector="ComboBox.SettingsComboBox">
+            <Setter Property="Height" Value="36" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#0F1116" />
+            <Setter Property="BorderBrush" Value="#30343D" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#FFFFFFFF" />
+            <Setter Property="Opacity" Value="1" />
+            <Setter Property="Padding" Value="12,0" />
+        </Style>
+
+        <Style Selector="ComboBox.SettingsComboBox:pointerover">
+            <Setter Property="Background" Value="#11141A" />
+            <Setter Property="BorderBrush" Value="#4B5563" />
+            <Setter Property="Foreground" Value="#FFFFFFFF" />
+        </Style>
+
+        <Style Selector="ComboBox.SettingsComboBox:focus">
+            <Setter Property="Background" Value="#11141A" />
+            <Setter Property="BorderBrush" Value="#F59E0B" />
+            <Setter Property="Foreground" Value="#FFFFFFFF" />
+        </Style>
+
+        <Style Selector="ComboBox.SettingsComboBox:disabled">
+            <Setter Property="Background" Value="#101318" />
+            <Setter Property="BorderBrush" Value="#262B34" />
+            <Setter Property="Foreground" Value="#7F8794" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+        <Style Selector="ComboBox.SettingsComboBox ComboBoxItem">
+            <Setter Property="Foreground" Value="#FFFFFFFF" />
+            <Setter Property="Background" Value="#17191F" />
+        </Style>
+
+    </Application.Styles>
+</Application>

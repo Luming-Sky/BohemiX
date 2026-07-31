@@ -1,0 +1,268 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:BohemiX.App.Controls"
+        x:Class="BohemiX.App.Views.StartupSplashWindow"
+        Icon="/Assets/bohemix-logo.ico"
+        Title="BohemiX"
+        Width="1600"
+        Height="900"
+        SystemDecorations="None"
+        WindowStartupLocation="CenterScreen"
+        TransparencyLevelHint="Transparent"
+        Background="{x:Null}"
+        ShowActivated="False"
+        ShowInTaskbar="False"
+        Topmost="True">
+
+    <Border x:Name="RootBorder"
+            CornerRadius="26"
+            ClipToBounds="True"
+            Background="{x:Null}">
+        <Grid ClipToBounds="True">
+            <Border x:Name="BaseBackdrop"
+                    CornerRadius="26"
+                    Background="#00FFFFFF"
+                    Opacity="0"
+                    IsHitTestVisible="False" />
+
+            <Grid x:Name="AcrylicMask"
+                  Opacity="0"
+                  IsHitTestVisible="False">
+                <Border x:Name="AcrylicBloom"
+                        Margin="-48"
+                        CornerRadius="52"
+                        Background="#72FFFFFF"
+                        Opacity="0">
+                    <Border.Effect>
+                        <BlurEffect Radius="112" />
+                    </Border.Effect>
+                </Border>
+
+                <Border x:Name="AcrylicBody"
+                        Margin="0"
+                        CornerRadius="26"
+                        Background="#86F8FBFF"
+                        Opacity="0">
+                    <Border.Effect>
+                        <BlurEffect Radius="42" />
+                    </Border.Effect>
+                </Border>
+
+                <Border x:Name="AcrylicFrost"
+                        Margin="0"
+                        CornerRadius="26"
+                        Background="#5AFFFFFF"
+                        Opacity="0">
+                    <Border.Effect>
+                        <BlurEffect Radius="18" />
+                    </Border.Effect>
+                </Border>
+
+                <Border x:Name="AcrylicShade"
+                        CornerRadius="26"
+                        Opacity="0">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                            <GradientStop Color="#6AFFFFFF" Offset="0" />
+                            <GradientStop Color="#42FFFFFF" Offset="0.34" />
+                            <GradientStop Color="#22FFFFFF" Offset="0.68" />
+                            <GradientStop Color="#10FFFFFF" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+
+                <Border x:Name="AcrylicGrain"
+                        CornerRadius="26"
+                        Opacity="0">
+                    <Border.Background>
+                        <RadialGradientBrush Center="50%,48%" GradientOrigin="50%,48%" RadiusX="88%" RadiusY="88%">
+                            <GradientStop Color="#34FFFFFF" Offset="0" />
+                            <GradientStop Color="#2AFFFFFF" Offset="0.36" />
+                            <GradientStop Color="#18FFFFFF" Offset="0.7" />
+                            <GradientStop Color="#08FFFFFF" Offset="1" />
+                        </RadialGradientBrush>
+                    </Border.Background>
+                </Border>
+
+                <Border x:Name="AcrylicRim"
+                        Margin="1"
+                        CornerRadius="25"
+                        BorderThickness="1"
+                        BorderBrush="#B8FFFFFF"
+                        Opacity="0" />
+            </Grid>
+
+            <Grid x:Name="StripeMask"
+                  Opacity="0"
+                  IsHitTestVisible="False">
+                <Grid x:Name="StripeSurface"
+                      Width="3200"
+                      Height="2400"
+                      Opacity="1"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      RenderTransformOrigin="50%,50%">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.08" ScaleY="0.08" />
+                            <RotateTransform Angle="0" />
+                            <TranslateTransform X="0" Y="0" />
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+
+                    <Border Background="#0A192F" />
+                    <Grid x:Name="StripePattern"
+                          Width="2600"
+                          Height="2194"
+                          VerticalAlignment="Center"
+                          RenderTransformOrigin="50%,50%">
+                        <Grid.RenderTransform>
+                            <TranslateTransform X="0" Y="0" />
+                        </Grid.RenderTransform>
+
+                        <Image Source="/Assets/striped-background-page.png"
+                               Stretch="UniformToFill"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch" />
+                    </Grid>
+
+                    <Border Opacity="0.28">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                <GradientStop Color="#30FFFFFF" Offset="0" />
+                                <GradientStop Color="#00FFFFFF" Offset="0.22" />
+                                <GradientStop Color="#00000000" Offset="0.6" />
+                                <GradientStop Color="#5F000000" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </Grid>
+
+                <Grid x:Name="StripeSplitCurtain"
+                      Opacity="0"
+                      ClipToBounds="True">
+                    <Grid x:Name="StripeTopLeftCurtain"
+                          ClipToBounds="True"
+                          RenderTransformOrigin="50%,50%">
+                        <Grid.Clip>
+                            <StreamGeometry>M0,0 L1600,0 L0,900 Z</StreamGeometry>
+                        </Grid.Clip>
+                        <Grid.RenderTransform>
+                            <TranslateTransform X="0" Y="0" />
+                        </Grid.RenderTransform>
+
+                        <Canvas Width="1600"
+                                Height="900"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                            <Border Width="1600"
+                                    Height="900"
+                                    Background="#0A192F" />
+                            <Image Canvas.Left="-500"
+                                   Canvas.Top="-647"
+                                   Width="2600"
+                                   Height="2194"
+                                   Source="/Assets/striped-background-page.png"
+                                   Stretch="Fill" />
+                        </Canvas>
+
+                        <Border Opacity="0.28">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                    <GradientStop Color="#30FFFFFF" Offset="0" />
+                                    <GradientStop Color="#00FFFFFF" Offset="0.22" />
+                                    <GradientStop Color="#00000000" Offset="0.6" />
+                                    <GradientStop Color="#5F000000" Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                    </Grid>
+
+                    <Grid x:Name="StripeBottomRightCurtain"
+                          ClipToBounds="True"
+                          RenderTransformOrigin="50%,50%">
+                        <Grid.Clip>
+                            <StreamGeometry>M1600,0 L1600,900 L0,900 Z</StreamGeometry>
+                        </Grid.Clip>
+                        <Grid.RenderTransform>
+                            <TranslateTransform X="0" Y="0" />
+                        </Grid.RenderTransform>
+
+                        <Canvas Width="1600"
+                                Height="900"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                            <Border Width="1600"
+                                    Height="900"
+                                    Background="#0A192F" />
+                            <Image Canvas.Left="-500"
+                                   Canvas.Top="-647"
+                                   Width="2600"
+                                   Height="2194"
+                                   Source="/Assets/striped-background-page.png"
+                                   Stretch="Fill" />
+                        </Canvas>
+
+                        <Border Opacity="0.28">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                    <GradientStop Color="#30FFFFFF" Offset="0" />
+                                    <GradientStop Color="#00FFFFFF" Offset="0.22" />
+                                    <GradientStop Color="#00000000" Offset="0.6" />
+                                    <GradientStop Color="#5F000000" Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                    </Grid>
+                </Grid>
+
+                <Border x:Name="StripeVignette"
+                        CornerRadius="26"
+                        Opacity="0">
+                    <Border.Background>
+                        <RadialGradientBrush Center="50%,46%" GradientOrigin="50%,46%" RadiusX="82%" RadiusY="82%">
+                            <GradientStop Color="#00000000" Offset="0" />
+                            <GradientStop Color="#14000000" Offset="0.56" />
+                            <GradientStop Color="#A8000000" Offset="1" />
+                        </RadialGradientBrush>
+                    </Border.Background>
+                </Border>
+            </Grid>
+
+            <Grid x:Name="LogoStage"
+                  Width="128"
+                  Height="128"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Opacity="1"
+                  RenderTransformOrigin="50%,50%">
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.86" ScaleY="0.86" />
+                        <TranslateTransform Y="8" />
+                    </TransformGroup>
+                </Grid.RenderTransform>
+
+                <Border Margin="-20"
+                        CornerRadius="48"
+                        Background="#45FFFFFF"
+                        Opacity="0.8">
+                    <Border.Effect>
+                        <BlurEffect Radius="34" />
+                    </Border.Effect>
+                </Border>
+
+                <Border CornerRadius="32"
+                        Background="#EEF4F6F8"
+                        BorderBrush="#D5FFFFFF"
+                        BorderThickness="1"
+                        BoxShadow="0 28 78 0 #52000000, inset 0 1 4 0 #FFFFFF">
+                    <controls:BohemiXLogoMark Width="92"
+                                               Height="92"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" />
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

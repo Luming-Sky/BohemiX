@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "styleSpec": "../style-spec.json",
+  "grid": "4x4",
+  "size": 256,
+  "cutout": "floodfill",
+  "threshold": 30,
+  "sheets": [
+    {
+      "name": "workflows",
+      "prompt": "prompts/workflows-sheet.txt",
+      "icons": [
+        "dashboard", "mod-library", "download-manager", "save-manager",
+        "player-profile", "load-order", "mod-conflict", "backup",
+        "cloud-sync", "mod-search", "favorites", "updates",
+        "news", "settings", "achievement", "launch-game"
+      ]
+    },
+    {
+      "name": "craft",
+      "prompt": "prompts/craft-sheet.txt",
+      "icons": [
+        "alchemy-lab", "potion", "herb-bundle", "recipe-book",
+        "cauldron", "mortar-pestle", "hourglass", "alchemy-liquids",
+        "forge-workshop", "longsword", "battle-axe", "grindstone",
+        "bellows", "hearth", "hot-billet", "craft-quality"
+      ]
+    }
+  ]
+}

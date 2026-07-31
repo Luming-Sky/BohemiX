@@ -1,0 +1,599 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:BohemiX.Modules.Forge.Controls"
+             xmlns:models="using:BohemiX.Modules.Forge.Models"
+             xmlns:vm="using:BohemiX.Modules.Forge.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Class="BohemiX.Modules.Forge.Views.ForgeWorkshopView"
+             x:DataType="vm:ForgeWorkshopViewModel"
+             d:DesignWidth="1416"
+             d:DesignHeight="820"
+             mc:Ignorable="d">
+    <UserControl.Styles>
+        <Style Selector="TextBlock.ForgeDisplayTitle">
+            <Setter Property="FontFamily" Value="Georgia" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="#2A1B10" />
+            <Setter Property="LetterSpacing" Value="0" />
+        </Style>
+        <Style Selector="TextBlock.ForgeEyebrow">
+            <Setter Property="FontSize" Value="10.5" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="#9D7138" />
+            <Setter Property="LetterSpacing" Value="0" />
+        </Style>
+        <Style Selector="Button.ForgeChoice">
+            <Setter Property="MinWidth" Value="176" />
+            <Setter Property="MinHeight" Value="76" />
+            <Setter Property="Padding" Value="14,12" />
+            <Setter Property="CornerRadius" Value="2" />
+            <Setter Property="Background" Value="#241E18" />
+            <Setter Property="BorderBrush" Value="#786044" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#F3E5C3" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style Selector="Button.ForgeChoice:pointerover">
+            <Setter Property="Background" Value="#35291C" />
+            <Setter Property="BorderBrush" Value="#D0A154" />
+            <Setter Property="Foreground" Value="#FFF1CE" />
+        </Style>
+        <Style Selector="Button.ForgeChoice:pressed">
+            <Setter Property="Background" Value="#191511" />
+        </Style>
+        <Style Selector="Button.ForgeChoice:focus /template/ ContentPresenter">
+            <Setter Property="BorderBrush" Value="#F1C66E" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+        <Style Selector="Button.ForgeTool">
+            <Setter Property="Height" Value="44" />
+            <Setter Property="Padding" Value="13,0" />
+            <Setter Property="CornerRadius" Value="2" />
+            <Setter Property="Background" Value="#E51A1713" />
+            <Setter Property="BorderBrush" Value="#7C684E" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#E8D8B9" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style Selector="Button.ForgeTool:pointerover">
+            <Setter Property="Background" Value="#F02C241A" />
+            <Setter Property="BorderBrush" Value="#C69A4E" />
+            <Setter Property="Foreground" Value="#FFF0CF" />
+        </Style>
+        <Style Selector="Button.ForgeTool.Primary">
+            <Setter Property="Background" Value="#EA623417" />
+            <Setter Property="BorderBrush" Value="#D38C3E" />
+            <Setter Property="Foreground" Value="#FFF0D1" />
+        </Style>
+        <Style Selector="Button.ForgeTool.Primary:pointerover">
+            <Setter Property="Background" Value="#F17D441E" />
+            <Setter Property="BorderBrush" Value="#F1BC64" />
+        </Style>
+        <Style Selector="Button.ForgeTool:disabled">
+            <Setter Property="Opacity" Value="0.36" />
+        </Style>
+        <Style Selector="Button.ForgeTool:focus /template/ ContentPresenter">
+            <Setter Property="BorderBrush" Value="#F1C66E" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+        <Style Selector="Button.ForgeIconButton">
+            <Setter Property="Width" Value="38" />
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Padding" Value="9" />
+            <Setter Property="CornerRadius" Value="2" />
+            <Setter Property="Background" Value="#92171310" />
+            <Setter Property="BorderBrush" Value="#675944" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#DDCBAA" />
+        </Style>
+        <Style Selector="Button.ForgeIconButton:pointerover">
+            <Setter Property="Background" Value="#E232281D" />
+            <Setter Property="BorderBrush" Value="#D0A052" />
+            <Setter Property="Foreground" Value="#FFF0D0" />
+        </Style>
+        <Style Selector="Border.ForgeCommandRail">
+            <Setter Property="Padding" Value="6" />
+            <Setter Property="Background" Value="#ED0E0C0A" />
+            <Setter Property="BorderBrush" Value="#796343" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="2" />
+            <Setter Property="BoxShadow" Value="0 8 22 0 #A8000000" />
+        </Style>
+        <Style Selector="Border.ForgeKeycap">
+            <Setter Property="MinWidth" Value="24" />
+            <Setter Property="Height" Value="21" />
+            <Setter Property="Padding" Value="5,0" />
+            <Setter Property="Background" Value="#25221D" />
+            <Setter Property="BorderBrush" Value="#766951" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="2" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style Selector="TextBlock.ForgeKeycapText">
+            <Setter Property="FontSize" Value="9.5" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="#DCCCA9" />
+        </Style>
+        <Style Selector="PathIcon.ForgeCommandIcon">
+            <Setter Property="Width" Value="16" />
+            <Setter Property="Height" Value="16" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style Selector="PathIcon.ForgeRecipeWeaponIcon">
+            <Setter Property="Width" Value="34" />
+            <Setter Property="Height" Value="34" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="#AEB7C4" />
+        </Style>
+        <Style Selector="Border.ForgeParchmentOuter">
+            <Setter Property="Background" Value="#291C11" />
+            <Setter Property="BorderBrush" Value="#B88B48" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="2" />
+            <Setter Property="BoxShadow" Value="0 14 38 0 #C6000000" />
+        </Style>
+        <Style Selector="Border.ForgeParchmentInner">
+            <Setter Property="Background" Value="#F1D2A36D" />
+            <Setter Property="BorderBrush" Value="#684524" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="1" />
+        </Style>
+        <Style Selector="Border.ForgeIronPanel">
+            <Setter Property="Background" Value="#F312100D" />
+            <Setter Property="BorderBrush" Value="#8D7048" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="2" />
+            <Setter Property="BoxShadow" Value="0 12 32 0 #B8000000" />
+        </Style>
+    </UserControl.Styles>
+
+    <Grid Background="#0B0907">
+        <controls:ForgeOpenGlControl x:Name="ForgeSurface"
+                                     RenderQuality="{Binding GraphicsSettings.RenderQuality}"
+                                     TextureQuality="{Binding GraphicsSettings.TextureQuality}"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     Focusable="True" />
+
+        <Button Classes="ForgeIconButton"
+                Margin="18"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding RequestExitCommand}"
+                ToolTip.Tip="{Binding ExitWorkshopText}"
+                AutomationProperties.Name="{Binding ExitWorkshopText}"
+                ZIndex="30">
+            <PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconBack}" />
+        </Button>
+
+        <!-- A compact forged-metal plaque leaves the workshop as the primary visual. -->
+        <Border Width="920"
+                MaxWidth="920"
+                Margin="0,14,0,0"
+                Padding="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Background="#9C9A7041"
+                BorderBrush="#403322"
+                BorderThickness="1"
+                CornerRadius="2"
+                BoxShadow="0 7 20 0 #92000000"
+                IsVisible="{Binding ShowRecipeStrip}">
+            <Border Padding="13,7"
+                    Background="#ED0D0C0A"
+                    BorderBrush="#6C5B43"
+                    BorderThickness="1"
+                    CornerRadius="1">
+                <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="24">
+                    <Grid ColumnDefinitions="4,Auto,*" ColumnSpacing="10">
+                        <Border Background="#B07B35" />
+                        <PathIcon Grid.Column="1" Data="{StaticResource BmxIconHammer}" Width="18" Height="18" Foreground="#D9A750" VerticalAlignment="Center" />
+                        <StackPanel Grid.Column="2" Spacing="1">
+                            <TextBlock Text="{Binding StageTitle}" FontSize="17" FontFamily="Georgia" FontWeight="Bold" Foreground="#F2DFB8" />
+                            <TextBlock Text="{Binding CurrentOperationText}" FontSize="10.5" Foreground="#AFA07F" />
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Column="1" ColumnDefinitions="Auto,Auto" ColumnSpacing="9" VerticalAlignment="Center">
+                        <PathIcon Data="{StaticResource BmxIconTemperature}" Width="16" Height="16" Foreground="#D47A36" VerticalAlignment="Center" />
+                        <StackPanel Grid.Column="1" Spacing="1">
+                            <TextBlock Text="{Binding RecipeDisplayName}" FontSize="13.5" FontWeight="SemiBold" Foreground="#E4CEAA" />
+                            <TextBlock Text="{Binding HeatDescription}" FontSize="10.5" Foreground="#B9A784" />
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal" Spacing="7">
+                        <Button Classes="ForgeIconButton" Command="{Binding ToggleRecipeBookCommand}" ToolTip.Tip="{Binding RecipeTooltip}">
+                            <PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconRecipe}" />
+                        </Button>
+                        <Button Classes="ForgeIconButton" Command="{Binding TogglePauseCommand}" ToolTip.Tip="{Binding PauseTooltip}">
+                            <PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconPause}" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Border>
+
+        <!-- Recipe selection: one framed craft surface, not a stack of desktop cards. -->
+        <Border Classes="ForgeParchmentOuter"
+                Width="880"
+                Padding="5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                IsVisible="{Binding IsRecipeSelect}">
+            <Border Classes="ForgeParchmentInner" Padding="28">
+                <Grid ColumnDefinitions="150,*" ColumnSpacing="26">
+                    <Grid>
+                        <Border Width="1" HorizontalAlignment="Right" Margin="0,4,0,4" Background="#805C351E" />
+                        <StackPanel Margin="0,12,24,0" Spacing="12" VerticalAlignment="Top">
+                            <Image Source="avares://BohemiX.Modules.Forge/Assets/Icons/forge-workshop.png"
+                                   Width="112" Height="112" Opacity="0.78" Stretch="Uniform" />
+                            <Border Height="1" Background="#8A694328" />
+                            <TextBlock Classes="ForgeEyebrow" Text="{Binding ForgeLedgerTitle}" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Grid.Column="1" Spacing="20">
+                        <StackPanel Spacing="4">
+                            <TextBlock Classes="ForgeDisplayTitle" Text="{Binding ChooseRecipeTitle}" FontSize="28" />
+                            <TextBlock Text="{Binding ChooseRecipeDescription}" FontSize="12.5" Foreground="#684827" />
+                            <Border Height="2" Margin="0,9,0,0" Background="#9B6B31" />
+                        </StackPanel>
+                        <ItemsControl ItemsSource="{Binding RecipeChoices}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate><UniformGrid Columns="3" /></ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:ForgeRecipeChoiceViewModel">
+                                    <Button Classes="ForgeChoice"
+                                            Margin="5,0"
+                                            Padding="9"
+                                            Height="180"
+                                            VerticalAlignment="Top"
+                                            HorizontalContentAlignment="Stretch"
+                                            VerticalContentAlignment="Stretch"
+                                            Command="{Binding SelectCommand}">
+                                        <Grid RowDefinitions="82,2,36,24" RowSpacing="6">
+                                            <Grid Background="#31271D">
+                                                <Image Source="{Binding ThumbnailUri}" Stretch="Uniform" Opacity="0.78" />
+                                                <Border Width="48"
+                                                        Height="48"
+                                                        Margin="9"
+                                                        Padding="4"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        Background="#D0191612"
+                                                        BorderBrush="#8B7455"
+                                                        BorderThickness="1"
+                                                        CornerRadius="2">
+                                                    <Grid>
+                                                        <PathIcon Classes="ForgeRecipeWeaponIcon"
+                                                                  Data="{StaticResource BmxIconDuellingLongsword}"
+                                                                  IsVisible="{Binding IsDuellingLongswordRecipe}" />
+                                                        <PathIcon Classes="ForgeRecipeWeaponIcon"
+                                                                  Data="{StaticResource BmxIconBasilard}"
+                                                                  IsVisible="{Binding IsBasilardRecipe}" />
+                                                        <PathIcon Classes="ForgeRecipeWeaponIcon"
+                                                                  Data="{StaticResource BmxIconBeardedAxe}"
+                                                                  IsVisible="{Binding IsAxeRecipe}" />
+                                                        <PathIcon Data="{StaticResource BmxIconSpark}"
+                                                                  Width="9"
+                                                                  Height="9"
+                                                                  Margin="1"
+                                                                  HorizontalAlignment="Left"
+                                                                  VerticalAlignment="Top"
+                                                                  Foreground="#E9D9B8" />
+                                                    </Grid>
+                                                </Border>
+                                            </Grid>
+                                            <Border Grid.Row="1" Background="#9B7138" />
+                                            <TextBlock Grid.Row="2"
+                                                       Text="{Binding DisplayName}"
+                                                       FontSize="13.5"
+                                                       TextAlignment="Center"
+                                                       TextWrapping="Wrap"
+                                                       VerticalAlignment="Center" />
+                                            <TextBlock Grid.Row="3"
+                                                       Text="{Binding RouteText}"
+                                                       FontSize="10"
+                                                       Foreground="#BBA982"
+                                                       TextAlignment="Center"
+                                                       TextWrapping="Wrap"
+                                                       VerticalAlignment="Center" />
+                                        </Grid>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Border>
+
+        <Border Classes="ForgeParchmentOuter"
+                Width="820"
+                Padding="5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                IsVisible="{Binding IsMaterialSelect}">
+            <Border Classes="ForgeParchmentInner" Padding="28">
+                <Grid ColumnDefinitions="150,*" ColumnSpacing="26">
+                    <Grid>
+                        <Border Width="1" HorizontalAlignment="Right" Margin="0,4" Background="#805C351E" />
+                        <StackPanel Margin="0,12,24,0" Spacing="12">
+                            <Image Source="avares://BohemiX.Modules.Forge/Assets/Icons/hot-billet.png"
+                                   Width="112" Height="112" Opacity="0.82" Stretch="Uniform" />
+                            <Border Height="1" Background="#8A694328" />
+                            <TextBlock Classes="ForgeEyebrow" Text="{Binding MaterialStockTitle}" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Grid.Column="1" Spacing="20">
+                        <StackPanel Spacing="4">
+                            <TextBlock Classes="ForgeDisplayTitle" Text="{Binding ChooseSteelTitle}" FontSize="28" />
+                            <TextBlock Text="{Binding ChooseSteelDescription}" FontSize="12.5" Foreground="#684827" />
+                            <Border Height="2" Margin="0,9,0,0" Background="#9B6B31" />
+                        </StackPanel>
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                            <Button Grid.Column="0" Classes="ForgeChoice" Command="{Binding SelectSoftSteelCommand}">
+                                <StackPanel Spacing="8">
+                                    <PathIcon Data="{StaticResource BmxIconIron}" Width="23" Height="23" Foreground="#C7B493" />
+                                    <TextBlock Text="{Binding SoftSteelText}" FontFamily="Georgia" FontWeight="Bold" FontSize="17" TextAlignment="Center" />
+                                    <TextBlock Text="{Binding SoftSteelDescription}" FontSize="10.5" Foreground="#BAA77F" TextAlignment="Center" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Button>
+                            <Button Grid.Column="1" Classes="ForgeChoice" Command="{Binding SelectBalancedSteelCommand}">
+                                <StackPanel Spacing="8">
+                                    <PathIcon Data="{StaticResource BmxIconIron}" Width="23" Height="23" Foreground="#D2C3A5" />
+                                    <TextBlock Text="{Binding BalancedSteelText}" FontFamily="Georgia" FontWeight="Bold" FontSize="17" TextAlignment="Center" />
+                                    <TextBlock Text="{Binding BalancedSteelDescription}" FontSize="10.5" Foreground="#BAA77F" TextAlignment="Center" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Button>
+                            <Button Grid.Column="2" Classes="ForgeChoice" Command="{Binding SelectHighCarbonSteelCommand}">
+                                <StackPanel Spacing="8">
+                                    <PathIcon Data="{StaticResource BmxIconIron}" Width="23" Height="23" Foreground="#E1C397" />
+                                    <TextBlock Text="{Binding HighCarbonSteelText}" FontFamily="Georgia" FontWeight="Bold" FontSize="17" TextAlignment="Center" />
+                                    <TextBlock Text="{Binding HighCarbonSteelDescription}" FontSize="10.5" Foreground="#BAA77F" TextAlignment="Center" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Border>
+
+        <!-- Contextual tool rack. Primary actions carry the warm forge accent. -->
+        <Border Classes="ForgeCommandRail" Margin="0,0,0,18" HorizontalAlignment="Center" VerticalAlignment="Bottom" IsVisible="{Binding IsHeating}">
+            <Grid ColumnDefinitions="4,Auto" ColumnSpacing="7">
+                <Border Background="#B97731" />
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="6">
+                    <Button Classes="ForgeTool" Command="{Binding PumpBellowsCommand}" ToolTip.Tip="{Binding BellowsText}">
+                        <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="8"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconHeat}" /><TextBlock Grid.Column="1" Text="{Binding BellowsText}" VerticalAlignment="Center" /><Border Grid.Column="2" Classes="ForgeKeycap"><TextBlock Classes="ForgeKeycapText" Text="Space" /></Border></Grid>
+                    </Button>
+                    <Button Classes="ForgeTool Primary" Command="{Binding MoveToAnvilCommand}" IsEnabled="{Binding Snapshot.CanProceed}" ToolTip.Tip="{Binding MoveToAnvilText}">
+                        <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="8"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconIron}" /><TextBlock Grid.Column="1" Text="{Binding MoveToAnvilText}" VerticalAlignment="Center" /><Border Grid.Column="2" Classes="ForgeKeycap"><TextBlock Classes="ForgeKeycapText" Text="Enter" /></Border></Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Classes="ForgeCommandRail" Margin="0,0,0,18" HorizontalAlignment="Center" VerticalAlignment="Bottom" IsVisible="{Binding IsHammering}">
+            <Grid ColumnDefinitions="4,Auto" ColumnSpacing="7">
+                <Border Background="#B97731" />
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="6">
+                    <Button Classes="ForgeTool" Command="{Binding RotateWorkpieceCommand}" ToolTip.Tip="{Binding TurnOverText}">
+                        <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="8"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconRefresh}" /><TextBlock Grid.Column="1" Text="{Binding TurnOverText}" VerticalAlignment="Center" /><Border Grid.Column="2" Classes="ForgeKeycap"><TextBlock Classes="ForgeKeycapText" Text="Q" /></Border></Grid>
+                    </Button>
+                    <Button Classes="ForgeTool" Command="{Binding MoveToForgeCommand}" ToolTip.Tip="{Binding ReturnToForgeText}">
+                        <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="8"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconHearth}" /><TextBlock Grid.Column="1" Text="{Binding ReturnToForgeText}" VerticalAlignment="Center" /><Border Grid.Column="2" Classes="ForgeKeycap"><TextBlock Classes="ForgeKeycapText" Text="R" /></Border></Grid>
+                    </Button>
+                    <Button Classes="ForgeTool Primary" Command="{Binding QuenchWaterCommand}" IsEnabled="{Binding Snapshot.CanProceed}" ToolTip.Tip="{Binding WaterQuenchText}">
+                        <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="8"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconWater}" /><TextBlock Grid.Column="1" Text="{Binding WaterQuenchText}" VerticalAlignment="Center" /><Border Grid.Column="2" Classes="ForgeKeycap"><TextBlock Classes="ForgeKeycapText" Text="1" /></Border></Grid>
+                    </Button>
+                    <Button Classes="ForgeTool Primary" Command="{Binding QuenchOilCommand}" IsEnabled="{Binding Snapshot.CanProceed}" ToolTip.Tip="{Binding OilQuenchText}">
+                        <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="8"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconOil}" /><TextBlock Grid.Column="1" Text="{Binding OilQuenchText}" VerticalAlignment="Center" /><Border Grid.Column="2" Classes="ForgeKeycap"><TextBlock Classes="ForgeKeycapText" Text="2" /></Border></Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Width="278" Margin="0,0,0,78" Padding="7" HorizontalAlignment="Center" VerticalAlignment="Bottom" Classes="ForgeCommandRail" IsHitTestVisible="False" IsVisible="{Binding IsHammerCharging}">
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                <PathIcon Data="{StaticResource BmxIconHammer}" Width="15" Height="15" Foreground="#D9A24C" VerticalAlignment="Center" />
+                <ProgressBar Grid.Column="1" Height="7" Minimum="0" Maximum="1" Value="{Binding HammerCharge}" VerticalAlignment="Center" Foreground="#E57F29" Background="#35261C" />
+                <TextBlock Grid.Column="2" Text="{Binding HammerChargePercent}" VerticalAlignment="Center" FontSize="10.5" Foreground="#E4D2AE" />
+            </Grid>
+        </Border>
+
+        <Border Classes="ForgeCommandRail" Margin="0,0,0,18" HorizontalAlignment="Center" VerticalAlignment="Bottom" IsVisible="{Binding IsQuenching}">
+            <Button Classes="ForgeTool Primary" Command="{Binding CompleteQuenchCommand}" IsEnabled="{Binding Snapshot.CanProceed}" ToolTip.Tip="{Binding FinishQuenchingText}">
+                <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="8"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconCheck}" /><TextBlock Grid.Column="1" Text="{Binding FinishQuenchingText}" VerticalAlignment="Center" /><Border Grid.Column="2" Classes="ForgeKeycap"><TextBlock Classes="ForgeKeycapText" Text="Enter" /></Border></Grid>
+            </Button>
+        </Border>
+
+        <Border Classes="ForgeCommandRail" Margin="0,0,0,18" HorizontalAlignment="Center" VerticalAlignment="Bottom" IsVisible="{Binding IsGrindingPreview}">
+            <Grid ColumnDefinitions="4,Auto" ColumnSpacing="7">
+                <Border Background="#B97731" />
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="6">
+                    <Button Classes="ForgeTool Primary" Command="{Binding BeginGrindingCommand}" ToolTip.Tip="{Binding StartGrindingText}">
+                        <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="8"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconMachine}" /><TextBlock Grid.Column="1" Text="{Binding StartGrindingText}" VerticalAlignment="Center" /><Border Grid.Column="2" Classes="ForgeKeycap"><TextBlock Classes="ForgeKeycapText" Text="G" /></Border></Grid>
+                    </Button>
+                    <Button Classes="ForgeTool" Command="{Binding SkipGrindingCommand}" ToolTip.Tip="{Binding KeepQuenchedEdgeText}">
+                        <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="8"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconArrowRight}" /><TextBlock Grid.Column="1" Text="{Binding KeepQuenchedEdgeText}" VerticalAlignment="Center" /><Border Grid.Column="2" Classes="ForgeKeycap"><TextBlock Classes="ForgeKeycapText" Text="K" /></Border></Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Classes="ForgeCommandRail" Margin="0,0,0,18" HorizontalAlignment="Center" VerticalAlignment="Bottom" IsVisible="{Binding IsGrindingActive}">
+            <Grid ColumnDefinitions="4,Auto" ColumnSpacing="7">
+                <Border Background="#B97731" />
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="7">
+                    <Grid Margin="4,0" ColumnDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="8" VerticalAlignment="Center">
+                        <PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconMachine}" Foreground="#CEB88D" />
+                        <Button Grid.Column="1" Classes="ForgeIconButton" Command="{Binding DecreaseGrinderSpeedCommand}" ToolTip.Tip="{Binding DecreaseSpeedTooltip}"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconRemove}" /></Button>
+                        <TextBlock Grid.Column="2" Width="58" Text="{Binding GrinderSpeedText}" VerticalAlignment="Center" TextAlignment="Center" FontWeight="SemiBold" Foreground="#E8D8B9" />
+                        <Button Grid.Column="3" Classes="ForgeIconButton" Command="{Binding IncreaseGrinderSpeedCommand}" ToolTip.Tip="{Binding IncreaseSpeedTooltip}"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconAdd}" /></Button>
+                    </Grid>
+                    <Border Classes="ForgeKeycap"><TextBlock Classes="ForgeKeycapText" Text="S / W" /></Border>
+                    <Button Classes="ForgeTool Primary" Command="{Binding SubmitInspectionCommand}" IsEnabled="{Binding Snapshot.CanProceed}" ToolTip.Tip="{Binding InspectText}">
+                        <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="8"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconCheck}" /><TextBlock Grid.Column="1" Text="{Binding InspectText}" VerticalAlignment="Center" /><Border Grid.Column="2" Classes="ForgeKeycap"><TextBlock Classes="ForgeKeycapText" Text="Enter" /></Border></Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Classes="ForgeCommandRail" Margin="0,0,0,18" HorizontalAlignment="Center" VerticalAlignment="Bottom" IsVisible="{Binding IsInspection}">
+            <Button Classes="ForgeTool Primary" Command="{Binding SubmitInspectionCommand}" ToolTip.Tip="{Binding SubmitInspectionText}">
+                <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="8"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconMeasure}" /><TextBlock Grid.Column="1" Text="{Binding SubmitInspectionText}" VerticalAlignment="Center" /><Border Grid.Column="2" Classes="ForgeKeycap"><TextBlock Classes="ForgeKeycapText" Text="Enter" /></Border></Grid>
+            </Button>
+        </Border>
+
+        <Border Classes="ForgeParchmentOuter" Width="650" Padding="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="{Binding IsResult}">
+            <Border Classes="ForgeParchmentInner" Padding="27">
+                <Grid ColumnDefinitions="128,*" ColumnSpacing="24">
+                    <StackPanel Spacing="10" VerticalAlignment="Top">
+                        <Image Source="avares://BohemiX.Modules.Forge/Assets/Icons/craft-quality.png" Width="106" Height="106" Opacity="0.8" />
+                        <Border Height="1" Background="#8A694328" />
+                        <TextBlock Classes="ForgeEyebrow" Text="{Binding CraftVerdictText}" TextAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Spacing="16">
+                        <StackPanel Spacing="3">
+                            <TextBlock Classes="ForgeDisplayTitle" Text="{Binding ResultTitle}" FontSize="34" />
+                            <TextBlock Text="{Binding ResultScoreText}" FontSize="12.5" FontWeight="SemiBold" Foreground="#6A4726" />
+                            <Border Height="2" Margin="0,8,0,0" Background="#9B6B31" />
+                        </StackPanel>
+                        <ItemsControl ItemsSource="{Binding ResultReasons}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="models:QualityReason">
+                                    <Grid ColumnDefinitions="92,*" Margin="0,4">
+                                        <TextBlock Text="{Binding Category}" FontSize="11.5" FontWeight="Bold" Foreground="#4A301A" />
+                                        <TextBlock Grid.Column="1" Text="{Binding Message}" FontSize="11.5" TextWrapping="Wrap" Foreground="#684827" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <Button Classes="ForgeChoice" HorizontalAlignment="Left" MinWidth="148" MinHeight="44" Command="{Binding RestartCommand}">
+                            <StackPanel Orientation="Horizontal" Spacing="9"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconRefresh}" /><TextBlock Text="{Binding ForgeAgainText}" VerticalAlignment="Center" /></StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Border>
+
+        <Border Classes="ForgeParchmentOuter" Width="520" Padding="4" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,88,0,0" IsVisible="{Binding IsRecipeBookOpen}">
+            <Border Classes="ForgeParchmentInner" Padding="20">
+                <Grid ColumnDefinitions="86,*" ColumnSpacing="18">
+                    <Image Source="avares://BohemiX.Modules.Forge/Assets/Icons/recipe-book.png" Width="78" Height="78" Opacity="0.72" VerticalAlignment="Top" />
+                    <StackPanel Grid.Column="1" Spacing="9">
+                        <TextBlock Classes="ForgeEyebrow" Text="{Binding SmithReferenceText}" />
+                        <TextBlock Classes="ForgeDisplayTitle" Text="{Binding RecipeDisplayName}" FontSize="22" />
+                        <Border Height="1" Background="#94652E" />
+                        <TextBlock Text="{Binding RecipeRouteText}" FontSize="12.5" FontWeight="SemiBold" Foreground="#51361F" />
+                        <TextBlock Text="{Binding RecipeGuidanceText}" TextWrapping="Wrap" FontSize="11.5" Foreground="#684827" />
+                        <Button Classes="ForgeTool" HorizontalAlignment="Left" Command="{Binding ToggleRecipeBookCommand}">
+                            <StackPanel Orientation="Horizontal" Spacing="8"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconClose}" /><TextBlock Text="{Binding CollapseText}" VerticalAlignment="Center" /><Border Classes="ForgeKeycap"><TextBlock Classes="ForgeKeycapText" Text="Tab" /></Border></StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Border>
+
+        <Border Background="#99000000" IsVisible="{Binding IsPaused}">
+            <Border Classes="ForgeIronPanel" Width="390" Padding="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Border Padding="24" Background="#F4171410" BorderBrush="#4C4030" BorderThickness="1" CornerRadius="1">
+                    <Grid ColumnDefinitions="86,*" ColumnSpacing="18">
+                        <Image Source="avares://BohemiX.Modules.Forge/Assets/Icons/forge-workshop.png" Width="78" Height="78" Opacity="0.55" VerticalAlignment="Top" />
+                        <StackPanel Grid.Column="1" Spacing="12">
+                            <StackPanel Spacing="2">
+                                <TextBlock Text="{Binding ForgePausedTitle}" FontFamily="Georgia" FontSize="24" FontWeight="Bold" Foreground="#F0DDB8" />
+                                <TextBlock Text="{Binding ForgePausedDescription}" FontSize="11" Foreground="#9F9279" />
+                            </StackPanel>
+                            <Border Height="1" Background="#64543C" />
+                            <Button Classes="ForgeTool Primary" Command="{Binding TogglePauseCommand}">
+                                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="9"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconPlay}" /><TextBlock Grid.Column="1" Text="{Binding ResumeForgingText}" VerticalAlignment="Center" /><Border Grid.Column="2" Classes="ForgeKeycap"><TextBlock Classes="ForgeKeycapText" Text="Esc" /></Border></Grid>
+                            </Button>
+                            <Button Classes="ForgeTool" Command="{Binding ToggleHintsCommand}">
+                                <StackPanel Orientation="Horizontal" Spacing="9"><PathIcon Classes="ForgeCommandIcon" Data="{StaticResource BmxIconSpark}" /><TextBlock Text="{Binding ApprenticeHintsText}" VerticalAlignment="Center" /></StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Border>
+        </Border>
+
+        <Grid Background="#C9000000"
+              IsVisible="{Binding IsExitConfirmationOpen}"
+              ZIndex="100">
+            <Border Classes="ForgeIronPanel"
+                    Width="430"
+                    Padding="4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                <Border Padding="26,24"
+                        Background="#FA17130F"
+                        BorderBrush="#66543D"
+                        BorderThickness="1"
+                        CornerRadius="1">
+                    <Grid ColumnDefinitions="72,*" ColumnSpacing="20">
+                        <Border Width="64"
+                                Height="64"
+                                Background="#281F17"
+                                BorderBrush="#8D7048"
+                                BorderThickness="1"
+                                CornerRadius="2"
+                                VerticalAlignment="Top">
+                            <PathIcon Data="{StaticResource BmxIconHammer}"
+                                      Width="28"
+                                      Height="28"
+                                      Foreground="#D0A052"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                        </Border>
+                        <StackPanel Grid.Column="1" Spacing="14">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="{Binding AbandonForgeTitle}"
+                                           FontFamily="Microsoft YaHei"
+                                           FontSize="21"
+                                           FontWeight="Bold"
+                                           Foreground="#F0DDB8" />
+                                <TextBlock Text="{Binding AbandonForgeDescription}"
+                                           FontFamily="Microsoft YaHei"
+                                           FontSize="11.5"
+                                           Foreground="#AFA083"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+                            <Border Height="1" Background="#64543C" />
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="9">
+                                <Button Classes="ForgeTool"
+                                        Command="{Binding CancelExitCommand}"
+                                        Content="{Binding ResumeForgingText}" />
+                                <Button Grid.Column="1"
+                                        Classes="ForgeTool Primary"
+                                        Command="{Binding ConfirmExitCommand}"
+                                        Content="{Binding AbandonAndReturnText}" />
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Border>
+        </Grid>
+
+        <Border Classes="ForgeIronPanel" Width="430" Padding="22" HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="{Binding HasRenderError}">
+            <StackPanel Spacing="8">
+                <TextBlock Text="Forge Simulator" FontFamily="Georgia" FontSize="20" FontWeight="Bold" Foreground="#F0DDB8" />
+                <TextBlock Text="{Binding RenderError}" TextWrapping="Wrap" Foreground="#CDBD9D" />
+            </StackPanel>
+        </Border>
+
+        <Border Margin="18,0,18,14" Padding="3" HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="#9A8B6B3F" CornerRadius="2" IsVisible="{Binding ApprenticeHints}">
+            <Border Padding="10,7" Background="#E70D0B09" BorderBrush="#5C4D38" BorderThickness="1" CornerRadius="1">
+                <Grid ColumnDefinitions="3,Auto,*" ColumnSpacing="9">
+                    <Border Background="#B37B36" />
+                    <PathIcon Grid.Column="1" Data="{StaticResource BmxIconSpark}" Width="14" Height="14" Foreground="#D7A650" VerticalAlignment="Top" Margin="0,1,0,0" />
+                    <TextBlock Grid.Column="2" Text="{Binding CraftFeedbackText}" MaxWidth="560" TextWrapping="Wrap" FontSize="11.5" Foreground="#D4C4A4" />
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</UserControl>

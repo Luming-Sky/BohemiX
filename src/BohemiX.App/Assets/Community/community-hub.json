@@ -1,0 +1,24 @@
+{
+  "contentEndpoint": "",
+  "feedbackEndpoint": "https://bohemix-echo-cave.bohemix-lume-sky.workers.dev",
+  "feedbackEndpointEnvironmentVariable": "BOHEMIX_ECHO_CAVE_ENDPOINT",
+  "fallbackSponsorUrl": "https://afdian.com/a/Lume_Sky",
+  "fallbackSpecialThanks": [],
+  "fallbackSponsors": [],
+  "afdian": {
+    "apiEndpoint": "https://afdian.com/api/open/query-sponsor",
+    "sponsorUrl": "https://afdian.com/a/Lume_Sky",
+    "userId": "36205b1e890911f191825254001e7c00",
+    "tokenEnvironmentVariable": "BOHEMIX_AFDIAN_TOKEN",
+    "specialHonorMinimumAmount": 0,
+    "specialHonorPlanNames": [
+      "\u8fd9\u671f\u795e\u4e86\uff01"
+    ],
+    "specialHonorDurationMonths": 3,
+    "echoCaveEligiblePlanNames": [
+      "\u718f\u5976\u916a",
+      "\u6551\u4e16\u5e72\u9152"
+    ],
+    "maximumPages": 20
+  }
+}

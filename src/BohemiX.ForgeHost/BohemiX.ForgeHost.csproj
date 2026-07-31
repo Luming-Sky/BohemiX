@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseWindowsForms>false</UseWindowsForms>
+    <DebugType Condition="'$(Configuration)' == 'Release'">none</DebugType>
+    <DebugSymbols Condition="'$(Configuration)' == 'Release'">false</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.14" />
+    <PackageReference Include="Avalonia.Win32" Version="11.3.14" />
+    <PackageReference Include="Avalonia.Skia" Version="11.3.14" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.14" />
+    <PackageReference Include="Semi.Avalonia" Version="11.3.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BohemiX.Core\BohemiX.Core.csproj" />
+    <ProjectReference Include="..\BohemiX.Modules.Forge\BohemiX.Modules.Forge.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="..\BohemiX.App\Assets\Icons\BohemiXIcons.axaml"
+                      Link="Assets\Icons\BohemiXIcons.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <RuntimeHostConfigurationOption Include="System.GC.ConserveMemory" Value="7" />
+    <RuntimeHostConfigurationOption Include="System.GC.Server" Value="false" />
+  </ItemGroup>
+
+  <Target Name="TrimWindowsX64BuildOutput" AfterTargets="Build">
+    <Exec Command="powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\..\..\tools\trim-win-x64-output.ps1&quot; -OutputDirectory &quot;$(TargetDir).&quot; -RemoveSymbols"
+          Condition="'$(Configuration)' == 'Release'" />
+  </Target>
+</Project>

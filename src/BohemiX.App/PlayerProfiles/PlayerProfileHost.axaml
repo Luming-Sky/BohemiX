@@ -1,0 +1,1185 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:BohemiX.App.Controls"
+             xmlns:profiles="using:BohemiX.App.PlayerProfiles"
+             x:Class="BohemiX.App.PlayerProfiles.PlayerProfileHost"
+             x:DataType="profiles:PlayerProfileManagerViewModel"
+             IsHitTestVisible="True">
+    <UserControl.Resources>
+        <StreamGeometry x:Key="ProfileIconImage">M4,5 L20,5 L20,19 L4,19 Z M7,15 L11,11 L14,14 L16,12 L20,16 M8,9 A1.5,1.5 0 1,0 8,6 A1.5,1.5 0 1,0 8,9</StreamGeometry>
+        <StreamGeometry x:Key="ProfileSteamIcon">M11.98,0 C5.68,0 0.51,4.86 0.02,11.04 L6.45,13.70 C6.99,13.33 7.65,13.11 8.36,13.11 C8.42,13.11 8.48,13.11 8.55,13.12 L11.41,8.97 L11.41,8.91 C11.41,6.42 13.44,4.39 15.94,4.39 C18.43,4.39 20.46,6.42 20.46,8.91 C20.46,11.41 18.43,13.44 15.94,13.44 L15.83,13.44 L11.76,16.35 C11.76,16.40 11.76,16.46 11.76,16.51 C11.76,18.38 10.25,19.90 8.37,19.90 C6.74,19.90 5.36,18.73 5.04,17.18 L0.44,15.28 C1.86,20.30 6.49,24 11.98,24 C18.61,24 24,18.63 24,12 C24,5.37 18.61,0 11.98,0 Z M8.39,18.77 C7.07,18.77 6,17.70 6,16.38 C6,16.29 6.01,16.20 6.02,16.11 L7.62,16.77 C7.80,17.58 8.52,18.19 9.38,18.19 C10.38,18.19 11.19,17.37 11.19,16.37 C11.19,15.51 10.58,14.79 9.77,14.61 L9.11,13.01 C9.20,13 9.29,12.99 9.38,12.99 C10.70,12.99 11.77,14.06 11.77,15.38 C11.77,16.70 10.70,18.77 8.39,18.77 Z M15.95,12.02 C14.24,12.02 12.86,10.63 12.86,8.93 C12.86,7.22 14.24,5.84 15.95,5.84 C17.65,5.84 19.04,7.22 19.04,8.93 C19.04,10.63 17.65,12.02 15.95,12.02 Z M15.95,6.59 C14.66,6.59 13.61,7.64 13.61,8.93 C13.61,10.21 14.66,11.26 15.95,11.26 C17.24,11.26 18.28,10.21 18.28,8.93 C18.28,7.64 17.24,6.59 15.95,6.59 Z</StreamGeometry>
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <Style Selector="Button.ProfileMenuItem">
+            <Setter Property="Height" Value="42" />
+            <Setter Property="Padding" Value="9,0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Foreground" Value="#E8EFF5" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+        <Style Selector="Button.ProfileMenuItem:pointerover">
+            <Setter Property="Background" Value="#263D5265" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+        </Style>
+        <Style Selector="Button.ProfileMenuItem:disabled">
+            <Setter Property="Opacity" Value="0.42" />
+            <Setter Property="Cursor" Value="Arrow" />
+        </Style>
+        <Style Selector="Button.ProfileIconButton">
+            <Setter Property="Width" Value="38" />
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Padding" Value="9" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#A6FFFFFF" />
+            <Setter Property="Foreground" Value="#24394C" />
+            <Setter Property="BorderBrush" Value="#7E8297AA" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+        <Style Selector="Button.ProfileIconButton:pointerover">
+            <Setter Property="Background" Value="#E8FFFFFF" />
+            <Setter Property="BorderBrush" Value="#C2B58A2D" />
+            <Setter Property="Foreground" Value="#142535" />
+        </Style>
+        <Style Selector="Button.ProfilePrimaryButton">
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Padding" Value="18,0" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#C69A2B" />
+            <Setter Property="Foreground" Value="#17222C" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="BorderBrush" Value="#E8C765" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+        <Style Selector="Button.ProfilePrimaryButton:pointerover">
+            <Setter Property="Background" Value="#DDB547" />
+            <Setter Property="BorderBrush" Value="#F2D27A" />
+        </Style>
+        <Style Selector="Button.ProfilePrimaryButton:disabled">
+            <Setter Property="Opacity" Value="0.52" />
+        </Style>
+        <Style Selector="Button.ProfileSecondaryButton">
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Padding" Value="17,0" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#82F8FAFC" />
+            <Setter Property="Foreground" Value="#24384A" />
+            <Setter Property="BorderBrush" Value="#708398A9" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+        <Style Selector="Button.ProfileSecondaryButton:pointerover">
+            <Setter Property="Background" Value="#E7FFFFFF" />
+            <Setter Property="BorderBrush" Value="#9E6E8599" />
+        </Style>
+        <Style Selector="Button.ProfileDangerButton">
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Padding" Value="18,0" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#B83E4B" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="BorderBrush" Value="#D86B75" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+        <Style Selector="Button.ProfileDangerButton:pointerover">
+            <Setter Property="Background" Value="#CC4A57" />
+            <Setter Property="BorderBrush" Value="#EA8790" />
+        </Style>
+        <Style Selector="TextBox.ProfileField, ComboBox.ProfileField">
+            <Setter Property="Height" Value="42" />
+            <Setter Property="Padding" Value="12,0" />
+            <Setter Property="Background" Value="#BFF9FBFC" />
+            <Setter Property="BorderBrush" Value="#778397A8" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Foreground" Value="#182A3A" />
+        </Style>
+        <Style Selector="TextBox.ProfileField:pointerover, ComboBox.ProfileField:pointerover">
+            <Setter Property="BorderBrush" Value="#9D687F93" />
+            <Setter Property="Background" Value="#E8FFFFFF" />
+        </Style>
+        <Style Selector="TextBox.ProfileField:focus, ComboBox.ProfileField:focus">
+            <Setter Property="BorderBrush" Value="#D0B1892A" />
+            <Setter Property="Background" Value="#F4FFFFFF" />
+        </Style>
+        <Style Selector="TextBlock.ProfileFieldLabel">
+            <Setter Property="FontSize" Value="11.5" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#31485B" />
+        </Style>
+        <Style Selector="TextBlock.ProfileMetaLabel">
+            <Setter Property="FontSize" Value="10.5" />
+            <Setter Property="Foreground" Value="#607386" />
+        </Style>
+        <Style Selector="Button.ProfileEditorIconButton">
+            <Setter Property="Width" Value="42" />
+            <Setter Property="Height" Value="42" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="CornerRadius" Value="13" />
+            <Setter Property="Background" Value="#1D2027" />
+            <Setter Property="Foreground" Value="#D1D5DB" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+        <Style Selector="Button.ProfileEditorIconButton:pointerover">
+            <Setter Property="Background" Value="#252932" />
+            <Setter Property="BorderBrush" Value="#4B5563" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+        </Style>
+        <Style Selector="Button.ProfileEditorPrimaryButton">
+            <Setter Property="Height" Value="42" />
+            <Setter Property="Padding" Value="20,0" />
+            <Setter Property="CornerRadius" Value="13" />
+            <Setter Property="Background" Value="{StaticResource GlyphPrimaryBrush}" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="BorderBrush" Value="{StaticResource GlyphSkyBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+        <Style Selector="Button.ProfileEditorPrimaryButton:pointerover">
+            <Setter Property="Background" Value="#1D4ED8" />
+        </Style>
+        <Style Selector="Button.ProfileEditorPrimaryButton:disabled">
+            <Setter Property="Opacity" Value="0.5" />
+        </Style>
+        <Style Selector="Button.ProfileEditorSecondaryButton">
+            <Setter Property="Height" Value="42" />
+            <Setter Property="Padding" Value="18,0" />
+            <Setter Property="CornerRadius" Value="13" />
+            <Setter Property="Background" Value="#1D2027" />
+            <Setter Property="Foreground" Value="#F3F4F6" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+        <Style Selector="Button.ProfileEditorSecondaryButton:pointerover">
+            <Setter Property="Background" Value="#252932" />
+            <Setter Property="BorderBrush" Value="#4B5563" />
+        </Style>
+        <Style Selector="TextBox.ProfileEditorField, ComboBox.ProfileEditorField">
+            <Setter Property="Height" Value="44" />
+            <Setter Property="Padding" Value="13,0" />
+            <Setter Property="Background" Value="#0F1116" />
+            <Setter Property="BorderBrush" Value="#30343D" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Foreground" Value="#F9FAFB" />
+        </Style>
+        <Style Selector="TextBox.ProfileEditorField:pointerover, ComboBox.ProfileEditorField:pointerover">
+            <Setter Property="BorderBrush" Value="#4B5563" />
+            <Setter Property="Background" Value="#17191F" />
+        </Style>
+        <Style Selector="TextBox.ProfileEditorField:focus, ComboBox.ProfileEditorField:focus">
+            <Setter Property="BorderBrush" Value="{StaticResource GlyphSkyBrush}" />
+            <Setter Property="Background" Value="#0F1116" />
+        </Style>
+        <Style Selector="TextBlock.ProfileEditorFieldLabel">
+            <Setter Property="FontSize" Value="11.5" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#D1D5DB" />
+        </Style>
+        <Style Selector="ListBox.ProfilePlayerList">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+        <Style Selector="ListBox.ProfilePlayerList > ListBoxItem">
+            <Setter Property="Margin" Value="0,0,0,10" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Background" Value="#17191F" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+        <Style Selector="ListBox.ProfilePlayerList > ListBoxItem:pointerover">
+            <Setter Property="Background" Value="#202734" />
+            <Setter Property="BorderBrush" Value="#4B6586" />
+        </Style>
+        <Style Selector="ListBox.ProfilePlayerList > ListBoxItem:selected">
+            <Setter Property="Background" Value="#24324A" />
+            <Setter Property="BorderBrush" Value="#4F8EEA" />
+        </Style>
+    </UserControl.Styles>
+
+    <Grid>
+        <Button Background="#01000000"
+                BorderThickness="0"
+                IsVisible="{Binding IsPlayerMenuOpen}"
+                Command="{Binding ClosePlayerMenuCommand}"
+                ZIndex="140" />
+
+        <Border Width="304"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="196,0,0,18"
+                CornerRadius="8"
+                ClipToBounds="True"
+                Background="#F0121D28"
+                BorderBrush="#66758DA0"
+                BorderThickness="1"
+                BoxShadow="0 22 54 0 #92000000"
+                IsVisible="{Binding IsPlayerMenuOpen}"
+                ZIndex="150">
+            <Grid RowDefinitions="98,*">
+                <Grid ClipToBounds="True">
+                    <Image Source="/Assets/kcd2-adventure-glass-bg.jpg"
+                           Stretch="UniformToFill"
+                           Opacity="0.82" />
+                    <Border>
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                <GradientStop Color="#4A102131" Offset="0" />
+                                <GradientStop Color="#C1142230" Offset="0.62" />
+                                <GradientStop Color="#F0131D27" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                    <Grid Margin="14" ColumnDefinitions="66,*" ColumnSpacing="12">
+                        <Grid Width="62" Height="62" VerticalAlignment="Center">
+                            <Border CornerRadius="31"
+                                    BorderBrush="#C4D4AF37"
+                                    BorderThickness="1.5"
+                                    Background="#D42A4256">
+                                <TextBlock Text="{Binding CurrentPlayer.Initial}"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontSize="22"
+                                           FontWeight="Bold"
+                                           Foreground="#F6D983" />
+                            </Border>
+                            <Border CornerRadius="31"
+                                    ClipToBounds="True"
+                                    IsVisible="{Binding CurrentPlayer.HasAvatar}">
+                                <Image Source="{Binding CurrentPlayer.AvatarImage}" Stretch="UniformToFill" />
+                            </Border>
+                            <Border Width="22"
+                                    Height="22"
+                                    CornerRadius="6"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    Margin="0,0,-3,-3"
+                                    Background="#F0182733"
+                                    BorderBrush="#A4D4AF37"
+                                    BorderThickness="1">
+                                <Grid>
+                                    <PathIcon Data="{StaticResource ProfileSteamIcon}"
+                                              Width="12"
+                                              Height="12"
+                                              Foreground="#FFFFFF"
+                                              IsVisible="{Binding CurrentPlayer.IsSteamPlatform}" />
+                                    <TextBlock Text="GOG"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               FontSize="6.5"
+                                               FontWeight="Bold"
+                                               Foreground="#FFFFFF"
+                                               IsVisible="{Binding CurrentPlayer.IsGogPlatform}" />
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <StackPanel Grid.Column="1"
+                                    MinWidth="0"
+                                    VerticalAlignment="Center"
+                                    Spacing="4">
+                            <TextBlock Text="Player Profile"
+                                       FontSize="10"
+                                       FontWeight="SemiBold"
+                                       Foreground="#DABF73" />
+                            <TextBlock Text="{Binding CurrentPlayer.DisplayName}"
+                                       FontSize="17"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFFFF"
+                                       TextTrimming="CharacterEllipsis" />
+                            <TextBlock Text="{Binding CurrentPlayer.ProviderDisplayName}"
+                                       FontSize="10.5"
+                                       Foreground="#C4D0DA" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                <Border Grid.Row="1" Background="#F2121D28" Padding="9,10,9,9">
+                    <StackPanel Spacing="3">
+                        <Button Classes="ProfileMenuItem" Command="{Binding OpenInformationCommand}">
+                            <Grid ColumnDefinitions="28,*,12" ColumnSpacing="9">
+                                <Border Width="28" Height="28" CornerRadius="6" Background="#1FFFFFFF">
+                                    <PathIcon Data="{StaticResource BmxIconPerson}" Width="14" Height="14" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Player Information" VerticalAlignment="Center" FontSize="12.5" />
+                                <PathIcon Grid.Column="2" Data="{StaticResource BmxIconChevronRight}" Width="9" Height="9" Foreground="#71869A" />
+                            </Grid>
+                        </Button>
+                        <Button Classes="ProfileMenuItem" Command="{Binding OpenSwitchPlayerCommand}">
+                            <Grid ColumnDefinitions="28,*,12" ColumnSpacing="9">
+                                <Border Width="28" Height="28" CornerRadius="6" Background="#1FFFFFFF">
+                                    <PathIcon Data="{StaticResource BmxIconAccount}" Width="14" Height="14" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Switch Player" VerticalAlignment="Center" FontSize="12.5" />
+                                <PathIcon Grid.Column="2" Data="{StaticResource BmxIconChevronRight}" Width="9" Height="9" Foreground="#71869A" />
+                            </Grid>
+                        </Button>
+                        <Button Classes="ProfileMenuItem" Command="{Binding OpenCreatePlayerCommand}">
+                            <Grid ColumnDefinitions="28,*,12" ColumnSpacing="9">
+                                <Border Width="28" Height="28" CornerRadius="6" Background="#1FFFFFFF">
+                                    <PathIcon Data="{StaticResource BmxIconPersonAdd}" Width="14" Height="14" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Create Player" VerticalAlignment="Center" FontSize="12.5" />
+                                <PathIcon Grid.Column="2" Data="{StaticResource BmxIconChevronRight}" Width="9" Height="9" Foreground="#71869A" />
+                            </Grid>
+                        </Button>
+                        <Button Classes="ProfileMenuItem" Command="{Binding OpenEditProfileCommand}">
+                            <Grid ColumnDefinitions="28,*,12" ColumnSpacing="9">
+                                <Border Width="28" Height="28" CornerRadius="6" Background="#1FFFFFFF">
+                                    <PathIcon Data="{StaticResource BmxIconEdit}" Width="14" Height="14" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Edit Profile" VerticalAlignment="Center" FontSize="12.5" />
+                                <PathIcon Grid.Column="2" Data="{StaticResource BmxIconChevronRight}" Width="9" Height="9" Foreground="#71869A" />
+                            </Grid>
+                        </Button>
+                        <Button Classes="ProfileMenuItem" Command="{Binding OpenSettingsCommand}">
+                            <Grid ColumnDefinitions="28,*,12" ColumnSpacing="9">
+                                <Border Width="28" Height="28" CornerRadius="6" Background="#1FFFFFFF">
+                                    <PathIcon Data="{StaticResource BmxIconSettings}" Width="14" Height="14" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Settings" VerticalAlignment="Center" FontSize="12.5" />
+                                <PathIcon Grid.Column="2" Data="{StaticResource BmxIconChevronRight}" Width="9" Height="9" Foreground="#71869A" />
+                            </Grid>
+                        </Button>
+                        <Button Classes="ProfileMenuItem"
+                                Command="{Binding RequestDeletePlayerCommand}"
+                                Foreground="#FFACB4">
+                            <Grid ColumnDefinitions="28,*,12" ColumnSpacing="9">
+                                <Border Width="28" Height="28" CornerRadius="6" Background="#24D85E69">
+                                    <PathIcon Data="{StaticResource BmxIconDelete}" Width="14" Height="14" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Delete Player" VerticalAlignment="Center" FontSize="12.5" />
+                                <PathIcon Grid.Column="2" Data="{StaticResource BmxIconChevronRight}" Width="9" Height="9" Foreground="#8F6E79" />
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <Grid IsVisible="{Binding IsAnyModalOpen}" ZIndex="160">
+            <Button Background="#B7081018"
+                    BorderThickness="0"
+                    Command="{Binding CloseModalCommand}" />
+
+            <Border Width="940"
+                    Height="650"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    CornerRadius="8"
+                    ClipToBounds="True"
+                    BorderBrush="#4B5563"
+                    BorderThickness="1"
+                    BoxShadow="0 30 90 0 #A0000000">
+                <Grid ColumnDefinitions="286,*">
+                    <Border Grid.Column="0" ClipToBounds="True">
+                        <Grid>
+                            <Image Source="/Assets/kcd2-cover-bg.jpg"
+                                   Stretch="UniformToFill" />
+                            <Border Background="#3B0A1620" />
+                            <Border>
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                        <GradientStop Color="#2215212B" Offset="0" />
+                                        <GradientStop Color="#85121D28" Offset="0.52" />
+                                        <GradientStop Color="#F20D1720" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <Grid Margin="22,22,22,24" RowDefinitions="Auto,*,Auto">
+                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                    <Image Source="/Assets/bohemix-logo.png"
+                                           Width="34"
+                                           Height="34"
+                                           Stretch="Uniform"
+                                           RenderOptions.BitmapInterpolationMode="HighQuality" />
+                                    <StackPanel VerticalAlignment="Center" Spacing="1">
+                                        <TextBlock Text="BohemiX"
+                                                   FontSize="14"
+                                                   FontWeight="Bold"
+                                                   Foreground="#FFF4D58A" />
+                                        <TextBlock Text="玩家资料"
+                                                   FontSize="9.5"
+                                                   Foreground="#C6D2DC" />
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="2"
+                                            Spacing="12"
+                                            IsVisible="{Binding IsEditorOpen}">
+                                    <Grid Width="104" Height="104" HorizontalAlignment="Left">
+                                        <Border CornerRadius="52"
+                                                Background="#252932"
+                                                BorderBrush="#4B5563"
+                                                BorderThickness="1">
+                                            <TextBlock Text="{Binding EditorInitial}"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       FontSize="30"
+                                                       FontWeight="Bold"
+                                                       Foreground="#F7D984" />
+                                        </Border>
+                                        <Border CornerRadius="52"
+                                                ClipToBounds="True"
+                                                IsVisible="{Binding HasEditorCroppedAvatar}">
+                                            <Image Source="{Binding EditorAvatarCroppedImage}"
+                                                   Stretch="UniformToFill" />
+                                        </Border>
+                                        <Border Width="27"
+                                                Height="27"
+                                                CornerRadius="7"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Bottom"
+                                                Margin="0,0,-4,-4"
+                                                Background="#F2182834"
+                                                BorderBrush="#BFD5B247"
+                                                BorderThickness="1">
+                                            <Grid>
+                                                <PathIcon Data="{StaticResource ProfileSteamIcon}"
+                                                          Width="14"
+                                                          Height="14"
+                                                          Foreground="#FFFFFF"
+                                                          IsVisible="{Binding IsEditorSteamPlatform}" />
+                                                <TextBlock Text="GOG"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"
+                                                           FontSize="7.5"
+                                                           FontWeight="Bold"
+                                                           Foreground="#FFFFFF"
+                                                           IsVisible="{Binding IsEditorGogPlatform}" />
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                    <StackPanel Spacing="4">
+                                        <TextBlock Text="{Binding EditorPreviewName}"
+                                                   FontSize="24"
+                                                   FontWeight="Bold"
+                                                   Foreground="#FFFFFF"
+                                                   TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Text="{Binding EditorProviderName}"
+                                                   FontSize="11.5"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="#E5C66F" />
+                                        <TextBlock Text="{Binding EditorProviderName}"
+                                                   FontSize="10.5"
+                                                   Foreground="#BECCD6" />
+                                    </StackPanel>
+                                    <Button Classes="ProfileMenuItem"
+                                            Height="40"
+                                            Padding="0"
+                                            HorizontalAlignment="Left"
+                                            Command="{Binding ChooseAvatarCommand}">
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <PathIcon Data="{StaticResource ProfileIconImage}" Width="15" Height="15" />
+                                            <TextBlock Text="更换头像" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="2"
+                                            Spacing="12"
+                                            IsVisible="{Binding !IsEditorOpen}">
+                                    <Grid Width="92" Height="92" HorizontalAlignment="Left">
+                                        <Border CornerRadius="46"
+                                                Background="#DE24394B"
+                                                BorderBrush="#D5C09945"
+                                                BorderThickness="2">
+                                            <TextBlock Text="{Binding CurrentPlayer.Initial}"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       FontSize="30"
+                                                       FontWeight="Bold"
+                                                       Foreground="#F7D984" />
+                                        </Border>
+                                        <Border CornerRadius="46"
+                                                ClipToBounds="True"
+                                                IsVisible="{Binding CurrentPlayer.HasAvatar}">
+                                            <Image Source="{Binding CurrentPlayer.AvatarImage}" Stretch="UniformToFill" />
+                                        </Border>
+                                        <Border Width="27"
+                                                Height="27"
+                                                CornerRadius="7"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Bottom"
+                                                Margin="0,0,-4,-4"
+                                                Background="#F2182834"
+                                                BorderBrush="#BFD5B247"
+                                                BorderThickness="1">
+                                            <Grid>
+                                                <PathIcon Data="{StaticResource ProfileSteamIcon}"
+                                                          Width="14"
+                                                          Height="14"
+                                                          Foreground="#FFFFFF"
+                                                          IsVisible="{Binding CurrentPlayer.IsSteamPlatform}" />
+                                                <TextBlock Text="GOG"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"
+                                                           FontSize="7.5"
+                                                           FontWeight="Bold"
+                                                           Foreground="#FFFFFF"
+                                                           IsVisible="{Binding CurrentPlayer.IsGogPlatform}" />
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                    <StackPanel Spacing="4">
+                                        <TextBlock Text="{Binding CurrentPlayer.DisplayName}"
+                                                   FontSize="24"
+                                                   FontWeight="Bold"
+                                                   Foreground="#FFFFFF"
+                                                   TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Text="{Binding CurrentPlayer.ProviderDisplayName}"
+                                                   FontSize="10.5"
+                                                   Foreground="#BECCD6" />
+                                    </StackPanel>
+                                    <Border Padding="10,8"
+                                            CornerRadius="6"
+                                            Background="#281BD58C"
+                                            BorderBrush="#4D55D6A0"
+                                            BorderThickness="1">
+                                        <Grid ColumnDefinitions="16,*" ColumnSpacing="8">
+                                            <PathIcon Data="{StaticResource BmxIconShield}"
+                                                      Width="14"
+                                                      Height="14"
+                                                      Foreground="#72DBA5" />
+                                            <TextBlock Grid.Column="1"
+                                                       Text="Profile data isolated"
+                                                       FontSize="10.5"
+                                                       Foreground="#BFECD5" />
+                                        </Grid>
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <Grid Grid.Column="1">
+                        <Border IsVisible="{Binding !IsEditorOpen}">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                    <GradientStop Color="#F4E5ECF1" Offset="0" />
+                                    <GradientStop Color="#F2D8E3EA" Offset="0.62" />
+                                    <GradientStop Color="#F5CAD9E3" Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                        <Border Background="#F2101114" IsVisible="{Binding IsEditorOpen}" />
+                        <Border Background="#F2101114" IsVisible="{Binding IsSwitchPlayerOpen}" />
+                        <Grid>
+                            <Border Width="84"
+                                    Height="2"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Margin="0,0,0,0"
+                                    Background="#C6A039"
+                                    IsVisible="{Binding IsInformationOpen}" />
+                            <Border Width="2"
+                                    Height="42"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Background="#C6A039"
+                                    IsVisible="{Binding IsInformationOpen}" />
+
+                            <Button Classes="ProfileEditorIconButton"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Margin="0,18,20,0"
+                                    Command="{Binding CloseModalCommand}"
+                                    IsVisible="{Binding CanCloseEditor}"
+                                    ToolTip.Tip="关闭">
+                                <PathIcon Data="{StaticResource BmxIconClose}" Width="15" Height="15" />
+                            </Button>
+
+                            <ScrollViewer Margin="34,30,30,26"
+                                          VerticalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <StackPanel IsVisible="{Binding IsProfileEditorContentVisible}" Spacing="18">
+                                        <StackPanel Spacing="7">
+                                            <Border Padding="9,4"
+                                                    CornerRadius="10"
+                                                    Background="#302563EB"
+                                                    BorderBrush="#502563EB"
+                                                    BorderThickness="1"
+                                                    HorizontalAlignment="Left">
+                                                <TextBlock Text="本地玩家档案"
+                                                           FontSize="9.5"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="#93C5FD" />
+                                            </Border>
+                                            <TextBlock Text="{Binding EditorTitle}"
+                                                       FontSize="28"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="#F9FAFB" />
+                                            <TextBlock Text="修改昵称、头像与个人简介。游戏平台、存档与模组在独立的游戏环境中管理。"
+                                                       MaxWidth="510"
+                                                       HorizontalAlignment="Left"
+                                                       FontSize="11.5"
+                                                       Foreground="#9CA3AF"
+                                                       TextWrapping="Wrap" />
+                                        </StackPanel>
+
+                                        <Border Padding="18"
+                                                CornerRadius="8"
+                                                Background="#17191F"
+                                                BorderBrush="#303640"
+                                                BorderThickness="1">
+                                            <StackPanel Spacing="15">
+                                            <StackPanel Spacing="7">
+                                                <TextBlock Classes="ProfileEditorFieldLabel" Text="玩家昵称" />
+                                                <TextBox Classes="ProfileEditorField"
+                                                         Text="{Binding EditorDisplayName}"
+                                                         MaxLength="64"
+                                                         Watermark="例如：Henry" />
+                                            </StackPanel>
+
+                                            <StackPanel Spacing="7">
+                                                <TextBlock Classes="ProfileEditorFieldLabel" Text="个人简介" />
+                                                <TextBox Classes="ProfileEditorField"
+                                                         Text="{Binding EditorBio}"
+                                                         MaxLength="280"
+                                                         AcceptsReturn="True"
+                                                         TextWrapping="Wrap"
+                                                         Height="86"
+                                                         VerticalContentAlignment="Top"
+                                                         Watermark="介绍一下你想在 BohemiX 社区中展示的自己" />
+                                            </StackPanel>
+
+                                            <StackPanel Spacing="7">
+                                                <TextBlock Classes="ProfileEditorFieldLabel" Text="账户来源" />
+                                                <Border Height="44"
+                                                        CornerRadius="12"
+                                                        Background="#0F1116"
+                                                        BorderBrush="#30343D"
+                                                        BorderThickness="1"
+                                                        Padding="13,0">
+                                                    <Grid ColumnDefinitions="18,*" ColumnSpacing="8">
+                                                        <PathIcon Data="{StaticResource BmxIconShield}"
+                                                                  Width="15"
+                                                                  Height="15"
+                                                                  Foreground="{StaticResource GlyphSkyBrush}" />
+                                                        <TextBlock Grid.Column="1"
+                                                                   Text="{Binding EditorProviderName}"
+                                                                   VerticalAlignment="Center"
+                                                                   Foreground="#D1D5DB"
+                                                                   FontWeight="SemiBold" />
+                                                    </Grid>
+                                                </Border>
+                                            </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <Border Padding="18"
+                                                CornerRadius="8"
+                                                Background="#17191F"
+                                                BorderBrush="#303640"
+                                                BorderThickness="1">
+                                            <Grid ColumnDefinitions="158,*" ColumnSpacing="20">
+                                                <Grid Width="148" Height="148" VerticalAlignment="Top">
+                                                    <Border CornerRadius="74"
+                                                            Background="#0F1116"
+                                                            BorderBrush="#4D6A7B8B"
+                                                            BorderThickness="1"
+                                                            ClipToBounds="True">
+                                                        <Grid>
+                                                            <Image Source="{Binding EditorAvatarCroppedImage}"
+                                                                   Stretch="UniformToFill"
+                                                                   IsVisible="{Binding HasEditorCroppedAvatar}" />
+                                                            <TextBlock Text="{Binding EditorInitial}"
+                                                                       IsVisible="{Binding !HasEditorCroppedAvatar}"
+                                                                       HorizontalAlignment="Center"
+                                                                       VerticalAlignment="Center"
+                                                                       FontSize="38"
+                                                                       FontWeight="SemiBold"
+                                                                       Foreground="#F7D984" />
+                                                        </Grid>
+                                                    </Border>
+                                                    <Border Width="34"
+                                                            Height="34"
+                                                            CornerRadius="17"
+                                                            HorizontalAlignment="Right"
+                                                            VerticalAlignment="Bottom"
+                                                            Background="#F1222D39"
+                                                            BorderBrush="#B1D5B247"
+                                                            BorderThickness="1">
+                                                        <PathIcon Data="{StaticResource ProfileIconImage}"
+                                                                  Width="16"
+                                                                  Height="16"
+                                                                  Foreground="#FFF4D58A" />
+                                                    </Border>
+                                                </Grid>
+
+                                                <StackPanel Grid.Column="1" Spacing="12">
+                                                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                                                        <StackPanel Spacing="3">
+                                                            <TextBlock Text="Avatar image"
+                                                                       FontSize="14"
+                                                                       FontWeight="SemiBold"
+                                                                       Foreground="#F3F4F6" />
+                                                            <TextBlock Text="Choose the framing that will be used everywhere in BohemiX."
+                                                                       FontSize="10.5"
+                                                                       Foreground="#9CA3AF"
+                                                                       TextWrapping="Wrap" />
+                                                        </StackPanel>
+                                                        <Button Grid.Column="1"
+                                                                Classes="ProfileEditorSecondaryButton"
+                                                                Content="Choose image"
+                                                                Command="{Binding ChooseAvatarCommand}" />
+                                                    </Grid>
+
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+
+                                        <Border Padding="16,13"
+                                                CornerRadius="8"
+                                                Background="#17191F"
+                                                BorderBrush="#303640"
+                                                BorderThickness="1">
+                                            <Grid ColumnDefinitions="26,*" ColumnSpacing="10">
+                                                <PathIcon Data="{StaticResource BmxIconDatabase}"
+                                                          Width="20"
+                                                          Height="20"
+                                                          Foreground="{StaticResource NebulaAccentBrush}" />
+                                                <StackPanel Grid.Column="1" Spacing="2">
+                                                    <TextBlock Text="身份与游戏数据分离"
+                                                               FontSize="11.5"
+                                                               FontWeight="SemiBold"
+                                                               Foreground="#F3F4F6" />
+                                                    <TextBlock Text="账户保存个人资料、软件偏好与未来社区内容；存档、模组和统计始终由独立游戏环境管理。"
+                                                               FontSize="10.5"
+                                                               Foreground="#9CA3AF"
+                                                               TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+
+                                        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+                                            <StackPanel VerticalAlignment="Center" Spacing="2">
+                                                <TextBlock Text="{Binding ErrorMessage}"
+                                                           Foreground="#F87171"
+                                                           FontSize="11"
+                                                           TextWrapping="Wrap" />
+                                                <TextBlock Text="{Binding EditorSaveStatus}"
+                                                           Foreground="#8E9AAE"
+                                                           FontSize="10.5"
+                                                           TextWrapping="Wrap" />
+                                            </StackPanel>
+                                            <Button Grid.Column="1"
+                                                    Classes="ProfileEditorSecondaryButton"
+                                                    Content="取消"
+                                                    Command="{Binding CloseModalCommand}"
+                                                    IsVisible="{Binding CanCloseEditor}" />
+                                            <Button Grid.Column="2"
+                                                    Classes="ProfileEditorPrimaryButton"
+                                                    Content="保存并完成"
+                                                    Command="{Binding SaveEditorCommand}"
+                                                    IsEnabled="{Binding !IsBusy}" />
+                                        </Grid>
+                                    </StackPanel>
+
+                                    <StackPanel IsVisible="{Binding IsAvatarCropSheetVisible}"
+                                                Width="560"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Spacing="18">
+                                        <StackPanel Spacing="6">
+                                            <TextBlock Text="Crop avatar"
+                                                       FontSize="28"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="#F9FAFB" />
+                                            <TextBlock Text="Adjust the selected image before using it as your BohemiX avatar."
+                                                       FontSize="11.5"
+                                                       Foreground="#9CA3AF"
+                                                       TextWrapping="Wrap" />
+                                        </StackPanel>
+
+                                        <Border Padding="26"
+                                                CornerRadius="8"
+                                                Background="#17191F"
+                                                BorderBrush="#3B4654"
+                                                BorderThickness="1">
+                                            <StackPanel Spacing="20">
+                                                <Grid x:Name="AvatarCropSurface"
+                                                      Width="260"
+                                                      Height="260"
+                                                      HorizontalAlignment="Center"
+                                                      Cursor="Hand"
+                                                      ToolTip.Tip="Drag to position, scroll to zoom"
+                                                      PointerPressed="AvatarCropSurface_OnPointerPressed"
+                                                      PointerMoved="AvatarCropSurface_OnPointerMoved"
+                                                      PointerReleased="AvatarCropSurface_OnPointerReleased"
+                                                      PointerWheelChanged="AvatarCropSurface_OnPointerWheelChanged">
+                                                    <Border CornerRadius="130"
+                                                            ClipToBounds="True"
+                                                            Background="#0F1116"
+                                                            BorderBrush="#547084"
+                                                            BorderThickness="1">
+                                                        <Image Source="{Binding EditorAvatarImage}"
+                                                               Width="{Binding EditorAvatarCropPreviewImageWidth}"
+                                                               Height="{Binding EditorAvatarCropPreviewImageHeight}"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"
+                                                               Stretch="Fill"
+                                                               RenderTransformOrigin="0.5,0.5">
+                                                            <Image.RenderTransform>
+                                                                <TranslateTransform X="{Binding EditorAvatarCropPreviewOffsetX}"
+                                                                                    Y="{Binding EditorAvatarCropPreviewOffsetY}" />
+                                                            </Image.RenderTransform>
+                                                        </Image>
+                                                    </Border>
+                                                    <Border Width="38"
+                                                            Height="38"
+                                                            CornerRadius="19"
+                                                            HorizontalAlignment="Right"
+                                                            VerticalAlignment="Bottom"
+                                                            Margin="0,0,3,3"
+                                                            Background="#F1222D39"
+                                                            BorderBrush="#B1D5B247"
+                                                            BorderThickness="1">
+                                                        <PathIcon Data="{StaticResource ProfileIconImage}"
+                                                                  Width="17"
+                                                                  Height="17"
+                                                                  Foreground="#FFF4D58A" />
+                                                    </Border>
+                                                </Grid>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                            <TextBlock Text="{Binding EditorSaveStatus}"
+                                                       VerticalAlignment="Center"
+                                                       FontSize="10.5"
+                                                       Foreground="#8E9AAE" />
+                                            <Button Grid.Column="1"
+                                                    Classes="ProfileEditorPrimaryButton"
+                                                    Content="Use this photo"
+                                                    Command="{Binding CompleteAvatarCropAdjustmentCommand}" />
+                                        </Grid>
+                                    </StackPanel>
+
+                                    <StackPanel IsVisible="{Binding IsInformationOpen}" Spacing="24">
+                                        <StackPanel Spacing="7">
+                                            <TextBlock Text="Player Information"
+                                                       FontSize="29"
+                                                       FontWeight="Bold"
+                                                       Foreground="#12283A" />
+                                            <Border Width="52" Height="2" HorizontalAlignment="Left" Background="#B48A22" />
+                                            <TextBlock Text="Identity, storage ownership and local account activity."
+                                                       FontSize="11.5"
+                                                       Foreground="#536B7E" />
+                                        </StackPanel>
+
+                                        <StackPanel Spacing="0">
+                                            <Grid Margin="0,13" ColumnDefinitions="148,*">
+                                                <TextBlock Classes="ProfileMetaLabel" Text="Account Provider" />
+                                                <TextBlock Grid.Column="1"
+                                                           Text="{Binding CurrentPlayer.ProviderDisplayName}"
+                                                           FontSize="12.5"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="#1C3447" />
+                                            </Grid>
+                                            <Border Height="1" Background="#4F7D8F9F" />
+                                            <Grid Margin="0,13" ColumnDefinitions="148,*">
+                                                <TextBlock Classes="ProfileMetaLabel" Text="Data Boundary" />
+                                                <TextBlock Grid.Column="1"
+                                                           Text="Identity and game environments are separate"
+                                                           FontSize="12.5"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="#9A7417" />
+                                            </Grid>
+                                            <Border Height="1" Background="#4F7D8F9F" />
+                                            <Grid Margin="0,13" ColumnDefinitions="148,*">
+                                                <TextBlock Classes="ProfileMetaLabel" Text="Created" />
+                                                <TextBlock Grid.Column="1"
+                                                           Text="{Binding CurrentPlayer.CreatedTimeDisplay}"
+                                                           FontSize="12"
+                                                           Foreground="#243C4F" />
+                                            </Grid>
+                                            <Border Height="1" Background="#4F7D8F9F" />
+                                            <Grid Margin="0,13" ColumnDefinitions="148,*">
+                                                <TextBlock Classes="ProfileMetaLabel" Text="Last Active" />
+                                                <TextBlock Grid.Column="1"
+                                                           Text="{Binding CurrentPlayer.LastLoginTimeDisplay}"
+                                                           FontSize="12"
+                                                           Foreground="#243C4F" />
+                                            </Grid>
+                                            <Border Height="1" Background="#4F7D8F9F" />
+                                            <Grid Margin="0,13" ColumnDefinitions="148,*">
+                                                <TextBlock Classes="ProfileMetaLabel" Text="Player ID" />
+                                                <TextBlock Grid.Column="1"
+                                                           Text="{Binding CurrentPlayer.Id}"
+                                                           FontFamily="Consolas"
+                                                           FontSize="10.5"
+                                                           Foreground="#405A6D"
+                                                           TextWrapping="Wrap" />
+                                            </Grid>
+                                            <Border Height="1" Background="#4F7D8F9F" />
+                                            <Grid Margin="0,13" ColumnDefinitions="148,*">
+                                                <TextBlock Classes="ProfileMetaLabel" Text="Biography" />
+                                                <TextBlock Grid.Column="1"
+                                                           Text="{Binding CurrentPlayer.BioDisplay}"
+                                                           FontSize="11"
+                                                           Foreground="#243C4F"
+                                                           TextWrapping="Wrap"
+                                                           MaxLines="2"
+                                                           TextTrimming="CharacterEllipsis" />
+                                            </Grid>
+                                        </StackPanel>
+
+                                        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+                                            <Border Padding="9,6"
+                                                    CornerRadius="6"
+                                                    Background="#2851B47E"
+                                                    BorderBrush="#4E51B47E"
+                                                    BorderThickness="1"
+                                                    HorizontalAlignment="Left">
+                                                <StackPanel Orientation="Horizontal" Spacing="7">
+                                                    <PathIcon Data="{StaticResource BmxIconShield}"
+                                                              Width="14"
+                                                              Height="14"
+                                                              Foreground="#2A8459" />
+                                                    <TextBlock Text="Local data isolated"
+                                                               FontSize="10.5"
+                                                               FontWeight="SemiBold"
+                                                               Foreground="#266A4A" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Button Grid.Column="1"
+                                                    Classes="ProfileSecondaryButton"
+                                                    Content="Close"
+                                                    Command="{Binding CloseModalCommand}" />
+                                            <Button Grid.Column="2"
+                                                    Classes="ProfilePrimaryButton"
+                                                    Content="Edit Profile"
+                                                    Command="{Binding OpenEditProfileCommand}" />
+                                        </Grid>
+                                    </StackPanel>
+
+                                    <StackPanel IsVisible="{Binding IsSwitchPlayerOpen}" Spacing="20">
+                                        <Grid ColumnDefinitions="44,*,Auto" ColumnSpacing="13">
+                                            <Border Width="42"
+                                                    Height="42"
+                                                    CornerRadius="14"
+                                                    Background="#2C2563EB"
+                                                    BorderBrush="#4D60A5FA"
+                                                    BorderThickness="1">
+                                                <PathIcon Data="{StaticResource BmxIconAccount}"
+                                                          Width="18"
+                                                          Height="18"
+                                                          Foreground="#BFDBFE" />
+                                            </Border>
+                                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
+                                                <TextBlock Text="切换玩家"
+                                                           FontSize="22"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="#F9FAFB" />
+                                                <TextBlock Text="选择一个本地账户，身份资料会立即切换。"
+                                                           FontSize="11"
+                                                           Foreground="#9CA3AF" />
+                                            </StackPanel>
+                                            <Border Grid.Column="2"
+                                                    Padding="9,5"
+                                                    CornerRadius="10"
+                                                    Background="#1BFFFFFF"
+                                                    BorderBrush="#303640"
+                                                    BorderThickness="1"
+                                                    VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Players.Count, StringFormat='共 {0} 个'}"
+                                                           FontSize="10"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="#CBD5E1" />
+                                            </Border>
+                                        </Grid>
+
+                                        <Border Height="1" Background="#303640" />
+
+                                        <ListBox Classes="ProfilePlayerList"
+                                                 ItemsSource="{Binding Players}"
+                                                 SelectedItem="{Binding SelectedPlayer}"
+                                                 MaxHeight="420"
+                                                 SelectionMode="Single">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate x:DataType="profiles:PlayerProfileItemViewModel">
+                                                    <Grid Margin="14,12"
+                                                          ColumnDefinitions="50,*,Auto"
+                                                          ColumnSpacing="13">
+                                                        <Grid Width="48" Height="48">
+                                                            <Border CornerRadius="24"
+                                                                    Background="#252932"
+                                                                    BorderBrush="#4B5563"
+                                                                    BorderThickness="1">
+                                                                <TextBlock Text="{Binding Initial}"
+                                                                           HorizontalAlignment="Center"
+                                                                           VerticalAlignment="Center"
+                                                                           FontSize="17"
+                                                                           FontWeight="SemiBold"
+                                                                           Foreground="#E0ECFF" />
+                                                            </Border>
+                                                            <Border CornerRadius="24"
+                                                                    ClipToBounds="True"
+                                                                    IsVisible="{Binding HasAvatar}">
+                                                                <Image Source="{Binding AvatarImage}" Stretch="UniformToFill" />
+                                                            </Border>
+                                                        </Grid>
+                                                        <StackPanel Grid.Column="1"
+                                                                    MinWidth="0"
+                                                                    VerticalAlignment="Center"
+                                                                    Spacing="3">
+                                                            <TextBlock Text="{Binding DisplayName}"
+                                                                       FontSize="14"
+                                                                       FontWeight="SemiBold"
+                                                                       Foreground="#F3F4F6"
+                                                                       TextTrimming="CharacterEllipsis" />
+                                                            <TextBlock Text="{Binding ProviderDisplayName}"
+                                                                       FontSize="10.5"
+                                                                       Foreground="#9CA3AF" />
+                                                        </StackPanel>
+                                                        <Border Grid.Column="2"
+                                                                IsVisible="{Binding IsCurrent}"
+                                                                Padding="8,4"
+                                                                CornerRadius="10"
+                                                                Background="#263B82F6"
+                                                                BorderBrush="#4060A5FA"
+                                                                BorderThickness="1"
+                                                                VerticalAlignment="Center">
+                                                            <TextBlock Text="当前账户"
+                                                                       FontSize="9.5"
+                                                                       FontWeight="SemiBold"
+                                                                       Foreground="#BFDBFE" />
+                                                        </Border>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+
+                                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10">
+                                            <Button Classes="ProfileEditorSecondaryButton"
+                                                    Content="新建玩家"
+                                                    Command="{Binding OpenCreatePlayerCommand}" />
+                                            <TextBlock Grid.Column="1"
+                                                       Text="{Binding ErrorMessage}"
+                                                       Foreground="#A93443"
+                                                       FontSize="11"
+                                                       VerticalAlignment="Center"
+                                                       TextWrapping="Wrap" />
+                                            <Button Grid.Column="2"
+                                                    Classes="ProfileEditorSecondaryButton"
+                                                    Content="取消"
+                                                    Command="{Binding CloseModalCommand}" />
+                                            <Button Grid.Column="3"
+                                                    Classes="ProfileEditorPrimaryButton"
+                                                    Content="切换到此玩家"
+                                                    Command="{Binding SwitchPlayerCommand}"
+                                                    CommandParameter="{Binding SelectedPlayer}"
+                                                    IsEnabled="{Binding !IsBusy}" />
+                                        </Grid>
+                                    </StackPanel>
+
+                                    <StackPanel IsVisible="{Binding IsDeleteConfirmationOpen}" Spacing="24">
+                                        <StackPanel Spacing="7">
+                                            <TextBlock Text="Delete Player"
+                                                       FontSize="29"
+                                                       FontWeight="Bold"
+                                                       Foreground="#8E2F3B" />
+                                            <Border Width="52" Height="2" HorizontalAlignment="Left" Background="#B83E4B" />
+                                            <TextBlock Text="This removes the local account from BohemiX. Only account identity data is archived; game environments remain unchanged."
+                                                       MaxWidth="510"
+                                                       HorizontalAlignment="Left"
+                                                       FontSize="11.5"
+                                                       Foreground="#5D6670"
+                                                       TextWrapping="Wrap" />
+                                        </StackPanel>
+
+                                        <Border Padding="16"
+                                                CornerRadius="7"
+                                                Background="#58F4E4E5"
+                                                BorderBrush="#8CB95863"
+                                                BorderThickness="1">
+                                            <Grid ColumnDefinitions="42,*" ColumnSpacing="12">
+                                                <Border Width="40"
+                                                        Height="40"
+                                                        CornerRadius="7"
+                                                        Background="#B83E4B">
+                                                    <PathIcon Data="{StaticResource BmxIconDelete}"
+                                                              Width="18"
+                                                              Height="18"
+                                                              Foreground="#FFFFFF" />
+                                                </Border>
+                                                <StackPanel Grid.Column="1" Spacing="4">
+                                                    <TextBlock Text="{Binding CurrentPlayer.DisplayName}"
+                                                               FontSize="17"
+                                                               FontWeight="Bold"
+                                                               Foreground="#49242A" />
+                                                    <TextBlock Text="{Binding CurrentPlayer.ProviderDisplayName}"
+                                                               FontSize="10.5"
+                                                               Foreground="#76585D" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+
+                                        <StackPanel Spacing="10">
+                                            <Grid ColumnDefinitions="20,*" ColumnSpacing="9">
+                                                <PathIcon Data="{StaticResource BmxIconDatabase}"
+                                                          Width="17"
+                                                          Height="17"
+                                                          Foreground="#8E2F3B" />
+                                                <TextBlock Grid.Column="1"
+                                                           Text="The account record is removed from SQLite and this player can no longer be selected."
+                                                           FontSize="11.5"
+                                                           Foreground="#344B5D"
+                                                           TextWrapping="Wrap" />
+                                            </Grid>
+                                            <Grid ColumnDefinitions="20,*" ColumnSpacing="9">
+                                                <PathIcon Data="{StaticResource BmxIconShield}"
+                                                          Width="17"
+                                                          Height="17"
+                                                          Foreground="#8E2F3B" />
+                                                <TextBlock Grid.Column="1"
+                                                           Text="Mods, saves, settings, cache and backups remain together in the archived profile folder."
+                                                           FontSize="11.5"
+                                                           Foreground="#344B5D"
+                                                           TextWrapping="Wrap" />
+                                            </Grid>
+                                        </StackPanel>
+
+                                        <TextBlock Text="{Binding ErrorMessage}"
+                                                   Foreground="#A93443"
+                                                   FontSize="11"
+                                                   TextWrapping="Wrap" />
+
+                                        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+                                            <Button Grid.Column="1"
+                                                    Classes="ProfileSecondaryButton"
+                                                    Content="Cancel"
+                                                    Command="{Binding CloseModalCommand}" />
+                                            <Button Grid.Column="2"
+                                                    Classes="ProfileDangerButton"
+                                                    Content="Delete Player"
+                                                    Command="{Binding ConfirmDeletePlayerCommand}"
+                                                    IsEnabled="{Binding !IsBusy}" />
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
