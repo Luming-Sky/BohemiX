@@ -49,7 +49,7 @@ BohemiX 面向喜欢在《天国：拯救 II》里配置模组、体验游戏玩
 
 - BohemiX 默认离线可用；只有下载、账户授权、更新检查等明确的在线功能会访问网络。
 - Nexus 登录发生在独立的 WebView2 会话中，密码只提交给 Nexus Mods 页面。Cookie 仅附加到经过验证的 `nexusmods.com` 主机，个人 API Key 使用 Windows Data Protection 加密。
-- 日志不会记录 Nexus Cookie、API Key 或爱发电服务端令牌等敏感值。
+- 日志不会记录 Nexus Cookie、API Key 等敏感值。
 - 远程 Mod 合集目录必须通过 ECDSA P-256/SHA-256 签名验证；验证失败时回退到上次可信缓存或内置目录。
 - 原生 usvfs 文件固定版本并校验 SHA-256，发布脚本在依赖缺失、架构错误或哈希不符时直接失败。
 
