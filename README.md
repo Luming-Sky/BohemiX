@@ -12,7 +12,7 @@
 
 [中文](#中文) | [English](#english)
 
-## AI 辅助开发
+# AI 辅助开发
 
 BohemiX 的部分开发工作借助了基于 AI 的工具。所有由 AI 生成或建议的代码及文档均由项目作者进行审查、测试和维护。最终软件、许可协议及版本发布的相关责任均由项目作者承担。
 
@@ -119,7 +119,7 @@ BohemiX 是社区开发的第三方工具，与 Warhorse Studios、Deep Silver�
 \---
 # English
 
-## AI-Assisted Development
+# AI-Assisted Development
 
 Parts of BohemiX were developed with the assistance of AI-based tools. All generated or suggested code and documentation are reviewed, tested, and maintained by the project author. Responsibility for the final software, licensing, and releases remains with the project author.
 
