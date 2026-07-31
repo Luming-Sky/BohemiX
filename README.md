@@ -53,14 +53,14 @@ BohemiX 面向喜欢在《天国：拯救 II》里配置模组、体验游戏玩
 - 远程 Mod 合集目录必须通过 ECDSA P-256/SHA-256 签名验证；验证失败时回退到上次可信缓存或内置目录。
 - 原生 usvfs 文件固定版本并校验 SHA-256，发布脚本在依赖缺失、架构错误或哈希不符时直接失败。
 
-更多说明：
+# 更多说明：
 
 - [Nexus 账户绑定](docs/NexusAccountBinding.md)
 - [Nexus Cookie 安全审计](docs/NexusCookieAuthSecurityAudit.md)
 - [存档快照架构](docs/SnapshotStorageArchitecture.md)
 - [发布检查清单](docs/ReleaseChecklist.md)
 
-## 从源码构建
+# 从源码构建
 
 需要 Git、PowerShell 和 [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)。
 
@@ -93,7 +93,7 @@ BohemiX.App                    Avalonia 桌面外壳、视图与应用组合
 
 项目使用 .NET 8、Avalonia 11、CommunityToolkit.Mvvm、SQLite/Dapper、Serilog、SkiaSharp、Silk.NET/OpenGL、WebView2、LibVLCSharp 和 usvfs。依赖方向与运行时生命周期说明见 [架构文档](docs/Architecture.md)。
 
-主要目录：
+## 主要目录：
 
 ```text
 src/          应用、核心、基础设施与功能模块
