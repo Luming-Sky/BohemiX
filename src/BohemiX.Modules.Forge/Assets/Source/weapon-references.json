@@ -1,0 +1,37 @@
+{
+  "accessedAt": "2026-07-28",
+  "usage": "Modeling reference only. No third-party image or game asset is redistributed.",
+  "weapons": [
+    {
+      "id": "duelling-longsword",
+      "sources": [
+        "https://kingdom-come-deliverance.fandom.com/wiki/Duelling_longsword",
+        "https://kingdom-come-deliverance.fandom.com/wiki/Sketch_-_Duelling_longsword",
+        "https://sketchfab.com/3d-models/lowpoly-oakeshott-type-xviiia-longsword-fishtail-f901bfc29e7e4f7ebc5b874d8611ec0a"
+      ],
+      "referenceLicense": "Sketchfab reference is CC Attribution; no geometry or textures are redistributed.",
+      "observations": "The game-ready Type XVIIIa reference uses a narrow lenticular/diamond blade: the visible ridge carries volume while the cutting planes stay thin. The Forge blade was reduced in both width and physical depth rather than uniformly scaled."
+    },
+    {
+      "id": "basilard",
+      "sources": [
+        "https://kingdom-come-deliverance.fandom.com/wiki/Basilard",
+        "https://kingdom-come-deliverance.fandom.com/wiki/Sketch_-_Basilard",
+        "https://www.metmuseum.org/art/collection/search/21961"
+      ],
+      "referenceLicense": "The Metropolitan Museum of Art object image is CC0.",
+      "observations": "The 1540 basilard is 31.8 cm long and shows a compact but thin blade below a dominant hilt. The Forge basilard remains broader than the longsword while losing the previous slab-like width and depth."
+    },
+    {
+      "id": "bearded-axe",
+      "sources": [
+        "https://kingdom-come-deliverance.fandom.com/wiki/Bearded_axe_(KCD2)",
+        "https://kingdom-come-deliverance.fandom.com/wiki/Sketch_-_Bearded_axe",
+        "https://sketchfab.com/3d-models/worn-bearded-axe-7fd0b45db9c847a5beb5248256363ea5",
+        "https://www.metmuseum.org/art/collection/search/810926"
+      ],
+      "referenceLicense": "Sketchfab reference is CC Attribution and the Met object image is Public Domain; no third-party geometry or textures are redistributed.",
+      "observations": "The 11th-12th century Met broad axe establishes the primary construction: a continuous arcing bit from toe to heel, a top edge slightly longer than the lower edge, and both edges narrowing into a short neck before the socket. The Forge variant follows those proportions with a lighter beard, a true wedge bevel, a raised solid haft seat and no visible through-hole."
+    }
+  ]
+}

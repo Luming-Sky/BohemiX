@@ -1,0 +1,476 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:BohemiX.App.Controls"
+             xmlns:vm="using:BohemiX.App.ViewModels"
+             x:Class="BohemiX.App.Controls.AdventureProfile"
+             x:DataType="vm:AdventureProfileViewModel"
+             ClipToBounds="False"
+             HorizontalContentAlignment="Stretch"
+             VerticalContentAlignment="Stretch">
+    <UserControl.Resources>
+        <StreamGeometry x:Key="AdventureProfileSteamIcon">M11.98,0 C5.68,0 0.51,4.86 0.02,11.04 L6.45,13.70 C6.99,13.33 7.65,13.11 8.36,13.11 C8.42,13.11 8.48,13.11 8.55,13.12 L11.41,8.97 L11.41,8.91 C11.41,6.42 13.44,4.39 15.94,4.39 C18.43,4.39 20.46,6.42 20.46,8.91 C20.46,11.41 18.43,13.44 15.94,13.44 L15.83,13.44 L11.76,16.35 C11.76,16.40 11.76,16.46 11.76,16.51 C11.76,18.38 10.25,19.90 8.37,19.90 C6.74,19.90 5.36,18.73 5.04,17.18 L0.44,15.28 C1.86,20.30 6.49,24 11.98,24 C18.61,24 24,18.63 24,12 C24,5.37 18.61,0 11.98,0 Z M8.39,18.77 C7.07,18.77 6,17.70 6,16.38 C6,16.29 6.01,16.20 6.02,16.11 L7.62,16.77 C7.80,17.58 8.52,18.19 9.38,18.19 C10.38,18.19 11.19,17.37 11.19,16.37 C11.19,15.51 10.58,14.79 9.77,14.61 L9.11,13.01 C9.20,13 9.29,12.99 9.38,12.99 C10.70,12.99 11.77,14.06 11.77,15.38 C11.77,16.70 10.70,18.77 8.39,18.77 Z M15.95,12.02 C14.24,12.02 12.86,10.63 12.86,8.93 C12.86,7.22 14.24,5.84 15.95,5.84 C17.65,5.84 19.04,7.22 19.04,8.93 C19.04,10.63 17.65,12.02 15.95,12.02 Z M15.95,6.59 C14.66,6.59 13.61,7.64 13.61,8.93 C13.61,10.21 14.66,11.26 15.95,11.26 C17.24,11.26 18.28,10.21 18.28,8.93 C18.28,7.64 17.24,6.59 15.95,6.59 Z</StreamGeometry>
+    </UserControl.Resources>
+    <UserControl.Styles>
+        <Style Selector="controls|SmoothCornerBorder.AdventureProfileSurface">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="#78DDEBE6" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="InsetStroke" Value="True" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+        <Style Selector="TextBlock.AdventureStatValue">
+            <Setter Property="FontSize" Value="34" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="#F8FCFB" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+        <Style Selector="TextBlock.AdventureStatTitle">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Foreground" Value="#B3CAD1" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+        <Style Selector="Button.AdventureSaveOption">
+            <Setter Property="Height" Value="30" />
+            <Setter Property="MinWidth" Value="76" />
+            <Setter Property="MaxWidth" Value="176" />
+            <Setter Property="Padding" Value="11,0" />
+            <Setter Property="Background" Value="#34071117" />
+            <Setter Property="BorderBrush" Value="#547C9996" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Foreground" Value="#C9D9D6" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+        <Style Selector="Button.AdventureSaveOption:pointerover">
+            <Setter Property="Background" Value="#4A143038" />
+            <Setter Property="BorderBrush" Value="#83A7C5C1" />
+            <Setter Property="Foreground" Value="#F4FAF8" />
+        </Style>
+        <Style Selector="Button.AdventureSaveOption.Selected">
+            <Setter Property="Background" Value="#4A503C18" />
+            <Setter Property="BorderBrush" Value="#C9D7AC58" />
+            <Setter Property="Foreground" Value="#FFF2D48B" />
+        </Style>
+        <Style Selector="Button.AdventureSaveOption.Selected:pointerover">
+            <Setter Property="Background" Value="#625B461D" />
+            <Setter Property="BorderBrush" Value="#F0E6C875" />
+        </Style>
+        <Style Selector="Border.AdventureAvatar">
+            <Setter Property="BoxShadow" Value="0 6 18 0 #50030A0B" />
+            <Setter Property="RenderTransformOrigin" Value="50%,50%" />
+            <Setter Property="RenderTransform" Value="scale(1)" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform"
+                                                   Duration="0:0:0.18" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Border.AdventureAvatar:pointerover">
+            <Setter Property="BoxShadow" Value="0 8 24 0 #70030A0B, 0 0 18 0 #709EDAD7" />
+            <Setter Property="RenderTransform" Value="scale(1.04)" />
+        </Style>
+        <Style Selector="Ellipse.AdventureAvatarBase">
+            <Setter Property="Fill" Value="#22FFFFFF" />
+        </Style>
+        <Style Selector="Border.AdventureAvatar:pointerover Ellipse.AdventureAvatarBase">
+            <Setter Property="Fill" Value="#3DEBFFFB" />
+        </Style>
+        <Style Selector="Ellipse.AdventureAvatarRing">
+            <Setter Property="Stroke" Value="#85EAF3EF" />
+            <Setter Property="StrokeThickness" Value="1" />
+        </Style>
+        <Style Selector="Border.AdventureAvatar:pointerover Ellipse.AdventureAvatarRing">
+            <Setter Property="Stroke" Value="#E8F4FFFC" />
+            <Setter Property="StrokeThickness" Value="2" />
+        </Style>
+    </UserControl.Styles>
+
+    <Grid ClipToBounds="False">
+        <!-- A gilded frame corner sits behind the translucent surface and shows through the glass. -->
+        <Grid Width="174"
+              Height="58"
+              Margin="72,11,0,0"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Top"
+              IsHitTestVisible="False">
+            <Grid Opacity="0.52">
+                <Border Height="5"
+                        Background="#B8D5A646"
+                        VerticalAlignment="Top">
+                    <Border.Effect>
+                        <BlurEffect Radius="6" />
+                    </Border.Effect>
+                </Border>
+                <Border Width="5"
+                        Background="#A8D5A646"
+                        HorizontalAlignment="Left">
+                    <Border.Effect>
+                        <BlurEffect Radius="6" />
+                    </Border.Effect>
+                </Border>
+            </Grid>
+
+            <Border BorderThickness="1.4,1.4,0,0"
+                    CornerRadius="5,0,0,0">
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                        <GradientStop Color="#FFF0D58A" Offset="0" />
+                        <GradientStop Color="#E7D0A858" Offset="0.54" />
+                        <GradientStop Color="#89B77C32" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+            </Border>
+        </Grid>
+
+        <Border CornerRadius="8"
+                Background="Transparent"
+                BoxShadow="0 18 44 0 #55030A0D, 0 0 28 0 #171E8D86">
+            <controls:SmoothCornerBorder Classes="AdventureProfileSurface">
+            <controls:SmoothCornerBorder.BorderBrush>
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                    <GradientStop Color="#A8E8F1ED" Offset="0" />
+                    <GradientStop Color="#68A8D3D4" Offset="0.45" />
+                    <GradientStop Color="#70D1AC64" Offset="0.76" />
+                    <GradientStop Color="#5292B3C6" Offset="1" />
+                </LinearGradientBrush>
+            </controls:SmoothCornerBorder.BorderBrush>
+            <Grid ClipToBounds="True">
+                <!-- Keep enough of the source texture visible for the surface to read as glass. -->
+                <controls:BackdropReflection Source="/Assets/kcd2-cover-bg.jpg"
+                                             Margin="-10"
+                                             StripeOpacity="0"
+                                             IsVisible="{ReflectionBinding DataContext.MoreSettings.ShowBackdropReflection, RelativeSource={RelativeSource AncestorType=Window}}"
+                                             IsHitTestVisible="False">
+                    <controls:BackdropReflection.Effect>
+                        <BlurEffect Radius="7" />
+                    </controls:BackdropReflection.Effect>
+                </controls:BackdropReflection>
+
+                <Image Source="/Assets/kcd2-adventure-glass-bg.jpg"
+                       Stretch="UniformToFill"
+                       Opacity="0.72"
+                       IsVisible="{ReflectionBinding DataContext.MoreSettings.ShowBackdropReflection, RelativeSource={RelativeSource AncestorType=Window}}"
+                       IsHitTestVisible="False" />
+
+                <Border IsHitTestVisible="False">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0%,20%" EndPoint="100%,80%">
+                            <GradientStop Color="#D2091720" Offset="0" />
+                            <GradientStop Color="#A30A2932" Offset="0.34" />
+                            <GradientStop Color="#58134B4D" Offset="0.65" />
+                            <GradientStop Color="#32273D55" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+
+                <Border IsHitTestVisible="False">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="82%,0%" EndPoint="22%,100%">
+                            <GradientStop Color="#509EDAD7" Offset="0" />
+                            <GradientStop Color="#2C82B8B3" Offset="0.27" />
+                            <GradientStop Color="#00162B32" Offset="0.52" />
+                            <GradientStop Color="#42C8A45E" Offset="0.82" />
+                            <GradientStop Color="#00162B32" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+
+                <Border IsHitTestVisible="False">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                            <GradientStop Color="#3CF3FFFF" Offset="0" />
+                            <GradientStop Color="#16CDE8E4" Offset="0.24" />
+                            <GradientStop Color="#00101C22" Offset="0.46" />
+                            <GradientStop Color="#70050D14" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+
+                <Border x:Name="AdventureProfilePortraitAtmosphere"
+                        Width="470"
+                        HorizontalAlignment="Right"
+                        IsHitTestVisible="False">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
+                            <GradientStop Color="#00162D35" Offset="0" />
+                            <GradientStop Color="#2F2D6974" Offset="0.5" />
+                            <GradientStop Color="#4F3F607D" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+
+                <Grid x:Name="AdventureProfileContent"
+                      Margin="22,18,292,12"
+                      RowDefinitions="34,70,124"
+                      RowSpacing="5">
+                    <Grid ColumnDefinitions="Auto,*"
+                          ColumnSpacing="18"
+                          Panel.ZIndex="3">
+                        <TextBlock Text="{Binding Title}"
+                                   FontSize="23"
+                                   FontWeight="Bold"
+                                   LineHeight="28"
+                                   LetterSpacing="0"
+                                   Foreground="#FFF2D48B"
+                                   TextTrimming="CharacterEllipsis"
+                                   UseLayoutRounding="True"
+                                   VerticalAlignment="Center" />
+
+                        <ScrollViewer Grid.Column="1"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      VerticalScrollBarVisibility="Disabled"
+                                      IsVisible="{Binding HasSaveOptions}">
+                            <ItemsControl ItemsSource="{Binding SaveOptions}"
+                                          HorizontalAlignment="Right">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" Spacing="7" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:AdventureSaveOptionViewModel">
+                                        <Button Classes="AdventureSaveOption"
+                                                Classes.Selected="{Binding IsSelected}"
+                                                Command="{Binding OpenCommand}"
+                                                ToolTip.Tip="{Binding DisplayName}">
+                                            <Grid ColumnDefinitions="14,*" ColumnSpacing="7">
+                                                <PathIcon Data="{StaticResource BmxIconSwitch}"
+                                                          Width="14"
+                                                          Height="14"
+                                                          Foreground="{Binding $parent[Button].Foreground}"
+                                                          VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="1"
+                                                           Text="{Binding DisplayName}"
+                                                           FontSize="12"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="{Binding $parent[Button].Foreground}"
+                                                           TextTrimming="CharacterEllipsis"
+                                                           VerticalAlignment="Center" />
+                                            </Grid>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <Grid Grid.Row="1"
+                          ColumnDefinitions="70,*"
+                          ColumnSpacing="16">
+                        <Border Classes="AdventureAvatar"
+                                Width="68"
+                                Height="68"
+                                CornerRadius="34"
+                                Background="Transparent"
+                                VerticalAlignment="Center">
+                            <Grid>
+                                <Ellipse Classes="AdventureAvatarBase" />
+                            <Image Source="{Binding AccountAvatar}"
+                                   Width="68"
+                                   Height="68"
+                                   Stretch="UniformToFill"
+                                   IsVisible="{Binding HasAccountAvatar}">
+                                <Image.Clip>
+                                    <EllipseGeometry Center="34,34"
+                                                     RadiusX="34"
+                                                     RadiusY="34" />
+                                </Image.Clip>
+                            </Image>
+                            <Grid>
+                                <TextBlock Text="{Binding PlayerInitial}"
+                                           FontSize="28"
+                                           FontWeight="Bold"
+                                           Foreground="#FFF7FBFA"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           IsVisible="{Binding !HasAccountAvatar}" />
+                            </Grid>
+                                <Ellipse Classes="AdventureAvatarRing"
+                                         IsHitTestVisible="False" />
+                            </Grid>
+                        </Border>
+
+                        <StackPanel Grid.Column="1"
+                                    Spacing="2"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="{Binding PlayerName}"
+                                       FontSize="30"
+                                       FontWeight="Bold"
+                                       Foreground="#F7FBFA"
+                                       TextTrimming="CharacterEllipsis" />
+
+                            <StackPanel Orientation="Horizontal"
+                                        Height="24"
+                                        Spacing="10"
+                                        VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal"
+                                            Height="24"
+                                            Spacing="6"
+                                            VerticalAlignment="Center">
+                                    <Grid Width="28"
+                                          Height="24"
+                                          VerticalAlignment="Center">
+                                        <Border Width="24"
+                                                Height="24"
+                                                CornerRadius="12"
+                                                BorderThickness="0"
+                                                BoxShadow="0 2 8 0 #56071320"
+                                                IsVisible="{Binding IsSteamPlatform}"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                            <Border.Background>
+                                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                                    <GradientStop Color="#E2205377" Offset="0" />
+                                                    <GradientStop Color="#D40B2843" Offset="1" />
+                                                </LinearGradientBrush>
+                                            </Border.Background>
+                                            <PathIcon Data="{StaticResource AdventureProfileSteamIcon}"
+                                                      Width="17"
+                                                      Height="17"
+                                                      Foreground="#FFF8FCFF"
+                                                      UseLayoutRounding="True"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center" />
+                                        </Border>
+                                        <Border Width="28"
+                                                Height="22"
+                                                CornerRadius="7"
+                                                BorderThickness="0"
+                                                BoxShadow="0 2 8 0 #50091220"
+                                                IsVisible="{Binding IsGogPlatform}"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                            <Border.Background>
+                                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                                    <GradientStop Color="#DB6548A4" Offset="0" />
+                                                    <GradientStop Color="#D32A173F" Offset="1" />
+                                                </LinearGradientBrush>
+                                            </Border.Background>
+                                            <TextBlock Text="GOG"
+                                                       FontSize="9.5"
+                                                       FontWeight="Bold"
+                                                       Foreground="#FFF8F2FF"
+                                                       LetterSpacing="0"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center" />
+                                        </Border>
+                                    </Grid>
+                                    <TextBlock Text="{Binding Platform}"
+                                               FontSize="13.5"
+                                               FontWeight="SemiBold"
+                                               LineHeight="18"
+                                               Foreground="#CADAD7"
+                                               VerticalAlignment="Center"
+                                               TextTrimming="CharacterEllipsis" />
+                                </StackPanel>
+                                <Border Width="1"
+                                        Height="13"
+                                        Background="#547D9591"
+                                        VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding Difficulty}"
+                                           FontSize="13.5"
+                                           FontWeight="SemiBold"
+                                           LineHeight="18"
+                                           Foreground="#CADAD7"
+                                           VerticalAlignment="Center"
+                                           TextTrimming="CharacterEllipsis" />
+                                <Border Width="1"
+                                        Height="13"
+                                        Background="#547D9591"
+                                        VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding HoursText}"
+                                           FontSize="13.5"
+                                           FontWeight="SemiBold"
+                                           LineHeight="18"
+                                           Foreground="#E4D6BC7C"
+                                           VerticalAlignment="Center"
+                                           TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <ItemsControl ItemsSource="{Binding Statistics}"
+                                      Height="124">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="3" Rows="2" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:AdventureStatisticViewModel">
+                                    <Border Padding="10,3,10,3">
+                                        <Grid RowDefinitions="40,16">
+                                            <TextBlock Classes="AdventureStatValue"
+                                                       Text="{Binding Value}"
+                                                       LineHeight="40"
+                                                       VerticalAlignment="Center" />
+                                            <TextBlock Grid.Row="1"
+                                                       Classes="AdventureStatTitle"
+                                                       Text="{Binding Title}"
+                                                       LineHeight="16"
+                                                       VerticalAlignment="Center" />
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <Grid IsHitTestVisible="False"
+                              Height="124"
+                              ColumnDefinitions="*,*,*"
+                              RowDefinitions="*,*">
+                            <Border Grid.Column="1"
+                                    Width="1"
+                                    Margin="0,8,0,8"
+                                    Background="#387C9A95"
+                                    HorizontalAlignment="Left" />
+                            <Border Grid.Column="2"
+                                    Width="1"
+                                    Margin="0,8,0,8"
+                                    Background="#387C9A95"
+                                    HorizontalAlignment="Left" />
+                            <Border Grid.Row="1"
+                                    Grid.ColumnSpan="3"
+                                    Height="1"
+                                    Margin="10,0"
+                                    Background="#327C9A95"
+                                    VerticalAlignment="Top" />
+                        </Grid>
+
+                        <Border Height="1"
+                                Background="#2A91AAA6"
+                                VerticalAlignment="Top"
+                                IsHitTestVisible="False" />
+                    </Grid>
+                </Grid>
+
+                </Grid>
+            </controls:SmoothCornerBorder>
+        </Border>
+
+        <!-- The portrait is a foreground layer: it can clear the card's top edge, but not its bottom edge. -->
+        <Grid x:Name="AdventureProfilePortraitLayer"
+              Height="340"
+              Margin="0,-76,0,0"
+              VerticalAlignment="Top"
+              ClipToBounds="True"
+              IsHitTestVisible="False"
+              Panel.ZIndex="2">
+            <Image Source="/Assets/henry-adventure-profile.webp"
+                   Width="480"
+                   Height="480"
+                   Margin="0,0,-10,-55"
+                   Stretch="Uniform"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom" />
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,34 @@
+{
+  "id": "saviour-schnapps",
+  "displayName": "Saviour Schnapps",
+  "base": "Wine",
+  "ingredients": [
+    {
+      "herbId": "nettle",
+      "count": 1,
+      "requiredState": "Fresh",
+      "requiredPreparation": "None"
+    },
+    {
+      "herbId": "belladonna",
+      "count": 2,
+      "requiredState": "Fresh",
+      "requiredPreparation": "Ground"
+    }
+  ],
+  "steps": [
+    { "kind": "Pour", "base": "Wine" },
+    { "kind": "Pour", "herbId": "nettle", "herbState": "Fresh" },
+    { "kind": "LowerCauldron" },
+    { "kind": "TurnHourglass", "turns": 2, "boilMode": "Plain" },
+    { "kind": "RaiseCauldron" },
+    { "kind": "Grind", "herbId": "belladonna", "herbState": "Fresh", "count": 2 },
+    { "kind": "Pour", "transfer": "PlateToCauldron" },
+    { "kind": "LowerCauldron" },
+    { "kind": "TurnHourglass", "turns": 1, "boilMode": "Plain" },
+    { "kind": "RaiseCauldron" },
+    { "kind": "Bottle" }
+  ],
+  "expectedBoilTurns": 3,
+  "requiresDistillation": false
+}

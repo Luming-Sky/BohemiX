@@ -1,0 +1,459 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:BohemiX.App.Controls"
+             xmlns:profiles="using:BohemiX.App.PlayerProfiles"
+             x:Class="BohemiX.App.PlayerProfiles.PlayerProfileSettingsView"
+             x:DataType="profiles:PlayerProfileManagerViewModel">
+    <UserControl.Resources>
+        <StreamGeometry x:Key="ProfilePageSteam">M11.98,0 C5.68,0 0.51,4.86 0.02,11.04 L6.45,13.70 C6.99,13.33 7.65,13.11 8.36,13.11 C8.42,13.11 8.48,13.11 8.55,13.12 L11.41,8.97 L11.41,8.91 C11.41,6.42 13.44,4.39 15.94,4.39 C18.43,4.39 20.46,6.42 20.46,8.91 C20.46,11.41 18.43,13.44 15.94,13.44 L15.83,13.44 L11.76,16.35 C11.76,16.40 11.76,16.46 11.76,16.51 C11.76,18.38 10.25,19.90 8.37,19.90 C6.74,19.90 5.36,18.73 5.04,17.18 L0.44,15.28 C1.86,20.30 6.49,24 11.98,24 C18.61,24 24,18.63 24,12 C24,5.37 18.61,0 11.98,0 Z M8.39,18.77 C7.07,18.77 6,17.70 6,16.38 C6,16.29 6.01,16.20 6.02,16.11 L7.62,16.77 C7.80,17.58 8.52,18.19 9.38,18.19 C10.38,18.19 11.19,17.37 11.19,16.37 C11.19,15.51 10.58,14.79 9.77,14.61 L9.11,13.01 C9.20,13 9.29,12.99 9.38,12.99 C10.70,12.99 11.77,14.06 11.77,15.38 C11.77,16.70 10.70,18.77 8.39,18.77 Z M15.95,12.02 C14.24,12.02 12.86,10.63 12.86,8.93 C12.86,7.22 14.24,5.84 15.95,5.84 C17.65,5.84 19.04,7.22 19.04,8.93 C19.04,10.63 17.65,12.02 15.95,12.02 Z M15.95,6.59 C14.66,6.59 13.61,7.64 13.61,8.93 C13.61,10.21 14.66,11.26 15.95,11.26 C17.24,11.26 18.28,10.21 18.28,8.93 C18.28,7.64 17.24,6.59 15.95,6.59 Z</StreamGeometry>
+        <StreamGeometry x:Key="ProfilePageNexusMods">M17.376,0 C16.383,0 15.196,0.686 14.469,1.182 C12.793,0.822 10.433,0.637 7.682,1.817 C6.317,1.304 5.257,1.255 4.362,1.329 A2.16,2.16 0 0,0 3.092,1.758 C2.762,1.978 0.304,4.448 0.023,6.410 C-0.15,7.508 0.68,8.932 1.218,9.718 C0.778,11.478 1.018,14.29 1.735,15.906 C1.382,16.947 1.022,17.995 1.071,19.111 C1.081,19.695 1.132,20.299 1.469,20.795 C1.72,21.19 4.528,24 6.545,24 C7.502,24 8.475,23.572 9.615,22.76 C11.775,23.143 14.017,23.108 16.063,22.228 C18.636,23.229 20.287,22.853 20.903,22.39 C21.49,21.933 23.729,19.475 23.973,17.768 C24.073,17.096 23.95,16.13 22.747,14.371 A10.983,10.983 0 0,0 22.246,7.916 C22.642,6.847 22.919,5.728 22.836,4.579 C22.821,3.899 22.615,3.412 22.349,3.072 C22.14,2.737 19.934,0.682 18.321,0.162 A3.105,3.105 0 0,0 17.376,0 M17.346,2.082 C17.996,2.097 19.501,3.175 20.356,3.988 L20.711,4.328 C19.752,4.165 18.586,4.756 17.451,5.878 A10.28,10.28 0 0,0 16.093,7.473 C15.813,7.857 15.576,8.241 15.34,8.758 L16.52,9.393 L12.625,10.87 L11.503,6.69 L12.536,7.237 C13.894,4.135 15.06,3.264 15.768,2.821 L15.783,2.821 A5.12,5.12 0 0,1 17.273,2.097 Z M12,3.065 A8.932,8.932 0 0,1 14.22,3.344 A7.67,7.67 0 0,0 13.8,3.832 A8.403,8.403 0 0,0 12,3.636 A8.336,8.336 0 0,0 6.103,6.068 A7.86,7.86 0 0,1 5.733,5.635 A8.905,8.905 0 0,1 12,3.065 M4.924,3.37 C5.634,3.368 6.233,3.497 7.124,3.836 A9.526,9.526 0 0,0 5.411,5.173 C5.084,4.631 4.787,4.017 4.923,3.37 M4.318,3.412 C4.156,4.372 4.746,5.538 5.868,6.676 C6.325,7.163 6.871,7.621 7.462,8.034 C7.845,8.315 8.229,8.551 8.745,8.788 L9.365,7.606 L10.855,11.52 L6.679,12.642 L7.225,11.609 C4.126,10.249 3.256,9.083 2.813,8.374 L2.813,8.359 A5.144,5.144 0 0,1 2.09,6.868 L2.075,6.794 C2.09,6.144 3.167,4.638 3.979,3.781 Z M20.353,4.895 A1.259,1.259 0 0,1 20.613,4.91 L20.753,4.933 A5.05,5.05 0 0,1 20.623,6.07 L20.623,6.085 C20.523,6.468 20.395,6.85 20.246,7.233 A9.526,9.526 0 0,0 18.9,5.457 C19.447,5.1 19.951,4.911 20.353,4.895 M18.43,5.8 A8.903,8.903 0 0,1 20.936,12 A8.937,8.937 0 0,1 20.666,14.183 A7.658,7.658 0 0,0 20.178,13.758 A8.407,8.407 0 0,0 20.364,12 A8.334,8.334 0 0,0 18,6.173 A7.904,7.904 0 0,1 18.429,5.8 M3.315,9.905 C3.472,10.053 3.634,10.195 3.803,10.33 A8.417,8.417 0 0,0 3.636,12 C3.636,14.248 4.523,16.286 5.963,17.788 A8.11,8.11 0 0,1 5.537,18.164 A8.902,8.902 0 0,1 3.065,12 A8.937,8.937 0 0,1 3.315,9.905 M17.303,11.446 L16.757,12.48 C19.855,13.839 20.726,15.006 21.169,15.715 L21.169,15.729 C21.509,16.217 21.744,16.719 21.892,17.221 L21.906,17.295 C21.892,17.945 20.814,19.451 20.003,20.308 L19.663,20.662 C19.826,19.702 19.236,18.535 18.114,17.398 A10.298,10.298 0 0,0 16.52,16.039 A7.008,7.008 0 0,0 15.237,15.286 L14.632,16.438 L13.127,12.568 Z M11.297,13.13 L12.418,17.31 L11.385,16.763 C10.028,19.865 8.862,20.736 8.154,21.179 L8.139,21.179 C7.652,21.519 7.154,21.755 6.649,21.903 L6.575,21.918 C5.925,21.903 4.421,20.825 3.565,20.012 L3.211,19.672 C4.17,19.835 5.335,19.244 6.471,18.122 C6.959,17.664 7.416,17.118 7.829,16.527 C8.109,16.143 8.346,15.759 8.582,15.241 L7.416,14.606 Z M3.72,16.663 A9.526,9.526 0 0,0 5.086,18.5 C4.389,18.97 3.756,19.165 3.309,19.09 L3.171,19.066 C3.171,18.699 3.209,18.318 3.299,17.929 L3.299,17.914 C3.409,17.497 3.553,17.079 3.719,16.662 M17.851,17.977 C17.98,18.117 18.104,18.26 18.223,18.407 A8.904,8.904 0 0,1 12,20.936 A8.932,8.932 0 0,1 9.718,20.64 A7.757,7.757 0 0,0 10.135,20.153 A8.335,8.335 0 0,0 17.851,17.978 M18.547,18.866 C18.977,19.532 19.154,20.133 19.081,20.564 L19.058,20.702 A5.034,5.034 0 0,1 17.922,20.574 L17.908,20.574 A10.718,10.718 0 0,1 16.794,20.208 A9.526,9.526 0 0,0 18.547,18.866</StreamGeometry>
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <Style Selector="controls|SmoothCornerBorder.ProfilePagePanel">
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="InsetStroke" Value="True" />
+            <Setter Property="Background" Value="#E61D2027" />
+        </Style>
+        <Style Selector="Button.ProfilePageButton">
+            <Setter Property="Height" Value="36" />
+            <Setter Property="Padding" Value="13,0" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#303640" />
+            <Setter Property="Background" Value="#1D2027" />
+            <Setter Property="Foreground" Value="#F3F4F6" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FontSize" Value="11.5" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style Selector="Button.ProfilePageButton:pointerover">
+            <Setter Property="BorderBrush" Value="#4B5563" />
+            <Setter Property="Background" Value="#252932" />
+        </Style>
+        <Style Selector="Button.ProfilePageButton.primary">
+            <Setter Property="Background" Value="{StaticResource GlyphPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource GlyphSkyBrush}" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+        </Style>
+        <Style Selector="Button.ProfilePageButton.primary:pointerover">
+            <Setter Property="Background" Value="#1D4ED8" />
+        </Style>
+        <Style Selector="Button.ProfilePageButton.danger">
+            <Setter Property="Background" Value="#2A991B1B" />
+            <Setter Property="BorderBrush" Value="#7FDC2626" />
+            <Setter Property="Foreground" Value="#FCA5A5" />
+        </Style>
+        <Style Selector="Button.ProfilePageButton:disabled">
+            <Setter Property="Opacity" Value="0.45" />
+        </Style>
+        <Style Selector="TextBlock.ProfilePageSectionTitle">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#F3F4F6" />
+        </Style>
+        <Style Selector="TextBlock.ProfilePageSectionSubtitle">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Foreground" Value="#9CA3AF" />
+        </Style>
+        <Style Selector="TextBlock.ProfilePageRowLabel">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Foreground" Value="#9CA3AF" />
+        </Style>
+        <Style Selector="TextBlock.ProfilePageRowValue">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#F9FAFB" />
+        </Style>
+    </UserControl.Styles>
+
+    <StackPanel Spacing="14" IsVisible="{Binding HasCurrentPlayer}">
+        <controls:SmoothCornerBorder Height="172"
+                                     CornerRadius="8"
+                                     BorderBrush="#4B5563"
+                                     BorderThickness="1"
+                                     InsetStroke="True">
+            <Grid>
+                <Image Source="/Assets/kcd2-adventure-glass-bg.jpg"
+                       Stretch="UniformToFill"
+                       Opacity="0.34" />
+                <Border Background="#5C0B0D12" />
+                <Border>
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                            <GradientStop Color="#F2101114" Offset="0" />
+                            <GradientStop Color="#E51D2027" Offset="0.55" />
+                            <GradientStop Color="#C5162532" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Border Height="1" Margin="24,1,24,0" VerticalAlignment="Top" Background="#303640" />
+
+                <Grid Margin="22,20" ColumnDefinitions="94,*,Auto" ColumnSpacing="18">
+                    <Grid Width="84" Height="84" VerticalAlignment="Center">
+                        <Border CornerRadius="42"
+                                Background="#252932"
+                                BorderBrush="#4B5563"
+                                BorderThickness="1"
+                                BoxShadow="0 14 30 0 #5A000000, inset 0 1 0 0 #32FFFFFF">
+                            <TextBlock Text="{Binding CurrentPlayer.Initial}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="28"
+                                       FontWeight="SemiBold"
+                                       Foreground="#FFFFFF" />
+                        </Border>
+                        <Border CornerRadius="42"
+                                ClipToBounds="True"
+                                IsVisible="{Binding CurrentPlayer.HasAvatar}">
+                            <Image Source="{Binding CurrentPlayer.AvatarImage}" Stretch="UniformToFill" />
+                        </Border>
+                    </Grid>
+
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="7">
+                        <TextBlock Text="本地账户"
+                                   FontSize="11"
+                                   FontWeight="SemiBold"
+                                   Foreground="#9CA3AF" />
+                        <StackPanel Spacing="2">
+                            <TextBlock Text="{Binding CurrentPlayer.DisplayName}"
+                                       FontSize="26"
+                                       FontWeight="SemiBold"
+                                       Foreground="#FFFFFF"
+                                       TextTrimming="CharacterEllipsis" />
+                            <TextBlock Text="{Binding CurrentPlayer.BioDisplay}"
+                                       MaxWidth="520"
+                                       HorizontalAlignment="Left"
+                                       FontSize="11.5"
+                                       Foreground="#B6C0CF"
+                                       TextWrapping="Wrap"
+                                       MaxLines="2"
+                                       TextTrimming="CharacterEllipsis" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Border Padding="10,5" CornerRadius="11" Background="#2622C55E" BorderBrush="#4D22C55E" BorderThickness="1">
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <Ellipse Width="5" Height="5" Fill="#86EFAC" VerticalAlignment="Center" />
+                                    <TextBlock Text="当前使用" FontSize="10.5" FontWeight="SemiBold" Foreground="#BBF7D0" />
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center" Spacing="10">
+                        <Button Width="176" Classes="ProfilePageButton primary" Command="{Binding OpenEditProfileCommand}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
+                                <PathIcon Data="{StaticResource BmxIconEdit}"
+                                          Width="14" Height="14"
+                                          Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+                                <TextBlock Text="编辑资料" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Width="128" Classes="ProfilePageButton" Command="{Binding OpenSwitchPlayerCommand}">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
+                                    <PathIcon Data="{StaticResource BmxIconAccount}"
+                                              Width="15" Height="15"
+                                              Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+                                    <TextBlock Text="切换玩家" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+                            <Button Width="36" Padding="0" Classes="ProfilePageButton" Command="{Binding OpenCreatePlayerCommand}" ToolTip.Tip="新建玩家">
+                                <PathIcon Data="{StaticResource BmxIconPersonAdd}"
+                                          Width="15" Height="15"
+                                          Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </controls:SmoothCornerBorder>
+
+        <controls:SmoothCornerBorder Classes="ProfilePagePanel" Padding="18,16">
+                <StackPanel Spacing="0">
+                    <Grid ColumnDefinitions="40,*" ColumnSpacing="12" Margin="0,0,0,12">
+                        <Border Width="36" Height="36" CornerRadius="7" Background="#302563EB" BorderBrush="#502563EB" BorderThickness="1">
+                            <PathIcon Data="{StaticResource BmxIconPerson}"
+                                      Width="17" Height="17"
+                                      Foreground="{StaticResource GlyphSkyBrush}" />
+                        </Border>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
+                            <TextBlock Classes="ProfilePageSectionTitle" Text="账户资料" />
+                            <TextBlock Classes="ProfilePageSectionSubtitle" Text="身份、个人资料与独立游戏环境的边界" />
+                        </StackPanel>
+                    </Grid>
+
+                    <Border Height="1" Background="#303640" />
+                    <Grid MinHeight="92" ColumnDefinitions="92,*,Auto" ColumnSpacing="12">
+                        <Grid Height="30"
+                              ColumnDefinitions="30,*"
+                              ColumnSpacing="8"
+                              VerticalAlignment="Center">
+                            <Border Width="30"
+                                    Height="30"
+                                    CornerRadius="8"
+                                    Background="#172B3A"
+                                    BorderBrush="#39556A"
+                                    BorderThickness="1">
+                                <Path Data="{StaticResource ProfilePageSteam}"
+                                      Width="18"
+                                      Height="18"
+                                      Fill="#66C0F4"
+                                      Stretch="Uniform"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                            </Border>
+                            <TextBlock Grid.Column="1"
+                                       Classes="ProfilePageRowLabel"
+                                       Text="Steam"
+                                       VerticalAlignment="Center"
+                                       Margin="0,0,0,1" />
+                        </Grid>
+
+                        <StackPanel Grid.Column="1"
+                                    Spacing="2"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center">
+                            <StackPanel Spacing="1"
+                                        HorizontalAlignment="Left"
+                                        IsVisible="{Binding HasSteamBinding}">
+                                <TextBlock Text="{Binding SteamBindingPersonaName}"
+                                           MaxWidth="250"
+                                           HorizontalAlignment="Left"
+                                           FontSize="12.5"
+                                           FontWeight="SemiBold"
+                                           Foreground="#F9FAFB"
+                                           TextTrimming="CharacterEllipsis" />
+                                <TextBlock Text="{Binding SteamBindingSteamIdText}"
+                                           HorizontalAlignment="Left"
+                                           FontFamily="Consolas"
+                                           FontSize="9.5"
+                                           Foreground="#8E9AAE" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="7"
+                                        HorizontalAlignment="Left"
+                                        IsVisible="{Binding !HasSteamBinding}">
+                                <Ellipse Width="5"
+                                         Height="5"
+                                         Fill="#6B7280"
+                                         VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding SteamBindingStateText}"
+                                           FontSize="12"
+                                           FontWeight="SemiBold"
+                                           Foreground="#D1D5DB" />
+                            </StackPanel>
+                            <TextBlock Text="{Binding SteamBindingMessage}"
+                                       MaxWidth="300"
+                                       HorizontalAlignment="Left"
+                                       FontSize="9.5"
+                                       Foreground="#8E9AAE"
+                                       TextAlignment="Left"
+                                       TextWrapping="Wrap"
+                                       MaxLines="2"
+                                       TextTrimming="CharacterEllipsis" />
+                            <ProgressBar Height="2"
+                                         Width="220"
+                                         HorizontalAlignment="Left"
+                                         IsIndeterminate="True"
+                                         IsVisible="{Binding IsSteamBindingBusy}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2"
+                                    Orientation="Horizontal"
+                                    Spacing="7"
+                                    VerticalAlignment="Center">
+                            <Button Width="34"
+                                    Height="34"
+                                    Padding="0"
+                                    CornerRadius="7"
+                                    Classes="ProfilePageButton"
+                                    Command="{Binding RefreshSteamBindingCommand}"
+                                    IsEnabled="{Binding !IsSteamBindingBusy}"
+                                    ToolTip.Tip="刷新 Steam 绑定状态">
+                                <PathIcon Data="{StaticResource BmxIconRefresh}"
+                                          Width="15"
+                                          Height="15"
+                                          Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+                            </Button>
+                            <Button Width="70"
+                                    Height="34"
+                                    Padding="12,0"
+                                    CornerRadius="7"
+                                    Classes="ProfilePageButton"
+                                    Command="{Binding BindSteamAccountCommand}"
+                                    IsEnabled="{Binding CanBindSteamAccount}"
+                                    IsVisible="{Binding !HasSteamBinding}">
+                                <TextBlock Text="绑定" />
+                            </Button>
+                            <Button Width="70"
+                                    Height="34"
+                                    Padding="12,0"
+                                    CornerRadius="7"
+                                    Classes="ProfilePageButton"
+                                    Command="{Binding UnbindSteamAccountCommand}"
+                                    IsEnabled="{Binding CanUnbindSteamAccount}"
+                                    IsVisible="{Binding HasSteamBinding}">
+                                <TextBlock Text="解绑" />
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <Border Height="1" Background="#303640" />
+                    <Grid MinHeight="92" ColumnDefinitions="92,*,Auto" ColumnSpacing="12">
+                        <Grid Height="30"
+                              ColumnDefinitions="30,*"
+                              ColumnSpacing="8"
+                              VerticalAlignment="Center">
+                            <Border Width="30"
+                                    Height="30"
+                                    CornerRadius="8"
+                                    Background="#321F1712"
+                                    BorderBrush="#6B9C4A2E"
+                                    BorderThickness="1">
+                                <Path Data="{StaticResource ProfilePageNexusMods}"
+                                      Width="17"
+                                      Height="17"
+                                      Fill="#F59E0B"
+                                      Stretch="Uniform"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                            </Border>
+                            <TextBlock Grid.Column="1"
+                                       Classes="ProfilePageRowLabel"
+                                       Text="Nexus Mods"
+                                       VerticalAlignment="Center"
+                                       Margin="0,0,0,1" />
+                        </Grid>
+
+                        <StackPanel Grid.Column="1"
+                                    Spacing="2"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center">
+                            <StackPanel Spacing="1"
+                                        HorizontalAlignment="Left"
+                                        IsVisible="{Binding HasNexusBinding}">
+                                <TextBlock Text="{Binding NexusBindingAccountName}"
+                                           MaxWidth="250"
+                                           HorizontalAlignment="Left"
+                                           FontSize="12.5"
+                                           FontWeight="SemiBold"
+                                           Foreground="#F9FAFB"
+                                           TextTrimming="CharacterEllipsis" />
+                                <TextBlock Text="{Binding NexusBindingTierText}"
+                                           MaxWidth="300"
+                                           HorizontalAlignment="Left"
+                                           FontSize="9.5"
+                                           Foreground="#8E9AAE"
+                                           TextWrapping="Wrap"
+                                           MaxLines="2"
+                                           TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="7"
+                                        HorizontalAlignment="Left"
+                                        IsVisible="{Binding !HasNexusBinding}">
+                                <Ellipse Width="5"
+                                         Height="5"
+                                         Fill="#6B7280"
+                                         VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding NexusBindingStateText}"
+                                           FontSize="12"
+                                           FontWeight="SemiBold"
+                                           Foreground="#D1D5DB" />
+                            </StackPanel>
+                            <TextBlock Text="{Binding NexusBindingMessage}"
+                                       MaxWidth="300"
+                                       HorizontalAlignment="Left"
+                                       FontSize="9.5"
+                                       Foreground="#8E9AAE"
+                                       TextAlignment="Left"
+                                       TextWrapping="Wrap"
+                                       MaxLines="2"
+                                       TextTrimming="CharacterEllipsis" />
+                            <ProgressBar Height="2"
+                                         Width="220"
+                                         HorizontalAlignment="Left"
+                                         IsIndeterminate="True"
+                                         IsVisible="{Binding IsNexusAccountBinding}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2"
+                                    Orientation="Horizontal"
+                                    Spacing="7"
+                                    VerticalAlignment="Center">
+                            <Button Width="34"
+                                    Height="34"
+                                    Padding="0"
+                                    CornerRadius="7"
+                                    Classes="ProfilePageButton"
+                                    Command="{Binding RefreshNexusAccountCommand}"
+                                    IsEnabled="{Binding !IsNexusAccountBinding}"
+                                    ToolTip.Tip="刷新 Nexus 账号绑定状态">
+                                <PathIcon Data="{StaticResource BmxIconRefresh}"
+                                          Width="15"
+                                          Height="15"
+                                          Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+                            </Button>
+                            <Button Width="70"
+                                    Height="34"
+                                    Padding="12,0"
+                                    CornerRadius="7"
+                                    Classes="ProfilePageButton"
+                                    Command="{Binding BindNexusAccountCommand}"
+                                    IsEnabled="{Binding CanBindNexusAccount}"
+                                    IsVisible="{Binding !HasNexusBinding}">
+                                <TextBlock Text="绑定" />
+                            </Button>
+                            <Button Width="70"
+                                    Height="34"
+                                    Padding="12,0"
+                                    CornerRadius="7"
+                                    Classes="ProfilePageButton"
+                                    Command="{Binding UnbindNexusAccountCommand}"
+                                    IsEnabled="{Binding CanUnbindNexusAccount}"
+                                    IsVisible="{Binding HasNexusBinding}">
+                                <TextBlock Text="解绑" />
+                            </Button>
+                            <Button Width="70"
+                                    Height="34"
+                                    Padding="12,0"
+                                    CornerRadius="7"
+                                    Classes="ProfilePageButton"
+                                    Command="{Binding CancelNexusAccountBindingCommand}"
+                                    IsVisible="{Binding IsNexusAccountBinding}">
+                                <TextBlock Text="取消" />
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+        </controls:SmoothCornerBorder>
+
+        <controls:SmoothCornerBorder Classes="ProfilePagePanel" Padding="18,16">
+            <Grid ColumnDefinitions="40,*,Auto" ColumnSpacing="12">
+                <Border Width="36" Height="36" CornerRadius="7" Background="#2A991B1B" BorderBrush="#7FDC2626" BorderThickness="1">
+                    <PathIcon Data="{StaticResource BmxIconDelete}"
+                              Width="16" Height="16"
+                              Foreground="#F87171" />
+                </Border>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="3">
+                    <TextBlock Classes="ProfilePageSectionTitle" Text="档案管理" />
+                    <TextBlock Classes="ProfilePageSectionSubtitle"
+                               Text="删除玩家后，相关目录会先归档，便于需要时恢复。" />
+                </StackPanel>
+                <Button Grid.Column="2"
+                        Width="126"
+                        Classes="ProfilePageButton danger"
+                        Command="{Binding RequestDeletePlayerCommand}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
+                        <PathIcon Data="{StaticResource BmxIconDelete}"
+                                  Width="14" Height="14"
+                                  Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+                        <TextBlock Text="删除玩家" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </controls:SmoothCornerBorder>
+    </StackPanel>
+</UserControl>

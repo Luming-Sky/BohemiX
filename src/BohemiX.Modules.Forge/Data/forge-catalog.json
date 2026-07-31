@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 3,
+  "recipes": [
+    {
+      "id": "duelling-longsword",
+      "name": "Duelling Longsword",
+      "nameZh": "决斗长剑",
+      "description": "A narrow two-handed blade whose straight edge and long point reward patient correction.",
+      "descriptionZh": "细长的双手长剑，需要耐心修正剑身直线与渐缩剑尖。",
+      "shape": {
+        "kind": "duelling-longsword",
+        "length": 1.0,
+        "width": 0.82,
+        "thickness": 0.96,
+        "edgeWidth": 0.13,
+        "tipTaper": 0.56,
+        "eyeWidth": 0.0,
+        "eyeHeight": 0.0,
+        "outline": [
+          { "u": 0.0, "lower": -0.045, "upper": 0.045 },
+          { "u": 0.15, "lower": -0.048, "upper": 0.048 },
+          { "u": 0.22, "lower": -0.135, "upper": 0.135 },
+          { "u": 0.72, "lower": -0.120, "upper": 0.120 },
+          { "u": 0.86, "lower": -0.092, "upper": 0.092 },
+          { "u": 1.0, "lower": -0.006, "upper": 0.006 }
+        ]
+      },
+      "billet": {
+        "start": 0.04,
+        "end": 0.90,
+        "massScale": 1.0,
+        "outline": [
+          { "u": 0.04, "lower": -0.065, "upper": 0.065 },
+          { "u": 0.90, "lower": -0.065, "upper": 0.065 }
+        ]
+      },
+      "zones": [
+        { "id": "tip", "label": "Tip", "labelZh": "剑尖", "order": 0, "idealHeatMin": 0.60, "idealHeatMax": 0.84, "recommendedMinStrikes": 7, "recommendedMaxStrikes": 12, "recommendedFlipAfterStrikes": 6, "start": 0.78, "end": 1.0, "yMin": 0.28, "yMax": 0.72, "recommendedFace": "Flat" },
+        { "id": "blade", "label": "Blade", "labelZh": "剑身", "order": 1, "idealHeatMin": 0.58, "idealHeatMax": 0.82, "recommendedMinStrikes": 18, "recommendedMaxStrikes": 30, "recommendedFlipAfterStrikes": 8, "start": 0.22, "end": 0.80, "yMin": 0.24, "yMax": 0.76, "recommendedFace": "Flat" },
+        { "id": "spine", "label": "Spine", "labelZh": "剑脊", "order": 2, "idealHeatMin": 0.56, "idealHeatMax": 0.78, "recommendedMinStrikes": 12, "recommendedMaxStrikes": 22, "recommendedFlipAfterStrikes": 7, "start": 0.22, "end": 0.76, "yMin": 0.40, "yMax": 0.60, "recommendedFace": "Flat" },
+        { "id": "tang", "label": "Tang", "labelZh": "剑茎", "order": 3, "idealHeatMin": 0.54, "idealHeatMax": 0.76, "recommendedMinStrikes": 8, "recommendedMaxStrikes": 14, "recommendedFlipAfterStrikes": 5, "start": 0.0, "end": 0.22, "yMin": 0.38, "yMax": 0.62, "recommendedFace": "Flat" },
+        { "id": "correction", "label": "Correction", "labelZh": "校正", "order": 4, "idealHeatMin": 0.56, "idealHeatMax": 0.80, "recommendedMinStrikes": 4, "recommendedMaxStrikes": 10, "recommendedFlipAfterStrikes": 4, "start": 0.0, "end": 1.0, "yMin": 0.20, "yMax": 0.80, "recommendedFace": "Flat" }
+      ],
+      "completionTolerance": 0.14,
+      "recommendedQuenchByMaterial": { "soft-steel": "Water", "balanced-steel": "Water", "high-carbon-steel": "Oil" },
+      "recommendedReheatMin": 3,
+      "recommendedReheatMax": 5,
+      "grindTargetSpeed": 0.50,
+      "grindSpeedTolerance": 0.22,
+      "visual": {
+        "thumbnailAsset": "recipe-duelling-longsword.png",
+        "finishedModelAsset": "weapon-duelling-longsword.glb",
+        "fittingsModelAsset": "fittings-duelling-longsword.glb",
+        "renderLength": 3.45,
+        "renderWidth": 0.90,
+        "recommendedDevelopmentStrikes": 52
+      }
+    },
+    {
+      "id": "basilard",
+      "name": "Basilard",
+      "nameZh": "巴塞拉德",
+      "description": "A broad one-handed blade with a compact point and a distinctive crescent guard.",
+      "descriptionZh": "宽阔的单手短剑，拥有紧凑剑尖与标志性的弧形护手。",
+      "shape": {
+        "kind": "basilard",
+        "length": 0.74,
+        "width": 0.92,
+        "thickness": 0.94,
+        "edgeWidth": 0.18,
+        "tipTaper": 0.34,
+        "eyeWidth": 0.0,
+        "eyeHeight": 0.0,
+        "outline": [
+          { "u": 0.0, "lower": -0.064, "upper": 0.064 },
+          { "u": 0.20, "lower": -0.070, "upper": 0.070 },
+          { "u": 0.28, "lower": -0.150, "upper": 0.150 },
+          { "u": 0.68, "lower": -0.160, "upper": 0.160 },
+          { "u": 0.82, "lower": -0.116, "upper": 0.116 },
+          { "u": 1.0, "lower": -0.008, "upper": 0.008 }
+        ]
+      },
+      "billet": {
+        "start": 0.06,
+        "end": 0.86,
+        "massScale": 1.0,
+        "outline": [
+          { "u": 0.06, "lower": -0.090, "upper": 0.090 },
+          { "u": 0.86, "lower": -0.090, "upper": 0.090 }
+        ]
+      },
+      "zones": [
+        { "id": "blade", "label": "Blade", "labelZh": "剑身", "order": 0, "idealHeatMin": 0.58, "idealHeatMax": 0.84, "recommendedMinStrikes": 16, "recommendedMaxStrikes": 26, "recommendedFlipAfterStrikes": 8, "start": 0.20, "end": 0.82, "yMin": 0.24, "yMax": 0.76, "recommendedFace": "Flat" },
+        { "id": "edge", "label": "Edge", "labelZh": "剑刃", "order": 1, "idealHeatMin": 0.60, "idealHeatMax": 0.84, "recommendedMinStrikes": 12, "recommendedMaxStrikes": 20, "recommendedFlipAfterStrikes": 6, "start": 0.24, "end": 0.90, "yMin": 0.25, "yMax": 0.40, "recommendedFace": "Flat" },
+        { "id": "tang", "label": "Tang", "labelZh": "剑茎", "order": 2, "idealHeatMin": 0.54, "idealHeatMax": 0.76, "recommendedMinStrikes": 7, "recommendedMaxStrikes": 13, "recommendedFlipAfterStrikes": 5, "start": 0.0, "end": 0.22, "yMin": 0.38, "yMax": 0.62, "recommendedFace": "Flat" },
+        { "id": "correction", "label": "Correction", "labelZh": "校正", "order": 3, "idealHeatMin": 0.56, "idealHeatMax": 0.80, "recommendedMinStrikes": 4, "recommendedMaxStrikes": 9, "recommendedFlipAfterStrikes": 4, "start": 0.0, "end": 1.0, "yMin": 0.20, "yMax": 0.80, "recommendedFace": "Flat" }
+      ],
+      "completionTolerance": 0.16,
+      "recommendedQuenchByMaterial": { "soft-steel": "Water", "balanced-steel": "Water", "high-carbon-steel": "Oil" },
+      "recommendedReheatMin": 2,
+      "recommendedReheatMax": 4,
+      "grindTargetSpeed": 0.52,
+      "grindSpeedTolerance": 0.24,
+      "visual": {
+        "thumbnailAsset": "recipe-basilard.png",
+        "finishedModelAsset": "weapon-basilard.glb",
+        "fittingsModelAsset": "fittings-basilard.glb",
+        "renderLength": 2.56,
+        "renderWidth": 1.02,
+        "recommendedDevelopmentStrikes": 42
+      }
+    },
+    {
+      "id": "bearded-axe",
+      "name": "Bearded Axe",
+      "nameZh": "胡须斧",
+      "description": "An asymmetric axe head with a deep beard, a reinforced poll and a solid haft seat.",
+      "descriptionZh": "不对称的深胡须斧头，需要形成清晰的单面刃、宽阔斧身与实心斧柄座。",
+      "shape": {
+        "kind": "bearded-axe",
+        "length": 0.72,
+        "width": 1.0,
+        "thickness": 1.12,
+        "edgeWidth": 0.13,
+        "tipTaper": 0.30,
+        "eyeWidth": 0.0,
+        "eyeHeight": 0.0,
+        "eyeCenterX": 0.72,
+        "eyeCenterY": 0.015,
+        "outline": [
+          { "u": 0.0, "lower": -0.480, "upper": 0.300 },
+          { "u": 0.16, "lower": -0.500, "upper": 0.390 },
+          { "u": 0.42, "lower": -0.430, "upper": 0.360 },
+          { "u": 0.58, "lower": -0.270, "upper": 0.310 },
+          { "u": 0.70, "lower": -0.150, "upper": 0.250 },
+          { "u": 0.84, "lower": -0.135, "upper": 0.195 },
+          { "u": 1.0, "lower": -0.125, "upper": 0.155 }
+        ]
+      },
+      "billet": {
+        "start": 0.18,
+        "end": 0.96,
+        "massScale": 1.0,
+        "outline": [
+          { "u": 0.18, "lower": -0.160, "upper": 0.160 },
+          { "u": 0.72, "lower": -0.175, "upper": 0.175 },
+          { "u": 0.96, "lower": -0.150, "upper": 0.150 }
+        ]
+      },
+      "zones": [
+        { "id": "edge", "label": "Edge", "labelZh": "斧刃", "order": 0, "idealHeatMin": 0.62, "idealHeatMax": 0.84, "recommendedMinStrikes": 13, "recommendedMaxStrikes": 22, "recommendedFlipAfterStrikes": 7, "start": 0.0, "end": 0.32, "yMin": 0.15, "yMax": 0.85, "recommendedFace": "Flat" },
+        { "id": "body", "label": "Beard and body", "labelZh": "胡须与斧身", "order": 1, "idealHeatMin": 0.56, "idealHeatMax": 0.80, "recommendedMinStrikes": 15, "recommendedMaxStrikes": 26, "recommendedFlipAfterStrikes": 8, "start": 0.22, "end": 0.74, "yMin": 0.15, "yMax": 0.85, "recommendedFace": "Flat" },
+        { "id": "haft-seat", "label": "Haft seat", "labelZh": "斧柄座", "order": 2, "idealHeatMin": 0.58, "idealHeatMax": 0.82, "recommendedMinStrikes": 10, "recommendedMaxStrikes": 18, "recommendedFlipAfterStrikes": 6, "start": 0.55, "end": 0.83, "yMin": 0.28, "yMax": 0.72, "recommendedFace": "Flat" },
+        { "id": "correction", "label": "Correction", "labelZh": "校正", "order": 3, "idealHeatMin": 0.56, "idealHeatMax": 0.80, "recommendedMinStrikes": 5, "recommendedMaxStrikes": 12, "recommendedFlipAfterStrikes": 4, "start": 0.0, "end": 1.0, "yMin": 0.15, "yMax": 0.85, "recommendedFace": "Flat" }
+      ],
+      "completionTolerance": 0.18,
+      "recommendedQuenchByMaterial": { "soft-steel": "Water", "balanced-steel": "Oil", "high-carbon-steel": "Oil" },
+      "recommendedReheatMin": 3,
+      "recommendedReheatMax": 5,
+      "grindTargetSpeed": 0.46,
+      "grindSpeedTolerance": 0.20,
+      "visual": {
+        "thumbnailAsset": "recipe-bearded-axe.png",
+        "finishedModelAsset": "weapon-bearded-axe.glb",
+        "fittingsModelAsset": "fittings-bearded-axe.glb",
+        "renderLength": 2.22,
+        "renderWidth": 1.24,
+        "recommendedDevelopmentStrikes": 46
+      }
+    }
+  ],
+  "materials": [
+    { "id": "soft-steel", "name": "Soft Steel", "description": "Forgiving and easy to move, but less tolerant of a weak quench.", "plasticityPeak": 0.70, "plasticityWidth": 0.24, "coolingRate": 0.72, "overheatThreshold": 0.98, "coldWorkThreshold": 0.26, "crackSensitivity": 0.55, "waterHardening": 0.88, "oilHardening": 0.62, "grindHardness": 0.72 },
+    { "id": "balanced-steel", "name": "Balanced Steel", "description": "A dependable steel with a broad working window and a clear response under the hammer.", "plasticityPeak": 0.72, "plasticityWidth": 0.22, "coolingRate": 0.82, "overheatThreshold": 0.96, "coldWorkThreshold": 0.30, "crackSensitivity": 0.70, "waterHardening": 0.92, "oilHardening": 0.78, "grindHardness": 0.82 },
+    { "id": "high-carbon-steel", "name": "High-Carbon Steel", "description": "Takes a keen edge, but punishes cold work, overheat and a rushed quench.", "plasticityPeak": 0.76, "plasticityWidth": 0.18, "coolingRate": 0.92, "overheatThreshold": 0.92, "coldWorkThreshold": 0.35, "crackSensitivity": 0.95, "waterHardening": 0.80, "oilHardening": 0.96, "grindHardness": 0.94 }
+  ],
+  "hammer": { "id": "smith-hammer", "name": "Smith's Hammer", "flatRadius": 0.13, "peenRadius": 0.075, "forceMultiplier": 1.0 }
+}

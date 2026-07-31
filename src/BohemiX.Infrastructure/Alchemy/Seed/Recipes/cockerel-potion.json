@@ -1,0 +1,34 @@
+{
+  "id": "cockerel-potion",
+  "displayName": "Cockerel Potion",
+  "base": "Spirits",
+  "ingredients": [
+    {
+      "herbId": "mint",
+      "count": 2,
+      "requiredState": "Fresh",
+      "requiredPreparation": "Ground"
+    },
+    {
+      "herbId": "valerian",
+      "count": 1,
+      "requiredState": "Fresh",
+      "requiredPreparation": "None"
+    }
+  ],
+  "steps": [
+    { "kind": "Pour", "base": "Spirits" },
+    { "kind": "Grind", "herbId": "mint", "herbState": "Fresh", "count": 2 },
+    { "kind": "Pour", "transfer": "PlateToCauldron" },
+    { "kind": "LowerCauldron" },
+    { "kind": "TurnHourglass", "turns": 1, "boilMode": "Plain" },
+    { "kind": "Pour", "herbId": "valerian", "herbState": "Fresh" },
+    { "kind": "TurnHourglass", "turns": 2, "boilMode": "Plain" },
+    { "kind": "RaiseCauldron" },
+    { "kind": "Pour", "transfer": "CauldronToAlembic" },
+    { "kind": "ExtinguishDistillation" },
+    { "kind": "Bottle" }
+  ],
+  "expectedBoilTurns": 3,
+  "requiresDistillation": true
+}

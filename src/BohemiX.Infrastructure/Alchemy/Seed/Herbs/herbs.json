@@ -1,0 +1,32 @@
+[
+  {
+    "id": "nettle",
+    "displayName": "Nettle",
+    "description": "A common stinging herb. Used fresh in restorative brews and save-potions."
+  },
+  {
+    "id": "belladonna",
+    "displayName": "Belladonna",
+    "description": "Deadly nightshade. Potent when ground; a staple of strong alchemy."
+  },
+  {
+    "id": "chamomile",
+    "displayName": "Chamomile",
+    "description": "A soothing flower. Brewed for calming and restorative decoctions."
+  },
+  {
+    "id": "sage",
+    "displayName": "Sage",
+    "description": "An aromatic leaf, typically ground before being added to a brew."
+  },
+  {
+    "id": "mint",
+    "displayName": "Mint",
+    "description": "A bright aromatic leaf. Ground in pairs for the Cockerel potion."
+  },
+  {
+    "id": "valerian",
+    "displayName": "Valerian",
+    "description": "A pale root used fresh in stamina and wakefulness brews."
+  }
+]

@@ -1,0 +1,10 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:semi="https://irihi.tech/semi"
+             x:Class="BohemiX.ForgeHost.App"
+             RequestedThemeVariant="Dark">
+  <Application.Styles>
+    <StyleInclude Source="avares://BohemiX.ForgeHost/Assets/Icons/BohemiXIcons.axaml" />
+    <semi:SemiTheme Locale="zh-CN" />
+  </Application.Styles>
+</Application>

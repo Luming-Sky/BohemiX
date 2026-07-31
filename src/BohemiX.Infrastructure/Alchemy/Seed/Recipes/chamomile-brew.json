@@ -1,0 +1,31 @@
+{
+  "id": "chamomile-brew",
+  "displayName": "Chamomile Brew",
+  "base": "Wine",
+  "ingredients": [
+    {
+      "herbId": "chamomile",
+      "count": 2,
+      "requiredState": "Fresh",
+      "requiredPreparation": "None"
+    },
+    {
+      "herbId": "sage",
+      "count": 1,
+      "requiredState": "Fresh",
+      "requiredPreparation": "Ground"
+    }
+  ],
+  "steps": [
+    { "kind": "Pour", "base": "Wine" },
+    { "kind": "Pour", "herbId": "chamomile", "herbState": "Fresh", "count": 2 },
+    { "kind": "LowerCauldron" },
+    { "kind": "TurnHourglass", "turns": 1, "boilMode": "Plain" },
+    { "kind": "RaiseCauldron" },
+    { "kind": "Grind", "herbId": "sage", "herbState": "Fresh", "count": 1 },
+    { "kind": "Pour", "transfer": "PlateToCauldron" },
+    { "kind": "Bottle" }
+  ],
+  "expectedBoilTurns": 1,
+  "requiresDistillation": false
+}

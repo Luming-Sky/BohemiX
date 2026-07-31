@@ -1,0 +1,172 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:profiles="using:BohemiX.App.PlayerProfiles"
+             x:Class="BohemiX.App.PlayerProfiles.PlayerSidebarProfile"
+             x:Name="ProfileSidebarRoot"
+             x:DataType="profiles:PlayerProfileManagerViewModel"
+             IsVisible="{Binding HasCurrentPlayer}">
+    <UserControl.Styles>
+        <Style Selector="Button.SidebarPlayerButton">
+            <Setter Property="Height" Value="62" />
+            <Setter Property="Padding" Value="7" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="BorderBrush" Value="#50AFC4D6" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Opacity" Value="1" />
+            <Setter Property="RenderTransformOrigin" Value="50%,50%" />
+            <Setter Property="RenderTransform" Value="translateX(0px) scale(1)" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.22" />
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.28" />
+                </Transitions>
+            </Setter>
+            <Setter Property="Background">
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                    <GradientStop Color="#D72B455B" Offset="0" />
+                    <GradientStop Color="#D51A2938" Offset="0.58" />
+                    <GradientStop Color="#DC111B26" Offset="1" />
+                </LinearGradientBrush>
+            </Setter>
+        </Style>
+        <Style Selector="Button.SidebarPlayerButton:pointerover">
+            <Setter Property="BorderBrush" Value="#A7D5B64D" />
+            <Setter Property="Background">
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                    <GradientStop Color="#E2385A72" Offset="0" />
+                    <GradientStop Color="#E1213547" Offset="0.62" />
+                    <GradientStop Color="#E216222F" Offset="1" />
+                </LinearGradientBrush>
+            </Setter>
+        </Style>
+        <Style Selector="Button.SidebarPlayerAvatarButton">
+            <Setter Property="Width" Value="44" />
+            <Setter Property="Height" Value="44" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="22" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Opacity" Value="0" />
+            <Setter Property="RenderTransformOrigin" Value="50%,50%" />
+            <Setter Property="RenderTransform" Value="translateX(8px) scale(0.94)" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.22" />
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.28" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.SidebarPlayerAvatarButton:pointerover">
+            <Setter Property="Background" Value="#1FFFFFFF" />
+        </Style>
+        <Style Selector="profiles|PlayerSidebarProfile:collapsed Button.SidebarPlayerButton">
+            <Setter Property="Opacity" Value="0" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="RenderTransform" Value="translateX(-8px) scale(0.96)" />
+        </Style>
+        <Style Selector="profiles|PlayerSidebarProfile:collapsed Button.SidebarPlayerAvatarButton">
+            <Setter Property="Opacity" Value="1" />
+            <Setter Property="IsHitTestVisible" Value="True" />
+            <Setter Property="RenderTransform" Value="translateX(0px) scale(1)" />
+        </Style>
+    </UserControl.Styles>
+
+    <Grid Height="62">
+        <Button Classes="SidebarPlayerButton"
+                Command="{Binding OpenSettingsCommand}"
+                ToolTip.Tip="Player Profiles">
+            <Grid ColumnDefinitions="44,*,12" ColumnSpacing="9">
+                <Grid Width="42" Height="42" VerticalAlignment="Center">
+                    <Border CornerRadius="22"
+                            BorderBrush="#9DD6B84D"
+                            BorderThickness="1.5">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                            <GradientStop Color="#F24B6A82" Offset="0" />
+                            <GradientStop Color="#F21A2A3A" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <TextBlock Text="{Binding CurrentPlayer.Initial}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="16"
+                               FontWeight="Bold"
+                               Foreground="#FFF0C56B" />
+                    </Border>
+                    <Image Source="{Binding CurrentPlayer.AvatarImage}"
+                           Width="42"
+                           Height="42"
+                           Stretch="UniformToFill"
+                           IsVisible="{Binding CurrentPlayer.HasAvatar}">
+                        <Image.Clip>
+                            <EllipseGeometry Center="21,21" RadiusX="21" RadiusY="21" />
+                        </Image.Clip>
+                    </Image>
+                </Grid>
+
+                <StackPanel Grid.Column="1"
+                            MinWidth="0"
+                            VerticalAlignment="Center"
+                            Spacing="3">
+                <TextBlock Text="{Binding CurrentPlayer.DisplayName}"
+                           FontSize="13"
+                           FontWeight="SemiBold"
+                           Foreground="#F8FAFC"
+                           TextTrimming="CharacterEllipsis" />
+                <TextBlock Text="{Binding CurrentPlayer.ProviderDisplayName}"
+                           FontSize="9.5"
+                           Foreground="#B7C5D2"
+                           TextTrimming="CharacterEllipsis" />
+                </StackPanel>
+
+                <PathIcon Grid.Column="2"
+                          Data="{StaticResource BmxIconChevronRight}"
+                          Width="10"
+                          Height="10"
+                          VerticalAlignment="Center"
+                          Foreground="#91A5B6" />
+            </Grid>
+        </Button>
+
+        <Button Classes="SidebarPlayerAvatarButton"
+                Command="{Binding OpenSettingsCommand}"
+                ToolTip.Tip="Player Profiles">
+        <Grid Width="42" Height="42">
+            <Ellipse>
+                <Ellipse.Fill>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                        <GradientStop Color="#F24B6A82" Offset="0" />
+                        <GradientStop Color="#F21A2A3A" Offset="1" />
+                    </LinearGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <TextBlock Text="{Binding CurrentPlayer.Initial}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       Foreground="#FFF0C56B" />
+            <Image Source="{Binding CurrentPlayer.AvatarImage}"
+                   Width="42"
+                   Height="42"
+                   Stretch="UniformToFill"
+                   IsVisible="{Binding CurrentPlayer.HasAvatar}">
+                <Image.Clip>
+                    <EllipseGeometry Center="21,21" RadiusX="21" RadiusY="21" />
+                </Image.Clip>
+            </Image>
+            <Ellipse Stroke="#9DD6B84D"
+                     StrokeThickness="1.5"
+                     IsHitTestVisible="False" />
+        </Grid>
+        </Button>
+    </Grid>
+</UserControl>

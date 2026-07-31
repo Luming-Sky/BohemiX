@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.14" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+    <PackageReference Include="NAudio" Version="2.3.0" />
+    <PackageReference Include="NAudio.Vorbis" Version="1.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BohemiX.Core\BohemiX.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\Audio\**"
+             Link="Assets\Alchemy\Audio\%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Sprites\**"
+             Link="Assets\Alchemy\Sprites\%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\BohemiX.App\Assets\Icons\Spot\png\recipe-book.png"
+             Link="Assets\Alchemy\Sprites\hud_recipe_book.png"
+             CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\BohemiX.App\Assets\Icons\Spot\png\herb-bundle.png"
+             Link="Assets\Alchemy\Sprites\hud_herbs.png"
+             CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\BohemiX.App\Assets\Icons\Spot\png\alchemy-liquids.png"
+             Link="Assets\Alchemy\Sprites\hud_liquids.png"
+             CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\BohemiX.App\Assets\Icons\Spot\png\hourglass.png"
+             Link="Assets\Alchemy\Sprites\hud_hourglass.png"
+             CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\BohemiX.App\Assets\Icons\Spot\png\mortar-pestle.png"
+             Link="Assets\Alchemy\Sprites\hud_mortar.png"
+             CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\BohemiX.App\Assets\Icons\Spot\png\potion.png"
+             Link="Assets\Alchemy\Sprites\hud_potion.png"
+             CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\BohemiX.App\Assets\Icons\Spot\png\craft-quality.png"
+             Link="Assets\Alchemy\Sprites\hud_quality.png"
+             CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

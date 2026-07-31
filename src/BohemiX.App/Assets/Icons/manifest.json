@@ -1,0 +1,887 @@
+﻿{
+    "schemaVersion":  1,
+    "name":  "BohemiX Icon Library",
+    "count":  144,
+    "keyPrefix":  "BmxIcon",
+    "viewBox":  "0 0 24 24",
+    "style":  "rounded filled geometric glyphs",
+    "palette":  [
+                    "#F8FAFC",
+                    "#E5E7EB",
+                    "#CBD5E1",
+                    "#A6ADBB",
+                    "#94A3B8",
+                    "#64748B",
+                    "#F59E0B",
+                    "#75C394",
+                    "#FCA5A5"
+                ],
+    "source":  "Material Design Icons SVG 0.14.15, round variant",
+    "license":  "Apache-2.0",
+    "icons":  [
+                  {
+                      "Category":  "Navigation",
+                      "Name":  "Home",
+                      "Key":  "BmxIconHome",
+                      "Source":  "home"
+                  },
+                  {
+                      "Category":  "Navigation",
+                      "Name":  "Dashboard",
+                      "Key":  "BmxIconDashboard",
+                      "Source":  "dashboard"
+                  },
+                  {
+                      "Category":  "Navigation",
+                      "Name":  "Grid",
+                      "Key":  "BmxIconGrid",
+                      "Source":  "apps"
+                  },
+                  {
+                      "Category":  "Navigation",
+                      "Name":  "Sidebar",
+                      "Key":  "BmxIconSidebar",
+                      "Source":  "view_sidebar"
+                  },
+                  {
+                      "Category":  "Navigation",
+                      "Name":  "Menu",
+                      "Key":  "BmxIconMenu",
+                      "Source":  "menu"
+                  },
+                  {
+                      "Category":  "Navigation",
+                      "Name":  "Search",
+                      "Key":  "BmxIconSearch",
+                      "Source":  "search"
+                  },
+                  {
+                      "Category":  "Navigation",
+                      "Name":  "Back",
+                      "Key":  "BmxIconBack",
+                      "Source":  "arrow_back"
+                  },
+                  {
+                      "Category":  "Navigation",
+                      "Name":  "Forward",
+                      "Key":  "BmxIconForward",
+                      "Source":  "arrow_forward"
+                  },
+                  {
+                      "Category":  "Navigation",
+                      "Name":  "Up",
+                      "Key":  "BmxIconUp",
+                      "Source":  "arrow_upward"
+                  },
+                  {
+                      "Category":  "Navigation",
+                      "Name":  "Down",
+                      "Key":  "BmxIconDown",
+                      "Source":  "arrow_downward"
+                  },
+                  {
+                      "Category":  "Navigation",
+                      "Name":  "ExpandMore",
+                      "Key":  "BmxIconExpandMore",
+                      "Source":  "expand_more"
+                  },
+                  {
+                      "Category":  "Navigation",
+                      "Name":  "ExpandLess",
+                      "Key":  "BmxIconExpandLess",
+                      "Source":  "expand_less"
+                  },
+                  {
+                      "Category":  "Navigation",
+                      "Name":  "Fullscreen",
+                      "Key":  "BmxIconFullscreen",
+                      "Source":  "fullscreen"
+                  },
+                  {
+                      "Category":  "Navigation",
+                      "Name":  "FullscreenExit",
+                      "Key":  "BmxIconFullscreenExit",
+                      "Source":  "fullscreen_exit"
+                  },
+                  {
+                      "Category":  "Navigation",
+                      "Name":  "External",
+                      "Key":  "BmxIconExternal",
+                      "Source":  "open_in_new"
+                  },
+                  {
+                      "Category":  "Navigation",
+                      "Name":  "More",
+                      "Key":  "BmxIconMore",
+                      "Source":  "more_horiz"
+                  },
+                  {
+                      "Category":  "Actions",
+                      "Name":  "Add",
+                      "Key":  "BmxIconAdd",
+                      "Source":  "add"
+                  },
+                  {
+                      "Category":  "Actions",
+                      "Name":  "Remove",
+                      "Key":  "BmxIconRemove",
+                      "Source":  "remove"
+                  },
+                  {
+                      "Category":  "Actions",
+                      "Name":  "Close",
+                      "Key":  "BmxIconClose",
+                      "Source":  "close"
+                  },
+                  {
+                      "Category":  "Actions",
+                      "Name":  "Check",
+                      "Key":  "BmxIconCheck",
+                      "Source":  "check"
+                  },
+                  {
+                      "Category":  "Actions",
+                      "Name":  "Refresh",
+                      "Key":  "BmxIconRefresh",
+                      "Source":  "refresh"
+                  },
+                  {
+                      "Category":  "Actions",
+                      "Name":  "Download",
+                      "Key":  "BmxIconDownload",
+                      "Source":  "download"
+                  },
+                  {
+                      "Category":  "Actions",
+                      "Name":  "Upload",
+                      "Key":  "BmxIconUpload",
+                      "Source":  "upload"
+                  },
+                  {
+                      "Category":  "Actions",
+                      "Name":  "Save",
+                      "Key":  "BmxIconSave",
+                      "Source":  "save"
+                  },
+                  {
+                      "Category":  "Actions",
+                      "Name":  "Delete",
+                      "Key":  "BmxIconDelete",
+                      "Source":  "delete"
+                  },
+                  {
+                      "Category":  "Actions",
+                      "Name":  "Edit",
+                      "Key":  "BmxIconEdit",
+                      "Source":  "edit"
+                  },
+                  {
+                      "Category":  "Actions",
+                      "Name":  "Copy",
+                      "Key":  "BmxIconCopy",
+                      "Source":  "content_copy"
+                  },
+                  {
+                      "Category":  "Actions",
+                      "Name":  "Undo",
+                      "Key":  "BmxIconUndo",
+                      "Source":  "undo"
+                  },
+                  {
+                      "Category":  "Actions",
+                      "Name":  "Redo",
+                      "Key":  "BmxIconRedo",
+                      "Source":  "redo"
+                  },
+                  {
+                      "Category":  "Actions",
+                      "Name":  "Play",
+                      "Key":  "BmxIconPlay",
+                      "Source":  "play_arrow"
+                  },
+                  {
+                      "Category":  "Actions",
+                      "Name":  "Pause",
+                      "Key":  "BmxIconPause",
+                      "Source":  "pause"
+                  },
+                  {
+                      "Category":  "Actions",
+                      "Name":  "Stop",
+                      "Key":  "BmxIconStop",
+                      "Source":  "stop"
+                  },
+                  {
+                      "Category":  "FilesAndData",
+                      "Name":  "Folder",
+                      "Key":  "BmxIconFolder",
+                      "Source":  "folder"
+                  },
+                  {
+                      "Category":  "FilesAndData",
+                      "Name":  "FolderOpen",
+                      "Key":  "BmxIconFolderOpen",
+                      "Source":  "folder_open"
+                  },
+                  {
+                      "Category":  "FilesAndData",
+                      "Name":  "FolderAdd",
+                      "Key":  "BmxIconFolderAdd",
+                      "Source":  "create_new_folder"
+                  },
+                  {
+                      "Category":  "FilesAndData",
+                      "Name":  "File",
+                      "Key":  "BmxIconFile",
+                      "Source":  "insert_drive_file"
+                  },
+                  {
+                      "Category":  "FilesAndData",
+                      "Name":  "Document",
+                      "Key":  "BmxIconDocument",
+                      "Source":  "description"
+                  },
+                  {
+                      "Category":  "FilesAndData",
+                      "Name":  "Article",
+                      "Key":  "BmxIconArticle",
+                      "Source":  "article"
+                  },
+                  {
+                      "Category":  "FilesAndData",
+                      "Name":  "Archive",
+                      "Key":  "BmxIconArchive",
+                      "Source":  "archive"
+                  },
+                  {
+                      "Category":  "FilesAndData",
+                      "Name":  "Unarchive",
+                      "Key":  "BmxIconUnarchive",
+                      "Source":  "unarchive"
+                  },
+                  {
+                      "Category":  "FilesAndData",
+                      "Name":  "Package",
+                      "Key":  "BmxIconPackage",
+                      "Source":  "inventory_2"
+                  },
+                  {
+                      "Category":  "FilesAndData",
+                      "Name":  "Cloud",
+                      "Key":  "BmxIconCloud",
+                      "Source":  "cloud"
+                  },
+                  {
+                      "Category":  "FilesAndData",
+                      "Name":  "CloudDownload",
+                      "Key":  "BmxIconCloudDownload",
+                      "Source":  "cloud_download"
+                  },
+                  {
+                      "Category":  "FilesAndData",
+                      "Name":  "CloudUpload",
+                      "Key":  "BmxIconCloudUpload",
+                      "Source":  "cloud_upload"
+                  },
+                  {
+                      "Category":  "FilesAndData",
+                      "Name":  "Storage",
+                      "Key":  "BmxIconStorage",
+                      "Source":  "storage"
+                  },
+                  {
+                      "Category":  "FilesAndData",
+                      "Name":  "Backup",
+                      "Key":  "BmxIconBackup",
+                      "Source":  "backup"
+                  },
+                  {
+                      "Category":  "FilesAndData",
+                      "Name":  "Restore",
+                      "Key":  "BmxIconRestore",
+                      "Source":  "restore"
+                  },
+                  {
+                      "Category":  "FilesAndData",
+                      "Name":  "History",
+                      "Key":  "BmxIconHistory",
+                      "Source":  "history"
+                  },
+                  {
+                      "Category":  "Status",
+                      "Name":  "Info",
+                      "Key":  "BmxIconInfo",
+                      "Source":  "info"
+                  },
+                  {
+                      "Category":  "Status",
+                      "Name":  "Help",
+                      "Key":  "BmxIconHelp",
+                      "Source":  "help"
+                  },
+                  {
+                      "Category":  "Status",
+                      "Name":  "Warning",
+                      "Key":  "BmxIconWarning",
+                      "Source":  "warning"
+                  },
+                  {
+                      "Category":  "Status",
+                      "Name":  "Error",
+                      "Key":  "BmxIconError",
+                      "Source":  "error"
+                  },
+                  {
+                      "Category":  "Status",
+                      "Name":  "Success",
+                      "Key":  "BmxIconSuccess",
+                      "Source":  "check_circle"
+                  },
+                  {
+                      "Category":  "Status",
+                      "Name":  "Cancel",
+                      "Key":  "BmxIconCancel",
+                      "Source":  "cancel"
+                  },
+                  {
+                      "Category":  "Status",
+                      "Name":  "Hourglass",
+                      "Key":  "BmxIconHourglass",
+                      "Source":  "hourglass_empty"
+                  },
+                  {
+                      "Category":  "Status",
+                      "Name":  "Clock",
+                      "Key":  "BmxIconClock",
+                      "Source":  "schedule"
+                  },
+                  {
+                      "Category":  "Status",
+                      "Name":  "Notification",
+                      "Key":  "BmxIconNotification",
+                      "Source":  "notifications"
+                  },
+                  {
+                      "Category":  "Status",
+                      "Name":  "NotificationOff",
+                      "Key":  "BmxIconNotificationOff",
+                      "Source":  "notifications_off"
+                  },
+                  {
+                      "Category":  "Status",
+                      "Name":  "Visible",
+                      "Key":  "BmxIconVisible",
+                      "Source":  "visibility"
+                  },
+                  {
+                      "Category":  "Status",
+                      "Name":  "Hidden",
+                      "Key":  "BmxIconHidden",
+                      "Source":  "visibility_off"
+                  },
+                  {
+                      "Category":  "Status",
+                      "Name":  "Lock",
+                      "Key":  "BmxIconLock",
+                      "Source":  "lock"
+                  },
+                  {
+                      "Category":  "Status",
+                      "Name":  "Unlock",
+                      "Key":  "BmxIconUnlock",
+                      "Source":  "lock_open"
+                  },
+                  {
+                      "Category":  "Status",
+                      "Name":  "Shield",
+                      "Key":  "BmxIconShield",
+                      "Source":  "shield"
+                  },
+                  {
+                      "Category":  "Status",
+                      "Name":  "Verified",
+                      "Key":  "BmxIconVerified",
+                      "Source":  "verified"
+                  },
+                  {
+                      "Category":  "People",
+                      "Name":  "Person",
+                      "Key":  "BmxIconPerson",
+                      "Source":  "person"
+                  },
+                  {
+                      "Category":  "People",
+                      "Name":  "Users",
+                      "Key":  "BmxIconUsers",
+                      "Source":  "group"
+                  },
+                  {
+                      "Category":  "People",
+                      "Name":  "PersonAdd",
+                      "Key":  "BmxIconPersonAdd",
+                      "Source":  "person_add"
+                  },
+                  {
+                      "Category":  "People",
+                      "Name":  "GroupAdd",
+                      "Key":  "BmxIconGroupAdd",
+                      "Source":  "group_add"
+                  },
+                  {
+                      "Category":  "People",
+                      "Name":  "Account",
+                      "Key":  "BmxIconAccount",
+                      "Source":  "account_circle"
+                  },
+                  {
+                      "Category":  "People",
+                      "Name":  "Badge",
+                      "Key":  "BmxIconBadge",
+                      "Source":  "badge"
+                  },
+                  {
+                      "Category":  "People",
+                      "Name":  "Contact",
+                      "Key":  "BmxIconContact",
+                      "Source":  "contact_page"
+                  },
+                  {
+                      "Category":  "People",
+                      "Name":  "Forum",
+                      "Key":  "BmxIconForum",
+                      "Source":  "forum"
+                  },
+                  {
+                      "Category":  "People",
+                      "Name":  "Chat",
+                      "Key":  "BmxIconChat",
+                      "Source":  "chat"
+                  },
+                  {
+                      "Category":  "People",
+                      "Name":  "Mail",
+                      "Key":  "BmxIconMail",
+                      "Source":  "mail"
+                  },
+                  {
+                      "Category":  "People",
+                      "Name":  "Share",
+                      "Key":  "BmxIconShare",
+                      "Source":  "share"
+                  },
+                  {
+                      "Category":  "People",
+                      "Name":  "Globe",
+                      "Key":  "BmxIconGlobe",
+                      "Source":  "public"
+                  },
+                  {
+                      "Category":  "People",
+                      "Name":  "Language",
+                      "Key":  "BmxIconLanguage",
+                      "Source":  "language"
+                  },
+                  {
+                      "Category":  "People",
+                      "Name":  "Favorite",
+                      "Key":  "BmxIconFavorite",
+                      "Source":  "favorite"
+                  },
+                  {
+                      "Category":  "People",
+                      "Name":  "Star",
+                      "Key":  "BmxIconStar",
+                      "Source":  "star"
+                  },
+                  {
+                      "Category":  "People",
+                      "Name":  "Premium",
+                      "Key":  "BmxIconPremium",
+                      "Source":  "workspace_premium"
+                  },
+                  {
+                      "Category":  "Game",
+                      "Name":  "Gamepad",
+                      "Key":  "BmxIconGamepad",
+                      "Source":  "sports_esports"
+                  },
+                  {
+                      "Category":  "Game",
+                      "Name":  "Puzzle",
+                      "Key":  "BmxIconPuzzle",
+                      "Source":  "extension"
+                  },
+                  {
+                      "Category":  "Game",
+                      "Name":  "Compass",
+                      "Key":  "BmxIconCompass",
+                      "Source":  "explore"
+                  },
+                  {
+                      "Category":  "Game",
+                      "Name":  "Map",
+                      "Key":  "BmxIconMap",
+                      "Source":  "map"
+                  },
+                  {
+                      "Category":  "Game",
+                      "Name":  "Quest",
+                      "Key":  "BmxIconQuest",
+                      "Source":  "flag"
+                  },
+                  {
+                      "Category":  "Game",
+                      "Name":  "Trophy",
+                      "Key":  "BmxIconTrophy",
+                      "Source":  "emoji_events"
+                  },
+                  {
+                      "Category":  "Game",
+                      "Name":  "Achievement",
+                      "Key":  "BmxIconAchievement",
+                      "Source":  "military_tech"
+                  },
+                  {
+                      "Category":  "Game",
+                      "Name":  "Spark",
+                      "Key":  "BmxIconSpark",
+                      "Source":  "auto_awesome"
+                  },
+                  {
+                      "Category":  "Game",
+                      "Name":  "Zap",
+                      "Key":  "BmxIconZap",
+                      "Source":  "bolt"
+                  },
+                  {
+                      "Category":  "Game",
+                      "Name":  "Flame",
+                      "Key":  "BmxIconFlame",
+                      "Source":  "local_fire_department"
+                  },
+                  {
+                      "Category":  "Game",
+                      "Name":  "Dice",
+                      "Key":  "BmxIconDice",
+                      "Source":  "casino"
+                  },
+                  {
+                      "Category":  "Game",
+                      "Name":  "Token",
+                      "Key":  "BmxIconToken",
+                      "Source":  "token"
+                  },
+                  {
+                      "Category":  "Game",
+                      "Name":  "Diamond",
+                      "Key":  "BmxIconDiamond",
+                      "Source":  "diamond"
+                  },
+                  {
+                      "Category":  "Game",
+                      "Name":  "Coin",
+                      "Key":  "BmxIconCoin",
+                      "Source":  "paid"
+                  },
+                  {
+                      "Category":  "Game",
+                      "Name":  "Gift",
+                      "Key":  "BmxIconGift",
+                      "Source":  "card_giftcard"
+                  },
+                  {
+                      "Category":  "Game",
+                      "Name":  "Leaderboard",
+                      "Key":  "BmxIconLeaderboard",
+                      "Source":  "leaderboard"
+                  },
+                  {
+                      "Category":  "Alchemy",
+                      "Name":  "Flask",
+                      "Key":  "BmxIconFlask",
+                      "Source":  "science"
+                  },
+                  {
+                      "Category":  "Alchemy",
+                      "Name":  "Biotech",
+                      "Key":  "BmxIconBiotech",
+                      "Source":  "biotech"
+                  },
+                  {
+                      "Category":  "Alchemy",
+                      "Name":  "Potion",
+                      "Key":  "BmxIconPotion",
+                      "Source":  "medication_liquid"
+                  },
+                  {
+                      "Category":  "Alchemy",
+                      "Name":  "Water",
+                      "Key":  "BmxIconWater",
+                      "Source":  "water_drop"
+                  },
+                  {
+                      "Category":  "Alchemy",
+                      "Name":  "Oil",
+                      "Key":  "BmxIconOil",
+                      "Source":  "oil_barrel"
+                  },
+                  {
+                      "Category":  "Alchemy",
+                      "Name":  "Drink",
+                      "Key":  "BmxIconDrink",
+                      "Source":  "local_drink"
+                  },
+                  {
+                      "Category":  "Alchemy",
+                      "Name":  "Wine",
+                      "Key":  "BmxIconWine",
+                      "Source":  "wine_bar"
+                  },
+                  {
+                      "Category":  "Alchemy",
+                      "Name":  "Spirits",
+                      "Key":  "BmxIconSpirits",
+                      "Source":  "liquor"
+                  },
+                  {
+                      "Category":  "Alchemy",
+                      "Name":  "Herb",
+                      "Key":  "BmxIconHerb",
+                      "Source":  "spa"
+                  },
+                  {
+                      "Category":  "Alchemy",
+                      "Name":  "Leaf",
+                      "Key":  "BmxIconLeaf",
+                      "Source":  "energy_savings_leaf"
+                  },
+                  {
+                      "Category":  "Alchemy",
+                      "Name":  "Grass",
+                      "Key":  "BmxIconGrass",
+                      "Source":  "grass"
+                  },
+                  {
+                      "Category":  "Alchemy",
+                      "Name":  "Filter",
+                      "Key":  "BmxIconFilter",
+                      "Source":  "filter_alt"
+                  },
+                  {
+                      "Category":  "Alchemy",
+                      "Name":  "Scale",
+                      "Key":  "BmxIconScale",
+                      "Source":  "scale"
+                  },
+                  {
+                      "Category":  "Alchemy",
+                      "Name":  "Timer",
+                      "Key":  "BmxIconTimer",
+                      "Source":  "timer"
+                  },
+                  {
+                      "Category":  "Alchemy",
+                      "Name":  "Temperature",
+                      "Key":  "BmxIconTemperature",
+                      "Source":  "device_thermostat"
+                  },
+                  {
+                      "Category":  "Alchemy",
+                      "Name":  "Recipe",
+                      "Key":  "BmxIconRecipe",
+                      "Source":  "menu_book"
+                  },
+                  {
+                      "Category":  "Forge",
+                      "Name":  "Hammer",
+                      "Key":  "BmxIconHammer",
+                      "Source":  "hardware"
+                  },
+                  {
+                      "Category":  "Forge",
+                      "Name":  "Construction",
+                      "Key":  "BmxIconConstruction",
+                      "Source":  "construction"
+                  },
+                  {
+                      "Category":  "Forge",
+                      "Name":  "Handyman",
+                      "Key":  "BmxIconHandyman",
+                      "Source":  "handyman"
+                  },
+                  {
+                      "Category":  "Forge",
+                      "Name":  "Build",
+                      "Key":  "BmxIconBuild",
+                      "Source":  "build"
+                  },
+                  {
+                      "Category":  "Forge",
+                      "Name":  "Engineering",
+                      "Key":  "BmxIconEngineering",
+                      "Source":  "engineering"
+                  },
+                  {
+                      "Category":  "Forge",
+                      "Name":  "Iron",
+                      "Key":  "BmxIconIron",
+                      "Source":  "iron"
+                  },
+                  {
+                      "Category":  "Forge",
+                      "Name":  "Hearth",
+                      "Key":  "BmxIconHearth",
+                      "Source":  "fireplace"
+                  },
+                  {
+                      "Category":  "Forge",
+                      "Name":  "Heat",
+                      "Key":  "BmxIconHeat",
+                      "Source":  "whatshot"
+                  },
+                  {
+                      "Category":  "Forge",
+                      "Name":  "Measure",
+                      "Key":  "BmxIconMeasure",
+                      "Source":  "straighten"
+                  },
+                  {
+                      "Category":  "Forge",
+                      "Name":  "Machine",
+                      "Key":  "BmxIconMachine",
+                      "Source":  "precision_manufacturing"
+                  },
+                  {
+                      "Category":  "Forge",
+                      "Name":  "Tune",
+                      "Key":  "BmxIconTune",
+                      "Source":  "settings_suggest"
+                  },
+                  {
+                      "Category":  "Forge",
+                      "Name":  "Factory",
+                      "Key":  "BmxIconFactory",
+                      "Source":  "factory"
+                  },
+                  {
+                      "Category":  "Forge",
+                      "Name":  "Inventory",
+                      "Key":  "BmxIconInventory",
+                      "Source":  "inventory"
+                  },
+                  {
+                      "Category":  "Forge",
+                      "Name":  "Materials",
+                      "Key":  "BmxIconMaterials",
+                      "Source":  "category"
+                  },
+                  {
+                      "Category":  "Forge",
+                      "Name":  "Blueprint",
+                      "Key":  "BmxIconBlueprint",
+                      "Source":  "architecture"
+                  },
+                  {
+                      "Category":  "Forge",
+                      "Name":  "Design",
+                      "Key":  "BmxIconDesign",
+                      "Source":  "design_services"
+                  },
+                  {
+                      "Category":  "Compatibility",
+                      "Name":  "ChevronDown",
+                      "Key":  "BmxIconChevronDown",
+                      "Source":  "expand_more"
+                  },
+                  {
+                      "Category":  "Compatibility",
+                      "Name":  "ChevronUp",
+                      "Key":  "BmxIconChevronUp",
+                      "Source":  "expand_less"
+                  },
+                  {
+                      "Category":  "Compatibility",
+                      "Name":  "ChevronRight",
+                      "Key":  "BmxIconChevronRight",
+                      "Source":  "chevron_right"
+                  },
+                  {
+                      "Category":  "Compatibility",
+                      "Name":  "ArrowLeft",
+                      "Key":  "BmxIconArrowLeft",
+                      "Source":  "arrow_back"
+                  },
+                  {
+                      "Category":  "Compatibility",
+                      "Name":  "ArrowRight",
+                      "Key":  "BmxIconArrowRight",
+                      "Source":  "arrow_forward"
+                  },
+                  {
+                      "Category":  "Compatibility",
+                      "Name":  "ArrowUp",
+                      "Key":  "BmxIconArrowUp",
+                      "Source":  "arrow_upward"
+                  },
+                  {
+                      "Category":  "Compatibility",
+                      "Name":  "ArrowDown",
+                      "Key":  "BmxIconArrowDown",
+                      "Source":  "arrow_downward"
+                  },
+                  {
+                      "Category":  "Compatibility",
+                      "Name":  "Plus",
+                      "Key":  "BmxIconPlus",
+                      "Source":  "add"
+                  },
+                  {
+                      "Category":  "Compatibility",
+                      "Name":  "Trash",
+                      "Key":  "BmxIconTrash",
+                      "Source":  "delete"
+                  },
+                  {
+                      "Category":  "Compatibility",
+                      "Name":  "Newspaper",
+                      "Key":  "BmxIconNewspaper",
+                      "Source":  "newspaper"
+                  },
+                  {
+                      "Category":  "Compatibility",
+                      "Name":  "Trend",
+                      "Key":  "BmxIconTrend",
+                      "Source":  "trending_up"
+                  },
+                  {
+                      "Category":  "Compatibility",
+                      "Name":  "Palette",
+                      "Key":  "BmxIconPalette",
+                      "Source":  "color_lens"
+                  },
+                  {
+                      "Category":  "Compatibility",
+                      "Name":  "Database",
+                      "Key":  "BmxIconDatabase",
+                      "Source":  "storage"
+                  },
+                  {
+                      "Category":  "Compatibility",
+                      "Name":  "Sword",
+                      "Key":  "BmxIconSword",
+                      "Source":  "custom"
+                  },
+                  {
+                      "Category":  "Compatibility",
+                      "Name":  "Bag",
+                      "Key":  "BmxIconBag",
+                      "Source":  "shopping_bag"
+                  },
+                  {
+                      "Category":  "Compatibility",
+                      "Name":  "BedSave",
+                      "Key":  "BmxIconBedSave",
+                      "Source":  "custom"
+                  }
+              ]
+}

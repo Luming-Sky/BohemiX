@@ -1,0 +1,31 @@
+﻿{
+    "name":  "bohemix-rounded-glyph",
+    "preamble":  "A cohesive library of compact, rounded, solid geometric glyphs for the BohemiX desktop application. Medieval game-management metaphors are reduced to one bold silhouette with calm modern geometry. Cool white and neutral grey forms stay legible over both pale-blue and deep-blue application surfaces. Near-black is never the dominant fill.",
+    "palette":  [
+                    "#F8FAFC",
+                    "#E5E7EB",
+                    "#CBD5E1",
+                    "#A6ADBB",
+                    "#94A3B8",
+                    "#64748B",
+                    "#F59E0B",
+                    "#75C394",
+                    "#FCA5A5"
+                ],
+    "cutout":  "floodfill",
+    "threshold":  30,
+    "construction":  {
+                         "grid":  "24x24 keyline; 20x20 maximum live area; optical centering",
+                         "angles":  "horizontal, vertical, and 45-degree diagonals",
+                         "stroke":  null,
+                         "corner_radius":  "rounded terminals and 1-2 unit internal radii",
+                         "fill_rule":  "single solid silhouette with intentional negative-space cutouts",
+                         "color_rule":  "one foreground color per glyph; semantic accent is applied by the consuming UI",
+                         "detail_budget":  "one metaphor, usually 1-3 joined masses, no micro-detail",
+                         "shared_parts":  "consistent circles, chevrons, plus/minus signs, document corners, and person heads",
+                         "perspective":  "flat front view",
+                         "shadow":  "none",
+                         "motif":  "soft corner cuts and compact central negative space",
+                         "weight_hierarchy":  "the silhouette remains visually dominant; no internal accent outweighs it"
+                     }
+}

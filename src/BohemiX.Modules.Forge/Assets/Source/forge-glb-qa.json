@@ -1,0 +1,2009 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "file": "anvil.glb",
+      "meshes": [
+        {
+          "name": "anvil",
+          "vertices": 13276,
+          "triangles": 21848,
+          "nonManifoldEdges": 4560,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "WoodDark",
+            "IronDark",
+            "Iron"
+          ],
+          "materialChannels": {
+            "WoodDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Iron": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "file": "bellows.glb",
+      "meshes": [
+        {
+          "name": "bellows",
+          "vertices": 4026,
+          "triangles": 5524,
+          "nonManifoldEdges": 2304,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Wood",
+            "Leather",
+            "IronDark",
+            "Brass"
+          ],
+          "materialChannels": {
+            "Wood": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "file": "fittings-basilard.glb",
+      "meshes": [
+        {
+          "name": "Basilard_Guard",
+          "vertices": 376,
+          "triangles": 508,
+          "nonManifoldEdges": 232,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_Ecusson",
+          "vertices": 378,
+          "triangles": 536,
+          "nonManifoldEdges": 208,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_QuillonL",
+          "vertices": 78,
+          "triangles": 80,
+          "nonManifoldEdges": 64,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_QuillonR",
+          "vertices": 78,
+          "triangles": 80,
+          "nonManifoldEdges": 64,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_GripCore",
+          "vertices": 548,
+          "triangles": 876,
+          "nonManifoldEdges": 208,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Wood"
+          ],
+          "materialChannels": {
+            "Wood": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_Collar",
+          "vertices": 1036,
+          "triangles": 1788,
+          "nonManifoldEdges": 276,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_Wrap",
+          "vertices": 4867,
+          "triangles": 7488,
+          "nonManifoldEdges": 2134,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_Riser0",
+          "vertices": 292,
+          "triangles": 380,
+          "nonManifoldEdges": 196,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_Riser1",
+          "vertices": 292,
+          "triangles": 380,
+          "nonManifoldEdges": 196,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_Riser2",
+          "vertices": 292,
+          "triangles": 380,
+          "nonManifoldEdges": 196,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_PommelNeck",
+          "vertices": 698,
+          "triangles": 1148,
+          "nonManifoldEdges": 240,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_RingPommel",
+          "vertices": 1448,
+          "triangles": 2400,
+          "nonManifoldEdges": 480,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_RingInlay",
+          "vertices": 1448,
+          "triangles": 2400,
+          "nonManifoldEdges": 480,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "file": "fittings-bearded-axe.glb",
+      "meshes": [
+        {
+          "name": "BeardedAxe_HaftSeatReinforcement",
+          "vertices": 468,
+          "triangles": 692,
+          "nonManifoldEdges": 234,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_PollCap",
+          "vertices": 378,
+          "triangles": 560,
+          "nonManifoldEdges": 184,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_Handle",
+          "vertices": 622,
+          "triangles": 1004,
+          "nonManifoldEdges": 228,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Wood"
+          ],
+          "materialChannels": {
+            "Wood": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_Wedge",
+          "vertices": 296,
+          "triangles": 428,
+          "nonManifoldEdges": 152,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Wood"
+          ],
+          "materialChannels": {
+            "Wood": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_HaftPeenBack",
+          "vertices": 72,
+          "triangles": 80,
+          "nonManifoldEdges": 56,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_HaftPeenFront",
+          "vertices": 72,
+          "triangles": 80,
+          "nonManifoldEdges": 56,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_Grip",
+          "vertices": 424,
+          "triangles": 636,
+          "nonManifoldEdges": 200,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_ButtCap",
+          "vertices": 74,
+          "triangles": 80,
+          "nonManifoldEdges": 56,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_ButtPin",
+          "vertices": 76,
+          "triangles": 80,
+          "nonManifoldEdges": 60,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "file": "fittings-duelling-longsword.glb",
+      "meshes": [
+        {
+          "name": "DuellingLongsword_GuardAndShoulder",
+          "vertices": 792,
+          "triangles": 1056,
+          "nonManifoldEdges": 508,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_QuillonL",
+          "vertices": 76,
+          "triangles": 80,
+          "nonManifoldEdges": 60,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_QuillonR",
+          "vertices": 76,
+          "triangles": 80,
+          "nonManifoldEdges": 60,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_GripCore",
+          "vertices": 652,
+          "triangles": 1052,
+          "nonManifoldEdges": 240,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_Collar",
+          "vertices": 1174,
+          "triangles": 2044,
+          "nonManifoldEdges": 296,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_Wrap",
+          "vertices": 5338,
+          "triangles": 8208,
+          "nonManifoldEdges": 2344,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_Riser0",
+          "vertices": 292,
+          "triangles": 380,
+          "nonManifoldEdges": 196,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_Riser1",
+          "vertices": 292,
+          "triangles": 380,
+          "nonManifoldEdges": 196,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_Riser2",
+          "vertices": 292,
+          "triangles": 380,
+          "nonManifoldEdges": 196,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_Pommel",
+          "vertices": 1244,
+          "triangles": 2156,
+          "nonManifoldEdges": 324,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_PommelCap",
+          "vertices": 686,
+          "triangles": 1148,
+          "nonManifoldEdges": 216,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "file": "grinder-stand.glb",
+      "meshes": [
+        {
+          "name": "grinder-stand",
+          "vertices": 7691,
+          "triangles": 10532,
+          "nonManifoldEdges": 4510,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "WoodDark",
+            "Wood",
+            "Brass",
+            "Iron",
+            "IronDark"
+          ],
+          "materialChannels": {
+            "WoodDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Wood": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Iron": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "file": "grinder-wheel.glb",
+      "meshes": [
+        {
+          "name": "grinder-wheel",
+          "vertices": 6096,
+          "triangles": 9332,
+          "nonManifoldEdges": 2792,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Stone",
+            "IronDark",
+            "Brass"
+          ],
+          "materialChannels": {
+            "Stone": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "file": "grinder.glb",
+      "meshes": [
+        {
+          "name": "grinder",
+          "vertices": 13798,
+          "triangles": 19864,
+          "nonManifoldEdges": 7330,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "WoodDark",
+            "Wood",
+            "Brass",
+            "Iron",
+            "IronDark",
+            "Stone"
+          ],
+          "materialChannels": {
+            "WoodDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Wood": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Iron": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Stone": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "file": "hammer.glb",
+      "meshes": [
+        {
+          "name": "hammer",
+          "vertices": 1604,
+          "triangles": 2368,
+          "nonManifoldEdges": 784,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Wood",
+            "IronDark",
+            "Iron",
+            "Leather"
+          ],
+          "materialChannels": {
+            "Wood": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Iron": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "file": "hearth.glb",
+      "meshes": [
+        {
+          "name": "hearth",
+          "vertices": 32894,
+          "triangles": 45592,
+          "nonManifoldEdges": 18324,
+          "zeroAreaTriangles": 142,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Stone",
+            "IronDark",
+            "Iron",
+            "Coal",
+            "Brick",
+            "Brass"
+          ],
+          "materialChannels": {
+            "Stone": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Iron": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Coal": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Brick": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "file": "quench-oil.glb",
+      "meshes": [
+        {
+          "name": "quench-oil",
+          "vertices": 6300,
+          "triangles": 8400,
+          "nonManifoldEdges": 3960,
+          "zeroAreaTriangles": 284,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass",
+            "IronDark",
+            "Oil"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Oil": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "file": "quench-water.glb",
+      "meshes": [
+        {
+          "name": "quench-water",
+          "vertices": 6300,
+          "triangles": 8400,
+          "nonManifoldEdges": 3960,
+          "zeroAreaTriangles": 284,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark",
+            "Water",
+            "Brass"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Water": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "file": "tongs.glb",
+      "meshes": [
+        {
+          "name": "tongs",
+          "vertices": 2684,
+          "triangles": 3916,
+          "nonManifoldEdges": 1376,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark",
+            "Iron",
+            "Leather"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Iron": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "file": "weapon-basilard.glb",
+      "meshes": [
+        {
+          "name": "Basilard_Blade",
+          "vertices": 1956,
+          "triangles": 2552,
+          "nonManifoldEdges": 1304,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Workpiece",
+            "WorkpieceEdge"
+          ],
+          "materialChannels": {
+            "Workpiece": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "WorkpieceEdge": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_Guard",
+          "vertices": 376,
+          "triangles": 508,
+          "nonManifoldEdges": 232,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_Ecusson",
+          "vertices": 378,
+          "triangles": 536,
+          "nonManifoldEdges": 208,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_QuillonL",
+          "vertices": 78,
+          "triangles": 80,
+          "nonManifoldEdges": 64,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_QuillonR",
+          "vertices": 78,
+          "triangles": 80,
+          "nonManifoldEdges": 64,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_GripCore",
+          "vertices": 548,
+          "triangles": 876,
+          "nonManifoldEdges": 208,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Wood"
+          ],
+          "materialChannels": {
+            "Wood": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_Collar",
+          "vertices": 1036,
+          "triangles": 1788,
+          "nonManifoldEdges": 276,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_Wrap",
+          "vertices": 4867,
+          "triangles": 7488,
+          "nonManifoldEdges": 2134,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_Riser0",
+          "vertices": 292,
+          "triangles": 380,
+          "nonManifoldEdges": 196,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_Riser1",
+          "vertices": 292,
+          "triangles": 380,
+          "nonManifoldEdges": 196,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_Riser2",
+          "vertices": 292,
+          "triangles": 380,
+          "nonManifoldEdges": 196,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_PommelNeck",
+          "vertices": 698,
+          "triangles": 1148,
+          "nonManifoldEdges": 240,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_RingPommel",
+          "vertices": 1448,
+          "triangles": 2400,
+          "nonManifoldEdges": 480,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "Basilard_RingInlay",
+          "vertices": 1448,
+          "triangles": 2400,
+          "nonManifoldEdges": 480,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "file": "weapon-bearded-axe.glb",
+      "meshes": [
+        {
+          "name": "BeardedAxe_Head",
+          "vertices": 461,
+          "triangles": 580,
+          "nonManifoldEdges": 316,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Workpiece",
+            "WorkpieceEdge"
+          ],
+          "materialChannels": {
+            "Workpiece": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "WorkpieceEdge": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_HaftSeatReinforcement",
+          "vertices": 468,
+          "triangles": 692,
+          "nonManifoldEdges": 234,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_PollCap",
+          "vertices": 378,
+          "triangles": 560,
+          "nonManifoldEdges": 184,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_Handle",
+          "vertices": 622,
+          "triangles": 1004,
+          "nonManifoldEdges": 228,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Wood"
+          ],
+          "materialChannels": {
+            "Wood": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_Wedge",
+          "vertices": 296,
+          "triangles": 428,
+          "nonManifoldEdges": 152,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Wood"
+          ],
+          "materialChannels": {
+            "Wood": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_HaftPeenBack",
+          "vertices": 72,
+          "triangles": 80,
+          "nonManifoldEdges": 56,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_HaftPeenFront",
+          "vertices": 72,
+          "triangles": 80,
+          "nonManifoldEdges": 56,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_Grip",
+          "vertices": 424,
+          "triangles": 636,
+          "nonManifoldEdges": 200,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_ButtCap",
+          "vertices": 74,
+          "triangles": 80,
+          "nonManifoldEdges": 56,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "BeardedAxe_ButtPin",
+          "vertices": 76,
+          "triangles": 80,
+          "nonManifoldEdges": 60,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "file": "weapon-duelling-longsword.glb",
+      "meshes": [
+        {
+          "name": "DuellingLongsword_Blade",
+          "vertices": 2740,
+          "triangles": 3632,
+          "nonManifoldEdges": 1800,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Workpiece",
+            "WorkpieceEdge"
+          ],
+          "materialChannels": {
+            "Workpiece": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "WorkpieceEdge": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_GuardAndShoulder",
+          "vertices": 792,
+          "triangles": 1056,
+          "nonManifoldEdges": 508,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_QuillonL",
+          "vertices": 76,
+          "triangles": 80,
+          "nonManifoldEdges": 60,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_QuillonR",
+          "vertices": 76,
+          "triangles": 80,
+          "nonManifoldEdges": 60,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_GripCore",
+          "vertices": 652,
+          "triangles": 1052,
+          "nonManifoldEdges": 240,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_Collar",
+          "vertices": 1174,
+          "triangles": 2044,
+          "nonManifoldEdges": 296,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_Wrap",
+          "vertices": 5338,
+          "triangles": 8208,
+          "nonManifoldEdges": 2344,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_Riser0",
+          "vertices": 292,
+          "triangles": 380,
+          "nonManifoldEdges": 196,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_Riser1",
+          "vertices": 292,
+          "triangles": 380,
+          "nonManifoldEdges": 196,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_Riser2",
+          "vertices": 292,
+          "triangles": 380,
+          "nonManifoldEdges": 196,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Leather"
+          ],
+          "materialChannels": {
+            "Leather": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_Pommel",
+          "vertices": 1244,
+          "triangles": 2156,
+          "nonManifoldEdges": 324,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "IronDark"
+          ],
+          "materialChannels": {
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        },
+        {
+          "name": "DuellingLongsword_PommelCap",
+          "vertices": 686,
+          "triangles": 1148,
+          "nonManifoldEdges": 216,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "Brass"
+          ],
+          "materialChannels": {
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "file": "workbench.glb",
+      "meshes": [
+        {
+          "name": "workbench",
+          "vertices": 14996,
+          "triangles": 19880,
+          "nonManifoldEdges": 9256,
+          "zeroAreaTriangles": 0,
+          "uvMissing": false,
+          "finiteNormals": true,
+          "finiteUvs": true,
+          "finiteTangents": true,
+          "materials": [
+            "WoodDark",
+            "Wood",
+            "Brass",
+            "IronDark",
+            "Iron"
+          ],
+          "materialChannels": {
+            "WoodDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Wood": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Brass": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "IronDark": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ],
+            "Iron": [
+              "BaseColor",
+              "Normal",
+              "MetallicRoughness"
+            ]
+          }
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

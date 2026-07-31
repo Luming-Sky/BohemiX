@@ -1,0 +1,879 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:community="clr-namespace:BohemiX.App.Community"
+             xmlns:controls="clr-namespace:BohemiX.App.Controls"
+             x:Name="Root"
+             x:Class="BohemiX.App.Community.MoreSettingsView"
+             x:DataType="community:MoreSettingsViewModel"
+             mc:Ignorable="d">
+    <controls:StripedCardBorder Classes="SettingsPanel"
+                                IsStripeMotionEnabled="{Binding #Root.IsStripeMotionEnabled}">
+        <controls:StripedCardBorder.Resources>
+            <SolidColorBrush x:Key="GlyphInkBrush" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="GlyphMutedBrush" Color="#D7D7D7" />
+        </controls:StripedCardBorder.Resources>
+
+        <Grid RowDefinitions="Auto,Auto,*" RowSpacing="16">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                <StackPanel Spacing="4">
+                    <TextBlock Text="{Binding #Root.Title}"
+                               FontSize="18"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource GlyphInkBrush}" />
+                    <TextBlock Text="{Binding ContentStatusText}"
+                               FontSize="12"
+                               Foreground="{StaticResource GlyphMutedBrush}"
+                               TextWrapping="Wrap" />
+                    <ProgressBar IsVisible="{Binding IsLoadingContent}"
+                                 IsIndeterminate="True"
+                                 Margin="0,6,0,0"
+                                 Height="2"
+                                 Foreground="#60A5FA" />
+                </StackPanel>
+
+                <Button Grid.Column="1"
+                        Classes="GlyphGlassButton"
+                        Height="34"
+                        Padding="13,0"
+                        VerticalAlignment="Top"
+                        Command="{Binding LoadContentCommand}"
+                        IsEnabled="{Binding !IsLoadingContent}"
+                        AutomationProperties.Name="{Binding RetryText}">
+                    <StackPanel Orientation="Horizontal" Spacing="7">
+                        <PathIcon Data="{StaticResource BmxIconRefresh}" Width="14" Height="14" />
+                        <TextBlock Text="{Binding RetryText}" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+            <Border Grid.Row="1" Height="1" Background="#24FFFFFF" />
+
+            <StackPanel Grid.Row="2" Spacing="12">
+                <controls:StripedCardBorder Classes="SettingRow"
+                                            Padding="18"
+                                            Background="#191B20"
+                                            BorderBrush="#3A404B">
+                    <StackPanel Spacing="14">
+                        <Image Source="/Assets/bohemix-logo.png"
+                               Width="76"
+                               Height="76"
+                               Stretch="Uniform"
+                               RenderOptions.BitmapInterpolationMode="HighQuality"
+                               HorizontalAlignment="Left" />
+
+                        <StackPanel Spacing="4">
+                            <controls:BohemiXWordLogo Width="180"
+                                                     Height="50"
+                                                     HorizontalAlignment="Left"
+                                                     AutomationProperties.Name="{Binding ApplicationName}" />
+                            <TextBlock Text="{Binding SoftwareDetailsDescriptionText}"
+                                       MaxWidth="520"
+                                       FontSize="12"
+                                       Foreground="#AEB8C7"
+                                       TextWrapping="Wrap"
+                                       HorizontalAlignment="Left" />
+                        </StackPanel>
+
+                        <TextBlock Text="{Binding ApplicationVersion}"
+                                   FontSize="12.5"
+                                   FontWeight="SemiBold"
+                                   Foreground="#DCE4EE" />
+
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Classes="GlyphPrimaryButton"
+                                    Height="36"
+                                    Padding="15,0"
+                                    CornerRadius="7"
+                                    Command="{Binding CheckForUpdatesCommand}"
+                                    IsEnabled="{Binding CanCheckForUpdates}"
+                                    AutomationProperties.Name="{Binding CheckForUpdatesText}">
+                                <StackPanel Orientation="Horizontal" Spacing="7">
+                                    <PathIcon Data="{StaticResource BmxIconRefresh}"
+                                              Width="14"
+                                              Height="14" />
+                                    <TextBlock Text="{Binding CheckForUpdatesText}" />
+                                </StackPanel>
+                            </Button>
+                            <Button Classes="GlyphGlassButton"
+                                    Height="36"
+                                    Padding="15,0"
+                                    Command="{Binding OpenGitHubCommand}"
+                                    AutomationProperties.Name="{Binding OpenGitHubText}">
+                                <StackPanel Orientation="Horizontal" Spacing="7">
+                                    <PathIcon Data="{StaticResource BmxIconExternal}"
+                                              Width="14"
+                                              Height="14" />
+                                    <TextBlock Text="{Binding OpenGitHubText}" />
+                                </StackPanel>
+                            </Button>
+                            <ProgressBar Width="52"
+                                         Height="3"
+                                         IsIndeterminate="True"
+                                         IsVisible="{Binding IsCheckingForUpdates}"
+                                         VerticalAlignment="Center"
+                                         Foreground="#60A5FA" />
+                        </StackPanel>
+
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="7">
+                            <PathIcon Data="{StaticResource BmxIconVerified}"
+                                      Width="14"
+                                      Height="14"
+                                      Foreground="#6EE7B7"
+                                      IsVisible="{Binding IsUpdateCheckSuccessful}"
+                                      VerticalAlignment="Center" />
+                            <PathIcon Data="{StaticResource BmxIconInfo}"
+                                      Width="14"
+                                      Height="14"
+                                      Foreground="#FCA5A5"
+                                      IsVisible="{Binding HasUpdateCheckError}"
+                                      VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding UpdateCheckStatusText}"
+                                       FontSize="11.5"
+                                       Foreground="#AEB8C7"
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Center" />
+                        </Grid>
+                    </StackPanel>
+                </controls:StripedCardBorder>
+
+                <controls:StripedCardBorder Classes="SettingRow">
+                    <StackPanel Spacing="14">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <PathIcon Data="{StaticResource BmxIconSettings}"
+                                      Width="20"
+                                      Height="20"
+                                      Foreground="#93C5FD"
+                                      VerticalAlignment="Top" />
+                            <StackPanel Grid.Column="1" Spacing="3">
+                                <TextBlock Text="{Binding AppearanceTitleText}"
+                                           FontSize="17"
+                                           FontWeight="SemiBold"
+                                           Foreground="White" />
+                                <TextBlock Text="{Binding AppearanceDescriptionText}"
+                                           FontSize="12"
+                                           Foreground="#AEB8C7"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid MaxWidth="1040" HorizontalAlignment="Left">
+                            <Border Background="#5011161D"
+                                    BorderBrush="#344A5868"
+                                    BorderThickness="1"
+                                    CornerRadius="6"
+                                    IsEnabled="{Binding CanUseSponsorFeatures}"
+                                    Opacity="{Binding SponsorFeatureContentOpacity}">
+                                <Grid RowDefinitions="Auto,1,Auto,1,Auto">
+                                <Grid Margin="14,11"
+                                      MinHeight="38"
+                                      ColumnDefinitions="190,210,*,118,132"
+                                      ColumnSpacing="10">
+                                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="9">
+                                        <PathIcon Data="{StaticResource BmxIconTune}"
+                                                  Width="15"
+                                                  Height="15"
+                                                  Foreground="#93C5FD"
+                                                  VerticalAlignment="Center" />
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding BackgroundCropText}"
+                                                   FontSize="13.5"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="White"
+                                                   VerticalAlignment="Center" />
+                                    </Grid>
+                                    <ComboBox Grid.Column="1"
+                                              Height="34"
+                                              SelectedIndex="{Binding BackgroundCropMode, Mode=TwoWay}"
+                                              VerticalAlignment="Center">
+                                        <ComboBoxItem Content="{Binding CropCenterText}" />
+                                        <ComboBoxItem Content="{Binding CropTopText}" />
+                                        <ComboBoxItem Content="{Binding CropBottomText}" />
+                                        <ComboBoxItem Content="{Binding CropLeftText}" />
+                                        <ComboBoxItem Content="{Binding CropRightText}" />
+                                    </ComboBox>
+                                    <Button Grid.Column="3"
+                                            Classes="GlyphGlassButton"
+                                            Height="34"
+                                            Padding="10,0"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Center"
+                                            Command="{Binding OpenBackgroundCropCommand}"
+                                            IsEnabled="{Binding HasSelectedBackground}">
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center"
+                                                    Spacing="6">
+                                            <PathIcon Data="{StaticResource BmxIconEdit}" Width="13" Height="13" />
+                                            <TextBlock Text="{Binding CropBackgroundText}" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Grid.Column="4"
+                                            Classes="GlyphGlassButton"
+                                            Height="34"
+                                            Padding="10,0"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Center"
+                                            Command="{Binding ResetWindowBackgroundCommand}">
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center"
+                                                    Spacing="6">
+                                            <PathIcon Data="{StaticResource BmxIconRestore}" Width="13" Height="13" />
+                                            <TextBlock Text="{Binding RestoreBackgroundText}" />
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+
+                                <Border Grid.Row="1" Background="#2E465362" />
+
+                                <Grid Grid.Row="2"
+                                      Margin="14,11"
+                                      MinHeight="38"
+                                      ColumnDefinitions="190,210,*,118,132"
+                                      ColumnSpacing="10">
+                                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="9">
+                                        <PathIcon Data="{StaticResource BmxIconPalette}"
+                                                  Width="15"
+                                                  Height="15"
+                                                  Foreground="#93C5FD"
+                                                  VerticalAlignment="Center" />
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding WindowBackgroundText}"
+                                                   FontSize="13.5"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="White"
+                                                   VerticalAlignment="Center" />
+                                    </Grid>
+                                    <ComboBox Grid.Column="1"
+                                              Height="34"
+                                              SelectedIndex="{Binding WindowBackgroundMode, Mode=TwoWay}"
+                                              VerticalAlignment="Center">
+                                        <ComboBoxItem Content="{Binding StaticBackgroundText}" />
+                                        <ComboBoxItem Content="{Binding DynamicBackgroundText}"
+                                                      IsEnabled="{Binding CanUseDynamicAppearance}" />
+                                    </ComboBox>
+                                    <StackPanel Grid.Column="2"
+                                                Margin="3,0"
+                                                Spacing="3"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding WindowBackgroundFileText}"
+                                                   FontSize="11.5"
+                                                   Foreground="#AEB8C7"
+                                                   TextTrimming="CharacterEllipsis" />
+                                        <Grid ColumnDefinitions="Auto,*"
+                                              ColumnSpacing="5"
+                                              IsVisible="{Binding IsDynamicAppearanceUpgradeRequired}">
+                                            <PathIcon Data="{StaticResource BmxIconLock}"
+                                                      Width="11"
+                                                      Height="11"
+                                                      Foreground="#F6C177"
+                                                      VerticalAlignment="Center" />
+                                            <TextBlock Grid.Column="1"
+                                                       Text="{Binding DynamicAppearanceUpgradeText}"
+                                                       FontSize="10.5"
+                                                       Foreground="#D8B171"
+                                                       TextTrimming="CharacterEllipsis" />
+                                        </Grid>
+                                    </StackPanel>
+                                    <Button Grid.Column="3"
+                                            Classes="GlyphGlassButton"
+                                            Height="34"
+                                            Padding="10,0"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Center"
+                                            Command="{Binding ChooseWindowBackgroundCommand}">
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center"
+                                                    Spacing="6">
+                                            <PathIcon Data="{StaticResource BmxIconFolderOpen}" Width="13" Height="13" />
+                                            <TextBlock Text="{Binding ChooseMediaText}" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Grid.Column="4"
+                                            Classes="GlyphGlassButton"
+                                            Height="34"
+                                            Padding="10,0"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Center"
+                                            Command="{Binding ResetWindowBackgroundCommand}">
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center"
+                                                    Spacing="6">
+                                            <PathIcon Data="{StaticResource BmxIconRestore}" Width="13" Height="13" />
+                                            <TextBlock Text="{Binding RestoreDefaultText}" />
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+
+                                <Border Grid.Row="3" Background="#2E465362" />
+
+                                <Grid Grid.Row="4"
+                                      Margin="14,11"
+                                      MinHeight="38"
+                                      ColumnDefinitions="190,210,*,118,132"
+                                      ColumnSpacing="10">
+                                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="9">
+                                        <PathIcon Data="{StaticResource BmxIconGrid}"
+                                                  Width="15"
+                                                  Height="15"
+                                                  Foreground="#93C5FD"
+                                                  VerticalAlignment="Center" />
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding CardTextureText}"
+                                                   FontSize="13.5"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="White"
+                                                   VerticalAlignment="Center" />
+                                    </Grid>
+                                    <ComboBox Grid.Column="1"
+                                              Height="34"
+                                              SelectedIndex="{Binding CardTextureMode, Mode=TwoWay}"
+                                              VerticalAlignment="Center">
+                                        <ComboBoxItem Content="{Binding CardBackgroundText}" />
+                                        <ComboBoxItem Content="{Binding DynamicCardBackgroundText}"
+                                                      IsEnabled="{Binding CanUseDynamicAppearance}" />
+                                    </ComboBox>
+                                    <StackPanel Grid.Column="2"
+                                                Margin="3,0"
+                                                Spacing="3"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding SelectedCardTextureFileText}"
+                                                   FontSize="11.5"
+                                                   Foreground="#AEB8C7"
+                                                   TextTrimming="CharacterEllipsis" />
+                                        <Grid ColumnDefinitions="Auto,*"
+                                              ColumnSpacing="5"
+                                              IsVisible="{Binding IsDynamicAppearanceUpgradeRequired}">
+                                            <PathIcon Data="{StaticResource BmxIconLock}"
+                                                      Width="11"
+                                                      Height="11"
+                                                      Foreground="#F6C177"
+                                                      VerticalAlignment="Center" />
+                                            <TextBlock Grid.Column="1"
+                                                       Text="{Binding DynamicAppearanceUpgradeText}"
+                                                       FontSize="10.5"
+                                                       Foreground="#D8B171"
+                                                       TextTrimming="CharacterEllipsis" />
+                                        </Grid>
+                                    </StackPanel>
+                                    <Button Grid.Column="3"
+                                            Classes="GlyphGlassButton"
+                                            Height="34"
+                                            Padding="10,0"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Center"
+                                            Command="{Binding ChooseCardTextureCommand}">
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center"
+                                                    Spacing="6">
+                                            <PathIcon Data="{StaticResource BmxIconFolderOpen}" Width="13" Height="13" />
+                                            <TextBlock Text="{Binding ChooseMediaText}" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Grid.Column="4"
+                                            Classes="GlyphGlassButton"
+                                            Height="34"
+                                            Padding="10,0"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Center"
+                                            Command="{Binding ResetCardTextureCommand}">
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center"
+                                                    Spacing="6">
+                                            <PathIcon Data="{StaticResource BmxIconRestore}" Width="13" Height="13" />
+                                            <TextBlock Text="{Binding RestoreDefaultText}" />
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                                </Grid>
+                            </Border>
+
+                            <Border Background="#E812171D"
+                                    BorderBrush="#58677A8D"
+                                    BorderThickness="1"
+                                    CornerRadius="6"
+                                    Padding="24,18"
+                                    IsVisible="{Binding IsSponsorFeatureLocked}">
+                                <StackPanel MaxWidth="720"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Spacing="10">
+                                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                        <PathIcon Data="{StaticResource BmxIconLock}"
+                                                  Width="20"
+                                                  Height="20"
+                                                  Foreground="#F6C177"
+                                                  VerticalAlignment="Center" />
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding AppearanceSponsorLockedTitleText}"
+                                                   FontSize="15"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="White"
+                                                   VerticalAlignment="Center" />
+                                    </Grid>
+
+                                    <TextBlock Text="{Binding AppearanceSponsorLockedDescriptionText}"
+                                               FontSize="12"
+                                               Foreground="#C6D0DD"
+                                               TextWrapping="Wrap" />
+
+                                    <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="9">
+                                        <TextBox Text="{Binding AfdianSupporterIdentifier, Mode=TwoWay}"
+                                                 Watermark="{Binding AfdianSupporterIdentifierWatermark}"
+                                                 MaxLength="120"
+                                                 MinHeight="36" />
+                                        <Button Grid.Column="1"
+                                                Classes="GlyphPrimaryButton"
+                                                Height="36"
+                                                Padding="13,0"
+                                                Command="{Binding VerifyEchoCaveAccessCommand}"
+                                                IsEnabled="{Binding CanVerifyEchoCaveAccess}">
+                                            <StackPanel Orientation="Horizontal" Spacing="7">
+                                                <PathIcon Data="{StaticResource BmxIconVerified}" Width="14" Height="14" />
+                                                <TextBlock Text="{Binding VerifyEchoCaveAccessText}" />
+                                            </StackPanel>
+                                        </Button>
+                                        <Button Grid.Column="2"
+                                                Classes="GlyphGlassButton"
+                                                Height="36"
+                                                Padding="13,0"
+                                                Command="{Binding OpenSponsorPageCommand}"
+                                                IsVisible="{Binding IsSponsorLinkAvailable}">
+                                            <StackPanel Orientation="Horizontal" Spacing="7">
+                                                <PathIcon Data="{StaticResource BmxIconExternal}" Width="14" Height="14" />
+                                                <TextBlock Text="{Binding SponsorButtonText}" />
+                                            </StackPanel>
+                                        </Button>
+                                    </Grid>
+
+                                    <TextBlock Text="{Binding EchoCaveAccessStatusText}"
+                                               FontSize="11.5"
+                                               Foreground="#F6C177"
+                                               TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </controls:StripedCardBorder>
+
+                <controls:StripedCardBorder Classes="SettingRow">
+                    <StackPanel Spacing="14">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <PathIcon Data="{StaticResource BmxIconVerified}"
+                                      Width="20"
+                                      Height="20"
+                                      Foreground="#93C5FD"
+                                      VerticalAlignment="Top" />
+                            <StackPanel Grid.Column="1" Spacing="3">
+                                <TextBlock Text="{Binding SpecialThanksTitle}"
+                                           FontSize="17"
+                                           FontWeight="SemiBold"
+                                           Foreground="White" />
+                                <TextBlock Text="{Binding SpecialThanksDescription}"
+                                           FontSize="12"
+                                           Foreground="#AEB8C7"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Border Height="1" Background="#24303A48" />
+
+                        <ItemsControl ItemsSource="{Binding SpecialThanks}"
+                                      IsVisible="{Binding HasSpecialThanks}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="community:CommunityPerson">
+                                    <Grid ColumnDefinitions="36,*" ColumnSpacing="12" Margin="0,6">
+                                        <Border Width="36"
+                                                Height="36"
+                                                CornerRadius="18"
+                                                Background="#25303B"
+                                                BorderBrush="#3B4A59"
+                                                BorderThickness="1"
+                                                ClipToBounds="True">
+                                            <Grid>
+                                                <Image Source="{Binding AvatarImage}"
+                                                       Stretch="UniformToFill"
+                                                       IsVisible="{Binding HasAvatar}" />
+                                                <PathIcon Data="{StaticResource BmxIconPerson}"
+                                                          Width="17"
+                                                          Height="17"
+                                                          Foreground="#93A4B8"
+                                                          HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center"
+                                                          IsVisible="{Binding !HasAvatar}" />
+                                            </Grid>
+                                        </Border>
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding Name}"
+                                                   FontSize="13.5"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="White"
+                                                   VerticalAlignment="Center"
+                                                   TextTrimming="CharacterEllipsis" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <TextBlock Text="{Binding EmptySpecialThanksText}"
+                                   IsVisible="{Binding !HasSpecialThanks}"
+                                   FontSize="12.5"
+                                   Foreground="#7F8A99" />
+                    </StackPanel>
+                </controls:StripedCardBorder>
+
+                <controls:StripedCardBorder Classes="SettingRow">
+                    <StackPanel Spacing="14">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <PathIcon Data="{StaticResource BmxIconGift}"
+                                      Width="20"
+                                      Height="20"
+                                      Foreground="#F6C177"
+                                      VerticalAlignment="Top" />
+                            <StackPanel Grid.Column="1" Spacing="3">
+                                <TextBlock Text="{Binding SponsorsTitle}"
+                                           FontSize="17"
+                                           FontWeight="SemiBold"
+                                           Foreground="White" />
+                                <TextBlock Text="{Binding SponsorsDescription}"
+                                           FontSize="12"
+                                           Foreground="#AEB8C7"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+                            <Button Grid.Column="2"
+                                    Classes="GlyphPrimaryButton"
+                                    Height="34"
+                                    Padding="13,0"
+                                    IsVisible="{Binding IsSponsorLinkAvailable}"
+                                    Command="{Binding OpenSponsorPageCommand}"
+                                    AutomationProperties.Name="{Binding SponsorButtonText}">
+                                <StackPanel Orientation="Horizontal" Spacing="7">
+                                    <PathIcon Data="{StaticResource BmxIconExternal}" Width="14" Height="14" />
+                                    <TextBlock Text="{Binding SponsorButtonText}" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+
+                        <Border Height="1" Background="#24303A48" />
+
+                        <ItemsControl ItemsSource="{Binding Sponsors}"
+                                      IsVisible="{Binding HasSponsors}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="community:CommunityPerson">
+                                    <TextBlock Text="{Binding Name}"
+                                               Margin="0,7"
+                                               FontSize="13.5"
+                                               FontWeight="SemiBold"
+                                               Foreground="White"
+                                               TextTrimming="CharacterEllipsis" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <TextBlock Text="{Binding EmptySponsorsText}"
+                                   IsVisible="{Binding !HasSponsors}"
+                                   FontSize="12.5"
+                                   Foreground="#7F8A99" />
+                    </StackPanel>
+                </controls:StripedCardBorder>
+
+                <controls:StripedCardBorder Classes="SettingRow"
+                                            MinHeight="72"
+                                            Background="#11181B"
+                                            BorderBrush="#315057"
+                                            BorderThickness="1.5"
+                                            Cursor="Hand"
+                                            Focusable="True"
+                                            ClipToBounds="True"
+                                            PointerPressed="OnEchoCavePointerPressed"
+                                            KeyDown="OnEchoCaveKeyDown"
+                                            AutomationProperties.Name="{Binding EchoPreviewLabel}">
+                    <StackPanel Spacing="9">
+                        <TextBlock Text="{Binding EchoPreviewLabel}"
+                                   FontSize="13"
+                                   FontWeight="SemiBold"
+                                   Foreground="#86D3B4" />
+
+                        <StackPanel MinHeight="22"
+                                    Margin="10,0,0,0"
+                                    Orientation="Horizontal">
+                            <TextBlock Text="{Binding EchoPreviewLineOne}"
+                                       FontSize="13"
+                                       Foreground="#E7F5F0"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Text="|"
+                                       IsVisible="{Binding IsEchoLineOneCaretVisible}"
+                                       Margin="2,0,0,0"
+                                       FontSize="13"
+                                       FontWeight="Bold"
+                                       Foreground="#A7F3D0" />
+                        </StackPanel>
+                    </StackPanel>
+                </controls:StripedCardBorder>
+
+                <controls:StripedCardBorder Classes="SettingRow"
+                                            Background="#101719"
+                                            BorderBrush="#315057"
+                                            BorderThickness="1.5">
+                    <StackPanel Spacing="12">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <PathIcon Data="{StaticResource BmxIconInfo}"
+                                      Width="20"
+                                      Height="20"
+                                      Foreground="#86D3B4"
+                                      VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding EchoCaveTitle}"
+                                       FontSize="17"
+                                       FontWeight="SemiBold"
+                                       Foreground="White"
+                                       VerticalAlignment="Center" />
+                        </Grid>
+
+                        <Border Height="1" Background="#24303A48" />
+
+                        <Grid>
+                            <StackPanel Spacing="12"
+                                        IsEnabled="{Binding !IsEchoCaveFeatureLocked}"
+                                        Opacity="{Binding EchoCaveContentOpacity}">
+                                <TextBlock Text="{Binding EchoCaveAccessStatusText}"
+                                           FontSize="12"
+                                           Foreground="#86D3B4"
+                                           TextWrapping="Wrap" />
+
+                                <StackPanel Spacing="7">
+                                    <TextBlock Text="{Binding FeedbackMessageLabel}"
+                                               FontSize="12.5"
+                                               FontWeight="SemiBold"
+                                               Foreground="#DCE4EE" />
+                                    <TextBox Text="{Binding FeedbackMessage, Mode=TwoWay}"
+                                             Watermark="{Binding FeedbackMessageWatermark}"
+                                             AcceptsReturn="True"
+                                             TextWrapping="Wrap"
+                                             MaxLength="2000"
+                                             MinHeight="104" />
+                                    <TextBlock Text="{Binding MessageCountText}"
+                                               HorizontalAlignment="Right"
+                                               FontSize="11"
+                                               Foreground="#7F8A99" />
+                                </StackPanel>
+
+                                <TextBlock Text="{Binding FeedbackPrivacyText}"
+                                           FontSize="11.5"
+                                           Foreground="#7F8A99"
+                                           TextWrapping="Wrap" />
+
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                    <Button Classes="GlyphPrimaryButton"
+                                            Height="36"
+                                            Padding="14,0"
+                                            Command="{Binding SubmitFeedbackCommand}"
+                                            IsEnabled="{Binding CanSubmitFeedback}">
+                                        <StackPanel Orientation="Horizontal" Spacing="7">
+                                            <PathIcon Data="{StaticResource BmxIconExternal}" Width="14" Height="14" />
+                                            <TextBlock Text="{Binding SubmitFeedbackText}" />
+                                        </StackPanel>
+                                    </Button>
+                                    <TextBlock Grid.Column="1"
+                                               Text="{Binding FeedbackStatusText}"
+                                               FontSize="12"
+                                               Foreground="#AEB8C7"
+                                               TextWrapping="Wrap"
+                                               VerticalAlignment="Center" />
+                                </Grid>
+                            </StackPanel>
+
+                            <Border MinHeight="224"
+                                    Background="#E812171D"
+                                    BorderBrush="#58677A8D"
+                                    BorderThickness="1"
+                                    CornerRadius="6"
+                                    Padding="24,18"
+                                    IsVisible="{Binding IsEchoCaveFeatureLocked}">
+                                <StackPanel MaxWidth="720"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Spacing="10">
+                                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                        <PathIcon Data="{StaticResource BmxIconLock}"
+                                                  Width="20"
+                                                  Height="20"
+                                                  Foreground="#F6C177"
+                                                  VerticalAlignment="Center" />
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding EchoCaveLockedTitleText}"
+                                                   FontSize="15"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="White"
+                                                   VerticalAlignment="Center" />
+                                    </Grid>
+
+                                    <TextBlock Text="{Binding EchoCaveLockedDescriptionText}"
+                                               FontSize="12"
+                                               Foreground="#C6D0DD"
+                                               TextWrapping="Wrap" />
+
+                                    <TextBlock Text="{Binding AfdianSupporterIdentifierLabel}"
+                                               FontSize="12.5"
+                                               FontWeight="SemiBold"
+                                               Foreground="#DCE4EE" />
+                                    <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="9">
+                                        <TextBox Text="{Binding AfdianSupporterIdentifier, Mode=TwoWay}"
+                                                 Watermark="{Binding AfdianSupporterIdentifierWatermark}"
+                                                 MaxLength="120"
+                                                 MinHeight="36" />
+                                        <Button Grid.Column="1"
+                                                Classes="GlyphPrimaryButton"
+                                                Height="36"
+                                                Padding="13,0"
+                                                Command="{Binding VerifyEchoCaveAccessCommand}"
+                                                IsEnabled="{Binding CanVerifyEchoCaveAccess}">
+                                            <StackPanel Orientation="Horizontal" Spacing="7">
+                                                <PathIcon Data="{StaticResource BmxIconVerified}" Width="14" Height="14" />
+                                                <TextBlock Text="{Binding VerifyEchoCaveAccessText}" />
+                                            </StackPanel>
+                                        </Button>
+                                        <Button Grid.Column="2"
+                                                Classes="GlyphGlassButton"
+                                                Height="36"
+                                                Padding="13,0"
+                                                Command="{Binding OpenSponsorPageCommand}"
+                                                IsVisible="{Binding IsSponsorLinkAvailable}"
+                                                AutomationProperties.Name="{Binding SponsorButtonText}">
+                                            <StackPanel Orientation="Horizontal" Spacing="7">
+                                                <PathIcon Data="{StaticResource BmxIconExternal}" Width="14" Height="14" />
+                                                <TextBlock Text="{Binding SponsorButtonText}" />
+                                            </StackPanel>
+                                        </Button>
+                                    </Grid>
+
+                                    <TextBlock Text="{Binding EchoCaveAccessStatusText}"
+                                               FontSize="11.5"
+                                               Foreground="#D8B171"
+                                               TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </controls:StripedCardBorder>
+
+                <controls:StripedCardBorder Classes="SettingRow"
+                                            Padding="18"
+                                            Background="#12171A"
+                                            BorderBrush="#3A4A4B"
+                                            BorderThickness="1.5">
+                    <StackPanel Spacing="14">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <Border Width="32"
+                                    Height="32"
+                                    CornerRadius="6"
+                                    Background="#182C2A"
+                                    BorderBrush="#315B55"
+                                    BorderThickness="1">
+                                <PathIcon Data="{StaticResource BmxIconInfo}"
+                                          Width="17"
+                                          Height="17"
+                                          Foreground="#86D3B4"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center" />
+                            </Border>
+                            <StackPanel Grid.Column="1" Spacing="4">
+                                <TextBlock Text="{Binding LegalTitleText}"
+                                           FontSize="17"
+                                           FontWeight="SemiBold"
+                                           Foreground="White" />
+                                <TextBlock Text="{Binding LegalDescriptionText}"
+                                           MaxWidth="760"
+                                           HorizontalAlignment="Left"
+                                           FontSize="12"
+                                           LineHeight="18"
+                                           Foreground="#AEB8C7"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Border Height="1" Background="#243D4649" />
+
+                        <StackPanel Spacing="3">
+                            <TextBlock Text="{Binding LegalProjectsTitleText}"
+                                       FontSize="13.5"
+                                       FontWeight="SemiBold"
+                                       Foreground="#E7F5F0" />
+                            <TextBlock Text="{Binding LegalProjectsDescriptionText}"
+                                       FontSize="11.5"
+                                       Foreground="#7F8A99"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <ItemsControl ItemsSource="{Binding LegalProjects}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="community:LegalProjectNotice">
+                                    <StackPanel>
+                                        <Grid Margin="0,10"
+                                              ColumnDefinitions="*,Auto"
+                                              ColumnSpacing="14">
+                                            <StackPanel Spacing="3"
+                                                        VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Name}"
+                                                           FontSize="13.5"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="#F1F5F9"
+                                                           TextTrimming="CharacterEllipsis" />
+                                                <TextBlock Text="{Binding Description}"
+                                                           MaxWidth="650"
+                                                           HorizontalAlignment="Left"
+                                                           FontSize="11.5"
+                                                           Foreground="#8F9AA8"
+                                                           TextWrapping="Wrap" />
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Column="1"
+                                                        Orientation="Horizontal"
+                                                        Spacing="8"
+                                                        VerticalAlignment="Center">
+                                                <Button Classes="GlyphGlassButton"
+                                                        Height="30"
+                                                        MinWidth="76"
+                                                        Padding="10,0"
+                                                        Command="{Binding OpenLicenseCommand}"
+                                                        AutomationProperties.Name="{Binding LicenseButtonText}"
+                                                        ToolTip.Tip="{Binding License}">
+                                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                                        <TextBlock Text="{Binding License}"
+                                                                   MaxWidth="170"
+                                                                   FontSize="11.5"
+                                                                   TextTrimming="CharacterEllipsis" />
+                                                        <PathIcon Data="{StaticResource BmxIconExternal}"
+                                                                  Width="12"
+                                                                  Height="12" />
+                                                    </StackPanel>
+                                                </Button>
+                                                <Button Classes="GlyphGlassButton"
+                                                        Width="74"
+                                                        Height="30"
+                                                        Padding="10,0"
+                                                        Command="{Binding OpenProjectCommand}"
+                                                        AutomationProperties.Name="{Binding ProjectButtonText}">
+                                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                                        <PathIcon Data="{StaticResource BmxIconExternal}"
+                                                                  Width="12"
+                                                                  Height="12" />
+                                                        <TextBlock Text="{Binding ProjectButtonText}"
+                                                                   FontSize="11.5" />
+                                                    </StackPanel>
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+                                        <Border Height="1" Background="#183D4649" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </controls:StripedCardBorder>
+
+            </StackPanel>
+        </Grid>
+    </controls:StripedCardBorder>
+</UserControl>

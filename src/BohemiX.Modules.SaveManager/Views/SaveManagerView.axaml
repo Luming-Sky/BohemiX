@@ -1,0 +1,626 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:BohemiX.Modules.SaveManager.ViewModels"
+             xmlns:models="using:BohemiX.Modules.SaveManager.Models"
+             x:Class="BohemiX.Modules.SaveManager.Views.SaveManagerView"
+             x:DataType="vm:SaveManagerViewModel"
+             d:DesignWidth="1320"
+             d:DesignHeight="820"
+             mc:Ignorable="d">
+
+  <UserControl.Styles>
+    <Style Selector="TextBlock.SaveEyebrow">
+      <Setter Property="FontSize" Value="9.5" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="#7D8594" />
+      <Setter Property="LetterSpacing" Value="0.65" />
+    </Style>
+    <Style Selector="TextBlock.SaveHeading">
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="#F1F4F8" />
+    </Style>
+    <Style Selector="TextBlock.SaveMuted">
+      <Setter Property="FontSize" Value="10.5" />
+      <Setter Property="Foreground" Value="#8C94A3" />
+    </Style>
+
+    <Style Selector="Border.SaveProfileRow">
+      <Setter Property="Height" Value="104" />
+      <Setter Property="Background" Value="#E915171C" />
+      <Setter Property="BorderBrush" Value="#30353F" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="Padding" Value="10" />
+      <Setter Property="Margin" Value="0,0,0,8" />
+      <Setter Property="Transitions">
+        <Transitions>
+          <BrushTransition Property="Background" Duration="0:0:0.14" />
+          <BrushTransition Property="BorderBrush" Duration="0:0:0.14" />
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Border.SaveProfileRow:pointerover">
+      <Setter Property="Background" Value="#F01B1E25" />
+      <Setter Property="BorderBrush" Value="#48505D" />
+    </Style>
+    <Style Selector="ListBox.SaveProfileList > ListBoxItem">
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <ContentPresenter Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch" />
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="ListBox.SaveProfileList > ListBoxItem:selected Border.SaveProfileRow">
+      <Setter Property="Background" Value="#F018233A" />
+      <Setter Property="BorderBrush" Value="#2563EB" />
+    </Style>
+    <Style Selector="ListBox.SaveProfileList > ListBoxItem:focus-visible Border.SaveProfileRow">
+      <Setter Property="BorderBrush" Value="#60A5FA" />
+    </Style>
+    <Style Selector="Button.SaveFavoriteButton">
+      <Setter Property="Width" Value="30" />
+      <Setter Property="Height" Value="30" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="#00FFFFFF" />
+      <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style Selector="Button.SaveFavoriteButton:pointerover">
+      <Setter Property="Background" Value="#252A33" />
+      <Setter Property="BorderBrush" Value="#454C58" />
+    </Style>
+
+    <Style Selector="Button.SaveContinueButton">
+      <Setter Property="Height" Value="42" />
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="CornerRadius" Value="7" />
+    </Style>
+
+    <Style Selector="Border.SaveSummaryTile">
+      <Setter Property="MinHeight" Value="70" />
+      <Setter Property="Background" Value="#161B23" />
+      <Setter Property="BorderBrush" Value="#2D3440" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="Padding" Value="9,8" />
+    </Style>
+
+    <Style Selector="Expander.SaveDetailExpander">
+      <Setter Property="Background" Value="#C914161B" />
+      <Setter Property="BorderBrush" Value="#2B3039" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+
+    <Style Selector="Border.SaveSnapshotRow">
+      <Setter Property="Background" Value="#15181E" />
+      <Setter Property="BorderBrush" Value="#292F38" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="Padding" Value="9" />
+      <Setter Property="Margin" Value="0,0,0,6" />
+    </Style>
+    <Style Selector="ListBox.SaveSnapshotList > ListBoxItem">
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <ContentPresenter Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch" />
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="ListBox.SaveSnapshotList > ListBoxItem:selected Border.SaveSnapshotRow">
+      <Setter Property="Background" Value="#18233A" />
+      <Setter Property="BorderBrush" Value="#2563EB" />
+    </Style>
+  </UserControl.Styles>
+
+  <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" RowSpacing="10">
+    <Border Grid.Row="0" Classes="ModOpsHeaderStrip" Padding="14,10" Background="#E8181A1F">
+      <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+        <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+          <Border Width="28" Height="28" CornerRadius="6" Background="#10253E" BorderBrush="#2563EB" BorderThickness="1" VerticalAlignment="Center" ClipToBounds="True">
+            <Image Source="avares://BohemiX.App/Assets/save-bed-isometric-active.png"
+                   Width="20"
+                   Height="20"
+                   Stretch="Uniform"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+          </Border>
+          <TextBlock Text="{Binding Text.Title}" FontSize="18" FontWeight="SemiBold" Foreground="#F7F8FA" VerticalAlignment="Center" />
+          <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+            <Ellipse Width="7" Height="7" Fill="#2563EB" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding ActiveProfileName}" FontSize="11" FontWeight="SemiBold" Foreground="#E8EBF0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" MaxWidth="180" />
+            <Border Width="1" Height="14" Background="#303640" Margin="2,0" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding ProfileCount}" FontSize="11" FontWeight="SemiBold" Foreground="#DCE1E8" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding Text.Profiles}" Classes="SaveMuted" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding SnapshotCount}" FontSize="11" FontWeight="SemiBold" Foreground="#DCE1E8" Margin="6,0,0,0" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding Text.Snapshots}" Classes="SaveMuted" VerticalAlignment="Center" />
+            <Border Width="1" Height="14" Background="#303640" Margin="2,0" VerticalAlignment="Center" />
+            <Grid Width="7" Height="7" VerticalAlignment="Center">
+              <Ellipse Fill="#38B26C" IsVisible="{Binding IsSafeToChange}" />
+              <Ellipse Fill="#D97706" IsVisible="{Binding !IsSafeToChange}" />
+            </Grid>
+            <TextBlock Text="{Binding SafetyText}" FontSize="11" FontWeight="SemiBold" Foreground="#DCE1E8" VerticalAlignment="Center" />
+          </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          <Button Classes="ModOpsPrimaryButton" Command="{Binding NewProfileCommand}" AutomationProperties.Name="{Binding Text.NewProfile}">
+            <StackPanel Orientation="Horizontal" Spacing="7">
+              <PathIcon Data="{StaticResource BmxIconAdd}" Width="12" Height="12" />
+              <TextBlock Text="{Binding Text.NewProfile}" />
+            </StackPanel>
+          </Button>
+          <Button Classes="ModOpsFlatButton" Command="{Binding ImportPackageCommand}" AutomationProperties.Name="{Binding Text.Import}">
+            <StackPanel Orientation="Horizontal" Spacing="7">
+              <PathIcon Data="{StaticResource BmxIconDownload}" Width="12" Height="12" />
+              <TextBlock Text="{Binding Text.Import}" />
+            </StackPanel>
+          </Button>
+          <Button Classes="ModOpsFlatButton" Command="{Binding OpenVaultCommand}" AutomationProperties.Name="{Binding Text.OpenVault}">
+            <StackPanel Orientation="Horizontal" Spacing="7">
+              <PathIcon Data="{StaticResource BmxIconFolder}" Width="12" Height="12" />
+              <TextBlock Text="{Binding Text.OpenVault}" />
+            </StackPanel>
+          </Button>
+          <Button Classes="ModOpsFlatButton" Command="{Binding RefreshCommand}" AutomationProperties.Name="{Binding Text.Refresh}">
+            <StackPanel Orientation="Horizontal" Spacing="7">
+              <PathIcon Data="{StaticResource BmxIconRefresh}" Width="12" Height="12" />
+              <TextBlock Text="{Binding Text.Refresh}" />
+            </StackPanel>
+          </Button>
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <Border Grid.Row="1" Height="0" IsVisible="False" />
+
+    <Border Grid.Row="2" Classes="ModOpsNotice" Background="#E814171D" Padding="10,8" IsVisible="{Binding HasUnmanagedSave}">
+      <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          <Border Width="22" Height="22" CornerRadius="5" Background="#1E2B45">
+            <TextBlock Text="!" FontSize="12" FontWeight="Bold" Foreground="#7DA6FF" HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Border>
+          <TextBlock Text="{Binding Text.UnmanagedTitle}" FontSize="12" FontWeight="SemiBold" Foreground="#EEF2F7" VerticalAlignment="Center" />
+          <TextBlock Text="{Binding Text.UnmanagedBody}" FontSize="11" Foreground="#919AAA" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+        </StackPanel>
+        <Button Grid.Column="1" Classes="ModOpsPrimaryButton" Content="{Binding Text.ManageCurrent}" Command="{Binding ManageCurrentCommand}" AutomationProperties.Name="{Binding Text.ManageCurrent}" />
+      </Grid>
+    </Border>
+
+    <Grid Grid.Row="3" ColumnDefinitions="11*,9*" ColumnSpacing="10" MinHeight="0">
+      <Border Grid.Column="0" Classes="ModOpsSurface" Padding="12" MinWidth="480" Background="#E817191F">
+        <Grid RowDefinitions="Auto,*" RowSpacing="10">
+          <Grid Grid.Row="0" ColumnDefinitions="*,138,138" ColumnSpacing="8">
+            <Grid Grid.Column="0">
+              <TextBox Classes="ModOpsTextBox"
+                       Padding="34,0,12,0"
+                       Text="{Binding SearchText, Mode=TwoWay}"
+                       Watermark="{Binding Text.SearchWatermark}"
+                       AutomationProperties.Name="{Binding Text.SearchWatermark}" />
+              <Path Data="{StaticResource BmxIconSearch}"
+                    Width="14" Height="14" Margin="12,0,0,0"
+                    Stretch="Uniform" Stroke="#8C94A3" StrokeThickness="1.5" Fill="Transparent"
+                    HorizontalAlignment="Left" VerticalAlignment="Center" IsHitTestVisible="False" />
+            </Grid>
+            <ComboBox Grid.Column="1" Classes="ModOpsComboBox" SelectedIndex="{Binding SelectedFilterIndex, Mode=TwoWay}" AutomationProperties.Name="Filter profiles">
+              <ComboBoxItem Content="{Binding $parent[UserControl].DataContext.Text.FilterAll}" />
+              <ComboBoxItem Content="{Binding $parent[UserControl].DataContext.Text.FilterFavorites}" />
+              <ComboBoxItem Content="{Binding $parent[UserControl].DataContext.Text.FilterActive}" />
+            </ComboBox>
+            <ComboBox Grid.Column="2" Classes="ModOpsComboBox" SelectedIndex="{Binding SelectedSortIndex, Mode=TwoWay}" AutomationProperties.Name="Sort profiles">
+              <ComboBoxItem Content="{Binding $parent[UserControl].DataContext.Text.SortRecent}" />
+              <ComboBoxItem Content="{Binding $parent[UserControl].DataContext.Text.SortName}" />
+              <ComboBoxItem Content="{Binding $parent[UserControl].DataContext.Text.SortUpdated}" />
+            </ComboBox>
+          </Grid>
+
+          <Grid Grid.Row="1">
+            <ListBox Classes="SaveProfileList ModOpsListBox"
+                     ItemsSource="{Binding Profiles}"
+                     SelectedItem="{Binding SelectedProfile, Mode=TwoWay}"
+                     Background="Transparent" BorderThickness="0">
+              <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="models:SaveProfileListItem">
+                  <Border Classes="SaveProfileRow"
+                          ToolTip.Tip="{Binding GameSaveTooltip}"
+                          AutomationProperties.Name="{Binding PrimaryTitle}">
+                    <Grid ColumnDefinitions="30,108,*,96" ColumnSpacing="10">
+                      <Button Grid.Column="0"
+                              Classes="SaveFavoriteButton"
+                              Command="{Binding $parent[UserControl].DataContext.ToggleFavoriteCommand}"
+                              CommandParameter="{Binding}"
+                              ToolTip.Tip="{Binding FavoriteActionText}"
+                              AutomationProperties.Name="{Binding FavoriteActionText}">
+                        <Grid Width="15" Height="15">
+                          <PathIcon Data="{StaticResource BmxIconStar}" Width="14" Height="14" Foreground="#687180" IsVisible="{Binding !IsFavorite}" />
+                          <PathIcon Data="{StaticResource BmxIconStar}" Width="14" Height="14" Foreground="#F5B942" IsVisible="{Binding IsFavorite}" />
+                        </Grid>
+                      </Button>
+
+                      <Border Grid.Column="1" Width="108" Height="76" CornerRadius="6" ClipToBounds="True" Background="#111721" BorderBrush="#303640" BorderThickness="1" VerticalAlignment="Center">
+                        <Grid>
+                          <Image Source="{Binding ThumbnailImage}" Stretch="UniformToFill" IsVisible="{Binding HasThumbnail}" />
+                          <Grid IsVisible="{Binding HasNoThumbnail}" Background="#18202C">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="5" Margin="6">
+                              <PathIcon Data="{StaticResource BmxIconCompass}" Width="17" Height="17" Foreground="#7185A5" />
+                              <TextBlock Text="{Binding LocationSubtitle}" FontSize="9" Foreground="#93A0B3" TextTrimming="CharacterEllipsis" MaxWidth="92" />
+                            </StackPanel>
+                          </Grid>
+                        </Grid>
+                      </Border>
+
+                      <StackPanel Grid.Column="2" Spacing="4" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                          <TextBlock Text="{Binding DisplayName}" FontSize="9.5" Foreground="#7F8897" TextTrimming="CharacterEllipsis" MaxWidth="150" />
+                          <Border Background="#20345D" CornerRadius="4" Padding="5,1" IsVisible="{Binding IsActive}">
+                            <TextBlock Text="{Binding $parent[UserControl].DataContext.Text.InUse}" FontSize="8" FontWeight="SemiBold" Foreground="#9BB9FF" />
+                          </Border>
+                        </StackPanel>
+                        <TextBlock Text="{Binding PrimaryTitle}" FontSize="13" FontWeight="SemiBold" Foreground="#F0F3F7" TextTrimming="CharacterEllipsis" />
+                        <TextBlock Text="{Binding LocationSubtitle}" FontSize="10.5" Foreground="#A4ABB7" TextTrimming="CharacterEllipsis" />
+                        <StackPanel Orientation="Horizontal" Spacing="8" IsVisible="{Binding $parent[UserControl].DataContext.ShowSecondaryColumns}">
+                          <Border Background="#1D222A" CornerRadius="4" Padding="6,2">
+                            <TextBlock Text="{Binding SaveTypeText}" FontSize="8.5" Foreground="#A8B0BD" />
+                          </Border>
+                          <StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
+                            <PathIcon Data="{StaticResource BmxIconPuzzle}" Width="10" Height="10" Foreground="#7DA6FF" />
+                            <TextBlock Text="{Binding CompactModSummary}" FontSize="8.5" Foreground="#8898B3" TextTrimming="CharacterEllipsis" />
+                          </StackPanel>
+                        </StackPanel>
+                      </StackPanel>
+
+                      <StackPanel Grid.Column="3" Spacing="8" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <StackPanel Spacing="1" HorizontalAlignment="Right">
+                          <TextBlock Text="{Binding $parent[UserControl].DataContext.Text.SavedAt}" Classes="SaveEyebrow" HorizontalAlignment="Right" />
+                          <TextBlock Text="{Binding LastSavedText}" FontSize="10" FontWeight="SemiBold" Foreground="#D9DEE6" HorizontalAlignment="Right" />
+                        </StackPanel>
+                        <StackPanel Spacing="1" HorizontalAlignment="Right">
+                          <TextBlock Text="{Binding $parent[UserControl].DataContext.Text.PlayTime}" Classes="SaveEyebrow" HorizontalAlignment="Right" />
+                          <TextBlock Text="{Binding PlayTimeText}" FontSize="10" Foreground="#AAB2BF" HorizontalAlignment="Right" />
+                        </StackPanel>
+                      </StackPanel>
+                    </Grid>
+                  </Border>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+
+            <StackPanel IsVisible="{Binding !HasProfiles}" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="6" MaxWidth="330">
+              <TextBlock Text="{Binding Text.NoProfilesTitle}" FontSize="14" FontWeight="SemiBold" Foreground="#E9EDF2" HorizontalAlignment="Center" />
+              <TextBlock Text="{Binding Text.NoProfilesBody}" FontSize="11" Foreground="#858E9D" TextAlignment="Center" TextWrapping="Wrap" />
+            </StackPanel>
+          </Grid>
+        </Grid>
+      </Border>
+
+      <Border Grid.Column="1" Classes="ModOpsSurface" Padding="0" MinWidth="400" Background="#E817191F">
+        <Grid>
+          <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" IsVisible="{Binding HasSelection}">
+            <StackPanel Margin="14" Spacing="12">
+              <Grid ColumnDefinitions="*">
+                <StackPanel Spacing="5">
+                  <StackPanel Orientation="Horizontal" Spacing="7">
+                    <TextBlock Text="{Binding SelectedProfile.DisplayName}" FontSize="10" FontWeight="SemiBold" Foreground="#8490A2" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding SelectedGameSaveName}" />
+                    <Border Background="#20345D" CornerRadius="4" Padding="6,2" IsVisible="{Binding IsSelectedProfileActive}" VerticalAlignment="Center">
+                      <TextBlock Text="{Binding Text.InUse}" FontSize="8.5" FontWeight="SemiBold" Foreground="#9BB9FF" />
+                    </Border>
+                  </StackPanel>
+                  <TextBlock Text="{Binding SelectedProfile.PrimaryTitle}" FontSize="18" FontWeight="SemiBold" Foreground="#F4F6F9" TextWrapping="Wrap" MaxLines="2" />
+                  <StackPanel Orientation="Horizontal" Spacing="6">
+                    <PathIcon Data="{StaticResource BmxIconCompass}" Width="12" Height="12" Foreground="#7DA6FF" />
+                    <TextBlock Text="{Binding SelectedProfile.LocationSubtitle}" FontSize="11" Foreground="#A7AFBC" TextTrimming="CharacterEllipsis" />
+                  </StackPanel>
+                </StackPanel>
+              </Grid>
+
+              <Border Background="#B5111318" BorderBrush="#292F38" BorderThickness="1" CornerRadius="6" Padding="11,10">
+                <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="10">
+                  <StackPanel Grid.Column="0" Spacing="2">
+                    <TextBlock Text="{Binding Text.PlayTime}" Classes="SaveEyebrow" />
+                    <TextBlock Text="{Binding SelectedPlayTime}" FontSize="11" FontWeight="SemiBold" Foreground="#E2E6EC" TextTrimming="CharacterEllipsis" />
+                  </StackPanel>
+                  <StackPanel Grid.Column="1" Spacing="2">
+                    <TextBlock Text="{Binding Text.SavedAt}" Classes="SaveEyebrow" />
+                    <TextBlock Text="{Binding SelectedSavedAt}" FontSize="10.5" FontWeight="SemiBold" Foreground="#E2E6EC" TextTrimming="CharacterEllipsis" />
+                  </StackPanel>
+                  <StackPanel Grid.Column="2" Spacing="2">
+                    <TextBlock Text="{Binding Text.ProfileName}" Classes="SaveEyebrow" />
+                    <TextBlock Text="{Binding SelectedSaveType}" FontSize="10.5" FontWeight="SemiBold" Foreground="#E2E6EC" TextTrimming="CharacterEllipsis" />
+                  </StackPanel>
+                  <StackPanel Grid.Column="3" Spacing="2">
+                    <TextBlock Text="{Binding Text.GameVersion}" Classes="SaveEyebrow" />
+                    <TextBlock Text="{Binding SelectedGameVersion}" FontSize="10.5" FontWeight="SemiBold" Foreground="#E2E6EC" TextTrimming="CharacterEllipsis" />
+                  </StackPanel>
+                </Grid>
+              </Border>
+
+              <Grid ColumnDefinitions="2*,1.2*,96" ColumnSpacing="8">
+                <Button Grid.Column="0"
+                        Classes="ModOpsPrimaryButton SaveContinueButton"
+                        HorizontalAlignment="Stretch"
+                        Command="{Binding ContinueGameCommand}"
+                        ToolTip.Tip="{Binding ContinueGameHintText}"
+                        AutomationProperties.Name="{Binding Text.ContinueGame}">
+                  <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                    <PathIcon Data="{StaticResource BmxIconPlay}" Width="14" Height="14" />
+                    <TextBlock Text="{Binding Text.ContinueGame}" />
+                  </StackPanel>
+                </Button>
+                <Button Grid.Column="1" Height="42" Classes="ModOpsFlatButton" HorizontalAlignment="Stretch" Command="{Binding ProtectLatestSaveCommand}" AutomationProperties.Name="{Binding ProtectLatestText}">
+                  <StackPanel Orientation="Horizontal" Spacing="6" HorizontalAlignment="Center">
+                    <PathIcon Data="{StaticResource BmxIconSave}" Width="12" Height="12" />
+                    <TextBlock Text="{Binding ProtectLatestText}" />
+                  </StackPanel>
+                </Button>
+                <Button Grid.Column="2" Height="42" Classes="ModOpsFlatButton" AutomationProperties.Name="{Binding Text.More}">
+                  <StackPanel Orientation="Horizontal" Spacing="6" HorizontalAlignment="Center">
+                    <TextBlock Text="{Binding Text.More}" />
+                    <PathIcon Data="{StaticResource BmxIconChevronDown}" Width="11" Height="11" />
+                  </StackPanel>
+                  <Button.Flyout>
+                    <Flyout Placement="BottomEdgeAlignedRight">
+                      <Border Width="230" Padding="10" Background="#1A1D24" BorderBrush="#3A414D" BorderThickness="1" CornerRadius="7">
+                        <StackPanel Spacing="7">
+                          <StackPanel Spacing="2" Margin="2,0,2,4">
+                            <TextBlock Text="{Binding Text.ProfileManagement}" FontSize="11.5" FontWeight="SemiBold" Foreground="#EEF1F5" />
+                            <TextBlock Text="{Binding SelectedGameSaveName}" FontSize="9" Foreground="#747E8D" TextTrimming="CharacterEllipsis" />
+                          </StackPanel>
+                          <Button Classes="ModOpsFlatButton" HorizontalAlignment="Stretch" Command="{Binding RenameProfileCommand}" Content="{Binding Text.Rename}" AutomationProperties.Name="{Binding Text.Rename}" />
+                          <Button Classes="ModOpsFlatButton" HorizontalAlignment="Stretch" Command="{Binding OpenProfileFolderCommand}" Content="{Binding Text.OpenFolder}" AutomationProperties.Name="{Binding Text.OpenFolder}" />
+                          <Button Classes="ModOpsFlatButton" HorizontalAlignment="Stretch" Command="{Binding CreateSnapshotCommand}" Content="{Binding CreateFullBackupText}" AutomationProperties.Name="{Binding CreateFullBackupText}" />
+                          <Button Classes="ModOpsFlatButton" HorizontalAlignment="Stretch" Command="{Binding ExportProfileCommand}" Content="{Binding Text.Export}" AutomationProperties.Name="{Binding Text.Export}" />
+                          <Button Classes="ModOpsDangerButton" HorizontalAlignment="Stretch" Command="{Binding DeleteProfileCommand}" Content="{Binding Text.Delete}" AutomationProperties.Name="{Binding Text.Delete}" />
+                        </StackPanel>
+                      </Border>
+                    </Flyout>
+                  </Button.Flyout>
+                </Button>
+              </Grid>
+
+              <Grid ColumnDefinitions="1.15*,*" ColumnSpacing="8">
+                <Border Grid.Column="0" Height="380" Background="#C914161B" BorderBrush="#2B3039" BorderThickness="1" CornerRadius="7" Padding="10">
+                  <Grid RowDefinitions="Auto,Auto,34,*,Auto" RowSpacing="6">
+                    <Grid Grid.Row="0" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                      <StackPanel Orientation="Horizontal" Spacing="7" VerticalAlignment="Center">
+                        <PathIcon Data="{StaticResource BmxIconClock}" Width="13" Height="13" Foreground="#91A3BF" />
+                        <TextBlock Text="{Binding BackupLibraryTitle}" FontSize="12" FontWeight="SemiBold" Foreground="#E8ECF2" VerticalAlignment="Center" />
+                      </StackPanel>
+                      <TextBlock Grid.Column="1" Text="{Binding BackupLibrarySummary}" FontSize="10" Foreground="#8F9AAA" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+                    </Grid>
+
+                    <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                      <StackPanel Orientation="Horizontal" Spacing="5">
+                        <TextBlock Text="{Binding BackupRetentionText}" FontSize="10" Foreground="#7D8594" VerticalAlignment="Center" />
+                        <NumericUpDown Width="72" MinWidth="72" Height="24" Minimum="1" Maximum="200" Increment="1" Value="{Binding BackupNodeRetention, Mode=TwoWay}" FormatString="0" />
+                        <Button Width="26" Height="24" Padding="0" Classes="ModOpsFlatButton" Command="{Binding SaveBackupRetentionCommand}" ToolTip.Tip="{Binding Text.Save}">
+                          <PathIcon Data="{StaticResource BmxIconSave}" Width="10" Height="10" />
+                        </Button>
+                      </StackPanel>
+                      <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4">
+                        <Button Width="30" Height="24" Padding="0" Classes="ModOpsFlatButton" Command="{Binding ProtectLatestSaveCommand}" ToolTip.Tip="{Binding ProtectLatestText}" AutomationProperties.Name="{Binding ProtectLatestText}">
+                          <PathIcon Data="{StaticResource BmxIconStar}" Width="12" Height="12" />
+                        </Button>
+                        <Button Width="30" Height="24" Padding="0" Classes="ModOpsFlatButton" Command="{Binding ImportExistingSavesCommand}" ToolTip.Tip="{Binding AddExistingText}" AutomationProperties.Name="{Binding AddExistingText}">
+                          <PathIcon Data="{StaticResource BmxIconAdd}" Width="12" Height="12" />
+                        </Button>
+                      </StackPanel>
+                    </Grid>
+
+                    <TabControl Grid.Row="2" SelectedIndex="{Binding SelectedBackupViewIndex, Mode=TwoWay}" Height="34">
+                      <TabItem Header="{Binding $parent[UserControl].DataContext.RecentNodesText}" />
+                      <TabItem Header="{Binding $parent[UserControl].DataContext.ImportantNodesText}" />
+                      <TabItem Header="{Binding $parent[UserControl].DataContext.FullBackupsText}" />
+                    </TabControl>
+
+                    <Grid Grid.Row="3" IsVisible="{Binding !IsFullBackupView}">
+                      <ListBox Classes="SaveSnapshotList"
+                               ItemsSource="{Binding BackupNodeItems}"
+                               SelectedItem="{Binding SelectedBackupNode, Mode=TwoWay}"
+                               Background="Transparent" BorderThickness="0">
+                        <ListBox.ItemTemplate>
+                          <DataTemplate x:DataType="models:SaveBackupNodeListItem">
+                            <Border Classes="SaveSnapshotRow" AutomationProperties.Name="{Binding Title}">
+                              <Grid ColumnDefinitions="18,*,Auto" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="6">
+                                <PathIcon Grid.RowSpan="3" Data="{StaticResource BmxIconStar}" Width="12" Height="12" Foreground="#F5B942" VerticalAlignment="Top" Margin="0,3,0,0" IsVisible="{Binding IsImportant}" />
+                                <Border Grid.RowSpan="3" Width="7" Height="7" CornerRadius="4" Background="#5C83E8" VerticalAlignment="Top" Margin="5,5,0,0" IsVisible="{Binding !IsImportant}" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Title}" FontSize="10" FontWeight="SemiBold" Foreground="#E7EAF0" TextTrimming="CharacterEllipsis" />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding DetailText}" FontSize="8.5" Foreground="#858E9D" TextTrimming="CharacterEllipsis" />
+                                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Spacing="6">
+                                  <TextBlock Text="{Binding SavedText}" FontSize="8.5" Foreground="#858E9D" />
+                                  <TextBlock Text="{Binding SizeText}" FontSize="8.5" Foreground="#A0A8B5" />
+                                </StackPanel>
+                                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding TypeText}" FontSize="8" Foreground="#8FA9D8" />
+                                <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding HealthText}" FontSize="8" Foreground="#E07A83" />
+                              </Grid>
+                            </Border>
+                          </DataTemplate>
+                        </ListBox.ItemTemplate>
+                      </ListBox>
+                      <TextBlock Text="{Binding NoBackupNodesText}" Classes="SaveMuted" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" IsVisible="{Binding !HasBackupNodes}" />
+                    </Grid>
+
+                    <Grid Grid.Row="3" IsVisible="{Binding IsFullBackupView}">
+                      <ListBox Classes="SaveSnapshotList"
+                               ItemsSource="{Binding SnapshotItems}"
+                               SelectedItem="{Binding SelectedSnapshot, Mode=TwoWay}"
+                               Background="Transparent" BorderThickness="0">
+                        <ListBox.ItemTemplate>
+                          <DataTemplate x:DataType="models:SaveSnapshotListItem">
+                            <Border Classes="SaveSnapshotRow" AutomationProperties.Name="{Binding NoteText}">
+                              <Grid ColumnDefinitions="14,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="6">
+                                <Border Grid.RowSpan="3" Width="7" Height="7" CornerRadius="4" Background="#5C83E8" VerticalAlignment="Top" Margin="0,4,0,0" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding TriggerText}" FontSize="10" FontWeight="SemiBold" Foreground="#E7EAF0" TextTrimming="CharacterEllipsis" />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CreatedText}" FontSize="9" Foreground="#858E9D" />
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SizeText}" FontSize="9" Foreground="#A0A8B5" />
+                              </Grid>
+                            </Border>
+                          </DataTemplate>
+                        </ListBox.ItemTemplate>
+                      </ListBox>
+                      <TextBlock Text="{Binding Text.NoSnapshots}" Classes="SaveMuted" HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="{Binding !HasSnapshots}" />
+                    </Grid>
+
+                    <StackPanel Grid.Row="4" Spacing="6" IsVisible="{Binding !IsFullBackupView}">
+                      <Button Classes="ModOpsPrimaryButton" HorizontalAlignment="Stretch" Command="{Binding RestoreBackupNodeCommand}" AutomationProperties.Name="{Binding Text.Restore}">
+                        <TextBlock Text="{Binding Text.Restore}" />
+                      </Button>
+                      <Grid ColumnDefinitions="*,Auto" ColumnSpacing="5">
+                        <Button Grid.Column="0" Classes="ModOpsFlatButton" Command="{Binding ExportBackupNodeCommand}">
+                          <TextBlock Text="{Binding Text.Export}" />
+                        </Button>
+                        <Button Grid.Column="1" Width="30" Padding="0" Classes="ModOpsDangerButton" Command="{Binding DeleteBackupNodeCommand}" ToolTip.Tip="{Binding Text.Delete}">
+                          <PathIcon Data="{StaticResource BmxIconDelete}" Width="11" Height="11" />
+                        </Button>
+                      </Grid>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Spacing="6" IsVisible="{Binding IsFullBackupView}">
+                      <Button Classes="ModOpsPrimaryButton" HorizontalAlignment="Stretch" Command="{Binding RestoreSnapshotCommand}">
+                        <TextBlock Text="{Binding Text.Restore}" />
+                      </Button>
+                      <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="5">
+                        <Button Grid.Column="0" Classes="ModOpsFlatButton" Command="{Binding ConvertSnapshotCommand}"><TextBlock Text="{Binding ConvertFullBackupText}" /></Button>
+                        <Button Grid.Column="1" Width="30" Padding="0" Classes="ModOpsFlatButton" Command="{Binding ExportSnapshotCommand}" ToolTip.Tip="{Binding Text.Export}"><PathIcon Data="{StaticResource BmxIconDownload}" Width="11" Height="11" /></Button>
+                        <Button Grid.Column="2" Width="30" Padding="0" Classes="ModOpsDangerButton" Command="{Binding DeleteSnapshotCommand}" ToolTip.Tip="{Binding Text.Delete}"><PathIcon Data="{StaticResource BmxIconDelete}" Width="11" Height="11" /></Button>
+                      </Grid>
+                    </StackPanel>
+                  </Grid>
+                </Border>
+
+                <Border Grid.Column="1" MinHeight="380" Background="#C914161B" BorderBrush="#2B3039" BorderThickness="1" CornerRadius="7" Padding="10">
+                  <Grid RowDefinitions="Auto,*,Auto" RowSpacing="9">
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="7">
+                      <PathIcon Data="{StaticResource BmxIconSave}" Width="13" Height="13" Foreground="#7DA6FF" />
+                      <TextBlock Text="{Binding Text.Metadata}" FontSize="12" FontWeight="SemiBold" Foreground="#E8ECF2" />
+                    </StackPanel>
+
+                    <Grid Grid.Row="1" ColumnDefinitions="*,*" RowDefinitions="*,*" ColumnSpacing="8" RowSpacing="8">
+                      <Border Grid.Row="0" Grid.Column="0" Classes="SaveSummaryTile">
+                        <StackPanel Spacing="5">
+                          <StackPanel Orientation="Horizontal" Spacing="6">
+                            <PathIcon Data="{StaticResource BmxIconCompass}" Width="11" Height="11" Foreground="#7DA6FF" />
+                            <TextBlock Text="{Binding Text.Location}" Classes="SaveEyebrow" Foreground="#7F9FD8" />
+                          </StackPanel>
+                          <TextBlock Text="{Binding SelectedLocation}" FontSize="10.5" FontWeight="SemiBold" Foreground="#DCE4F1" TextWrapping="Wrap" MaxLines="2" />
+                        </StackPanel>
+                      </Border>
+                      <Border Grid.Row="0" Grid.Column="1" Classes="SaveSummaryTile">
+                        <StackPanel Spacing="5">
+                          <StackPanel Orientation="Horizontal" Spacing="6">
+                            <PathIcon Data="{StaticResource BmxIconQuest}" Width="11" Height="11" Foreground="#A8B2C2" />
+                            <TextBlock Text="{Binding Text.Quest}" Classes="SaveEyebrow" />
+                          </StackPanel>
+                          <TextBlock Text="{Binding SelectedQuest}" FontSize="10.5" FontWeight="SemiBold" Foreground="#DCE1E8" TextWrapping="Wrap" MaxLines="2" />
+                        </StackPanel>
+                      </Border>
+                      <Border Grid.Row="1" Grid.Column="0" Classes="SaveSummaryTile" Background="#182236" BorderBrush="#29406A">
+                        <StackPanel Spacing="5">
+                          <StackPanel Orientation="Horizontal" Spacing="6">
+                            <PathIcon Data="{StaticResource BmxIconPuzzle}" Width="11" Height="11" Foreground="#7DA6FF" />
+                            <TextBlock Text="{Binding Text.CurrentModConfiguration}" Classes="SaveEyebrow" Foreground="#7F9FD8" />
+                          </StackPanel>
+                          <TextBlock Text="{Binding ModProfileSummary}" FontSize="10" FontWeight="SemiBold" Foreground="#C8D8F6" TextWrapping="Wrap" MaxLines="2" />
+                        </StackPanel>
+                      </Border>
+                      <Border Grid.Row="1" Grid.Column="1" Classes="SaveSummaryTile">
+                        <StackPanel Spacing="5">
+                          <StackPanel Orientation="Horizontal" Spacing="6">
+                            <PathIcon Data="{StaticResource BmxIconUsers}" Width="11" Height="11" Foreground="#75C394" />
+                            <TextBlock Text="{Binding Text.CharacterStatus}" Classes="SaveEyebrow" Foreground="#75B98F" />
+                          </StackPanel>
+                          <TextBlock Text="{Binding SelectedCharacterSummary}" FontSize="10" FontWeight="SemiBold" Foreground="#CDE7D7" TextWrapping="Wrap" MaxLines="2" />
+                        </StackPanel>
+                      </Border>
+                    </Grid>
+
+                    <Expander Grid.Row="2" Classes="SaveDetailExpander" IsExpanded="{Binding IsCharacterExpanded, Mode=TwoWay}">
+                      <Expander.Header>
+                        <Grid ColumnDefinitions="*,Auto" Margin="10,8">
+                          <StackPanel Orientation="Horizontal" Spacing="7">
+                            <PathIcon Data="{StaticResource BmxIconUsers}" Width="13" Height="13" Foreground="#91A3BF" />
+                            <TextBlock Text="{Binding Text.CharacterStatus}" FontSize="11" FontWeight="SemiBold" Foreground="#E4E8EE" />
+                          </StackPanel>
+                          <TextBlock Grid.Column="1" Text="{Binding SelectedLevelBadge}" FontSize="10" Foreground="#8993A2" />
+                        </Grid>
+                      </Expander.Header>
+                      <Border BorderBrush="#292F38" BorderThickness="0,1,0,0" Padding="11,10">
+                        <StackPanel Spacing="10">
+                          <Grid ColumnDefinitions="*,*" ColumnSpacing="16">
+                            <StackPanel Spacing="2">
+                              <TextBlock Text="{Binding Text.Level}" Classes="SaveEyebrow" />
+                              <TextBlock Text="{Binding SelectedLevel}" FontSize="11" FontWeight="SemiBold" Foreground="#DCE1E8" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Spacing="2">
+                              <TextBlock Text="{Binding Text.Groschen}" Classes="SaveEyebrow" />
+                              <TextBlock Text="{Binding SelectedGroschen}" FontSize="11" FontWeight="SemiBold" Foreground="#DCE1E8" />
+                            </StackPanel>
+                          </Grid>
+                          <StackPanel Spacing="5">
+                            <TextBlock Text="{Binding Text.StatusEffects}" Classes="SaveEyebrow" />
+                            <ItemsControl ItemsSource="{Binding SelectedStatusEffects}" IsVisible="{Binding HasSelectedStatusEffects}">
+                              <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                  <WrapPanel ItemSpacing="6" LineSpacing="6" />
+                                </ItemsPanelTemplate>
+                              </ItemsControl.ItemsPanel>
+                              <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                  <Border Background="#1D252F" BorderBrush="#333E4B" BorderThickness="1" CornerRadius="4" Padding="7,3">
+                                    <TextBlock Text="{Binding}" FontSize="9" Foreground="#B9C4D2" />
+                                  </Border>
+                                </DataTemplate>
+                              </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <TextBlock Text="{Binding Text.NoStatusEffects}" Classes="SaveMuted" IsVisible="{Binding !HasSelectedStatusEffects}" />
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+                    </Expander>
+                  </Grid>
+                </Border>
+
+              </Grid>
+            </StackPanel>
+          </ScrollViewer>
+
+          <TextBlock Text="{Binding Text.InspectorEmpty}"
+                     IsVisible="{Binding !HasSelection}"
+                     MaxWidth="250" TextWrapping="Wrap" TextAlignment="Center"
+                     FontSize="11" Foreground="#858E9D"
+                     HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Grid>
+      </Border>
+    </Grid>
+
+    <Grid Grid.Row="4" RowDefinitions="Auto,Auto" RowSpacing="6">
+      <Border Grid.Row="0" Background="#3B1D24" BorderBrush="#7F2D3A" BorderThickness="1" CornerRadius="6" Padding="10,8" IsVisible="{Binding HasError}">
+        <Grid ColumnDefinitions="*,Auto">
+          <TextBlock Text="{Binding ErrorText}" FontSize="10.5" Foreground="#FCA5A5" TextWrapping="Wrap" VerticalAlignment="Center" />
+          <Button Grid.Column="1" Width="28" Height="28" Classes="ModOpsSearchClearButton" Content="×" Command="{Binding ClearErrorCommand}" ToolTip.Tip="Close" AutomationProperties.Name="Close error" />
+        </Grid>
+      </Border>
+      <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="10" IsVisible="{Binding IsBusy}">
+        <ProgressBar Classes="ModOpsProgress" Minimum="0" Maximum="100" Value="{Binding ProgressPercent}" Height="4" VerticalAlignment="Center" />
+        <Button Grid.Column="1" Classes="ModOpsFlatButton" Content="{Binding Text.Cancel}" Command="{Binding CancelOperationCommand}" AutomationProperties.Name="{Binding Text.Cancel}" />
+      </Grid>
+    </Grid>
+  </Grid>
+</UserControl>

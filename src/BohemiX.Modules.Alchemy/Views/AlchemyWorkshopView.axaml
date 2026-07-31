@@ -1,0 +1,201 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:BohemiX.Modules.Alchemy.Controls"
+             xmlns:vm="using:BohemiX.Modules.Alchemy.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="1440"
+             d:DesignHeight="820"
+             x:DataType="vm:AlchemyWorkshopViewModel"
+             x:Class="BohemiX.Modules.Alchemy.Views.AlchemyWorkshopView">
+    <UserControl.Styles>
+        <Style Selector="Button.AlchemyIconButton">
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="CornerRadius" Value="3" />
+            <Setter Property="Background" Value="#E51B1712" />
+            <Setter Property="BorderBrush" Value="#8B714B" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#E8D6AF" />
+            <Setter Property="RenderTransformOrigin" Value="50%,50%" />
+            <Setter Property="RenderTransform" Value="translateY(0px) scale(1)" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.12" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.12" />
+                    <BrushTransition Property="Foreground" Duration="0:0:0.12" />
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.09" />
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.12" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.AlchemyIconButton:pointerover">
+            <Setter Property="Background" Value="#F03A2B1D" />
+            <Setter Property="BorderBrush" Value="#E1B968" />
+            <Setter Property="Foreground" Value="#FFF0CF" />
+        </Style>
+        <Style Selector="Button.AlchemyIconButton:pressed">
+            <Setter Property="Background" Value="#FA120D09" />
+            <Setter Property="BorderBrush" Value="#F0C978" />
+            <Setter Property="Foreground" Value="#FFF4D9" />
+            <Setter Property="RenderTransform" Value="translateY(1.5px) scale(0.985)" />
+        </Style>
+        <Style Selector="Button.AlchemyIconButton:focus-visible">
+            <Setter Property="BorderBrush" Value="#F0C978" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+        <Style Selector="Button.AlchemyIconButton:disabled">
+            <Setter Property="Opacity" Value="0.46" />
+            <Setter Property="Background" Value="#B314100D" />
+            <Setter Property="BorderBrush" Value="#665D4632" />
+        </Style>
+        <Style Selector="Button.AlchemyDialogButton">
+            <Setter Property="Height" Value="42" />
+            <Setter Property="Padding" Value="14,0" />
+            <Setter Property="CornerRadius" Value="3" />
+            <Setter Property="Background" Value="#28221B" />
+            <Setter Property="BorderBrush" Value="#786548" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#E8D8B7" />
+            <Setter Property="FontFamily" Value="Microsoft YaHei" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="RenderTransformOrigin" Value="50%,50%" />
+            <Setter Property="RenderTransform" Value="translateY(0px) scale(1)" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.12" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.12" />
+                    <BrushTransition Property="Foreground" Duration="0:0:0.12" />
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.09" />
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.12" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.AlchemyDialogButton:pointerover">
+            <Setter Property="Background" Value="#3A2C1D" />
+            <Setter Property="BorderBrush" Value="#E1B968" />
+            <Setter Property="Foreground" Value="#FFF0CF" />
+        </Style>
+        <Style Selector="Button.AlchemyDialogButton:pressed">
+            <Setter Property="Background" Value="#17110D" />
+            <Setter Property="BorderBrush" Value="#F0C978" />
+            <Setter Property="RenderTransform" Value="translateY(1.5px) scale(0.988)" />
+        </Style>
+        <Style Selector="Button.AlchemyDialogButton:focus-visible">
+            <Setter Property="BorderBrush" Value="#F0C978" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+        <Style Selector="Button.AlchemyDialogButton:disabled">
+            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="Background" Value="#B314100D" />
+            <Setter Property="BorderBrush" Value="#665D4632" />
+        </Style>
+        <Style Selector="Button.AlchemyDialogButton.Primary">
+            <Setter Property="Background" Value="#6A431F" />
+            <Setter Property="BorderBrush" Value="#D9A84E" />
+            <Setter Property="Foreground" Value="#FFF3D5" />
+        </Style>
+        <Style Selector="Button.AlchemyDialogButton.Primary:pointerover">
+            <Setter Property="Background" Value="#835829" />
+            <Setter Property="BorderBrush" Value="#F0C978" />
+        </Style>
+        <Style Selector="Button.AlchemyDialogButton.Primary:pressed">
+            <Setter Property="Background" Value="#4F3017" />
+            <Setter Property="BorderBrush" Value="#FFE09A" />
+        </Style>
+        <Style Selector="Button.AlchemyDialogButton.Danger">
+            <Setter Property="Background" Value="#48201B" />
+            <Setter Property="BorderBrush" Value="#B95B4D" />
+            <Setter Property="Foreground" Value="#F4D6CC" />
+        </Style>
+        <Style Selector="Button.AlchemyDialogButton.Danger:pointerover">
+            <Setter Property="Background" Value="#612A22" />
+            <Setter Property="BorderBrush" Value="#D06A58" />
+            <Setter Property="Foreground" Value="#FFE8DF" />
+        </Style>
+        <Style Selector="Button.AlchemyDialogButton.Danger:pressed">
+            <Setter Property="Background" Value="#351612" />
+            <Setter Property="BorderBrush" Value="#E48673" />
+        </Style>
+    </UserControl.Styles>
+
+    <Grid>
+        <controls:AlchemyCanvas HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Focusable="True" />
+
+        <Button Classes="AlchemyIconButton"
+                Margin="18,23,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding RequestExitCommand}"
+                ToolTip.Tip="{Binding ExitTooltipText}"
+                AutomationProperties.Name="{Binding ExitTooltipText}"
+                ZIndex="30">
+            <PathIcon Data="{StaticResource BmxIconBack}" Width="18" Height="18" />
+        </Button>
+
+        <Grid Background="#C9000000"
+              IsVisible="{Binding IsExitConfirmationOpen}"
+              ZIndex="100">
+            <Border Width="430"
+                    Padding="4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="#2C2116"
+                    BorderBrush="#A17A42"
+                    BorderThickness="1"
+                    CornerRadius="3"
+                    BoxShadow="0 14 38 0 #C6000000">
+                <Border Padding="26,24"
+                        Background="#FA17130F"
+                        BorderBrush="#66543D"
+                        BorderThickness="1"
+                        CornerRadius="2">
+                    <Grid ColumnDefinitions="72,*" ColumnSpacing="20">
+                        <Border Width="64"
+                                Height="64"
+                                Background="#282018"
+                                BorderBrush="#8D7048"
+                                BorderThickness="1"
+                                CornerRadius="3"
+                                VerticalAlignment="Top">
+                            <PathIcon Data="{StaticResource BmxIconFlask}"
+                                      Width="28"
+                                      Height="28"
+                                      Foreground="#D0A052"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                        </Border>
+                        <StackPanel Grid.Column="1" Spacing="14">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="{Binding ExitConfirmationTitle}"
+                                           FontFamily="Microsoft YaHei"
+                                           FontSize="21"
+                                           FontWeight="Bold"
+                                           Foreground="#F0DDB8" />
+                                <TextBlock Text="{Binding ExitConfirmationMessage}"
+                                           FontFamily="Microsoft YaHei"
+                                           FontSize="11.5"
+                                           Foreground="#AFA083"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+                            <Border Height="1" Background="#64543C" />
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="9">
+                                <Button Classes="AlchemyDialogButton Primary"
+                                        Command="{Binding CancelExitCommand}"
+                                        Content="{Binding ContinueBrewingText}" />
+                                <Button Grid.Column="1"
+                                        Classes="AlchemyDialogButton Danger"
+                                        Command="{Binding ConfirmExitCommand}"
+                                        Content="{Binding AbandonAndExitText}" />
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

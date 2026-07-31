@@ -1,0 +1,184 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="BohemiX.App.Views.ErrorDialogWindow"
+        Title="BohemiX 错误报告"
+        Width="780"
+        Height="700"
+        MinWidth="640"
+        MinHeight="560"
+        WindowStartupLocation="CenterOwner"
+        CanResize="True"
+        Background="#111318">
+    <Window.Styles>
+        <Style Selector="Button.ErrorDialogSecondary">
+            <Setter Property="MinWidth" Value="108" />
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Padding" Value="16,0" />
+            <Setter Property="Foreground" Value="#F4F6FA" />
+            <Setter Property="Background" Value="#303744" />
+            <Setter Property="BorderBrush" Value="#586274" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="5" />
+        </Style>
+        <Style Selector="Button.ErrorDialogSecondary:pointerover">
+            <Setter Property="Background" Value="#3C4656" />
+            <Setter Property="BorderBrush" Value="#78859A" />
+        </Style>
+        <Style Selector="Button.ErrorDialogSecondary:disabled">
+            <Setter Property="Foreground" Value="#7F8898" />
+            <Setter Property="Background" Value="#20242C" />
+            <Setter Property="BorderBrush" Value="#343A45" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="Button.ErrorDialogPrimary">
+            <Setter Property="MinWidth" Value="92" />
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Padding" Value="18,0" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="Background" Value="#B83D4B" />
+            <Setter Property="BorderBrush" Value="#E16A76" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="5" />
+        </Style>
+        <Style Selector="Button.ErrorDialogPrimary:pointerover">
+            <Setter Property="Background" Value="#CE4A58" />
+            <Setter Property="BorderBrush" Value="#FF8C96" />
+        </Style>
+    </Window.Styles>
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Border Grid.Row="0"
+                Padding="24,20"
+                Background="#181B22"
+                BorderBrush="#3A3F49"
+                BorderThickness="0,0,0,1">
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="16">
+                <Border Width="44"
+                        Height="44"
+                        CornerRadius="6"
+                        Background="#3A171B"
+                        BorderBrush="#A63D48"
+                        BorderThickness="1">
+                    <TextBlock Text="!"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="25"
+                               FontWeight="Bold"
+                               Foreground="#FFB4BC" />
+                </Border>
+                <StackPanel Grid.Column="1" Spacing="5">
+                    <TextBlock x:Name="TitleTextBlock"
+                               FontSize="20"
+                               FontWeight="SemiBold"
+                               Foreground="#F7F8FA"
+                               TextWrapping="Wrap" />
+                    <TextBlock x:Name="MessageTextBlock"
+                               FontSize="13"
+                               Foreground="#C8CDD7"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <ScrollViewer Grid.Row="1"
+                      Padding="24,18"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="14">
+                <StackPanel Spacing="7">
+                    <TextBlock Text="报错位置"
+                               Foreground="#AEB5C1"
+                               FontWeight="SemiBold" />
+                    <Border Padding="12,10"
+                            Background="#1A1E25"
+                            BorderBrush="#3A424F"
+                            BorderThickness="1"
+                            CornerRadius="5">
+                        <TextBlock x:Name="LocationTextBlock"
+                                   Foreground="#FFD080"
+                                   FontFamily="Consolas"
+                                   FontSize="12.5"
+                                   FontWeight="SemiBold"
+                                   TextWrapping="Wrap" />
+                    </Border>
+                </StackPanel>
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="24">
+                    <StackPanel Spacing="5">
+                        <TextBlock Text="来源" Foreground="#8F98A8" FontSize="12" />
+                        <TextBlock x:Name="SourceTextBlock"
+                                   Foreground="#E5E8EE"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Spacing="5">
+                        <TextBlock Text="发生时间" Foreground="#8F98A8" FontSize="12" />
+                        <TextBlock x:Name="TimeTextBlock" Foreground="#E5E8EE" />
+                    </StackPanel>
+                </Grid>
+
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                    <StackPanel Spacing="5">
+                        <TextBlock Text="日志位置" Foreground="#8F98A8" FontSize="12" />
+                        <TextBlock x:Name="LogPathTextBlock"
+                                   Foreground="#C8CDD7"
+                                   FontFamily="Consolas"
+                                   FontSize="12"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                    <Button x:Name="OpenLogButton"
+                            Grid.Column="1"
+                            Classes="ErrorDialogSecondary"
+                            VerticalAlignment="Center"
+                            Click="OpenLog_OnClick"
+                            ToolTip.Tip="打开最新的 BohemiX 错误日志">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <PathIcon Data="{StaticResource BmxIconFolderOpen}"
+                                      Width="15"
+                                      Height="15" />
+                            <TextBlock Text="打开日志" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                </Grid>
+
+                <StackPanel Spacing="7">
+                    <TextBlock Text="技术详情" Foreground="#AEB5C1" FontWeight="SemiBold" />
+                    <Border Height="210"
+                            Background="#0B0D11"
+                            BorderBrush="#343A45"
+                            BorderThickness="1"
+                            CornerRadius="5">
+                        <ScrollViewer Padding="12"
+                                      VerticalScrollBarVisibility="Auto"
+                                      HorizontalScrollBarVisibility="Auto">
+                            <SelectableTextBlock x:Name="DetailsTextBlock"
+                                                 TextWrapping="NoWrap"
+                                                 FontFamily="Consolas"
+                                                 FontSize="12"
+                                                 Foreground="#DDE2EA" />
+                        </ScrollViewer>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Border Grid.Row="2"
+                Padding="24,14"
+                Background="#181B22"
+                BorderBrush="#3A3F49"
+                BorderThickness="0,1,0,0">
+            <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+                <TextBlock Text="可复制详情用于排查；原生游戏崩溃不一定包含源码行号。"
+                           VerticalAlignment="Center"
+                           Foreground="#7F8898"
+                           FontSize="11.5"
+                           TextWrapping="Wrap" />
+                <Button Grid.Column="1"
+                        Classes="ErrorDialogSecondary"
+                        Click="CopyDetails_OnClick"
+                        Content="复制详情" />
+                <Button Grid.Column="2"
+                        Classes="ErrorDialogPrimary"
+                        Click="Close_OnClick"
+                        Content="关闭" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

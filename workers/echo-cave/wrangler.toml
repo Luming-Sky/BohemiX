@@ -1,0 +1,14 @@
+name = "bohemix-echo-cave"
+main = "src/index.mjs"
+compatibility_date = "2025-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+AFDIAN_USER_ID = "36205b1e890911f191825254001e7c00"
+ECHO_CAVE_ELIGIBLE_PLANS_JSON = "[\"\\u718f\\u5976\\u916a\",\"\\u6551\\u4e16\\u5e72\\u9152\"]"
+AFDIAN_API_ENDPOINT = "https://afdian.com/api/open/query-sponsor"
+
+[[d1_databases]]
+binding = "ECHO_CAVE_DB"
+database_name = "bohemix-echo-cave"
+database_id = "bfe87397-eed9-4a5f-9931-0971ebd6d693"
