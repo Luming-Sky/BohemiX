@@ -6,6 +6,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Platform;
+using Serilog;
 
 namespace BohemiX.App.Views;
 
@@ -89,6 +90,11 @@ public partial class StartupSplashWindow : Window
         }
         catch (OperationCanceledException)
         {
+            CompleteSplash();
+        }
+        catch (Exception ex)
+        {
+            Log.Logger.Error(ex, "Startup splash animation failed");
             CompleteSplash();
         }
         finally

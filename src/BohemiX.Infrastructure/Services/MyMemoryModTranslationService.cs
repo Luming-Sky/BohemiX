@@ -27,7 +27,7 @@ public sealed class MyMemoryModTranslationService : IModTranslationService, IDis
         {
             Timeout = requestTimeout ?? RequestTimeout
         };
-        httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("BohemiX/0.7");
+        httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("BohemiX/0.9.1");
         httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     }
 

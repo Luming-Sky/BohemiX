@@ -245,7 +245,7 @@ public sealed class ParticlePool : IDisposable
         intensity = Math.Clamp(intensity, 0, 1.35f);
         quality = Math.Clamp(quality, 0, 1);
         var count = requestedCount ?? GrindingSparkCount(intensity, quality);
-        count = Math.Clamp(count, 1, 18);
+        count = Math.Clamp(count, 1, 28);
         var wheelTravel = -ForgeWorkpieceMotion.GrindingTangent;
         for (var i = 0; i < count; i++)
         {
@@ -260,8 +260,8 @@ public sealed class ParticlePool : IDisposable
             {
                 Position = origin + offset,
                 Color = color,
-                Size = .014f + (float)random.NextDouble() * (.018f + quality * .010f),
-                Life = .16f + (float)random.NextDouble() * (.24f + intensity * .12f),
+                Size = .017f + (float)random.NextDouble() * (.022f + quality * .012f),
+                Life = .20f + (float)random.NextDouble() * (.30f + intensity * .14f),
                 Gravity = -2.35f,
                 Kind = 4
             }, direction * (.72f + intensity * 1.28f) * (.78f + (float)random.NextDouble() * .44f));
@@ -269,7 +269,7 @@ public sealed class ParticlePool : IDisposable
     }
 
     internal static int GrindingSparkCount(float intensity, float quality) =>
-        Math.Clamp((int)MathF.Round(2 + Math.Clamp(intensity, 0, 1.35f) * (7 + Math.Clamp(quality, 0, 1) * 5)), 2, 18);
+        Math.Clamp((int)MathF.Round(4 + Math.Clamp(intensity, 0, 1.35f) * (12 + Math.Clamp(quality, 0, 1) * 9)), 4, 28);
 
     public unsafe void Draw()
     {

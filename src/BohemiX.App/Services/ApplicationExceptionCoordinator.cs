@@ -1,6 +1,8 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Threading;
 using BohemiX.Core.Models;
 using BohemiX.Core.Services;
@@ -13,7 +15,9 @@ public sealed class ApplicationExceptionCoordinator : IDisposable
     private readonly IApplicationErrorReporter errorReporter;
     private readonly IApplicationPathService applicationPathService;
     private readonly ILogger logger;
+    private Func<Task>? fatalShutdownHandler;
     private int attached;
+    private int fatalShutdownStarted;
 
     public ApplicationExceptionCoordinator(
         IApplicationErrorReporter errorReporter,
@@ -23,6 +27,12 @@ public sealed class ApplicationExceptionCoordinator : IDisposable
         this.errorReporter = errorReporter;
         this.applicationPathService = applicationPathService;
         this.logger = logger.ForContext<ApplicationExceptionCoordinator>();
+    }
+
+    internal void SetFatalShutdownHandler(Func<Task> handler)
+    {
+        ArgumentNullException.ThrowIfNull(handler);
+        Volatile.Write(ref fatalShutdownHandler, handler);
     }
 
     public void Attach()
@@ -51,8 +61,9 @@ public sealed class ApplicationExceptionCoordinator : IDisposable
 
     private void OnUiThreadUnhandledException(object? sender, DispatcherUnhandledExceptionEventArgs e)
     {
+        // Keep the dispatcher alive only long enough to report the failure and perform an orderly shutdown.
         e.Handled = true;
-        _ = ReportAsync(e.Exception, "界面线程发生未处理异常", "Avalonia UI 线程");
+        _ = ReportFatalAndShutdownAsync(e.Exception, "界面线程发生未处理异常", "Avalonia UI 线程");
     }
 
     private void OnCurrentDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -91,6 +102,45 @@ public sealed class ApplicationExceptionCoordinator : IDisposable
             source,
             logPath: applicationPathService.GetPaths().LogsDirectory);
         return errorReporter.ReportAsync(report);
+    }
+
+    internal async Task ReportFatalAndShutdownAsync(Exception exception, string title, string source)
+    {
+        if (Interlocked.Exchange(ref fatalShutdownStarted, 1) != 0)
+        {
+            return;
+        }
+
+        try
+        {
+            await ReportAsync(exception, title, source);
+        }
+        catch (Exception reportError)
+        {
+            logger.Error(reportError, "Unable to report a fatal application error");
+        }
+
+        try
+        {
+            var shutdownHandler = Volatile.Read(ref fatalShutdownHandler);
+            if (shutdownHandler is not null)
+            {
+                await shutdownHandler();
+                return;
+            }
+
+            await Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    desktop.Shutdown(1);
+                }
+            });
+        }
+        catch (Exception shutdownError)
+        {
+            logger.Error(shutdownError, "Unable to complete fatal application shutdown");
+        }
     }
 
     public void Dispose() => Detach();

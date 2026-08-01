@@ -55,7 +55,7 @@ public sealed partial class SteamGameNewsService : IGameNewsService, IDisposable
         {
             Timeout = RequestTimeout
         };
-        httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("BohemiX/0.1");
+        httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("BohemiX/0.9.1");
         httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     }
 

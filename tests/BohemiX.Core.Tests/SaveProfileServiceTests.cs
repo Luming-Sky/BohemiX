@@ -391,6 +391,39 @@ public sealed class SaveProfileServiceTests
     }
 
     [Fact]
+    public async Task BackupLibraryStats_IgnoresNodesWhoseManifestIsMissing()
+    {
+        using var harness = new Harness();
+        await harness.Service.InitializeAsync();
+        var profile = await harness.AddProfileAsync("Missing node manifest", "profile");
+        await File.WriteAllTextAsync(Path.Combine(profile.PhysicalPath, "autosave1.whs"), "first backup");
+        var first = Assert.Single(await harness.Service.ReconcileBackupNodesAsync(profile.Id));
+        await File.WriteAllTextAsync(Path.Combine(profile.PhysicalPath, "autosave2.whs"), "second backup");
+        var nodes = await harness.Service.ReconcileBackupNodesAsync(profile.Id);
+        var second = Assert.Single(nodes.Where(node => node.Id != first.Id));
+
+        File.Delete(Path.Combine(
+            harness.Service.GetSnapshotsRootPath(),
+            first.ManifestRelativePath.Replace('/', Path.DirectorySeparatorChar)));
+        await using (var connection = harness.OpenConnection())
+        {
+            await using var command = connection.CreateCommand();
+            command.CommandText = "UPDATE SaveBackupNodes SET Health = $health WHERE Id = $id;";
+            command.Parameters.AddWithValue("$health", SaveBackupNodeHealth.MissingManifest.ToString());
+            command.Parameters.AddWithValue("$id", first.Id.ToString("D"));
+            await command.ExecuteNonQueryAsync();
+        }
+
+        var stats = await harness.Service.GetBackupLibraryStatsAsync();
+
+        Assert.Equal(2, stats.NodeCount);
+        Assert.True(stats.PhysicalBytes > 0);
+        Assert.True(File.Exists(Path.Combine(
+            harness.Service.GetSnapshotsRootPath(),
+            second.ManifestRelativePath.Replace('/', Path.DirectorySeparatorChar))));
+    }
+
+    [Fact]
     public async Task GameExitProtection_CreatesNodesWithoutCreatingAFullSnapshot()
     {
         using var harness = new Harness();

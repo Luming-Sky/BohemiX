@@ -25,10 +25,6 @@ public sealed class ForgeCameraRig
         new Vector3(.35f, 3.75f, 10.25f),
         new Vector3(.35f, -.22f, .05f),
         .66f);
-    private static readonly CameraPose PostQuenchDisplayAnchor = new(
-        new Vector3(.10f, 1.62f, 5.05f),
-        new Vector3(.05f, .96f, .42f),
-        .50f);
     // First-person work stance across the wheel axle. The wider field of view keeps
     // the wheel, complete weapon and the smith's grip area visible at once instead of
     // turning grinding into a close-up inspection shot.
@@ -49,7 +45,7 @@ public sealed class ForgeCameraRig
         [ForgeStateId.Hammering] = new(new(2.30f, 5.90f, 2.80f), new(-.10f, .38f, .12f), .58f),
         [ForgeStateId.RotateWorkpiece] = new(new(2.30f, 5.90f, 2.80f), new(-.10f, .38f, .12f), .58f),
         [ForgeStateId.Quenching] = WaterQuenchAnchor,
-        [ForgeStateId.Grinding] = PostQuenchDisplayAnchor,
+        [ForgeStateId.Grinding] = ActiveGrindingAnchor,
         [ForgeStateId.Inspection] = new(new(.10f, 1.62f, 5.05f), new(.05f, .96f, .42f), .50f),
         [ForgeStateId.Result] = new(new(.10f, 1.62f, 5.05f), new(.05f, .96f, .42f), .50f)
     };
@@ -172,8 +168,7 @@ public sealed class ForgeCameraRig
     public static CameraPose GetQuenchAnchor(QuenchMedium medium) =>
         medium == QuenchMedium.Oil ? OilQuenchAnchor : WaterQuenchAnchor;
     public static CameraPose GetTransferAnchor() => TransferAnchor;
-    public static CameraPose GetGrindingAnchor(bool engaged) =>
-        engaged ? ActiveGrindingAnchor : PostQuenchDisplayAnchor;
+    public static CameraPose GetGrindingAnchor(bool engaged) => ActiveGrindingAnchor;
 
     private static CameraPose AnchorFor(ForgeStateId state, QuenchMedium medium, bool engaged) => state switch
     {

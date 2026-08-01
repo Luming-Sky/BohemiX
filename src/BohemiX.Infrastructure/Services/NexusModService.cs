@@ -12,8 +12,9 @@ namespace BohemiX.Infrastructure.Services;
 
 public sealed class NexusModService : INexusModService, IDisposable
 {
-    private const string UserAgent = "BohemiX/0.1.0 (NexusAccountBinding)";
+    private const string UserAgent = "BohemiX/0.9.1 (NexusAccountBinding)";
     private const string BrowserUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0";
+    private const int TransientTransportAttemptCount = 3;
 
     private readonly HttpClient httpClient;
     private readonly INexusApiKeyProvider apiKeyProvider;
@@ -458,6 +459,33 @@ public sealed class NexusModService : INexusModService, IDisposable
         CancellationToken cancellationToken)
     {
         var payload = JsonSerializer.Serialize(new { query, variables });
+
+        for (var attempt = 1; ; attempt++)
+        {
+            try
+            {
+                return await SendGraphQlAttemptAsync(payload, cancellationToken);
+            }
+            catch (Exception ex) when (
+                attempt < TransientTransportAttemptCount
+                && !cancellationToken.IsCancellationRequested
+                && ex is HttpRequestException or IOException)
+            {
+                var delay = TimeSpan.FromMilliseconds(250 * attempt);
+                logger.Warning(
+                    ex,
+                    "Nexus GraphQL transport failed on attempt {Attempt}; retrying after {DelayMs} ms.",
+                    attempt,
+                    delay.TotalMilliseconds);
+                await Task.Delay(delay, cancellationToken);
+            }
+        }
+    }
+
+    private async Task<JsonDocument> SendGraphQlAttemptAsync(
+        string payload,
+        CancellationToken cancellationToken)
+    {
         using var request = new HttpRequestMessage(HttpMethod.Post, options.GraphQlEndpoint)
         {
             Content = new StringContent(payload, Encoding.UTF8, "application/json")
@@ -1342,7 +1370,7 @@ public sealed class NexusModService : INexusModService, IDisposable
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         request.Headers.TryAddWithoutValidation("User-Agent", UserAgent);
         request.Headers.TryAddWithoutValidation("Application-Name", "BohemiX");
-        request.Headers.TryAddWithoutValidation("Application-Version", "0.1.0");
+        request.Headers.TryAddWithoutValidation("Application-Version", "0.9.1");
         request.Headers.TryAddWithoutValidation("Protocol-Version", "1.0");
 
         var apiKey = await apiKeyProvider.GetApiKeyAsync(cancellationToken);

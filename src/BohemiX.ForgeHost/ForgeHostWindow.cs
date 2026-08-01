@@ -15,8 +15,7 @@ internal sealed class ForgeHostWindow : Window
     private const int GwlHwndParent = -8;
     private readonly ForgeWorkshopViewModel viewModel;
     private readonly ForgeWorkshopView workshopView;
-    private readonly TextReader input = Console.In;
-    private readonly TextWriter output = Console.Out;
+
     private CancellationTokenSource? protocolCancellation;
     private bool initialized;
 
@@ -64,7 +63,7 @@ internal sealed class ForgeHostWindow : Window
     {
         while (!cancellationToken.IsCancellationRequested)
         {
-            var line = await input.ReadLineAsync(cancellationToken);
+            var line = await Console.In.ReadLineAsync(cancellationToken);
             if (line is null)
             {
                 Close();
@@ -143,8 +142,8 @@ internal sealed class ForgeHostWindow : Window
 
     private async Task SendAsync(ForgeHostMessage message)
     {
-        await output.WriteLineAsync(JsonSerializer.Serialize(message, ForgeHostProtocol.JsonOptions));
-        await output.FlushAsync();
+        await Console.Out.WriteLineAsync(JsonSerializer.Serialize(message, ForgeHostProtocol.JsonOptions));
+        await Console.Out.FlushAsync();
     }
 
     private static IntPtr SetWindowLongPtr(IntPtr handle, int index, IntPtr value) =>

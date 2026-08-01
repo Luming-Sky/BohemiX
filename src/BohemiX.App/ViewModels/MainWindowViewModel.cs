@@ -120,6 +120,7 @@ public partial class MainWindowViewModel : ViewModelBase, IDisposable
     private readonly SemaphoreSlim playerRuntimeGate = new(1, 1);
     private bool isPlayerProfileManagerInitialized;
     private bool isGameRuntimeInitialized;
+    internal bool IsInitializationReady { get; private set; }
     private long adventureProfileRefreshVersion;
     private readonly Lazy<AlchemyWorkshopViewModel> alchemyWorkshop;
     private readonly Lazy<ForgeWorkshopViewModel> forgeWorkshop;
@@ -173,6 +174,10 @@ public partial class MainWindowViewModel : ViewModelBase, IDisposable
     private CancellationTokenSource? modPackCoverCacheCancellation;
     private CancellationTokenSource? dailyModCoverCancellation;
     private readonly CancellationTokenSource downloadCoverCancellation = new();
+    private readonly CancellationTokenSource shutdownCancellation = new();
+    private readonly object shutdownPreparationGate = new();
+    private Task? shutdownPreparationTask;
+    private int isShuttingDown;
     private IReadOnlyList<ModManifest> currentModManifests = [];
     private IReadOnlyList<ModConflict> currentModConflicts = [];
     private IReadOnlyList<ModPackCatalogEntry> currentModPackCatalog = [];
@@ -2532,6 +2537,7 @@ public partial class MainWindowViewModel : ViewModelBase, IDisposable
     [RelayCommand]
     public async Task InitializeAsync()
     {
+        IsInitializationReady = false;
         try
         {
             await PlayerProfiles.InitializeAsync();
@@ -2542,11 +2548,13 @@ public partial class MainWindowViewModel : ViewModelBase, IDisposable
                 StorageText = "Create a local player profile to initialize BohemiX.";
                 StatusText = "Player profile setup required";
                 LastActionText = StatusText;
+                IsInitializationReady = true;
                 return;
             }
 
             await InitializeCurrentPlayerRuntimeAsync();
             isGameRuntimeInitialized = true;
+            IsInitializationReady = true;
         }
         catch (Exception ex)
         {
@@ -2588,14 +2596,21 @@ public partial class MainWindowViewModel : ViewModelBase, IDisposable
                 cachedGames = await gameDiscoveryService.DiscoverInstalledGamesAsync();
             }
             ApplyDiscoveredGames(cachedGames);
-            await PrepareTrackerModPackageAsync();
-            await RefreshModsAsync();
-            await SaveManager.InitializeAsync();
+
+            // 并行执行相互独立的 I/O 初始化任务，减少启动等待时间
+            var trackerPackageTask = PrepareTrackerModPackageAsync();
+            var modsTask = RefreshModsAsync();
+            var saveManagerTask = SaveManager.InitializeAsync();
+            await Task.WhenAll(trackerPackageTask, modsTask, saveManagerTask);
+
             RefreshAdventureProfileRuntimeData();
-            await RefreshTrackerAsync();
-            await RefreshAdventureProfileDataAsync();
-            await LoadCachedGameNewsAsync();
-            UpdateDashboardTimestamp();
+
+            // 在前置依赖完成后，并行执行第二批独立初始化任务
+            var trackerRefreshTask = RefreshTrackerAsync();
+            var adventureProfileTask = RefreshAdventureProfileDataAsync();
+            var cachedNewsTask = LoadCachedGameNewsAsync();
+            await Task.WhenAll(trackerRefreshTask, adventureProfileTask, cachedNewsTask);
+
             _ = RefreshGameNewsAsync();
             StartTrackerMonitor();
 
@@ -2614,7 +2629,7 @@ public partial class MainWindowViewModel : ViewModelBase, IDisposable
     {
         try
         {
-            if (!isPlayerProfileManagerInitialized)
+            if (!isPlayerProfileManagerInitialized || IsShuttingDown)
             {
                 return;
             }
@@ -4473,7 +4488,7 @@ public partial class MainWindowViewModel : ViewModelBase, IDisposable
     [RelayCommand]
     private async Task InstallModPackAsync(ModPackRowViewModel? modPack)
     {
-        if (modPack is null || modPack.IsInstalling)
+        if (modPack is null || modPack.IsInstalling || IsShuttingDown)
         {
             return;
         }
@@ -4501,7 +4516,8 @@ public partial class MainWindowViewModel : ViewModelBase, IDisposable
 
             var plan = await modPackInstallService.PrepareAsync(
                 modPack.Entry,
-                allowAdultContent: modPack.ContainsAdultContent);
+                allowAdultContent: modPack.ContainsAdultContent,
+                cancellationToken: shutdownCancellation.Token);
             pendingModPackInstallPlan = plan;
             ModPackInstallOptions.Clear();
             foreach (var item in plan.Items)
@@ -4584,7 +4600,7 @@ public partial class MainWindowViewModel : ViewModelBase, IDisposable
     [RelayCommand]
     private async Task ConfirmModPackInstallAsync()
     {
-        if (!CanConfirmModPackInstall || pendingModPackInstallPlan is null)
+        if (!CanConfirmModPackInstall || pendingModPackInstallPlan is null || IsShuttingDown)
         {
             return;
         }
@@ -4622,7 +4638,11 @@ public partial class MainWindowViewModel : ViewModelBase, IDisposable
                 LastActionText = value.Message;
                 SyncDownloadQueueRows(modDownloader.Queue);
             });
-            var result = await modPackInstallService.InstallAsync(plan.SessionId, selectedOptionalIds, progress);
+            var result = await modPackInstallService.InstallAsync(
+                plan.SessionId,
+                selectedOptionalIds,
+                progress,
+                shutdownCancellation.Token);
             ModPackInstallProgressPercent = 100;
             ModPackPreflightStatusText = result.Message;
             ModPackInstallProgressText = string.Format(
@@ -4716,6 +4736,11 @@ public partial class MainWindowViewModel : ViewModelBase, IDisposable
 
     private async Task InstallSteamModPackCoreAsync(ModPackRowViewModel modPack)
     {
+        if (IsShuttingDown)
+        {
+            return;
+        }
+
         if (!ulong.TryParse(modPack.PlatformIdentifier, NumberStyles.None, CultureInfo.InvariantCulture, out var collectionId)
             || collectionId == 0)
         {
@@ -4746,7 +4771,8 @@ public partial class MainWindowViewModel : ViewModelBase, IDisposable
             LastActionText = StatusText;
             var result = await workshopService.InstallCollectionAsync(
                 new WorkshopCollectionInstallRequest(collectionId, modsDirectory),
-                progress);
+                progress,
+                shutdownCancellation.Token);
 
             NexusStatusText = result.FailedCount == 0
                 ? string.Format(T("SteamModPackInstallComplete"), result.InstalledCount)
@@ -6453,7 +6479,7 @@ public partial class MainWindowViewModel : ViewModelBase, IDisposable
                     string.IsNullOrWhiteSpace(details.Version) ? mod.Version : details.Version);
                 changed = true;
             }
-            catch (Exception ex) when (ex is NexusModsException or HttpRequestException or InvalidOperationException)
+            catch (Exception ex) when (ex is NexusModsException or HttpRequestException or IOException or InvalidOperationException)
             {
                 // Leave the local metadata unchanged when Nexus cannot be reached.
             }
@@ -6645,7 +6671,7 @@ public partial class MainWindowViewModel : ViewModelBase, IDisposable
                         requirements = details.Requirements;
                         installedModRequirementCache[nexusModId] = requirements;
                     }
-                    catch (Exception ex) when (ex is NexusModsException or HttpRequestException or InvalidOperationException)
+                    catch (Exception ex) when (ex is NexusModsException or HttpRequestException or IOException or InvalidOperationException)
                     {
                         // A connectivity or authorization failure must not be shown as a missing dependency.
                         continue;
@@ -8166,8 +8192,132 @@ public partial class MainWindowViewModel : ViewModelBase, IDisposable
             Path.TrimEndingDirectorySeparator(Path.GetFullPath(left)),
             Path.TrimEndingDirectorySeparator(Path.GetFullPath(right)));
 
+    private bool IsShuttingDown => Volatile.Read(ref isShuttingDown) != 0;
+
+    internal Task PrepareForShutdownAsync()
+    {
+        lock (shutdownPreparationGate)
+        {
+            if (shutdownPreparationTask is null || shutdownPreparationTask.IsFaulted || shutdownPreparationTask.IsCanceled)
+            {
+                shutdownPreparationTask = PrepareForShutdownCoreAsync();
+            }
+
+            return shutdownPreparationTask;
+        }
+    }
+
+    private async Task PrepareForShutdownCoreAsync()
+    {
+        Interlocked.Exchange(ref isShuttingDown, 1);
+        shutdownCancellation.Cancel();
+        gameDiscoveryCancellation?.Cancel();
+        steamAccountBindingDetectionCancellation?.Cancel();
+        modSearchAutoSearchCancellation?.Cancel();
+        modCoverCacheCancellation?.Cancel();
+        installedModCoverCancellation?.Cancel();
+        installedModRequirementsCancellation?.Cancel();
+        modPackCoverCacheCancellation?.Cancel();
+        dailyModCoverCancellation?.Cancel();
+        downloadCoverCancellation.Cancel();
+        localModPackImportCancellation?.Cancel();
+        SaveManager.CancelPendingOperationsForShutdown();
+        modDownloader.CancelQueue();
+
+        if (pendingModPackInstallPlan is not null)
+        {
+            try
+            {
+                await modPackInstallService.CancelAsync(pendingModPackInstallPlan.SessionId);
+            }
+            catch (Exception ex)
+            {
+                Serilog.Log.Logger.Warning(ex, "Unable to cancel the active mod-pack installation during shutdown");
+            }
+        }
+
+        await AwaitRunningCommandsAsync(this, SaveManager, PlayerProfiles, MoreSettings);
+        var backgroundDownloadQueueTask = backgroundModDownloadQueueTask;
+        if (backgroundDownloadQueueTask is not null)
+        {
+            try
+            {
+                await backgroundDownloadQueueTask;
+            }
+            catch (Exception ex)
+            {
+                Serilog.Log.Logger.Warning(ex, "Unable to finish the background mod download queue during shutdown");
+            }
+        }
+
+        if (localModPackImportPlan is not null)
+        {
+            try
+            {
+                await modPackImportService.DiscardAsync(localModPackImportPlan.SessionId);
+                localModPackImportPlan = null;
+            }
+            catch (Exception ex)
+            {
+                Serilog.Log.Logger.Warning(ex, "Unable to discard the active local mod-pack import session during shutdown");
+            }
+        }
+
+        await playerRuntimeGate.WaitAsync();
+        try
+        {
+            await StopPlayerScopedBackgroundOperationsAsync();
+        }
+        finally
+        {
+            playerRuntimeGate.Release();
+        }
+
+        try
+        {
+            await vfsSessionService.UnmountAsync();
+        }
+        catch (Exception ex)
+        {
+            Serilog.Log.Logger.Warning(ex, "Unable to unmount the virtual file-system session during shutdown");
+        }
+    }
+
+    private static async Task AwaitRunningCommandsAsync(params object[] owners)
+    {
+        while (true)
+        {
+            var tasks = owners
+                .SelectMany(owner => owner.GetType().GetProperties().Select(property => (Owner: owner, Property: property)))
+                .Where(item => item.Property.GetIndexParameters().Length == 0)
+                .Where(item => typeof(IAsyncRelayCommand).IsAssignableFrom(item.Property.PropertyType))
+                .Select(item => item.Property.GetValue(item.Owner))
+                .OfType<IAsyncRelayCommand>()
+                .Where(command => command.IsRunning && command.ExecutionTask is not null)
+                .Select(command => command.ExecutionTask!)
+                .Distinct()
+                .ToArray();
+            if (tasks.Length == 0)
+            {
+                return;
+            }
+
+            try
+            {
+                await Task.WhenAll(tasks);
+            }
+            catch
+            {
+                // Command handlers own user-facing error reporting; shutdown only waits for completion.
+            }
+
+            await Task.Yield();
+        }
+    }
+
     public void Dispose()
     {
+        shutdownCancellation.Cancel();
         PlayerProfiles.PlayerChanged -= OnPlayerChanged;
         PlayerProfiles.SettingsRequested -= OnPlayerSettingsRequested;
         SaveManager.PropertyChanged -= OnSaveManagerPropertyChanged;
@@ -8227,6 +8377,7 @@ public partial class MainWindowViewModel : ViewModelBase, IDisposable
         dailyModCoverCancellation?.Dispose();
         downloadCoverCancellation.Cancel();
         downloadCoverCancellation.Dispose();
+        shutdownCancellation.Dispose();
         foreach (var row in ModDownloadQueueRows)
         {
             row.Dispose();

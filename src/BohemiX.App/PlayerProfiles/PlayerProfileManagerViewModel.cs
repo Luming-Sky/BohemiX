@@ -512,6 +512,7 @@ public sealed partial class PlayerProfileManagerViewModel : ObservableObject, ID
         }
 
         editorAutoSaveCancellation?.Cancel();
+        editorAutoSaveCancellation?.Dispose();
         IsBusy = true;
             ErrorMessage = string.Empty;
             EditorSaveStatus = string.Empty;
@@ -1211,6 +1212,7 @@ public sealed partial class PlayerProfileManagerViewModel : ObservableObject, ID
         }
 
         editorAutoSaveCancellation?.Cancel();
+        editorAutoSaveCancellation?.Dispose();
         editorAutoSaveCancellation = new CancellationTokenSource();
         EditorSaveStatus = "存在未保存的更改";
         _ = AutoSaveEditorAsync(editorAutoSaveCancellation);

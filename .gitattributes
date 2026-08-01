@@ -1,0 +1,6 @@
+third-party/usvfs/v0.5.7.2/win-x64/*.dll -text
+third-party/usvfs/v0.5.7.2/win-x64/LICENSE text eol=crlf
+third-party/usvfs/v0.5.7.2/win-x64/SHA256SUMS text eol=crlf
+third-party/usvfs/v0.5.7.2/win-x64/*.md text eol=crlf
+third-party/usvfs/v0.5.7.2/win-x64/*.txt text eol=crlf
+third-party/usvfs/v0.5.7.2/win-x64/licenses/*.txt text eol=crlf

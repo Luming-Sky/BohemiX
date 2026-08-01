@@ -1,0 +1,67 @@
+{
+  "format": "bohemix-forge-grinding-calibration",
+  "version": 1,
+  "recipeId": "duelling-longsword",
+  "sourceBlend": "forge-weapons.blend",
+  "coordinateSystem": {
+    "blenderUpAxis": "Z",
+    "wheelAxleAxis": "Y",
+    "runtimeAxisMap": "x=x, y=z, z=-y"
+  },
+  "wheel": {
+    "meshAxisOrigin": [
+      0.0,
+      0.0,
+      0.46
+    ],
+    "crownContact": [
+      0.0,
+      0.0,
+      1.105
+    ],
+    "radius": 0.645
+  },
+  "weaponRelativeToWheel": {
+    "location": [
+      0.12152300029993057,
+      -0.15000000596046448,
+      1.11503005027771
+    ],
+    "rotationEulerDegrees": [
+      12.0,
+      0.0,
+      -90.0
+    ],
+    "rotationQuaternion": [
+      0.7032331824302673,
+      0.07391278445720673,
+      -0.07391279190778732,
+      -0.7032331824302673
+    ],
+    "scale": [
+      0.6200000047683716,
+      0.6200000047683716,
+      0.6200000047683716
+    ]
+  },
+  "edgeContact": {
+    "weaponLocal": [
+      0.0,
+      -0.11900000274181366,
+      0.0
+    ],
+    "wheelLocal": [
+      0.049355268478393555,
+      -0.15000000596046448,
+      1.099690318107605
+    ],
+    "runtimeWheelLocal": [
+      0.049355268478393555,
+      1.099690318107605,
+      0.15000000596046448
+    ],
+    "axialOffset": -0.15000000596046448,
+    "radialDistance": 0.6415914517669987,
+    "radiusError": -0.003408548233001296
+  }
+}

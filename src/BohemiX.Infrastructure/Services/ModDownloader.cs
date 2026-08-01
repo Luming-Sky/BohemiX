@@ -15,7 +15,7 @@ namespace BohemiX.Infrastructure.Services;
 
 public sealed class ModDownloader : IModDownloader, IDisposable
 {
-    private const string UserAgent = "BohemiX/0.1.0 (NexusAccountBinding)";
+    private const string UserAgent = "BohemiX/0.9.1 (NexusAccountBinding)";
     private const string BrowserUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0";
     private const int MaxRedirects = 8;
     private const int MaxDownloadAttempts = 4;

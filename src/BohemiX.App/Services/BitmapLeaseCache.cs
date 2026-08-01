@@ -189,29 +189,36 @@ internal sealed class BitmapLeaseCache : IBitmapLeaseCache, IDisposable
 
     private void TrimUnlocked(long targetPixelBytes)
     {
-        while (totalPixelBytes > targetPixelBytes)
+        if (totalPixelBytes <= targetPixelBytes)
         {
-            CacheKey? oldestKey = null;
-            Entry? oldestEntry = null;
-            foreach (var pair in entries)
-            {
-                if (pair.Value.ReferenceCount != 0 || oldestEntry is not null && pair.Value.LastAccess >= oldestEntry.LastAccess)
-                {
-                    continue;
-                }
+            return;
+        }
 
-                oldestKey = pair.Key;
-                oldestEntry = pair.Value;
+        // 一次收集全部可淘汰条目并按访问时间升序排序（O(n log n)），
+        // 替代原先每次淘汰都全表扫描的 O(n^2) 实现。
+        var evictable = new List<KeyValuePair<CacheKey, Entry>>(entries.Count);
+        foreach (var pair in entries)
+        {
+            if (pair.Value.ReferenceCount == 0)
+            {
+                evictable.Add(pair);
+            }
+        }
+
+        evictable.Sort(static (a, b) => a.Value.LastAccess.CompareTo(b.Value.LastAccess));
+
+        foreach (var pair in evictable)
+        {
+            if (totalPixelBytes <= targetPixelBytes)
+            {
+                break;
             }
 
-            if (oldestKey is null || oldestEntry is null)
+            if (entries.Remove(pair.Key))
             {
-                return;
+                totalPixelBytes -= pair.Value.PixelBytes;
+                bitmapDisposer(pair.Value.Bitmap);
             }
-
-            entries.Remove(oldestKey.Value);
-            totalPixelBytes -= oldestEntry.PixelBytes;
-            bitmapDisposer(oldestEntry.Bitmap);
         }
     }
 

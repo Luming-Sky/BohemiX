@@ -9,10 +9,23 @@ public sealed class ApplicationShutdownWatchdogTests
     {
         using var terminationRequested = new ManualResetEventSlim();
 
-        ApplicationShutdownWatchdog.Start(
+        using var watchdog = ApplicationShutdownWatchdog.Start(
             TimeSpan.FromMilliseconds(20),
             terminationRequested.Set);
 
         Assert.True(terminationRequested.Wait(TimeSpan.FromSeconds(2)));
+    }
+
+    [Fact]
+    public void Dispose_CancelsPendingTermination()
+    {
+        using var terminationRequested = new ManualResetEventSlim();
+        var watchdog = ApplicationShutdownWatchdog.Start(
+            TimeSpan.FromMilliseconds(150),
+            terminationRequested.Set);
+
+        watchdog.Dispose();
+
+        Assert.False(terminationRequested.Wait(TimeSpan.FromMilliseconds(300)));
     }
 }

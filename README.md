@@ -5,7 +5,7 @@
   <p>启动游戏、管理 Mod、保护存档、追踪进度，并在一个安静可靠的工作台中探索炼金与锻造。</p>
 
   [![BohemiX CI](https://github.com/Luming-Sky/BohemiX/actions/workflows/ci.yml/badge.svg)](https://github.com/Luming-Sky/BohemiX/actions/workflows/ci.yml)
-  ![Version](https://img.shields.io/badge/version-0.9.0%20-2f6fed)
+  ![Version](https://img.shields.io/badge/version-0.9.1%20-2f6fed)
   ![Platform](https://img.shields.io/badge/platform-Windows%20x64-087cd5)
   [![License](https://img.shields.io/badge/license-MIT-2f855a)](LICENSE)
 </div>
@@ -80,7 +80,7 @@ dotnet run --project src/BohemiX.App/BohemiX.App.csproj -c Release
 生成经过测试和依赖校验的 Windows x64 便携包：
 
 ```powershell
-.\tools\publish-win-x64.ps1 -Version "0.9.0"
+.\tools\publish-win-x64.ps1 -Version "0.9.1"
 ```
 
 脚本会运行完整 Release 测试、发布自包含程序、裁剪无关运行时、校验原生依赖、复制许可证，并生成 ZIP 与 `SHA256SUMS.txt`。
@@ -187,7 +187,7 @@ dotnet run --project src/BohemiX.App/BohemiX.App.csproj -c Release
 To generate a tested and dependency-validated portable Windows x64 package:
 
 ```powershell
-.\tools\publish-win-x64.ps1 -Version "0.9.0"
+.\tools\publish-win-x64.ps1 -Version "0.9.1"
 ```
 
 The script runs the complete Release test suite, publishes a self-contained application, removes unrelated runtime files, validates native dependencies, copies licenses, and generates a ZIP archive and `SHA256SUMS.txt`.

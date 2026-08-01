@@ -1338,6 +1338,12 @@ public sealed partial class SaveManagerViewModel : ObservableObject, IDisposable
         return $"{value:0.#} {units[unit]}";
     }
 
+    public void CancelPendingOperationsForShutdown()
+    {
+        operationCancellation?.Cancel();
+        CancelSelectedDetailsLoad();
+    }
+
     public void Dispose()
     {
         operationCancellation?.Cancel();

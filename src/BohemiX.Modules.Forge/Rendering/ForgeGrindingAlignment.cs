@@ -14,9 +14,25 @@ internal readonly record struct ForgeGrindingAlignment(
     Vector3 LocalInteriorAxis,
     Vector3 LocalFaceNormal,
     float Scale,
-    ForgeGrindingOrientation Orientation)
+    ForgeGrindingOrientation Orientation,
+    Vector3 WheelLocalContactPoint,
+    bool UsesAuthoredWheelPose,
+    Vector3 WheelLocalRootPosition,
+    Quaternion WheelLocalRootRotation)
 {
     private const float DefaultScale = .62f;
+    private static readonly Vector3 WheelCrownContact = new(0, 1.105f, 0);
+    private static readonly Vector3 LongswordWheelContact = new(.04935527f, 1.0996903f, .15f);
+    private static readonly Vector3 BasilardWheelContact = new(.02449076f, 1.0944052f, .15f);
+    private static readonly Vector3 AuthoredSwordRootPosition = new(
+        .1215230003f,
+        1.1150300503f,
+        .1500000060f);
+    private static readonly Quaternion AuthoredSwordRootRotation = Quaternion.Normalize(new Quaternion(
+        .0739127845f,
+        -.7032331824f,
+        .0739127919f,
+        .7032331824f));
 
     public static ForgeGrindingAlignment FromMesh(string? recipeId, MeshAsset asset)
     {
@@ -37,12 +53,42 @@ internal readonly record struct ForgeGrindingAlignment(
 
     public static ForgeGrindingAlignment Fallback(string? recipeId) => recipeId?.ToLowerInvariant() switch
     {
-        "basilard" => new(new Vector3(0, -.16f, 0), Vector3.UnitX, Vector3.UnitY, Vector3.UnitZ, DefaultScale, ForgeGrindingOrientation.BladeForward),
-        // The axe's edge runs along local Y while the haft grows inward along +X.
-        // Lay that complete cutting edge across the wheel axle; the handle then
-        // extends horizontally back toward the smith instead of copying the sword pose.
-        "bearded-axe" => new(new Vector3(-1.275f, .08f, 0), Vector3.UnitY, Vector3.UnitX, -Vector3.UnitZ, DefaultScale, ForgeGrindingOrientation.EdgeAcrossWheel),
-        _ => new(new Vector3(0, -.119f, 0), Vector3.UnitX, Vector3.UnitY, Vector3.UnitZ, DefaultScale, ForgeGrindingOrientation.BladeForward)
+        "basilard" => new(
+            new Vector3(0, -.16f, 0),
+            Vector3.UnitX,
+            Vector3.UnitY,
+            Vector3.UnitZ,
+            DefaultScale,
+            ForgeGrindingOrientation.BladeForward,
+            BasilardWheelContact,
+            true,
+            AuthoredSwordRootPosition,
+            AuthoredSwordRootRotation),
+        // Keep the calibrated axe pose: its handle and long cutting-edge direction
+        // run along local Z, its cheek normal is local Y, and the head grows inward
+        // along +X. Its accepted top-crown target remains unchanged.
+        "bearded-axe" => new(
+            new Vector3(-1.275f, .08f, 0),
+            Vector3.UnitZ,
+            Vector3.UnitX,
+            Vector3.UnitY,
+            DefaultScale,
+            ForgeGrindingOrientation.EdgeAcrossWheel,
+            WheelCrownContact,
+            false,
+            Vector3.Zero,
+            Quaternion.Identity),
+        _ => new(
+            new Vector3(0, -.119f, 0),
+            Vector3.UnitX,
+            Vector3.UnitY,
+            Vector3.UnitZ,
+            DefaultScale,
+            ForgeGrindingOrientation.BladeForward,
+            LongswordWheelContact,
+            true,
+            AuthoredSwordRootPosition,
+            AuthoredSwordRootRotation)
     };
 
     private static List<Vector3> EdgeVertices(MeshAsset asset)

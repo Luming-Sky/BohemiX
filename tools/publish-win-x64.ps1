@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string]$Version = "0.9.0",
+    [string]$Version = "0.9.1",
     [string]$NativeBundlePath,
     [ValidateNotNullOrEmpty()]
     [string]$UsvfsVersion = "0.5.7.2",
@@ -33,6 +33,7 @@ $licenseFile = Get-ChildItem -LiteralPath $repoRoot -File |
 if ($Version -notmatch '^\d+\.\d+\.\d+([-.][0-9A-Za-z.-]+)?$') {
     throw "Version must be a semantic version such as 0.7.0 or 0.7.0-rc.1."
 }
+$assemblyVersion = "$(($Version -split '[-+]')[0]).0"
 
 if (-not (Test-Path -LiteralPath $nativeBundle -PathType Container)) {
     throw "Native bundle directory does not exist: $nativeBundle"
@@ -154,7 +155,8 @@ Write-Host "Publishing self-contained win-x64 payload..."
 dotnet publish (Join-Path $repoRoot "src\BohemiX.App\BohemiX.App.csproj") `
     -c Release -r win-x64 --self-contained true `
     -p:PublishReadyToRun=false -p:DebugType=None -p:DebugSymbols=false `
-    -p:Version=$Version -o $publishDirectory --nologo
+    -p:Version=$Version -p:AssemblyVersion=$assemblyVersion -p:FileVersion=$assemblyVersion `
+    -p:InformationalVersion=$Version -o $publishDirectory --nologo
 if ($LASTEXITCODE -ne 0) {
     throw "Release publish failed with exit code $LASTEXITCODE."
 }

@@ -1,0 +1,51 @@
+{
+  "format": "bohemix-forge-grinding-calibration",
+  "version": 1,
+  "recipeId": "bearded-axe",
+  "sourceBlend": "forge-weapons.blend",
+  "coordinateSystem": {
+    "blenderUpAxis": "Z",
+    "wheelAxleAxis": "Y",
+    "runtimeAxisMap": "x=x, y=z, z=-y"
+  },
+  "wheel": {
+    "meshAxisOrigin": [
+      0.0,
+      0.0,
+      0.46
+    ],
+    "crownContact": [
+      0.0,
+      0.0,
+      1.105
+    ],
+    "radius": 0.645
+  },
+  "axeRelativeToWheel": {
+    "location": [
+      0.6939594745635986,
+      -0.15279307961463928,
+      1.2384999990463257
+    ],
+    "rotationQuaternion": [
+      0.9958676695823669,
+      -0.0041243876330554485,
+      -0.0621241070330143,
+      -0.0661151334643364
+    ],
+    "scale": [
+      0.6200000047683716,
+      0.6200000047683716,
+      0.6200000047683716
+    ]
+  },
+  "edgeContact": {
+    "wheelLocal": [
+      0.02895951271057129,
+      -0.11414332687854767,
+      1.1043117046356201
+    ],
+    "radialDistance": 0.6449621813360693,
+    "radiusError": -3.781866393071098e-05
+  }
+}

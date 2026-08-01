@@ -784,13 +784,13 @@ public sealed class ForgeRenderingTests
     }
 
     [Fact]
-    public void GrindingCameraChangesFromWeaponDisplayToWheelWorkView()
+    public void GrindingCameraUsesTheWheelWorkViewBeforeAndDuringContact()
     {
         var display = ForgeCameraRig.GetGrindingAnchor(engaged: false);
         var active = ForgeCameraRig.GetGrindingAnchor(engaged: true);
         var activeForward = Vector3.Normalize(active.Target - active.Position);
 
-        Assert.InRange(Vector3.Distance(display.Position, display.Target), 4.2f, 5.2f);
+        Assert.Equal(active, display);
         Assert.InRange(Vector3.Distance(active.Position, active.Target), 4.55f, 4.75f);
         Assert.InRange(active.FieldOfView, .54f, .58f);
         Assert.InRange(-activeForward.Y, .69f, .73f);
@@ -860,6 +860,47 @@ public sealed class ForgeRenderingTests
             ForgeWorkpieceMotion.GrindingWheelRadius + .001f);
     }
 
+    [Fact]
+    public void SwordGrindingUsesTheBlenderAuthoredPoseWithoutMovingTheAxe()
+    {
+        var axe = ForgeGrindingAlignment.Fallback("bearded-axe");
+        var longsword = ForgeGrindingAlignment.Fallback("duelling-longsword");
+        var basilard = ForgeGrindingAlignment.Fallback("basilard");
+
+        Assert.False(axe.UsesAuthoredWheelPose);
+        Assert.True(longsword.UsesAuthoredWheelPose);
+        Assert.True(basilard.UsesAuthoredWheelPose);
+        Assert.True(Vector3.Distance(
+            ForgeWorkpieceMotion.GrindingContactPoint,
+            ForgeWorkpieceMotion.GrindingContactPointFor(axe)) < .00001f);
+    }
+
+    [Theory]
+    [InlineData("duelling-longsword", "weapon-duelling-longsword.glb")]
+    [InlineData("basilard", "weapon-basilard.glb")]
+    public void SwordGrindingPoseExactlyMatchesTheBlenderAuthoredRootMatrix(string recipeId, string fileName)
+    {
+        var loader = new ForgeGlbAssetLoader();
+        using var mesh = loader.LoadMesh(new Uri(Path.Combine(FindModelsDirectory(), fileName)));
+        var alignment = ForgeGrindingAlignment.FromMesh(recipeId, mesh);
+        var expected =
+            Matrix4x4.CreateScale(.62f) *
+            Matrix4x4.CreateFromQuaternion(Quaternion.Normalize(new Quaternion(
+                .0739127845f,
+                -.7032331824f,
+                .0739127919f,
+                .7032331824f))) *
+            Matrix4x4.CreateTranslation(.1215230003f, 1.1150300503f, .1500000060f) *
+            ForgeWorkbenchLayout.Grinder.Transform;
+        var actual = ForgeWorkpieceMotion.PoseFor(
+            ForgeStateId.Grinding,
+            false,
+            QuenchMedium.Water,
+            alignment).ToMatrix();
+
+        AssertMatrixClose(expected, actual, .00001f);
+    }
+
     [Theory]
     [InlineData("duelling-longsword", "weapon-duelling-longsword.glb")]
     [InlineData("basilard", "weapon-basilard.glb")]
@@ -884,21 +925,27 @@ public sealed class ForgeRenderingTests
         var expectedLength = ForgeWorkpieceMotion.GrindingLengthAxisFor(alignment);
         var expectedFace = ForgeWorkpieceMotion.GrindingFaceNormalFor(alignment);
         var expectedInterior = ForgeWorkpieceMotion.GrindingInteriorDirectionFor(alignment);
+        var expectedContact = ForgeWorkpieceMotion.GrindingContactPointFor(alignment);
         var towardPlayer = Vector3.Normalize(camera.Position - contact);
 
         Assert.True(Vector3.Dot(lengthAxis, expectedLength) > .999f);
         Assert.True(Vector3.Dot(interiorAxis, expectedInterior) > .999f);
         Assert.True(Vector3.Dot(faceNormal, expectedFace) > .999f);
-        Assert.True(Vector3.Dot(expectedFace, ForgeWorkpieceMotion.GrindingContactNormal) > .97f);
         Assert.True(Math.Abs(Vector3.Dot(expectedFace, expectedLength)) < .01f);
-        Assert.InRange(
-            Vector3.Distance(ForgeWorkpieceMotion.GrindingContactPoint, ForgeWorkpieceMotion.GrindingWheelCenter),
-            ForgeWorkpieceMotion.GrindingWheelRadius - .001f,
-            ForgeWorkpieceMotion.GrindingWheelRadius + .001f);
-        Assert.True(Vector3.Distance(contact, ForgeWorkpieceMotion.GrindingContactPoint) < .001f);
+        Assert.True(Vector3.Distance(contact, expectedContact) < .001f);
 
         if (recipeId == "bearded-axe")
         {
+            Assert.False(alignment.UsesAuthoredWheelPose);
+            Assert.True(Vector3.Dot(expectedFace, ForgeWorkpieceMotion.GrindingContactNormal) > .97f);
+            var centerToExpectedContact = expectedContact - ForgeWorkpieceMotion.GrindingWheelCenter;
+            var expectedAxialDistance = Vector3.Dot(centerToExpectedContact, ForgeWorkpieceMotion.GrindingWheelAxis);
+            var expectedRadial = centerToExpectedContact -
+                                 ForgeWorkpieceMotion.GrindingWheelAxis * expectedAxialDistance;
+            Assert.InRange(
+                expectedRadial.Length(),
+                ForgeWorkpieceMotion.GrindingWheelRadius - .001f,
+                ForgeWorkpieceMotion.GrindingWheelRadius + .001f);
             Assert.True(alignment.LocalContactPoint.X < -1.20f, "The axe must contact the stone with its cutting edge, not its poll or haft.");
             Assert.True(Math.Abs(Vector3.Dot(lengthAxis, screenUp)) < .10f);
             Assert.True(Math.Abs(Vector3.Dot(lengthAxis, screenRight)) > .97f,
@@ -909,9 +956,8 @@ public sealed class ForgeRenderingTests
         }
         else
         {
+            Assert.True(alignment.UsesAuthoredWheelPose);
             Assert.True(alignment.LocalContactPoint.Y < -.09f, "The sword must contact the stone with its lower cutting edge.");
-            Assert.True(Vector3.Dot(lengthAxis, towardPlayer) < -.55f,
-                "The sword tip must point away from the smith while the hilt remains near the camera.");
         }
     }
 
@@ -930,7 +976,7 @@ public sealed class ForgeRenderingTests
         {
             var pose = ForgeWorkpieceMotion.PoseFor(ForgeStateId.Grinding, flipped, QuenchMedium.Water, alignment);
             var contact = ForgeWorkpieceMotion.GrindingContactForPose(pose, alignment);
-            Assert.True(Vector3.Distance(contact, ForgeWorkpieceMotion.GrindingContactPoint) < .001f);
+            Assert.True(Vector3.Distance(contact, ForgeWorkpieceMotion.GrindingContactPointFor(alignment)) < .001f);
 
             foreach (var position in new[] { 0f, .5f, 1f })
             {
@@ -970,8 +1016,16 @@ public sealed class ForgeRenderingTests
         var resting = ForgeSceneRenderer.GrindingContactIntensity(true, .8, .08, .4);
         var controlledStroke = ForgeSceneRenderer.GrindingContactIntensity(true, 1, 1, .9);
         Assert.True(controlledStroke > resting * 2);
-        Assert.True(ParticlePool.GrindingSparkCount(controlledStroke, .9f) >
-                    ParticlePool.GrindingSparkCount(controlledStroke, .1f));
+        var roughBurst = ParticlePool.GrindingSparkCount(controlledStroke, .1f);
+        var finishedBurst = ParticlePool.GrindingSparkCount(controlledStroke, .9f);
+        Assert.True(finishedBurst > roughBurst);
+        Assert.InRange(finishedBurst, 20, 28);
+
+        var restingRate = ForgeSceneRenderer.GrindingSparkRate(false, resting, .4f);
+        var controlledRate = ForgeSceneRenderer.GrindingSparkRate(false, controlledStroke, .9f);
+        Assert.InRange(restingRate, 35f, 50f);
+        Assert.True(controlledRate > restingRate * 2);
+        Assert.True(ForgeSceneRenderer.GrindingSparkRate(true, controlledStroke, .9f) < controlledRate);
     }
 
     [Theory]
@@ -1945,6 +1999,29 @@ public sealed class ForgeRenderingTests
             : Math.Abs(vertex.Position.Z) < extent * .22f).ToArray();
         Assert.NotEmpty(selected);
         return selected.Average(vertex => vertex.Position.Y);
+    }
+
+    private static void AssertMatrixClose(Matrix4x4 expected, Matrix4x4 actual, float tolerance)
+    {
+        var expectedElements = new[]
+        {
+            expected.M11, expected.M12, expected.M13, expected.M14,
+            expected.M21, expected.M22, expected.M23, expected.M24,
+            expected.M31, expected.M32, expected.M33, expected.M34,
+            expected.M41, expected.M42, expected.M43, expected.M44
+        };
+        var actualElements = new[]
+        {
+            actual.M11, actual.M12, actual.M13, actual.M14,
+            actual.M21, actual.M22, actual.M23, actual.M24,
+            actual.M31, actual.M32, actual.M33, actual.M34,
+            actual.M41, actual.M42, actual.M43, actual.M44
+        };
+
+        for (var index = 0; index < expectedElements.Length; index++)
+        {
+            Assert.InRange(actualElements[index] - expectedElements[index], -tolerance, tolerance);
+        }
     }
 
     private static ShapeCellSnapshot[] TargetCells(ShapeTemplateDefinition definition)

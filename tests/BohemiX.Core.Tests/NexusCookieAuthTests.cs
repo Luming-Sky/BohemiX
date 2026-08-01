@@ -359,6 +359,47 @@ public sealed class NexusCookieAuthTests
     }
 
     [Fact]
+    public async Task NexusModService_SearchModsRetriesWhenFirstResponseStreamDisconnects()
+    {
+        var requestCount = 0;
+        using var handler = new RoutingHttpMessageHandler(_ =>
+        {
+            requestCount++;
+            if (requestCount == 1)
+            {
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new StreamContent(new DisconnectingDownloadStream(Encoding.UTF8.GetBytes("{")))
+                };
+            }
+
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(
+                    """{"data":{"mods":{"nodes":[],"totalCount":0}}}""",
+                    Encoding.UTF8,
+                    "application/json")
+            };
+        });
+        using var service = new NexusModService(
+            new EmptyNexusApiKeyProvider(),
+            new NullCookieAuthService(),
+            new NexusModsOptions(),
+            Logger.None,
+            handler);
+
+        var result = await service.SearchModsAsync(new NexusModSearchRequest(
+            "kingdomcomedeliverance2",
+            "combat",
+            0,
+            10));
+
+        Assert.Equal(2, requestCount);
+        Assert.Empty(result.Mods);
+        Assert.Equal(0, result.TotalCount);
+    }
+
+    [Fact]
     public async Task NexusModService_GetDownloadLinkPrefersEmbeddedBrowserGenerateDownloadUrl()
     {
         using var handler = new RoutingHttpMessageHandler(request =>

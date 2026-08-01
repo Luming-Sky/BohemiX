@@ -60,7 +60,7 @@ public partial class MainWindowViewModel
                 ? T("DailyModRecommendationReady")
                 : T("DailyModRecommendationUnavailable");
         }
-        catch (Exception ex) when (ex is NexusModsException or HttpRequestException or InvalidOperationException)
+        catch (Exception ex) when (ex is NexusModsException or HttpRequestException or IOException or InvalidOperationException)
         {
             DailyModRecommendationStatusText = T("DailyModRecommendationUnavailable");
         }
@@ -232,7 +232,7 @@ public partial class MainWindowViewModel
             StatusText = ModRecommendationStatusText;
             LastActionText = StatusText;
         }
-        catch (Exception ex) when (ex is NexusModsException or HttpRequestException or InvalidOperationException)
+        catch (Exception ex) when (ex is NexusModsException or HttpRequestException or IOException or InvalidOperationException)
         {
             var fallbackCandidates = CreateFallbackModRecommendationCandidates();
             BuildModRecommendations(fallbackCandidates);

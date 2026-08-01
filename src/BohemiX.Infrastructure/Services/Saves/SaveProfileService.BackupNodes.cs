@@ -29,13 +29,20 @@ public sealed partial class SaveProfileService
         await InitializeAsync(cancellationToken).ConfigureAwait(false);
         await using var connection = connectionFactory.CreateConnection();
         var rows = (await connection.QueryAsync<BackupNodeStorageRow>(new CommandDefinition(
-            "SELECT ManifestRelativePath, TotalBytes, IsImportant FROM SaveBackupNodes;",
+            "SELECT ManifestRelativePath, TotalBytes, IsImportant, Health FROM SaveBackupNodes;",
             cancellationToken: cancellationToken)).ConfigureAwait(false)).ToList();
         long physicalBytes;
         try
         {
             physicalBytes = await snapshotStore!.GetPhysicalBytesAsync(
-                rows.Select(row => row.ManifestRelativePath).ToList(), cancellationToken).ConfigureAwait(false);
+                rows
+                    .Where(row => string.Equals(
+                        row.Health,
+                        SaveBackupNodeHealth.Healthy.ToString(),
+                        StringComparison.OrdinalIgnoreCase))
+                    .Select(row => row.ManifestRelativePath)
+                    .ToList(),
+                cancellationToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -1035,6 +1042,7 @@ public sealed partial class SaveProfileService
         public string ManifestRelativePath { get; init; } = string.Empty;
         public long TotalBytes { get; init; }
         public int IsImportant { get; init; }
+        public string Health { get; init; } = SaveBackupNodeHealth.Healthy.ToString();
     }
 
     private sealed class BackupObservationRow

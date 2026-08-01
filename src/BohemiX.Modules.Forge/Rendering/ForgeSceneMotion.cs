@@ -44,18 +44,17 @@ public sealed class ForgeWorkpieceMotion
     internal const float HearthApproachFraction = .58f;
     internal static readonly Vector3 HearthApproachOffset = new(0, .09f, 1.42f);
     // KCD2 and real treadle-wheel sharpening place the bevel on the crown of the
-    // cylindrical working surface, never on the circular side cap or the rim shoulder.
-    // The blade runs along the axle so a longitudinal stroke moves each section of
-    // edge through the dressed top contact line.
+    // cylindrical working surface, never on the circular side cap or rim shoulder.
     internal static readonly Vector3 GrindingWheelAxis = Vector3.Normalize(new(-.179f, 0, .984f));
     internal static readonly Vector3 GrindingContactNormal = Vector3.UnitY;
     internal static readonly Vector3 GrindingTangent = Vector3.Normalize(Vector3.Cross(
         GrindingWheelAxis,
         GrindingContactNormal));
     private const float GrindingBevelAngle = 12f * MathF.PI / 180f;
-    // Swords point down the wheel tangent, away from the player. Their face tilts
-    // across the wheel width to establish the bevel while keeping length and face
-    // axes orthogonal.
+    // Swords extend along the wheel tangent into the work area so the point stays
+    // away from the smith and the hilt remains on the camera side. The manually
+    // calibrated Blender contact is retained without copying its viewport-relative
+    // axle alignment into the first-person game camera.
     internal static readonly Vector3 GrindingLengthAxis = GrindingTangent;
     internal static readonly Vector3 GrindingFaceNormal = Vector3.Normalize(
         GrindingContactNormal * MathF.Cos(GrindingBevelAngle) +
@@ -95,6 +94,7 @@ public sealed class ForgeWorkpieceMotion
     private bool inspectionDragging;
 
     public ForgeObjectPose CurrentPose => current;
+    internal Vector3 CurrentGrindingContactPoint => GrindingContactPointFor(grindingAlignment);
     public Matrix4x4 World { get; private set; } = Matrix4x4.Identity;
     public bool IsTransferring => transition < 1 && arcHeight > .2f;
     public float TransferProgress => transition;
@@ -284,21 +284,43 @@ public sealed class ForgeWorkpieceMotion
         GrindingLengthAxisFor(alignment) * ((.5f - Math.Clamp(position, 0, 1)) * .72f);
 
     internal static Vector3 GrindingLengthAxisFor(ForgeGrindingAlignment alignment) =>
-        alignment.Orientation == ForgeGrindingOrientation.EdgeAcrossWheel
-            ? GrindingWheelAxis
-            : GrindingTangent;
+        alignment.UsesAuthoredWheelPose
+            ? AuthoredDirection(alignment.LocalLengthAxis, alignment)
+            : alignment.Orientation == ForgeGrindingOrientation.EdgeAcrossWheel
+                ? GrindingWheelAxis
+                : GrindingTangent;
 
     internal static Vector3 GrindingFaceNormalFor(ForgeGrindingAlignment alignment) =>
-        Vector3.Normalize(
-            GrindingContactNormal * MathF.Cos(GrindingBevelAngle) +
-            (alignment.Orientation == ForgeGrindingOrientation.EdgeAcrossWheel
-                ? GrindingTangent
-                : GrindingWheelAxis) * MathF.Sin(GrindingBevelAngle));
+        alignment.UsesAuthoredWheelPose
+            ? AuthoredDirection(alignment.LocalFaceNormal, alignment)
+            : Vector3.Normalize(
+                GrindingContactNormal * MathF.Cos(GrindingBevelAngle) +
+                (alignment.Orientation == ForgeGrindingOrientation.EdgeAcrossWheel
+                    ? GrindingTangent
+                    : GrindingWheelAxis) * MathF.Sin(GrindingBevelAngle));
 
-    internal static Vector3 GrindingInteriorDirectionFor(ForgeGrindingAlignment alignment) =>
-        Vector3.Normalize(Vector3.Cross(
+    internal static Vector3 GrindingInteriorDirectionFor(ForgeGrindingAlignment alignment)
+    {
+        if (alignment.UsesAuthoredWheelPose)
+        {
+            return AuthoredDirection(alignment.LocalInteriorAxis, alignment);
+        }
+
+        var localSide = Vector3.Normalize(Vector3.Cross(
+            alignment.LocalFaceNormal,
+            alignment.LocalLengthAxis));
+        var interiorSign = MathF.Sign(Vector3.Dot(
+            Vector3.Normalize(alignment.LocalInteriorAxis),
+            localSide));
+        return Vector3.Normalize(Vector3.Cross(
             GrindingFaceNormalFor(alignment),
-            GrindingLengthAxisFor(alignment)));
+            GrindingLengthAxisFor(alignment))) * interiorSign;
+    }
+
+    internal static Vector3 GrindingContactPointFor(ForgeGrindingAlignment alignment) =>
+        alignment.UsesAuthoredWheelPose
+            ? Vector3.Transform(alignment.LocalContactPoint, AuthoredGrindingMatrix(alignment))
+            : Vector3.Transform(alignment.WheelLocalContactPoint, ForgeWorkbenchLayout.Grinder.Transform);
 
     internal void SetGrindingAlignment(ForgeGrindingAlignment alignment) =>
         grindingAlignment = alignment;
@@ -375,6 +397,32 @@ public sealed class ForgeWorkpieceMotion
 
     private static ForgeObjectPose GrindingPose(ForgeGrindingAlignment alignment, bool flipped)
     {
+        if (alignment.UsesAuthoredWheelPose)
+        {
+            var authoredWorld = AuthoredGrindingMatrix(alignment);
+            if (!Matrix4x4.Decompose(
+                    authoredWorld,
+                    out var authoredScale,
+                    out var authoredRotation,
+                    out var authoredPosition))
+            {
+                throw new InvalidOperationException("The Blender-authored grinding transform is not decomposable.");
+            }
+
+            authoredRotation = Quaternion.Normalize(authoredRotation);
+            if (!flipped)
+            {
+                return new ForgeObjectPose(authoredScale, authoredRotation, authoredPosition);
+            }
+
+            var flippedRotation = Quaternion.Normalize(authoredRotation * Quaternion.CreateFromAxisAngle(
+                alignment.LocalLengthAxis,
+                MathF.PI));
+            var contact = Vector3.Transform(alignment.LocalContactPoint, authoredWorld);
+            var flippedContactOffset = Vector3.Transform(alignment.LocalContactPoint * authoredScale, flippedRotation);
+            return new ForgeObjectPose(authoredScale, flippedRotation, contact - flippedContactOffset);
+        }
+
         var rotation = CreateGrindingRotation(alignment);
         if (flipped)
         {
@@ -385,8 +433,20 @@ public sealed class ForgeWorkpieceMotion
 
         var scale = new Vector3(alignment.Scale);
         var localContactOffset = Vector3.Transform(alignment.LocalContactPoint * scale, rotation);
-        return new ForgeObjectPose(scale, rotation, GrindingContactPoint - localContactOffset);
+        return new ForgeObjectPose(
+            scale,
+            rotation,
+            GrindingContactPointFor(alignment) - localContactOffset);
     }
+
+    internal static Matrix4x4 AuthoredGrindingMatrix(ForgeGrindingAlignment alignment) =>
+        Matrix4x4.CreateScale(alignment.Scale) *
+        Matrix4x4.CreateFromQuaternion(alignment.WheelLocalRootRotation) *
+        Matrix4x4.CreateTranslation(alignment.WheelLocalRootPosition) *
+        ForgeWorkbenchLayout.Grinder.Transform;
+
+    private static Vector3 AuthoredDirection(Vector3 localDirection, ForgeGrindingAlignment alignment) =>
+        Vector3.Normalize(Vector3.TransformNormal(localDirection, AuthoredGrindingMatrix(alignment)));
 
     internal static Vector3 GrindingContactForPose(
         ForgeObjectPose pose,

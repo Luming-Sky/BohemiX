@@ -202,7 +202,7 @@ public sealed class NexusAccountService : INexusAccountService, IDisposable
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         request.Headers.TryAddWithoutValidation("apikey", apiKey);
         request.Headers.TryAddWithoutValidation("Application-Name", "BohemiX");
-        request.Headers.TryAddWithoutValidation("Application-Version", "0.1.0");
+        request.Headers.TryAddWithoutValidation("Application-Version", "0.9.1");
 
         using var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         var body = await response.Content.ReadAsStringAsync(cancellationToken);

@@ -868,9 +868,9 @@ public sealed class ForgeSceneRenderer : IDisposable
             snapshot.GrindingQuality);
         var intensity = Math.Max(restingContact, grindingContactImpulse);
         var quality = (float)Math.Clamp(snapshot.GrindingQuality, 0, 1);
-        var rate = (qualityDegraded ? 12f : 18f) + intensity * (qualityDegraded ? 25f : 42f);
+        var rate = GrindingSparkRate(qualityDegraded, intensity, quality);
         grindingSparkAccumulator += elapsedSeconds * rate;
-        var count = Math.Min(8, (int)grindingSparkAccumulator);
+        var count = Math.Min(14, (int)grindingSparkAccumulator);
         if (count <= 0)
         {
             return;
@@ -878,7 +878,7 @@ public sealed class ForgeSceneRenderer : IDisposable
 
         grindingSparkAccumulator -= count;
         particles.EmitGrind(
-            ForgeWorkpieceMotion.GrindingContactPoint,
+            workpieceMotion.CurrentGrindingContactPoint,
             intensity,
             quality,
             count);
@@ -899,6 +899,16 @@ public sealed class ForgeSceneRenderer : IDisposable
         var movement = (float)Math.Clamp(strokeSpeed / 1.05, .06, 1.25);
         var consistency = (float)Math.Clamp(.72 + quality * .28, .72, 1);
         return Math.Clamp((.12f + movement * .88f) * (.42f + wheel * .58f) * consistency, .08f, 1.35f);
+    }
+
+    internal static float GrindingSparkRate(bool degraded, float intensity, float quality)
+    {
+        intensity = Math.Clamp(intensity, 0, 1.35f);
+        quality = Math.Clamp(quality, 0, 1);
+        var baseRate = degraded ? 20f : 30f;
+        var contactRate = degraded ? 38f : 68f;
+        var finishFactor = .85f + quality * .35f;
+        return (baseRate + intensity * contactRate) * finishFactor;
     }
 
     internal static float HammerSparkAfterglowDuration(float intensity) =>

@@ -10,7 +10,7 @@ public sealed class TrackerModPackageService : ITrackerModPackageService
 {
     private const string ModId = "bohemix-tracker";
     private const string DisplayName = "BohemiX Tracker";
-    private const string Version = "0.9.0";
+    private const string Version = "0.9.1";
     private const string PakFileName = "bohemix-tracker.pak";
     private const string PackedScriptPath = "Scripts/Mods/bohemix-tracker.lua";
     private const string PackedConfigPath = "Scripts/Mods/bohemix_tracker_config.lua";

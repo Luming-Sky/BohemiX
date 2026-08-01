@@ -1,4 +1,4 @@
-using BohemiX.Core.Models;
+﻿using BohemiX.Core.Models;
 using BohemiX.Core.PlayerProfiles;
 using BohemiX.Core.Services;
 using BohemiX.Core.Services.Saves;
@@ -7,6 +7,8 @@ using BohemiX.Infrastructure.PlayerProfiles;
 using BohemiX.Infrastructure.Services;
 using BohemiX.Infrastructure.Services.Saves;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Net.Http;
 
 namespace BohemiX.Infrastructure;
 
@@ -34,16 +36,25 @@ public static class DependencyInjection
                 : ModPackCatalogTrust.DefaultPublicKeyPem));
         services.AddSingleton<IApplicationPathService, ApplicationPathService>();
         services.AddSingleton<IApplicationUpdateValidationService, ApplicationUpdateValidationService>();
+
+        // 使用 SocketsHttpHandler 以支持连接池、长连接复用，避免端口耗尽
         services.AddSingleton<IApplicationUpdateCheckService>(_ =>
         {
-            var client = new HttpClient
+            var handler = new SocketsHttpHandler
+            {
+                PooledConnectionLifetime = TimeSpan.FromMinutes(5),
+                PooledConnectionIdleTimeout = TimeSpan.FromMinutes(2),
+                MaxConnectionsPerServer = 4
+            };
+            var client = new HttpClient(handler, disposeHandler: true)
             {
                 Timeout = TimeSpan.FromSeconds(15)
             };
-            client.DefaultRequestHeaders.UserAgent.ParseAdd("BohemiX/0.7");
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("BohemiX/0.9.1");
             client.DefaultRequestHeaders.Accept.ParseAdd("application/vnd.github+json");
             return new ApplicationUpdateCheckService(client);
         });
+
         services.AddSingleton<IProfileRepository, SqliteProfileRepository>();
         services.AddSingleton<IPlayerSteamAccountBindingService, SqliteSteamAccountBindingService>();
         services.AddSingleton<IPlayerProvider, LocalPlayerProvider>();
@@ -66,20 +77,29 @@ public static class DependencyInjection
         services.AddSingleton<IGameNewsService, SteamGameNewsService>();
         services.AddSingleton<IGameProcessMonitorService, GameProcessMonitorService>();
         services.AddSingleton<IModCatalogService, ModCatalogService>();
+
+        // 使用 SocketsHttpHandler 替代 HttpClientHandler 以支持连接池
         services.AddSingleton<IModPackCatalogService>(provider =>
         {
-            var handler = new HttpClientHandler { AllowAutoRedirect = false };
+            var handler = new SocketsHttpHandler
+            {
+                AllowAutoRedirect = false,
+                PooledConnectionLifetime = TimeSpan.FromMinutes(5),
+                PooledConnectionIdleTimeout = TimeSpan.FromMinutes(2),
+                MaxConnectionsPerServer = 4
+            };
             var client = new HttpClient(handler, disposeHandler: true)
             {
                 Timeout = TimeSpan.FromSeconds(20)
             };
-            client.DefaultRequestHeaders.UserAgent.ParseAdd("BohemiX/0.1");
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("BohemiX/0.9.1");
             return new ModPackCatalogService(
                 provider.GetRequiredService<IApplicationPathService>(),
                 provider.GetRequiredService<ModPackCatalogOptions>(),
                 client,
                 provider.GetRequiredService<Serilog.ILogger>());
         });
+
         services.AddSingleton<IModConflictAnalyzer, ModConflictAnalyzer>();
         services.AddSingleton<IModConflictReviewService, ModConflictReviewService>();
         services.AddSingleton<IModDownloader, ModDownloader>();

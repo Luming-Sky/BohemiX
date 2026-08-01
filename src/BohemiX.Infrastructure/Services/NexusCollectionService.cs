@@ -497,9 +497,9 @@ public sealed class NexusCollectionService : INexusCollectionService, IDisposabl
         HttpRequestMessage request,
         CancellationToken cancellationToken)
     {
-        request.Headers.UserAgent.ParseAdd("BohemiX/0.1.0");
+        request.Headers.UserAgent.ParseAdd("BohemiX/0.9.1");
         request.Headers.TryAddWithoutValidation("Application-Name", "BohemiX");
-        request.Headers.TryAddWithoutValidation("Application-Version", "0.1.0");
+        request.Headers.TryAddWithoutValidation("Application-Version", "0.9.1");
         request.Headers.TryAddWithoutValidation("Protocol-Version", "1.0");
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 

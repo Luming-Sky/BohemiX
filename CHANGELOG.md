@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.1
+
+- Improved resilience for transient Nexus Mods transport failures during startup.
+- Fixed native dependency verification for Windows line endings.
+- Hardened backup-node reconciliation when manifests are missing.
+
 ## 0.9.0
 
 - Added application composition-root and runtime service boundaries.

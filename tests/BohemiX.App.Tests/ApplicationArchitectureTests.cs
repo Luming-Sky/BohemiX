@@ -63,6 +63,21 @@ public sealed class ApplicationArchitectureTests
             provider.GetRequiredService<IMainWindowTextCatalog>());
     }
 
+    [Avalonia.Headless.XUnit.AvaloniaFact]
+    public async Task ShutdownPreparation_IsIdempotentForTheApplicationGraph()
+    {
+        var services = new ServiceCollection();
+        services.AddBohemiXApplication(Logger.None);
+        using var provider = services.BuildServiceProvider();
+        var viewModel = provider.GetRequiredService<MainWindowViewModel>();
+
+        var first = viewModel.PrepareForShutdownAsync();
+        var second = viewModel.PrepareForShutdownAsync();
+
+        Assert.Same(first, second);
+        await first;
+    }
+
     [Fact]
     public void NexusBusinessServices_DoNotCreateEmbeddedBrowserUntilFirstBrowserCall()
     {

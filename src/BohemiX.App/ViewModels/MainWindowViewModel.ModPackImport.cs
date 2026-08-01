@@ -84,6 +84,11 @@ public partial class MainWindowViewModel
     [RelayCommand]
     private async Task ImportLocalModPackAsync()
     {
+        if (IsShuttingDown)
+        {
+            return;
+        }
+
         var path = await gamePathPickerService.PickModPackAsync();
         if (string.IsNullOrWhiteSpace(path))
         {
@@ -99,7 +104,7 @@ public partial class MainWindowViewModel
     [RelayCommand]
     private async Task RetryLocalModPackImportAsync()
     {
-        if (string.IsNullOrWhiteSpace(localModPackImportPath))
+        if (string.IsNullOrWhiteSpace(localModPackImportPath) || IsShuttingDown)
         {
             return;
         }
@@ -110,7 +115,7 @@ public partial class MainWindowViewModel
     [RelayCommand]
     private async Task ConfirmLocalModPackImportAsync()
     {
-        if (localModPackImportPlan is null || IsLocalModPackImportBusy)
+        if (localModPackImportPlan is null || IsLocalModPackImportBusy || IsShuttingDown)
         {
             return;
         }

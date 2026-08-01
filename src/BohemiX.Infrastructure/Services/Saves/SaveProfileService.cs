@@ -1291,18 +1291,43 @@ public sealed partial class SaveProfileService : ISaveProfileService, ISaveResto
         }
 
         var nodeRows = (await connection.QueryAsync<BackupManifestRow>(new CommandDefinition(
-            "SELECT Id, ManifestRelativePath FROM SaveBackupNodes;",
+            "SELECT Id, ManifestRelativePath, Health FROM SaveBackupNodes;",
             cancellationToken: cancellationToken)).ConfigureAwait(false)).ToList();
         foreach (var node in nodeRows)
         {
             try
             {
+                var manifestPath = snapshotStore!.GetManifestFullPath(node.ManifestRelativePath);
+                if (!File.Exists(manifestPath))
+                {
+                    hasInvalidManifest = true;
+                    const string message = "Backup node manifest file is missing.";
+                    await connection.ExecuteAsync(new CommandDefinition(
+                        "UPDATE SaveBackupNodes SET Health = @Health, HealthMessage = @Message WHERE Id = @Id;",
+                        new { Id = node.Id, Health = SaveBackupNodeHealth.MissingManifest.ToString(), Message = message },
+                        cancellationToken: cancellationToken)).ConfigureAwait(false);
+                    AddMigrationWarning(node.Id, message);
+                    if (!string.Equals(
+                            node.Health,
+                            SaveBackupNodeHealth.MissingManifest.ToString(),
+                            StringComparison.OrdinalIgnoreCase))
+                    {
+                        logger.Warning("Backup node {NodeId} manifest is missing; marking the node unavailable", node.Id);
+                    }
+
+                    continue;
+                }
+
                 await snapshotStore!.ValidateManifestAsync(node.ManifestRelativePath, cancellationToken).ConfigureAwait(false);
                 liveManifests.Add(node.ManifestRelativePath);
                 await connection.ExecuteAsync(new CommandDefinition(
                     "UPDATE SaveBackupNodes SET Health = @Health, HealthMessage = NULL WHERE Id = @Id;",
                     new { Id = node.Id, Health = SaveBackupNodeHealth.Healthy.ToString() },
                     cancellationToken: cancellationToken)).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+            {
+                throw;
             }
             catch (Exception ex)
             {
@@ -1322,7 +1347,10 @@ public sealed partial class SaveProfileService : ISaveProfileService, ISaveResto
                     new { Id = node.Id, Health = health.ToString(), Message = ex.Message },
                     cancellationToken: cancellationToken)).ConfigureAwait(false);
                 AddMigrationWarning(node.Id, $"Backup node manifest is unavailable: {ex.Message}");
-                logger.Warning(ex, "Backup node manifest reconciliation failed for {NodeId}", node.Id);
+                if (!string.Equals(node.Health, health.ToString(), StringComparison.OrdinalIgnoreCase))
+                {
+                    logger.Warning(ex, "Backup node manifest reconciliation failed for {NodeId}", node.Id);
+                }
             }
         }
 
@@ -2399,6 +2427,7 @@ public sealed partial class SaveProfileService : ISaveProfileService, ISaveResto
     {
         public string Id { get; init; } = string.Empty;
         public string ManifestRelativePath { get; init; } = string.Empty;
+        public string Health { get; init; } = SaveBackupNodeHealth.Healthy.ToString();
     }
     private sealed record DirectoryStats(int FileCount, long TotalBytes);
     private sealed record PackageProfile(string DisplayName, bool IsFavorite, DateTimeOffset CreatedAtUtc);

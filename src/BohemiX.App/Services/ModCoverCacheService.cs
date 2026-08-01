@@ -17,7 +17,7 @@ public sealed class ModCoverCacheService : IModCoverCacheService, IDisposable
     private const string CacheVersion = "v3";
     private const int MaxCachedCoverWidth = 768;
     private const int JpegQuality = 88;
-    private const string UserAgent = "BohemiX/0.1";
+    private const string UserAgent = "BohemiX/0.9.1";
     private static readonly TimeSpan CoverRequestTimeout = TimeSpan.FromSeconds(20);
 
     private readonly IApplicationPathService applicationPathService;

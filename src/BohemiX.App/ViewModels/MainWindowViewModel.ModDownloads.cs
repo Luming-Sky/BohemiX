@@ -15,9 +15,11 @@ namespace BohemiX.App.ViewModels;
 
 public partial class MainWindowViewModel
 {
+    private Task? backgroundModDownloadQueueTask;
+
     private async Task InstallSteamWorkshopModAsync(NexusModSearchRowViewModel mod)
     {
-        if (IsDownloadingMods)
+        if (IsDownloadingMods || IsShuttingDown)
         {
             return;
         }
@@ -44,7 +46,8 @@ public partial class MainWindowViewModel
 
             var result = await workshopService.SubscribeAndInstallAsync(
                 new WorkshopInstallRequest(mod.PublishedFileId, modsDirectory, WorkshopDeployMode.Copy),
-                progress);
+                progress,
+                shutdownCancellation.Token);
 
             NexusStatusText = result.Success
                 ? string.Format(T("SteamWorkshopInstallComplete"), mod.Name)
@@ -73,9 +76,9 @@ public partial class MainWindowViewModel
         finally
         {
             IsDownloadingMods = false;
-            if (modDownloader.Queue.Any(item => item.Status == ModDownloadStatus.Pending))
+            if (!IsShuttingDown && modDownloader.Queue.Any(item => item.Status == ModDownloadStatus.Pending))
             {
-                _ = StartModDownloadQueueAsync();
+                StartModDownloadQueueInBackground();
             }
         }
     }
@@ -83,7 +86,7 @@ public partial class MainWindowViewModel
     [RelayCommand]
     private async Task StartModDownloadQueueAsync()
     {
-        if (IsDownloadingMods)
+        if (IsDownloadingMods || IsShuttingDown)
         {
             return;
         }
@@ -111,7 +114,7 @@ public partial class MainWindowViewModel
                 Dispatcher.UIThread.Post(() => ApplyDownloadProgress(progress));
             });
 
-            var results = await modDownloader.StartQueuedDownloadsAsync(progress);
+            var results = await modDownloader.StartQueuedDownloadsAsync(progress, shutdownCancellation.Token);
             modDownloader.ClearCanceledQueueItems();
             SyncDownloadQueueRows(modDownloader.Queue);
             RefreshModSearchDownloadStates();
@@ -139,9 +142,40 @@ public partial class MainWindowViewModel
         finally
         {
             IsDownloadingMods = false;
-            if (modDownloader.Queue.Any(item => item.Status == ModDownloadStatus.Pending))
+            if (!IsShuttingDown && modDownloader.Queue.Any(item => item.Status == ModDownloadStatus.Pending))
             {
-                _ = StartModDownloadQueueAsync();
+                StartModDownloadQueueInBackground();
+            }
+        }
+    }
+
+    private void StartModDownloadQueueInBackground()
+    {
+        if (IsShuttingDown)
+        {
+            return;
+        }
+
+        var task = StartModDownloadQueueAsync();
+        backgroundModDownloadQueueTask = task;
+        _ = ObserveBackgroundModDownloadQueueAsync(task);
+    }
+
+    private async Task ObserveBackgroundModDownloadQueueAsync(Task task)
+    {
+        try
+        {
+            await task;
+        }
+        catch (Exception ex)
+        {
+            Serilog.Log.Logger.Warning(ex, "Background mod download queue failed");
+        }
+        finally
+        {
+            if (ReferenceEquals(backgroundModDownloadQueueTask, task))
+            {
+                backgroundModDownloadQueueTask = null;
             }
         }
     }
@@ -183,7 +217,7 @@ public partial class MainWindowViewModel
         StatusText = NexusStatusText;
         LastActionText = StatusText;
 
-        _ = StartModDownloadQueueAsync();
+        StartModDownloadQueueInBackground();
     }
 
     [RelayCommand]
@@ -234,7 +268,7 @@ public partial class MainWindowViewModel
         StatusText = NexusStatusText;
         LastActionText = StatusText;
 
-        _ = StartModDownloadQueueAsync();
+        StartModDownloadQueueInBackground();
     }
 
     [RelayCommand]
@@ -356,6 +390,11 @@ public partial class MainWindowViewModel
     [RelayCommand]
     private async Task InstallLocalModPackageAsync()
     {
+        if (IsShuttingDown)
+        {
+            return;
+        }
+
         var packagePath = await gamePathPickerService.PickModPackageAsync();
         if (string.IsNullOrWhiteSpace(packagePath))
         {
@@ -369,7 +408,7 @@ public partial class MainWindowViewModel
             modsDirectory,
             displayName,
             displayName,
-            "local"));
+            "local"), shutdownCancellation.Token);
 
         StatusText = result.Message;
         NexusStatusText = result.Message;
@@ -395,7 +434,7 @@ public partial class MainWindowViewModel
                 modsDirectory,
                 $"nexus-{request.ModId}",
                 metadata.DisplayName,
-                metadata.Version));
+                metadata.Version), shutdownCancellation.Token);
 
             ApplyInstallResultToQueueRow(request, installResult);
             if (installResult.Success)
@@ -440,7 +479,7 @@ public partial class MainWindowViewModel
                 string.IsNullOrWhiteSpace(details.Name) ? fallbackName : details.Name,
                 string.IsNullOrWhiteSpace(details.Version) ? "nexus" : details.Version);
         }
-        catch (Exception ex) when (ex is NexusModsException or HttpRequestException or InvalidOperationException)
+        catch (Exception ex) when (ex is NexusModsException or HttpRequestException or IOException or InvalidOperationException)
         {
             return (fallbackName, "nexus");
         }
